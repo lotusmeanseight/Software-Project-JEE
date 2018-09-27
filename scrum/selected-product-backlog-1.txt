@@ -1,0 +1,4 @@
+- create: ein Feld für jedes Attribut eines Kunden und einen Bestaetigen Button.
+- read: eine Liste aller Kunden mit jeweiligen Attributen.
+- update: eine Liste wie bei read und jeweils einem Button zum Bearbeiten und zum Bestätigen der Bearbeitung.
+- delete: eine Liste wie bei read und daneben jeweils einen Button zum Löschen.
