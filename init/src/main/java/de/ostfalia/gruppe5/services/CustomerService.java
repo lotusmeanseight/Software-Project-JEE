@@ -1,11 +1,10 @@
 package de.ostfalia.gruppe5.services;
 
+import de.ostfalia.gruppe5.models.Customer;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import de.ostfalia.gruppe5.models.Customer;
-
 import java.util.List;
 
 
@@ -22,29 +21,28 @@ public class CustomerService {
     public void save(Customer customer) {
         em.persist(customer);
     }
-    
-    public void merge(Customer customer) {
-    	em.merge(customer);
-    }
-    
-    public void merge(Long id) {
-    	em.merge(find(id));
+
+    public void mergeById(Long id) {
+        em.merge(findById(id));
     }
 
-    public Customer find(Long id) {
-    	return em.find(Customer.class, id);
+    public void merge(Customer customer) {
+        em.merge(customer);
     }
-    
-    public void delete(Customer customer) {
-    	em.remove(customer);
+
+    public void detachCustomer(Customer customer) {
+        em.detach(customer);
     }
-    
-    public void delete(Long id) {
-    	em.remove(find(id));
+
+    public Customer findById(Long id) {
+        return em.find(Customer.class, id);
     }
-    
-    @SuppressWarnings("unchecked")
-	public List<Customer> getAllCustomers(){
-       return (List<Customer>) em.createQuery("SELECT c from Customer c").getResultList();
+
+    public void deleteById(Long id) {
+        em.remove(findById(id));
+    }
+
+    public List<Customer> getAllCustomers() {
+        return em.createQuery("SELECT c from Customer c").getResultList();
     }
 }

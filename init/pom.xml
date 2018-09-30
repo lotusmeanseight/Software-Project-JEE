@@ -34,7 +34,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>init</finalName>
+		<finalName>init-gruppe-5</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
