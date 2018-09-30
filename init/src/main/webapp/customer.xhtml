@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+ <title>Customers</title>
+</h:head>
+
+<body>
+    <h1>Alle Eintraege</h1>
+    <h:form>
+        <h:dataTable value="#{customerView.customers}" var="customer">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
+                #{customer.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{customer.lastname}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Vorname</f:facet>
+                #{customer.firstname}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Geburtsdatum</f:facet>
+                #{customer.birthdate}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    
+    <h1>Einfuegen</h1>
+    <h:form>
+        <h:panelGrid columns="2">
+            Name: <h:inputText value="#{customerView.customer.lastname}" />
+            Vorname: <h:inputText value="#{customerView.customer.firstname}" />
+            Geburtsdatum: <h:inputText value="#{customerView.customer.birthdate}"> 
+            	<f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date" />
+            </h:inputText>
+        </h:panelGrid>
+        <h:commandButton action="#{customerView.save}" value="Speichern" />
+    </h:form>
+    
+    <h1>Loeschen</h1>
+    <h:form>
+        <h:panelGrid columns="2">
+            Id: <h:inputText value="#{customerView.customer.id}" />
+        </h:panelGrid>
+        <h:commandButton action="#{customerView.delete()}" value="Loeschen" />
+    </h:form>
+    
+    <h1>Aktualisieren</h1>
+    <h:form>
+        <h:panelGrid columns="2">
+        	Id: <h:inputText value="#{customerView.customer.id}" />
+            Name: <h:inputText value="#{customerView.customer.lastname}" />
+            Vorname: <h:inputText value="#{customerView.customer.firstname}" />
+            Geburtsdatum: <h:inputText value="#{customerView.customer.birthdate}"> 
+            	<f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date" />
+            </h:inputText>
+        </h:panelGrid>
+        <h:commandButton action="#{customerView.merge}" value="Aktualisieren" />
+    </h:form>
+    
+</body>
+
+</html>

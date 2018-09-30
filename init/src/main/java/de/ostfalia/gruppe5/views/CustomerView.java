@@ -1,6 +1,12 @@
+package de.ostfalia.gruppe5.views;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import de.ostfalia.gruppe5.models.Customer;
+import de.ostfalia.gruppe5.services.CustomerService;
+
 import java.util.List;
 
 @RequestScoped
@@ -12,10 +18,8 @@ public class CustomerView {
     @Inject
     private CustomerService service;
 
-    public List<Customer> customers;
-
     public CustomerView() {
-
+    	customer = new Customer();
     }
 
     public Customer getCustomer() {
@@ -25,8 +29,23 @@ public class CustomerView {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+    
+    public List<Customer> getCustomers() {
+		return service.getAllCustomers();
+	}
 
-    public void save() {
+	public String save() {
         service.save(customer);
+        return null;
     }
+	
+	public String merge() {
+		service.merge(customer.getId());
+		return null;
+	}
+	
+	public String delete() {
+		service.delete(customer.getId());
+		return null;
+	}
 }
