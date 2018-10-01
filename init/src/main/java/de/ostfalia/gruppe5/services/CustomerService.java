@@ -27,10 +27,6 @@ public class CustomerService {
         em.persist(customer);
     }
 
-    public Customer mergeById(Long id) {
-        return em.merge(findById(id));
-    }
-
     private Customer findById(Long id) {
         return em.find(Customer.class, id);
     }
@@ -46,7 +42,7 @@ public class CustomerService {
     public Customer update(Customer customer) {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
-        Customer detachedCustomer = this.findById(Long.valueOf(customer.getId()));
+        Customer detachedCustomer = this.findById(customer.getId());
 
         Date birthdayDate= null;
         try {
