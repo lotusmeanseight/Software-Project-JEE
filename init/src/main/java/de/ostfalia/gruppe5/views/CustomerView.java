@@ -35,15 +35,18 @@ public class CustomerView {
         return service.getAllCustomers();
     }
 
-    public void save() {
+    public String save() {
         service.save(customer);
+        return null;
     }
 
-    public void update(String id) {
+    public String update(String id) {
         service.update(id);
+        return null;
     }
 
-    public void delete(String id) {
+    public String delete(String id) {
         service.deleteById(Long.valueOf(id));
+        return null;
 	}
 }
