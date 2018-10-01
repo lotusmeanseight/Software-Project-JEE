@@ -5,65 +5,78 @@
 >
 
 <h:head>
- <title>Customers</title>
+    <title>Customers</title>
 </h:head>
 
 <body>
-    <h1>Alle Eintraege</h1>
-    <h:form>
-        <h:dataTable value="#{customerView.customers}" var="customer">
-            <h:column>
-                <f:facet name="header">Id</f:facet>
-                #{customer.id}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                #{customer.lastname}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Vorname</f:facet>
-                #{customer.firstname}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Geburtsdatum</f:facet>
-                #{customer.birthdate}
-            </h:column>
-        </h:dataTable>
-    </h:form>
-    
-    <h1>Einfuegen</h1>
-    <h:form>
-        <h:panelGrid columns="2">
-            Name: <h:inputText value="#{customerView.customer.lastname}" />
-            Vorname: <h:inputText value="#{customerView.customer.firstname}" />
-            Geburtsdatum: <h:inputText value="#{customerView.customer.birthdate}"> 
-            	<f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date" />
-            </h:inputText>
-        </h:panelGrid>
-        <h:commandButton action="#{customerView.save}" value="Speichern" />
-    </h:form>
-    
-    <h1>Loeschen</h1>
-    <h:form>
-        <h:panelGrid columns="2">
-            Id: <h:inputText value="#{customerView.customer.id}" />
-        </h:panelGrid>
-        <h:commandButton action="#{customerView.delete()}" value="Loeschen" />
-    </h:form>
-    
-    <h1>Aktualisieren</h1>
-    <h:form>
-        <h:panelGrid columns="2">
-        	Id: <h:inputText value="#{customerView.customer.id}" />
-            Name: <h:inputText value="#{customerView.customer.lastname}" />
-            Vorname: <h:inputText value="#{customerView.customer.firstname}" />
-            Geburtsdatum: <h:inputText value="#{customerView.customer.birthdate}"> 
-            	<f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date" />
-            </h:inputText>
-        </h:panelGrid>
-        <h:commandButton action="#{customerView.update}" value="Aktualisieren"/>
-    </h:form>
-    
+<h1>Alle Eintraege</h1>
+<h:form id="customer_datatable_form">
+    <h:dataTable id="customer_datatable_data" value="#{customerView.customers}" var="customer" border="1"
+                 selectionMode="single">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            <input id="customer_lastname_input_#{customer.id}" name="customer_lastname_input_#{customer.id}" value="#{customer.lastname}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Vorname</f:facet>
+            <input id="customer_firstname_input_#{customer.id}" name="customer_firstname_input_#{customer.id}" value="#{customer.firstname}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Geburtsdatum</f:facet>
+            <input id="customer_birthdate_input_#{customer.id}" name="customer_birthdate_input_#{customer.id}" value="#{customer.birthdate}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">add</f:facet>
+        </h:column>
+        <h:column>
+            <f:facet name="header">update</f:facet>
+            <h:commandButton action="#{customerView.update(customer.id)}" value="Aktualisieren"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">delete</f:facet>
+            <h:commandButton action="#{customerView.delete(customer.id)}" value="Loeschen"/>
+        </h:column>
+    </h:dataTable>
+
+
+</h:form>
+
+<h1>Einfuegen</h1>
+<h:form>
+    <h:panelGrid columns="2">
+        Name: <h:inputText value="#{customerView.customer.lastname}"/>
+        Vorname: <h:inputText value="#{customerView.customer.firstname}"/>
+        Geburtsdatum: <h:inputText value="#{customerView.customer.birthdate}">
+        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date"/>
+    </h:inputText>
+    </h:panelGrid>
+    <h:commandButton action="#{customerView.save}" value="Speichern"/>
+</h:form>
+
+<h1>Loeschen</h1>
+<h:form>
+    <h:panelGrid columns="2">
+        Id: <h:inputText value="#{customerView.customer.id}"/>
+    </h:panelGrid>
+    <h:commandButton action="#{customerView.delete()}" value="Loeschen"/>
+</h:form>
+
+<h1>Aktualisieren</h1>
+<h:form>
+    <h:panelGrid columns="2">
+        Id: <h:inputText value="#{customerView.customer.id}"/>
+        Name: <h:inputText value="#{customerView.customer.lastname}"/>
+        Vorname: <h:inputText value="#{customerView.customer.firstname}"/>
+        Geburtsdatum: <h:inputText value="#{customerView.customer.birthdate}">
+        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date"/>
+    </h:inputText>
+    </h:panelGrid>
+    <h:commandButton action="#{customerView.update}" value="Aktualisieren"/>
+</h:form>
+
 </body>
 
 </html>
