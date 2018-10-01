@@ -3,8 +3,13 @@ package de.ostfalia.gruppe5.services;
 import de.ostfalia.gruppe5.models.Customer;
 
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,15 +31,15 @@ public class CustomerService {
         em.merge(findById(id));
     }
 
-    public void merge(Customer customer) {
+    private void merge(Customer customer) {
         em.merge(customer);
     }
 
-    public void detachCustomer(Customer customer) {
+    private void detachCustomer(Customer customer) {
         em.detach(customer);
     }
 
-    public Customer findById(Long id) {
+    private Customer findById(Long id) {
         return em.find(Customer.class, id);
     }
 
@@ -43,6 +48,24 @@ public class CustomerService {
     }
 
     public List<Customer> getAllCustomers() {
-        return em.createQuery("SELECT c from Customer c").getResultList();
+        return em.createQuery("SELECT c from Customer c",Customer.class).getResultList();
+    }
+
+    public Customer update(String id) {
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+
+        Customer detachedCustomer = this.findById(Long.valueOf(id));
+        this.detachCustomer(detachedCustomer);
+        Date birthdayDate= null;
+        try {
+            birthdayDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(request.getParameter("customer_birthdate_input_"+id));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        detachedCustomer.setBirthdate(birthdayDate);
+        detachedCustomer.setFirstname(request.getParameter("customer_firstname_input_"+id));
+        detachedCustomer.setLastname(request.getParameter("customer_lastname_input_"+id));
+        this.merge(detachedCustomer);
+        return detachedCustomer;
     }
 }
