@@ -3,13 +3,11 @@ package de.ostfalia.gruppe5.views;
 import de.ostfalia.gruppe5.models.Customer;
 import de.ostfalia.gruppe5.services.CustomerService;
 
-import javax.annotation.ManagedBean;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
-@ManagedBean
 @RequestScoped
 @Named
 public class CustomerView {
@@ -40,13 +38,13 @@ public class CustomerView {
         return null;
     }
 
-    public String update(String id) {
-        service.update(id);
+    public String update(Customer customer) {
+        service.update(customer);
         return null;
     }
 
-    public String delete(String id) {
-        service.deleteById(Long.valueOf(id));
+    public String delete(Customer customer) {
+        service.deleteById(customer.getId());
         return null;
 	}
 }

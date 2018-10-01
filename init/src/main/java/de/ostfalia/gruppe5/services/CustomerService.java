@@ -43,19 +43,20 @@ public class CustomerService {
         return em.createQuery("SELECT c from Customer c",Customer.class).getResultList();
     }
 
-    public Customer update(String id) {
+    public Customer update(Customer customer) {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
-        Customer detachedCustomer = this.findById(Long.valueOf(id));
+        Customer detachedCustomer = this.findById(Long.valueOf(customer.getId()));
+
         Date birthdayDate= null;
         try {
-            birthdayDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(request.getParameter("customer_birthdate_input_"+id));
+            birthdayDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(request.getParameter("customer_birthdate_input_"+customer.getId()));
         } catch (ParseException e) {
             e.printStackTrace();
         }
         detachedCustomer.setBirthdate(birthdayDate);
-        detachedCustomer.setFirstname(request.getParameter("customer_firstname_input_"+id));
-        detachedCustomer.setLastname(request.getParameter("customer_lastname_input_"+id));
+        detachedCustomer.setFirstname(request.getParameter("customer_firstname_input_"+customer.getId()));
+        detachedCustomer.setLastname(request.getParameter("customer_lastname_input_"+customer.getId()));
         return detachedCustomer;
     }
 }

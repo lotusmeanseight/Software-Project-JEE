@@ -27,11 +27,11 @@
         </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="#{customerView.update(customer.id)}" value="Aktualisieren"/>
+            <h:commandButton action="#{customerView.update(customer)}" value="Aktualisieren"/>
         </h:column>
         <h:column>
             <f:facet name="header">Loeschen</f:facet>
-            <h:commandButton action="#{customerView.delete(customer.id)}" value="Loeschen"/>
+            <h:commandButton action="#{customerView.delete(customer)}" value="Loeschen"/>
         </h:column>
     </h:dataTable>
 
