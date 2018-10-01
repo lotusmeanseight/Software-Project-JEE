@@ -31,14 +31,6 @@ public class CustomerService {
         em.merge(findById(id));
     }
 
-    private void merge(Customer customer) {
-        em.merge(customer);
-    }
-
-    private void detachCustomer(Customer customer) {
-        em.detach(customer);
-    }
-
     private Customer findById(Long id) {
         return em.find(Customer.class, id);
     }
@@ -55,7 +47,6 @@ public class CustomerService {
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
         Customer detachedCustomer = this.findById(Long.valueOf(id));
-        this.detachCustomer(detachedCustomer);
         Date birthdayDate= null;
         try {
             birthdayDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(request.getParameter("customer_birthdate_input_"+id));
@@ -65,7 +56,6 @@ public class CustomerService {
         detachedCustomer.setBirthdate(birthdayDate);
         detachedCustomer.setFirstname(request.getParameter("customer_firstname_input_"+id));
         detachedCustomer.setLastname(request.getParameter("customer_lastname_input_"+id));
-        this.merge(detachedCustomer);
         return detachedCustomer;
     }
 }
