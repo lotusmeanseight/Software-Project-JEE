@@ -27,8 +27,8 @@ public class CustomerService {
         em.persist(customer);
     }
 
-    public void mergeById(Long id) {
-        em.merge(findById(id));
+    public Customer mergeById(Long id) {
+        return em.merge(findById(id));
     }
 
     private Customer findById(Long id) {
