@@ -14,9 +14,6 @@
     <h:dataTable id="customer_datatable_data" value="#{customerView.customers}" var="customer" border="1"
                  selectionMode="single">
         <h:column>
-            <f:facet name="header">Id</f:facet>
-        </h:column>
-        <h:column>
             <f:facet name="header">Name</f:facet>
             <input id="customer_lastname_input_#{customer.id}" name="customer_lastname_input_#{customer.id}" value="#{customer.lastname}"/>
         </h:column>
@@ -29,14 +26,11 @@
             <input id="customer_birthdate_input_#{customer.id}" name="customer_birthdate_input_#{customer.id}" value="#{customer.birthdate}"/>
         </h:column>
         <h:column>
-            <f:facet name="header">add</f:facet>
-        </h:column>
-        <h:column>
-            <f:facet name="header">update</f:facet>
+            <f:facet name="header">Aktualisieren</f:facet>
             <h:commandButton action="#{customerView.update(customer.id)}" value="Aktualisieren"/>
         </h:column>
         <h:column>
-            <f:facet name="header">delete</f:facet>
+            <f:facet name="header">Loeschen</f:facet>
             <h:commandButton action="#{customerView.delete(customer.id)}" value="Loeschen"/>
         </h:column>
     </h:dataTable>
@@ -54,27 +48,6 @@
     </h:inputText>
     </h:panelGrid>
     <h:commandButton action="#{customerView.save}" value="Speichern"/>
-</h:form>
-
-<h1>Loeschen</h1>
-<h:form>
-    <h:panelGrid columns="2">
-        Id: <h:inputText value="#{customerView.customer.id}"/>
-    </h:panelGrid>
-    <h:commandButton action="#{customerView.delete()}" value="Loeschen"/>
-</h:form>
-
-<h1>Aktualisieren</h1>
-<h:form>
-    <h:panelGrid columns="2">
-        Id: <h:inputText value="#{customerView.customer.id}"/>
-        Name: <h:inputText value="#{customerView.customer.lastname}"/>
-        Vorname: <h:inputText value="#{customerView.customer.firstname}"/>
-        Geburtsdatum: <h:inputText value="#{customerView.customer.birthdate}">
-        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date"/>
-    </h:inputText>
-    </h:panelGrid>
-    <h:commandButton action="#{customerView.update}" value="Aktualisieren"/>
 </h:form>
 
 </body>
