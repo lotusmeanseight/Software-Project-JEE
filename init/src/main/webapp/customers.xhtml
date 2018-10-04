@@ -15,15 +15,15 @@
                  selectionMode="single">
         <h:column>
             <f:facet name="header">Name</f:facet>
-            #{customer.lastname}
+            <h:outputText id="lastName" value="#{customer.lastname}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Vorname</f:facet>
-            #{customer.firstname}
+            <h:outputText id="firstName" value="#{customer.firstname}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Geburtsdatum</f:facet>
-            #{customer.birthdate}
+            <h:outputText id="birthDate" value="#{customer.birthdate}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
