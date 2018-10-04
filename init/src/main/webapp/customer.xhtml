@@ -7,37 +7,7 @@
 <h:head>
     <title>Customers</title>
 </h:head>
-
 <body>
-<h1>Alle Eintraege</h1>
-<h:form id="customer_datatable_form">
-    <h:dataTable id="customer_datatable_data" value="#{customerView.customers}" var="customer" border="1"
-                 selectionMode="single">
-        <h:column>
-            <f:facet name="header">Name</f:facet>
-            <input id="customer_lastname_input_#{customer.id}" name="customer_lastname_input_#{customer.id}" value="#{customer.lastname}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Vorname</f:facet>
-            <input id="customer_firstname_input_#{customer.id}" name="customer_firstname_input_#{customer.id}" value="#{customer.firstname}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Geburtsdatum</f:facet>
-            <input id="customer_birthdate_input_#{customer.id}" name="customer_birthdate_input_#{customer.id}" value="#{customer.birthdate}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="#{customerView.update(customer)}" value="Aktualisieren"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Loeschen</f:facet>
-            <h:commandButton action="#{customerView.delete(customer)}" value="Loeschen"/>
-        </h:column>
-    </h:dataTable>
-
-
-</h:form>
-
 <h1>Einfuegen</h1>
 <h:form>
     <h:panelGrid columns="2">
@@ -49,7 +19,6 @@
     </h:panelGrid>
     <h:commandButton action="#{customerView.save}" value="Speichern"/>
 </h:form>
-
 </body>
 
 </html>

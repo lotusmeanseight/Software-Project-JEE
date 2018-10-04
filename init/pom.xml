@@ -13,6 +13,10 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- VERSIONS -->
 		<javaee.version>8.0</javaee.version>
+		<hibernate.core.version>5.3.6.Final</hibernate.core.version>
+		<derby.version>10.11.1.1</derby.version>
+		<junit.version>4.12</junit.version>
+		<!-- PLUGINS -->
         <maven.war.plugin.version>3.2.2</maven.war.plugin.version>
         <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
 	</properties>
@@ -24,6 +28,30 @@
 			<version>${javaee.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Hibernate Entity Manager Dependency inside,
+		artifact: hibernate-entity.manager deprecated -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.core.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>${derby.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>

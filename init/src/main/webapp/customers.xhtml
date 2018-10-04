@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<h:form id="customer_datatable_form">
+    <h:dataTable id="customer_datatable_data" value="#{customerView.customers}" var="customer" border="1"
+                 selectionMode="single">
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            <input id="customer_lastname_input_#{customer.id}" name="customer_lastname_input_#{customer.id}" value="#{customer.lastname}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Vorname</f:facet>
+            <input id="customer_firstname_input_#{customer.id}" name="customer_firstname_input_#{customer.id}" value="#{customer.firstname}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Geburtsdatum</f:facet>
+            <input id="customer_birthdate_input_#{customer.id}" name="customer_birthdate_input_#{customer.id}" value="#{customer.birthdate}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Aktualisieren</f:facet>
+            <h:commandButton action="#{customerView.update(customer)}" value="Aktualisieren"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Loeschen</f:facet>
+            <h:commandButton action="#{customerView.delete(customer)}" value="Loeschen"/>
+        </h:column>
+    </h:dataTable>
+</h:form>
+</body>
+</html>
