@@ -1,0 +1,13 @@
+1. Die JEE Applikation folgt dem Master-Detail Muster.
+d.h:
+	- Einfügen/Editieren befindet sich auf eigenen seperaten Seiten
+	- Die Liste aller Kunden enthält wie im letzten Sprint
+		1) einen Knopf für das Editieren eines Eintrages.
+		2) einen Knopf für das Löschen eines Eintrages.
+		Mit der Änderung dass, das Editieren nicht mehr direkt in der Tabelle sondern auf einer seperaten
+		Seite durchgeführt wird.
+2. Die JEE Applikation wird durch Integrationstests auf die Richtigkeit der JPA-Mappings überprüft.
+	- Verwendung von EntityManagerFactory um auf dem Persistentkontext der Datenbank
+	innerhalb des Deployments zugreifen zu können.
+	- Verwendung von Apache Derby oder der Oracle Distribution JavaDB
+
