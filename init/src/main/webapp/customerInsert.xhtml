@@ -6,6 +6,9 @@
 
 <h:head>
     <title>Customers</title>
+    <h:head>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
 </h:head>
 <body>
 <h1>Einfuegen</h1>
@@ -19,7 +22,7 @@
     </h:panelGrid>
     <h:commandButton action="#{customerView.save}" value="Einfuegen">
   	</h:commandButton>
-    <h:button value="Liste" outcome="customers"/>
+    <h:button styleClass="button" value="Liste" outcome="customers"/>
 </h:form>
 </body>
 

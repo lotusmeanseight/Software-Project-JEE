@@ -6,6 +6,9 @@
 
 <h:head>
     <title>Customers</title>
+    <h:head>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
 </h:head>
 <body>
 <h1>Aktualisieren</h1>
@@ -21,7 +24,7 @@
     <h:commandButton action="#{customerView.update(customerView.customer)}" value="Aktualisieren">
         <f:setPropertyActionListener target="#{customerView.customer}" value="#{customerView.customer}" />
     </h:commandButton>
-    <h:button value="Liste" outcome="customers"/>
+    <h:button styleClass="button" value="Liste" outcome="customers"/>
 </h:form>
 </body>
 </html>

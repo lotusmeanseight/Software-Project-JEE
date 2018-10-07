@@ -1,0 +1,45 @@
+.customer-table{
+    border-collapse:collapse;
+}
+
+.customer-table-header{
+    text-align:center;
+    background:no-repeat;
+    padding: 8px;
+}
+
+.customer-table-even-row{
+    text-align:center;
+    padding: 8px;
+    border-top:1px solid #f2f2f2;
+    background-color: #f3f3f3;
+}
+
+.customer-table-odd-row{
+    text-align:center;
+    padding: 8px;
+    border-top:1px solid #555555;
+}
+
+input[type=text] {
+    padding: 12px 20px;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 3px solid #555;
+}
+
+input[type=submit] {
+    margin: 8px;
+    border-radius: 2px;
+    border: 0;
+    font-family: Tahoma;
+    background: #f4f4f4;
+}
+
+.button{
+    margin: 8px;
+    border-radius: 2px;
+    border: 0;
+    font-family: Tahoma;
+    background: #f4f4f4;
+}
