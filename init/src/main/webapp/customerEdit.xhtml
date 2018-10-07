@@ -17,9 +17,11 @@
         <f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date"/>
     </h:inputText>
     </h:panelGrid>
-    <h:commandButton action="#{customerView.update(customerView.customer)}" value="Aktualisieren"/>
+    <h:inputHidden value="#{customerView.customer.id}"/>
+    <h:commandButton action="#{customerView.update(customerView.customer)}" value="Aktualisieren">
+        <f:setPropertyActionListener target="#{customerView.customer}" value="#{customerView.customer}" />
+    </h:commandButton>
     <h:button value="Liste" outcome="customers"/>
 </h:form>
 </body>
-
 </html>

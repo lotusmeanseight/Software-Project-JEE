@@ -18,9 +18,9 @@ public class CustomerService {
 
     @PersistenceContext
     EntityManager em;
-    
+
     public CustomerService() {
-    	
+
     }
 
     public void save(Customer customer) {
@@ -39,20 +39,36 @@ public class CustomerService {
         return em.createQuery("SELECT c from Customer c",Customer.class).getResultList();
     }
 
+    public Customer update(Long id){
+        return this.update(this.findById(id));
+    }
+
     public Customer update(Customer customer) {
+        System.out.println("###################################");
+        System.out.println(customer.getFirstname());
+        System.out.println(customer.getLastname());
+        System.out.println(customer.getBirthdate());
+        System.out.println(customer.getId());
+        System.out.println("###################################");
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
         Customer detachedCustomer = this.findById(customer.getId());
 
-        Date birthdayDate= null;
-        try {
-            birthdayDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(request.getParameter("customer_birthdate_input_"+customer.getId()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        detachedCustomer.setBirthdate(birthdayDate);
-        detachedCustomer.setFirstname(request.getParameter("customer_firstname_input_"+customer.getId()));
-        detachedCustomer.setLastname(request.getParameter("customer_lastname_input_"+customer.getId()));
+//        Date birthdayDate= null;
+//        try {
+//            birthdayDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(request.getParameter("customer_birthdate_input_"+customer.getId()));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        detachedCustomer.setBirthdate(birthdayDate);
+//        detachedCustomer.setFirstname(request.getParameter("customer_firstname_input_"+customer.getId()));
+//        detachedCustomer.setLastname(request.getParameter("customer_lastname_input_"+customer.getId()));
+
+        detachedCustomer.setBirthdate(customer.getBirthdate());
+        detachedCustomer.setFirstname(customer.getFirstname());
+        detachedCustomer.setLastname(customer.getLastname());
+        detachedCustomer.setId(customer.getId());
+
         return detachedCustomer;
     }
 }

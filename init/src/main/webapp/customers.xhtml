@@ -14,6 +14,10 @@
     <h:dataTable id="customer_datatable_data" value="#{customerView.customers}" var="customer" border="1"
                  selectionMode="single">
         <h:column>
+            <f:facet name="header">ID</f:facet>
+            <h:outputText id="id" value="#{customer.id}"/>
+        </h:column>
+        <h:column>
             <f:facet name="header">Name</f:facet>
             <h:outputText id="lastName" value="#{customer.lastname}"/>
         </h:column>
@@ -27,7 +31,10 @@
         </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="customerEdit" value="Aktualisieren"/>
+            <h:commandButton action="customerEdit" value="Aktualisieren" >
+                <f:setPropertyActionListener target="#{customerView.customer}" value="#{customer}" />
+                <f:setPropertyActionListener target="#{customerView.customer.id}" value="#{customer.id}" />
+            </h:commandButton>
         </h:column>
         <h:column>
             <f:facet name="header">Loeschen</f:facet>
@@ -36,7 +43,7 @@
     </h:dataTable>
 </h:form>
 <h:form>
-    <h:button value="Einfuegen" outcome="customerInsert"/>
+    <h:commandButton action="customerInsert" value="Einfuegen" />
 </h:form>
 </body>
 </html>
