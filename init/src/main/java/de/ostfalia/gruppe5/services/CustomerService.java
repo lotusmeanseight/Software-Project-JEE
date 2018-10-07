@@ -7,9 +7,6 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 
@@ -44,12 +41,6 @@ public class CustomerService {
     }
 
     public Customer update(Customer customer) {
-        System.out.println("###################################");
-        System.out.println(customer.getFirstname());
-        System.out.println(customer.getLastname());
-        System.out.println(customer.getBirthdate());
-        System.out.println(customer.getId());
-        System.out.println("###################################");
         HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 
         Customer detachedCustomer = this.findById(customer.getId());
