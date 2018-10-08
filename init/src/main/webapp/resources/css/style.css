@@ -5,7 +5,7 @@
 .customer-table-header{
     text-align:center;
     background:no-repeat;
-    padding: 8px;
+    padding: 8px 4px 8px 4px;
 }
 
 .customer-table-even-row{
@@ -29,17 +29,19 @@ input[type=text] {
 }
 
 input[type=submit] {
-    margin: 8px;
+    width: 128px;
+    margin: 7px 5px 7px;
+    padding: 3px 0 6px 0;
     border-radius: 2px;
-    border: 0;
     font-family: Tahoma;
     background: #f4f4f4;
 }
 
 .button{
-    margin: 8px;
+    width: 128px;
+    margin: 7px 0 5px 7px;
+    padding: 3px 0 6px 0;
     border-radius: 2px;
-    border: 0;
     font-family: Tahoma;
     background: #f4f4f4;
 }
