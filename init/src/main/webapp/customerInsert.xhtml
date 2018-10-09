@@ -17,7 +17,7 @@
         Name: <h:inputText value="#{customerView.customer.lastname}"/>
         Vorname: <h:inputText value="#{customerView.customer.firstname}"/>
         Geburtsdatum: <h:inputText value="#{customerView.customer.birthdate}">
-        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date"/>
+        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="localDate" />
     </h:inputText>
     </h:panelGrid>
     <h:commandButton action="#{customerView.save}" value="Einfuegen">
