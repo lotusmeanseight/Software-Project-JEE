@@ -1,0 +1,30 @@
+
+sprint—review-2
+Gruppe 5
+
+Software Engineering Projekt: Realisierung eines Warenwirtschaftssystems
+
+Projektstart: 27.09.2018
+Projektende : 20.12.2018
+
+=================================================
+
+Sprint 2 
+
+Sprintanfang: 04.10.2018
+Sprintende  : 10.10.2018 (24.00 Uhr)
+
+
+• Bugs der letzten Version: 
+	- Verwendung neuer APIs: Umstellung auf JSF 2.3, JPA 2.2, CDI 2.0 sowie Umstellung der Kalenderdaten auf LocalDate.
+• Testen: 
+	- Integrations Test für das JPA O/R Mapping mit dem EntityManager und Derby (CustomerIT.class)
+• Implementierung des Master Detail Patterns: 
+	- Anzeige einer Liste von Kunden (Vor-, Nachname und Geburtstag), in der jeder Eintrag durch einen Lösch- und Editier Button gelöscht bzw. aktualisiert werden kann (Der Button zum Einfügen neuer Kunden befindet sich unterhalb in einem eigenen HTML form Element)
+	- Aktualisierung und Einfügen von Kundeneinträgen mittels HTML Input Elemente in dafür vorgesehenen separaten Seiten (customerEdit.xhtml, customerInsert.xhtml)
+• Einbinden der vorgegebenen pom.xml
+• Zusätzliche Aufgaben: 
+	- Einbinden eines CSS Stylesheets (style.css) in JSF Seiten, um die Formatierung zu definieren
+
+
+
