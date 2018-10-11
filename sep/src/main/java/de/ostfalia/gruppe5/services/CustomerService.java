@@ -36,11 +36,20 @@ public class CustomerService {
 
 
     public Customer update(Customer customer) {
-        Customer detachedCustomer = this.findById(customer.getId());
-        detachedCustomer.setBirthdate(customer.getBirthdate());
-        detachedCustomer.setFirstname(customer.getFirstname());
-        detachedCustomer.setLastname(customer.getLastname());
-        detachedCustomer.setId(customer.getId());
+        Customer detachedCustomer = this.findById(customer.getCustomerNumber());
+        detachedCustomer.setAddressLine1(customer.getAddressLine1());
+        detachedCustomer.setAddressLine2(customer.getAddressLine2());
+        detachedCustomer.setCity(customer.getCity());
+        detachedCustomer.setContactFirstName(customer.getContactFirstName());
+        detachedCustomer.setContactLastName(customer.getContactLastName());
+        detachedCustomer.setCountry(customer.getCountry());
+        detachedCustomer.setCreditLimit(customer.getCreditLimit());
+        detachedCustomer.setCustomerName(customer.getCustomerName());
+        detachedCustomer.setCustomerNumber(customer.getCustomerNumber());
+        detachedCustomer.setPhone(customer.getPhone());
+        detachedCustomer.setPostalCode(customer.getPostalCode());
+        detachedCustomer.setSalesRepEmployeeNumber(customer.getSalesRepEmployeeNumber());
+        detachedCustomer.setState(customer.getState());
 
         return detachedCustomer;
     }

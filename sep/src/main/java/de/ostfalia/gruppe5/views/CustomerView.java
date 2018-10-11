@@ -44,7 +44,7 @@ public class CustomerView {
     }
 
     public String delete(Customer customer) {
-        service.deleteById(customer.getId());
+        service.deleteById(customer.getCustomerNumber());
         return null;
 	}
 }
