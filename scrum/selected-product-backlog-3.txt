@@ -1,0 +1,33 @@
+
+Product Backlog
+Gruppe 5
+
+Software Engineering Projekt: Realisierung eines Warenwirtschaftssystems
+
+Projektstart: 27.09.2018
+Projektende : 20.12.2018
+
+=================================================
+
+Sprint 3
+
+Sprintanfang: 11.10.2018
+Sprintende  : 24.10.2018 (24.00 Uhr)
+
+
+• Daten:  
+	- Anlegen der Entitäten unter Berücksichtigung der Beziehungen zwischen den einzelnen Tabellen 
+	- Erweiterung der Entität Customer.class um weitere Attribute
+	- Bean Validation auf Basis der Eigenschaften in dem Datenbankschema wählen (CusterName max. 50 Zeichen lang, @size(max=50))
+	- Implementierung der CRUD-Funktionalitäten/der erforderlichen Services (außer für Binärdaten wie BLOB und für Orders.class, ggf. Oberklasse, die CRUD Funktionalität umfasst, von der andere Services erben) 
+	- Definieren der Data Source/Eingabe der Data Source in Wildfly 
+• Design: 
+	- Konzipierung und anschließende Realisierung einer geeigneten Navigationsstruktur (ggf. Menü) 
+	- Einhaltung eines konsistenten Designs auf jeder JSF Seite (Verwendung von Templates)
+• Bugs: 
+	- Mögliche Fehler aus dem Sprint Bewertung 2 überarbeiten 
+
+
+
+
+
