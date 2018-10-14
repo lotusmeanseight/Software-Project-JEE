@@ -1,11 +1,6 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,7 +10,7 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerNumber;
+	private Integer customerNumber;
 
     @NotNull
     @Size(max=50)
@@ -59,11 +54,11 @@ public class Customer {
     
     private Double creditLimit;
 
-	public Long getCustomerNumber() {
+	public Integer getCustomerNumber() {
 		return customerNumber;
 	}
 
-	public void setCustomerNumber(Long customerNumber) {
+	public void setCustomerNumber(Integer customerNumber) {
 		this.customerNumber = customerNumber;
 	}
 
