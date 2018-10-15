@@ -16,6 +16,10 @@ public class EmployeeView {
     @Inject
     private EmployeeService service;
 
+    public EmployeeView() {
+        employee = new Employee();
+    }
+
     public List<Employee> getEmployees() {
         return service.getAllEmployees();
     }
