@@ -14,13 +14,10 @@
 <h1>Aktualisieren</h1>
 <h:form>
     <h:panelGrid columns="2">
-        Name: <h:inputText value="#{customerView.customer.lastname}"/>
-        Vorname: <h:inputText value="#{customerView.customer.firstname}"/>
-        Geburtsdatum: <h:inputText value="#{customerView.customer.birthdate}">
-        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date"/>
-    </h:inputText>
+        Name: <h:inputText value="#{customerView.customer.contactLastName}"/>
+        Vorname: <h:inputText value="#{customerView.customer.contactFirstName}"/>
     </h:panelGrid>
-    <h:inputHidden value="#{customerView.customer.id}"/>
+    <h:inputHidden value="#{customerView.customer.customerNumber}"/>
     <h:commandButton action="#{customerView.update(customerView.customer)}" value="Aktualisieren">
         <f:setPropertyActionListener target="#{customerView.customer}" value="#{customerView.customer}" />
     </h:commandButton>

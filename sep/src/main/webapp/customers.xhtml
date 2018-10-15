@@ -15,25 +15,22 @@
                  selectionMode="single" styleClass="customer-table" headerClass="customer-table-header" rowClasses="customer-table-odd-row,customer-table-even-row">
         <h:column>
             <f:facet name="header">ID</f:facet>
-            <h:outputText id="id" value="#{customer.id}"/>
+            <h:outputText id="id" value="#{customer.customerNumber}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Name</f:facet>
-            <h:outputText id="lastName" value="#{customer.lastname}"/>
+            <h:outputText id="lastName" value="#{customer.contactLastName}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Vorname</f:facet>
-            <h:outputText id="firstName" value="#{customer.firstname}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Geburtsdatum</f:facet>
-            <h:outputText id="birthDate" value="#{customer.birthdate}"/>
+            <h:outputText id="firstName" value="#{customer.contactFirstName}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
             <h:commandButton action="customerEdit" value="Aktualisieren" >
                 <f:setPropertyActionListener target="#{customerView.customer}" value="#{customer}" />
-                <f:setPropertyActionListener target="#{customerView.customer.id}" value="#{customer.id}" />
+                <f:setPropertyActionListener target="#{customerView.customer.customerNumber}"
+                                             value="#{customer.customerNumber}"/>
             </h:commandButton>
         </h:column>
         <h:column>
