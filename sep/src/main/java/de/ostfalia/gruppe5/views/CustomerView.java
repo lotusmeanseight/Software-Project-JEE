@@ -13,7 +13,6 @@ import java.util.List;
 public class CustomerView {
 
     private Customer customer;
-
     @Inject
     private CustomerService service;
 
