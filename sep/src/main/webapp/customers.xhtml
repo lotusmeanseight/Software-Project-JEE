@@ -18,12 +18,52 @@
             <h:outputText id="id" value="#{customer.customerNumber}"/>
         </h:column>
         <h:column>
+            <f:facet name="header">Firma</f:facet>
+            <h:outputText id="name" value="#{customer.customerName}"/>
+        </h:column>
+        <h:column>
             <f:facet name="header">Name</f:facet>
             <h:outputText id="lastName" value="#{customer.contactLastName}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Vorname</f:facet>
             <h:outputText id="firstName" value="#{customer.contactFirstName}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Telefonnummer</f:facet>
+            <h:outputText id="phone" value="#{customer.phone}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">1. Adresse</f:facet>
+            <h:outputText id="firstAdressline" value="#{customer.addressLine1}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">2. Adresse</f:facet>
+            <h:outputText id="secondAdressLine" value="#{customer.addressLine2}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Stadt</f:facet>
+            <h:outputText id="city" value="#{customer.city}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Staat</f:facet>
+            <h:outputText id="state" value="#{customer.state}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Postleitzahl</f:facet>
+            <h:outputText id="postalcode" value="#{customer.postalCode}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Land</f:facet>
+            <h:outputText id="country" value="#{customer.country}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Repräsentant</f:facet>
+            <h:outputText id="employeenumber" value="#{customer.salesRepEmployeeNumber}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Kreditlimit</f:facet>
+            <h:outputText id="limit" value="#{customer.creditLimit}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
