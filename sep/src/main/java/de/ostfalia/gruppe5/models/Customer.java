@@ -50,7 +50,7 @@ public class Customer {
     private String country;
     
     @ManyToOne
-    private Integer salesRepEmployeeNumber;
+    private Employee salesRepEmployeeNumber;
     
     private Double creditLimit;
 
@@ -142,11 +142,11 @@ public class Customer {
 		this.country = country;
 	}
 
-	public Integer getSalesRepEmployeeNumber() {
+    public Employee getSalesRepEmployeeNumber() {
 		return salesRepEmployeeNumber;
 	}
 
-	public void setSalesRepEmployeeNumber(Integer salesRepEmployeeNumber) {
+    public void setSalesRepEmployeeNumber(Employee salesRepEmployeeNumber) {
 		this.salesRepEmployeeNumber = salesRepEmployeeNumber;
 	}
 

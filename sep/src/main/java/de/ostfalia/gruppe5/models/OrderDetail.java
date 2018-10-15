@@ -1,37 +1,37 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "orderdetails")
-public class OrderDetail {
+public class OrderDetail implements Serializable {
 
+    @Id
     @OneToOne
-    private Integer orderNumber;
-    @OneToMany
+    private Order orderNumber;
+    @Id
+    @ManyToOne
     @Size(max = 15)
-    private String productCode;
+    private Product productCode;
     private Integer quantityOrdered;
     private Double priceEach;
     private Short orderLineNumber;
 
-    public Integer getOrderNumber() {
+    public Order getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(Integer orderNumber) {
+    public void setOrderNumber(Order orderNumber) {
         this.orderNumber = orderNumber;
     }
 
-    public String getProductCode() {
+    public Product getProductCode() {
         return productCode;
     }
 
-    public void setProductCode(String productCode) {
+    public void setProductCode(Product productCode) {
         this.productCode = productCode;
     }
 

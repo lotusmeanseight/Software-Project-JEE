@@ -1,24 +1,18 @@
 package de.ostfalia.gruppe5.models;
 
-import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "productlines")
-public class ProductLine {
+public class ProductLine implements Serializable {
 
 	@Id
 	@Size(max=50)
 	@ManyToOne
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String productLine;
+    private Product productLine;
 	
 	private String textDescription;
 	
@@ -26,11 +20,11 @@ public class ProductLine {
 	
 	private Serializable BLOB;
 
-	public String getProductLine() {
+    public Product getProductLine() {
 		return productLine;
 	}
 
-	public void setProductLine(String productLine) {
+    public void setProductLine(Product productLine) {
 		this.productLine = productLine;
 	}
 

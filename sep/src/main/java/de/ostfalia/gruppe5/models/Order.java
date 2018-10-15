@@ -17,7 +17,7 @@ public class Order {
     private String status;
     private String comments;
     @ManyToOne
-    private Integer customerNumber;
+    private Customer customerNumber;
 
     public Order() {
 
@@ -63,11 +63,11 @@ public class Order {
         this.comments = comments;
     }
 
-    public Integer getCustomerNumber() {
+    public Customer getCustomerNumber() {
         return customerNumber;
     }
 
-    public void setCustomerNumber(Integer customerNumber) {
+    public void setCustomerNumber(Customer customerNumber) {
         this.customerNumber = customerNumber;
     }
 }
