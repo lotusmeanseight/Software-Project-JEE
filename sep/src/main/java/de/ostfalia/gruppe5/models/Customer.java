@@ -3,6 +3,8 @@ package de.ostfalia.gruppe5.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -11,6 +13,12 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerNumber;
+
+    @OneToMany(mappedBy = "customerNumber", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "customerNumber", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Payment> payments = new ArrayList<>();
 
     @NotNull
     @Size(max=50)
@@ -48,8 +56,9 @@ public class Customer {
     @NotNull
     @Size(max=50)
     private String country;
-    
+
     @ManyToOne
+    @JoinColumn(name = "salesRepEmployeeNumber")
     private Employee salesRepEmployeeNumber;
     
     private Double creditLimit;

@@ -9,10 +9,9 @@ import java.io.Serializable;
 public class ProductLine implements Serializable {
 
 	@Id
-	@Size(max=50)
-	@ManyToOne
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Product productLine;
+	@Size(max = 50)
+	private String productLine;
 	
 	private String textDescription;
 	
@@ -20,11 +19,11 @@ public class ProductLine implements Serializable {
 	
 	private Serializable BLOB;
 
-    public Product getProductLine() {
+	public String getProductLine() {
 		return productLine;
 	}
 
-    public void setProductLine(Product productLine) {
+	public void setProductLine(String productLine) {
 		this.productLine = productLine;
 	}
 

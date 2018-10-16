@@ -3,14 +3,19 @@ package de.ostfalia.gruppe5.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
 public class Employee {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer employeeNumber;
+
+    @OneToMany(mappedBy = "salesRepEmployeeNumber", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Customer> customers = new ArrayList<>();
 	
 	@NotNull
 	@Size(max=50)
@@ -31,6 +36,7 @@ public class Employee {
 	@NotNull
 	@Size(max=10)
 	@ManyToOne
+    @JoinColumn(name = "officeCode")
 	private Office officeCode;
 	
 	private Integer reportsTo;

@@ -17,6 +17,7 @@ public class Order {
     private String status;
     private String comments;
     @ManyToOne
+    @JoinColumn(name = "customerNumber")
     private Customer customerNumber;
 
     public Order() {

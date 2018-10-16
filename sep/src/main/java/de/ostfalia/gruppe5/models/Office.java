@@ -1,12 +1,10 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "offices")
@@ -16,7 +14,10 @@ public class Office {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Size(max=10)
 	private String officeCode;
-	
+
+    @OneToMany(mappedBy = "officeCode", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Employee> employees = new ArrayList<>();
+
 	@NotNull
 	@Size(max=50)
 	private String city;

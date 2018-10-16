@@ -11,6 +11,7 @@ public class OrderDetail implements Serializable {
     @Id
     @OneToOne
     private Order orderNumber;
+
     @Id
     @ManyToOne
     @Size(max = 15)

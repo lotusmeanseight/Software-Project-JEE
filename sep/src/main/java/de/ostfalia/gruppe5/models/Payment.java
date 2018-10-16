@@ -13,6 +13,7 @@ public class Payment implements Serializable {
 	@Id
 	@NotNull
 	@ManyToOne
+	@JoinColumn(name = "customerNumber")
 	private Customer customerNumber;
 	
 	@Id
