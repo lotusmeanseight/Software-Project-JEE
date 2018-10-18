@@ -1,6 +1,6 @@
 <datasources>
     <datasource jndi-name="java:jboss/datasources/sep-ds-5" pool-name="sep-ds-5" enabled="true" use-java-context="true">
-        <connection-url>jdbc:h2:~/classicmodels;DB_CLOSE_DELAY=-1</connection-url>
+        <connection-url>jdbc:h2:tcp//localhost/~/classicmodels;DB_CLOSE_DELAY=-1</connection-url>
         <driver>h2</driver>
         <security>
             <user-name>sa</user-name>
