@@ -1,8 +1,14 @@
 package de.ostfalia.gruppe5.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -11,10 +17,13 @@ import javax.validation.constraints.Size;
 public class OrderDetail {
 
     @OneToOne
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderNumber;
     @OneToMany
     @Size(max = 15)
-    private String productCode;
+    @PrimaryKeyJoinColumn
+    private List<String> productCode;
     private Integer quantityOrdered;
     private Double priceEach;
     private Short orderLineNumber;
@@ -27,13 +36,6 @@ public class OrderDetail {
         this.orderNumber = orderNumber;
     }
 
-    public String getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
-    }
 
     public Integer getQuantityOrdered() {
         return quantityOrdered;
@@ -58,4 +60,12 @@ public class OrderDetail {
     public void setOrderLineNumber(Short orderLineNumber) {
         this.orderLineNumber = orderLineNumber;
     }
+
+	public List<String> getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(List<String> productCode) {
+		this.productCode = productCode;
+	}
 }

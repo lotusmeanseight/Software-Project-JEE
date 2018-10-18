@@ -36,7 +36,7 @@ public class CustomerService {
 
 
     public Customer update(Customer customer) {
-        Customer detachedCustomer = this.findById(customer.getCustomerNumber());
+        Customer detachedCustomer = this.findById(customer.getCustomerNumber().longValue());
         detachedCustomer.setAddressLine1(customer.getAddressLine1());
         detachedCustomer.setAddressLine2(customer.getAddressLine2());
         detachedCustomer.setCity(customer.getCity());

@@ -107,8 +107,4 @@ public class Employee {
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
-	
-
-	
-	
 }
