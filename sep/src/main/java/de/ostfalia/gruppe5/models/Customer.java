@@ -166,7 +166,5 @@ public class Customer {
 	public void setCreditLimit(Double creditLimit) {
 		this.creditLimit = creditLimit;
 	}
-    
-    
-    
+
 }

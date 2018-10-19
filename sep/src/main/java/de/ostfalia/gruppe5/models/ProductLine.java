@@ -3,6 +3,8 @@ package de.ostfalia.gruppe5.models;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "productlines")
@@ -12,6 +14,9 @@ public class ProductLine implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Size(max = 50)
 	private String productLine;
+
+    @OneToMany(mappedBy = "productCode")
+    private List<Product> productList = new ArrayList<>();
 	
 	private String textDescription;
 	
