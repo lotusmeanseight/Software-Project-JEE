@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "employees")
@@ -108,8 +109,25 @@ public class Employee {
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
-	
 
-	
-	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Employee employee = (Employee) o;
+		return Objects.equals(getEmployeeNumber(), employee.getEmployeeNumber()) &&
+				Objects.equals(customers, employee.customers) &&
+				Objects.equals(getLastName(), employee.getLastName()) &&
+				Objects.equals(getFirstName(), employee.getFirstName()) &&
+				Objects.equals(getExtension(), employee.getExtension()) &&
+				Objects.equals(getEmail(), employee.getEmail()) &&
+				Objects.equals(getOfficeCode(), employee.getOfficeCode()) &&
+				Objects.equals(getReportsTo(), employee.getReportsTo()) &&
+				Objects.equals(getJobTitle(), employee.getJobTitle());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getEmployeeNumber(), customers, getLastName(), getFirstName(), getExtension(), getEmail(), getOfficeCode(), getReportsTo(), getJobTitle());
+	}
 }

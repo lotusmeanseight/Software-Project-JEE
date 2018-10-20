@@ -3,6 +3,7 @@ package de.ostfalia.gruppe5.models;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "orderdetails")
@@ -58,5 +59,22 @@ public class OrderDetail implements Serializable {
 
     public void setOrderLineNumber(Short orderLineNumber) {
         this.orderLineNumber = orderLineNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderDetail that = (OrderDetail) o;
+        return Objects.equals(getOrderNumber(), that.getOrderNumber()) &&
+                Objects.equals(getProductCode(), that.getProductCode()) &&
+                Objects.equals(getQuantityOrdered(), that.getQuantityOrdered()) &&
+                Objects.equals(getPriceEach(), that.getPriceEach()) &&
+                Objects.equals(getOrderLineNumber(), that.getOrderLineNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getOrderNumber(), getProductCode(), getQuantityOrdered(), getPriceEach(), getOrderLineNumber());
     }
 }

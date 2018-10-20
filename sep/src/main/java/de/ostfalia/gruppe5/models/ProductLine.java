@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "productlines")
@@ -55,7 +56,21 @@ public class ProductLine implements Serializable {
 	public void setBLOB(Serializable bLOB) {
 		BLOB = bLOB;
 	}
-	
-	
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ProductLine that = (ProductLine) o;
+		return Objects.equals(getProductLine(), that.getProductLine()) &&
+				Objects.equals(productList, that.productList) &&
+				Objects.equals(getTextDescription(), that.getTextDescription()) &&
+				Objects.equals(getHtmlDescription(), that.getHtmlDescription()) &&
+				Objects.equals(getBLOB(), that.getBLOB());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getProductLine(), productList, getTextDescription(), getHtmlDescription(), getBLOB());
+	}
 }

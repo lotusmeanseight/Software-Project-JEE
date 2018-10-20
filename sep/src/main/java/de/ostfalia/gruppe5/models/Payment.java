@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "payments")
@@ -58,7 +59,20 @@ public class Payment implements Serializable {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-	
-	
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Payment payment = (Payment) o;
+		return Objects.equals(getCustomerNumber(), payment.getCustomerNumber()) &&
+				Objects.equals(getCheckNumber(), payment.getCheckNumber()) &&
+				Objects.equals(getPaymentDate(), payment.getPaymentDate()) &&
+				Objects.equals(getAmount(), payment.getAmount());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getCustomerNumber(), getCheckNumber(), getPaymentDate(), getAmount());
+	}
 }

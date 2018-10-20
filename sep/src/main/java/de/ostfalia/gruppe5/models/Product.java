@@ -3,6 +3,7 @@ package de.ostfalia.gruppe5.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "products")
@@ -114,6 +115,24 @@ public class Product {
 		MSRP = mSRP;
 	}
 
-	
-	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Product product = (Product) o;
+		return Objects.equals(getProductCode(), product.getProductCode()) &&
+				Objects.equals(getProductName(), product.getProductName()) &&
+				Objects.equals(getProductLine(), product.getProductLine()) &&
+				Objects.equals(getProductScale(), product.getProductScale()) &&
+				Objects.equals(getProductVendor(), product.getProductVendor()) &&
+				Objects.equals(getProductDescription(), product.getProductDescription()) &&
+				Objects.equals(getQuantityInStock(), product.getQuantityInStock()) &&
+				Objects.equals(getBuyPrice(), product.getBuyPrice()) &&
+				Objects.equals(getMSRP(), product.getMSRP());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getProductCode(), getProductName(), getProductLine(), getProductScale(), getProductVendor(), getProductDescription(), getQuantityInStock(), getBuyPrice(), getMSRP());
+	}
 }
