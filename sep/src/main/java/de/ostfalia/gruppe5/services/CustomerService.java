@@ -1,6 +1,7 @@
 package de.ostfalia.gruppe5.services;
 
-import de.ostfalia.gruppe5.models.Customer;
+import de.ostfalia.gruppe5.models.interfaces.Customer;
+import de.ostfalia.gruppe5.models.implementations.CustomerImpl;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ public class CustomerService {
     }
 
     private Customer findById(Integer id) {
-        return em.find(Customer.class, id);
+        return em.find(CustomerImpl.class, id);
     }
 
     public void deleteById(Integer id) {

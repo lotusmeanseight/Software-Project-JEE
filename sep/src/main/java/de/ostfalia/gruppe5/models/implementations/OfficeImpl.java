@@ -1,4 +1,7 @@
-package de.ostfalia.gruppe5.models;
+package de.ostfalia.gruppe5.models.implementations;
+
+import de.ostfalia.gruppe5.models.interfaces.Employee;
+import de.ostfalia.gruppe5.models.interfaces.Office;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,7 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "offices")
-public class Office {
+public class OfficeImpl implements Office {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,74 +52,92 @@ public class Office {
 	@Size(max=10)
 	private String territory;
 
+	@Override
 	public String getOfficeCode() {
 		return officeCode;
 	}
 
+	@Override
 	public void setOfficeCode(String officeCode) {
 		this.officeCode = officeCode;
 	}
 
+	@Override
 	public String getCity() {
 		return city;
 	}
 
+	@Override
 	public void setCity(String city) {
 		this.city = city;
 	}
 
+	@Override
 	public String getPhone() {
 		return phone;
 	}
 
+	@Override
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
+	@Override
 	public String getAddressLine1() {
 		return addressLine1;
 	}
 
+	@Override
 	public void setAddressLine1(String addressLine1) {
 		this.addressLine1 = addressLine1;
 	}
 
+	@Override
 	public String getAddressLine2() {
 		return addressLine2;
 	}
 
+	@Override
 	public void setAddressLine2(String addressLine2) {
 		this.addressLine2 = addressLine2;
 	}
 
+	@Override
 	public String getState() {
 		return state;
 	}
 
+	@Override
 	public void setState(String state) {
 		this.state = state;
 	}
 
+	@Override
 	public String getCountry() {
 		return country;
 	}
 
+	@Override
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
+	@Override
 	public String getPostalCode() {
 		return postalCode;
 	}
 
+	@Override
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
 
+	@Override
 	public String getTerritory() {
 		return territory;
 	}
 
+	@Override
 	public void setTerritory(String territory) {
 		this.territory = territory;
 	}
@@ -125,7 +146,7 @@ public class Office {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		Office office = (Office) o;
+		OfficeImpl office = (OfficeImpl) o;
 		return Objects.equals(getOfficeCode(), office.getOfficeCode()) &&
 				Objects.equals(employees, office.employees) &&
 				Objects.equals(getCity(), office.getCity()) &&

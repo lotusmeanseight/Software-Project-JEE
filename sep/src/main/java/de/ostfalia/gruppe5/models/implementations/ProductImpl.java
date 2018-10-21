@@ -1,4 +1,7 @@
-package de.ostfalia.gruppe5.models;
+package de.ostfalia.gruppe5.models.implementations;
+
+import de.ostfalia.gruppe5.models.interfaces.Product;
+import de.ostfalia.gruppe5.models.interfaces.ProductLine;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -7,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class ProductImpl implements Product {
 	
 	@Id
 	@Size(max=15)
@@ -43,74 +46,92 @@ public class Product {
 	@NotNull
 	private Double MSRP;
 
-    public ProductLine getProductCode() {
+    @Override
+	public ProductLine getProductCode() {
 		return productCode;
 	}
 
-    public void setProductCode(ProductLine productCode) {
+    @Override
+	public void setProductCode(ProductLine productCode) {
 		this.productCode = productCode;
 	}
 
+	@Override
 	public String getProductName() {
 		return productName;
 	}
 
+	@Override
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
 
+	@Override
 	public String getProductLine() {
 		return productLine;
 	}
 
+	@Override
 	public void setProductLine(String productLine) {
 		this.productLine = productLine;
 	}
 
+	@Override
 	public String getProductScale() {
 		return productScale;
 	}
 
+	@Override
 	public void setProductScale(String productScale) {
 		this.productScale = productScale;
 	}
 
+	@Override
 	public String getProductVendor() {
 		return productVendor;
 	}
 
+	@Override
 	public void setProductVendor(String productVendor) {
 		this.productVendor = productVendor;
 	}
 
+	@Override
 	public String getProductDescription() {
 		return productDescription;
 	}
 
+	@Override
 	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
 	}
 
+	@Override
 	public Integer getQuantityInStock() {
 		return quantityInStock;
 	}
 
+	@Override
 	public void setQuantityInStock(Integer quantityInStock) {
 		this.quantityInStock = quantityInStock;
 	}
 
+	@Override
 	public Double getBuyPrice() {
 		return buyPrice;
 	}
 
+	@Override
 	public void setBuyPrice(Double buyPrice) {
 		this.buyPrice = buyPrice;
 	}
 
+	@Override
 	public Double getMSRP() {
 		return MSRP;
 	}
 
+	@Override
 	public void setMSRP(Double mSRP) {
 		MSRP = mSRP;
 	}

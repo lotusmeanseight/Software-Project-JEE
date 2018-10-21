@@ -1,6 +1,7 @@
 package de.ostfalia.gruppe5.services;
 
-import de.ostfalia.gruppe5.models.Employee;
+import de.ostfalia.gruppe5.models.interfaces.Employee;
+import de.ostfalia.gruppe5.models.implementations.EmployeeImpl;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,7 +23,7 @@ public class EmployeeService {
     }
 
     private Employee findById(Integer id) {
-        return entityManager.find(Employee.class, id);
+        return entityManager.find(EmployeeImpl.class, id);
     }
 
     public void deleteById(Integer id) {

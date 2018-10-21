@@ -1,15 +1,17 @@
-package de.ostfalia.gruppe5.models;
+package de.ostfalia.gruppe5.models.implementations;
+
+import de.ostfalia.gruppe5.models.interfaces.Customer;
+import de.ostfalia.gruppe5.models.interfaces.Payment;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
 @Table(name = "payments")
-public class Payment implements Serializable {
+public class PaymentImpl implements Payment {
 	
 	@Id
 	@NotNull
@@ -28,34 +30,42 @@ public class Payment implements Serializable {
 	@NotNull
 	private Double amount;
 
+	@Override
 	public Customer getCustomerNumber() {
 		return customerNumber;
 	}
 
+	@Override
 	public void setCustomerNumber(Customer customerNumber) {
 		this.customerNumber = customerNumber;
 	}
 
+	@Override
 	public String getCheckNumber() {
 		return checkNumber;
 	}
 
+	@Override
 	public void setCheckNumber(String checkNumber) {
 		this.checkNumber = checkNumber;
 	}
 
+	@Override
 	public LocalDateTime getPaymentDate() {
 		return paymentDate;
 	}
 
+	@Override
 	public void setPaymentDate(LocalDateTime paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 
+	@Override
 	public Double getAmount() {
 		return amount;
 	}
 
+	@Override
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}

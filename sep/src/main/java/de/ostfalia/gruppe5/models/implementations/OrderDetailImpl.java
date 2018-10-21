@@ -1,14 +1,15 @@
-package de.ostfalia.gruppe5.models;
+package de.ostfalia.gruppe5.models.implementations;
+
+import de.ostfalia.gruppe5.models.interfaces.OrderDetail;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "orderdetails")
-public class OrderDetail implements Serializable {
+public class OrderDetailImpl implements OrderDetail {
 
 	@OneToOne
 	@Id
@@ -22,42 +23,52 @@ public class OrderDetail implements Serializable {
 	private Double priceEach;
 	private Short orderLineNumber;
 
+	@Override
 	public Integer getOrderNumber() {
 		return orderNumber;
 	}
 
+	@Override
 	public void setOrderNumber(Integer orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
+	@Override
 	public Integer getQuantityOrdered() {
 		return quantityOrdered;
 	}
 
+	@Override
 	public void setQuantityOrdered(Integer quantityOrdered) {
 		this.quantityOrdered = quantityOrdered;
 	}
 
+	@Override
 	public Double getPriceEach() {
 		return priceEach;
 	}
 
+	@Override
 	public void setPriceEach(Double priceEach) {
 		this.priceEach = priceEach;
 	}
 
+	@Override
 	public Short getOrderLineNumber() {
 		return orderLineNumber;
 	}
 
+	@Override
 	public void setOrderLineNumber(Short orderLineNumber) {
 		this.orderLineNumber = orderLineNumber;
 	}
 
+	@Override
 	public List<String> getProductCode() {
 		return productCode;
 	}
 
+	@Override
 	public void setProductCode(List<String> productCode) {
 		this.productCode = productCode;
 	}

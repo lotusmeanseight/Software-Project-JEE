@@ -1,4 +1,7 @@
-package de.ostfalia.gruppe5.models;
+package de.ostfalia.gruppe5.models.implementations;
+
+import de.ostfalia.gruppe5.models.interfaces.Customer;
+import de.ostfalia.gruppe5.models.interfaces.Order;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -14,7 +17,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class OrderImpl implements Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,62 +38,76 @@ public class Order {
 	@JoinColumn(name = "customerNumber")
 	private Customer customerNumber;
 
-	public Order() {
+	public OrderImpl() {
 
 	}
 
+	@Override
 	public Integer getOrderNumber() {
 		return orderNumber;
 	}
 
+	@Override
 	public void setOrderNumber(Integer orderNumber) {
 		this.orderNumber = orderNumber;
 	}
 
+	@Override
 	public LocalDateTime getRequiredDate() {
 		return requiredDate;
 	}
 
+	@Override
 	public void setRequiredDate(LocalDateTime requiredDate) {
 		this.requiredDate = requiredDate;
 	}
 
+	@Override
 	public LocalDateTime getShippedDate() {
 		return shippedDate;
 	}
 
+	@Override
 	public void setShippedDate(LocalDateTime shippedDate) {
 		this.shippedDate = shippedDate;
 	}
 
+	@Override
 	public String getStatus() {
 		return status;
 	}
 
+	@Override
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
+	@Override
 	public String getComments() {
 		return comments;
 	}
 
+	@Override
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
 
+	@Override
 	public Customer getCustomerNumber() {
 		return customerNumber;
 	}
 
+	@Override
 	public void setCustomerNumber(Customer customerNumber) {
 		this.customerNumber = customerNumber;
 	}
 
+	@Override
 	public LocalDateTime getOrderDate() {
 		return orderDate;
 	}
 
+	@Override
 	public void setOrderDate(LocalDateTime orderDate) {
 		this.orderDate = orderDate;
 	}

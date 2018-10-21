@@ -6,7 +6,8 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.ostfalia.gruppe5.models.Order;
+import de.ostfalia.gruppe5.models.interfaces.Order;
+import de.ostfalia.gruppe5.models.implementations.OrderImpl;
 import de.ostfalia.gruppe5.services.OrderService;
 
 @Named
@@ -19,7 +20,7 @@ public class OrderView {
 	private OrderService service;
 
 	public OrderView() {
-		order = new Order();
+		order = new OrderImpl();
 	}
 
 	public List<Order> getOrders() {

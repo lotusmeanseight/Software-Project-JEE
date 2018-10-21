@@ -1,4 +1,7 @@
-package de.ostfalia.gruppe5.models;
+package de.ostfalia.gruppe5.models.implementations;
+
+import de.ostfalia.gruppe5.models.interfaces.Product;
+import de.ostfalia.gruppe5.models.interfaces.ProductLine;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -9,7 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "productlines")
-public class ProductLine implements Serializable {
+public class ProductLineImpl implements ProductLine {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,34 +28,42 @@ public class ProductLine implements Serializable {
 	
 	private Serializable BLOB;
 
+	@Override
 	public String getProductLine() {
 		return productLine;
 	}
 
+	@Override
 	public void setProductLine(String productLine) {
 		this.productLine = productLine;
 	}
 
+	@Override
 	public String getTextDescription() {
 		return textDescription;
 	}
 
+	@Override
 	public void setTextDescription(String textDescription) {
 		this.textDescription = textDescription;
 	}
 
+	@Override
 	public String getHtmlDescription() {
 		return htmlDescription;
 	}
 
+	@Override
 	public void setHtmlDescription(String htmlDescription) {
 		this.htmlDescription = htmlDescription;
 	}
 
+	@Override
 	public Serializable getBLOB() {
 		return BLOB;
 	}
 
+	@Override
 	public void setBLOB(Serializable bLOB) {
 		BLOB = bLOB;
 	}
@@ -61,7 +72,7 @@ public class ProductLine implements Serializable {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		ProductLine that = (ProductLine) o;
+		ProductLineImpl that = (ProductLineImpl) o;
 		return Objects.equals(getProductLine(), that.getProductLine()) &&
 				Objects.equals(productList, that.productList) &&
 				Objects.equals(getTextDescription(), that.getTextDescription()) &&
