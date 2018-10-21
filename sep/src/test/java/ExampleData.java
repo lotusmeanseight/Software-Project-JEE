@@ -8,7 +8,6 @@ import de.ostfalia.gruppe5.models.implementations.OrderImpl;
 import de.ostfalia.gruppe5.models.implementations.PaymentImpl;
 import de.ostfalia.gruppe5.models.implementations.ProductImpl;
 import de.ostfalia.gruppe5.models.implementations.ProductLineImpl;
-import de.ostfalia.gruppe5.models.interfaces.Employee;
 
 public class ExampleData {
 
