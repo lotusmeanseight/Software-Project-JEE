@@ -1,24 +1,23 @@
 package de.ostfalia.gruppe5.models;
 
-import java.io.Serializable;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "productlines")
-public class ProductLine {
+public class ProductLine implements Serializable {
 
 	@Id
-	@Size(max=50)
-	@ManyToOne
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Size(max = 50)
 	private String productLine;
+
+    @OneToMany(mappedBy = "productCode")
+    private List<Product> productList = new ArrayList<>();
 	
 	private String textDescription;
 	
@@ -57,7 +56,21 @@ public class ProductLine {
 	public void setBLOB(Serializable bLOB) {
 		BLOB = bLOB;
 	}
-	
-	
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		ProductLine that = (ProductLine) o;
+		return Objects.equals(getProductLine(), that.getProductLine()) &&
+				Objects.equals(productList, that.productList) &&
+				Objects.equals(getTextDescription(), that.getTextDescription()) &&
+				Objects.equals(getHtmlDescription(), that.getHtmlDescription()) &&
+				Objects.equals(getBLOB(), that.getBLOB());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getProductLine(), productList, getTextDescription(), getHtmlDescription(), getBLOB());
+	}
 }

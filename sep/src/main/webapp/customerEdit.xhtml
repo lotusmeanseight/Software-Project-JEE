@@ -5,7 +5,7 @@
 >
 
 <h:head>
-    <title>Customers</title>
+    <title>Customer Edit</title>
     <h:head>
         <h:outputStylesheet library="css" name="style.css"/>
     </h:head>
@@ -14,13 +14,19 @@
 <h1>Aktualisieren</h1>
 <h:form>
     <h:panelGrid columns="2">
-        Name: <h:inputText value="#{customerView.customer.lastname}"/>
-        Vorname: <h:inputText value="#{customerView.customer.firstname}"/>
-        Geburtsdatum: <h:inputText value="#{customerView.customer.birthdate}">
-        <f:convertDateTime pattern="dd.MM.yyyy" timeZone="EST" type="date"/>
-    </h:inputText>
+        Firma: <h:inputText value="#{customerView.customer.customerName}"/>
+        Name: <h:inputText value="#{customerView.customer.contactLastName}"/>
+        Vorname: <h:inputText value="#{customerView.customer.contactFirstName}"/>
+        Telefonnummer: <h:inputText value="#{customerView.customer.phone}"/>
+        1. Adresse: <h:inputText value="#{customerView.customer.addressLine1}"/>
+        2. Adresse: <h:inputText value="#{customerView.customer.addressLine2}"/>
+        Stadt: <h:inputText value="#{customerView.customer.city}"/>
+        Staat: <h:inputText value="#{customerView.customer.state}"/>
+        Postleitzahl: <h:inputText value="#{customerView.customer.postalCode}"/>
+        Land: <h:inputText value="#{customerView.customer.country}"/>
+        Kreditlimit: <h:inputText value="#{customerView.customer.creditLimit}"/>
     </h:panelGrid>
-    <h:inputHidden value="#{customerView.customer.id}"/>
+    <h:inputHidden value="#{customerView.customer.customerNumber}"/>
     <h:commandButton action="#{customerView.update(customerView.customer)}" value="Aktualisieren">
         <f:setPropertyActionListener target="#{customerView.customer}" value="#{customerView.customer}" />
     </h:commandButton>

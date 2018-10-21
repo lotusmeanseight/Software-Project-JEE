@@ -1,65 +1,58 @@
 package de.ostfalia.gruppe5.models;
 
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "orderdetails")
-public class OrderDetail {
+public class OrderDetail implements Serializable {
 
-    @OneToOne
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderNumber;
-    @OneToMany
-    @Size(max = 15)
-    @PrimaryKeyJoinColumn
-    private List<String> productCode;
-    private Integer quantityOrdered;
-    private Double priceEach;
-    private Short orderLineNumber;
+	@OneToOne
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer orderNumber;
+	@OneToMany
+	@Size(max = 15)
+	@PrimaryKeyJoinColumn
+	private List<String> productCode;
+	private Integer quantityOrdered;
+	private Double priceEach;
+	private Short orderLineNumber;
 
-    public Integer getOrderNumber() {
-        return orderNumber;
-    }
+	public Integer getOrderNumber() {
+		return orderNumber;
+	}
 
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
-    }
+	public void setOrderNumber(Integer orderNumber) {
+		this.orderNumber = orderNumber;
+	}
 
+	public Integer getQuantityOrdered() {
+		return quantityOrdered;
+	}
 
-    public Integer getQuantityOrdered() {
-        return quantityOrdered;
-    }
+	public void setQuantityOrdered(Integer quantityOrdered) {
+		this.quantityOrdered = quantityOrdered;
+	}
 
-    public void setQuantityOrdered(Integer quantityOrdered) {
-        this.quantityOrdered = quantityOrdered;
-    }
+	public Double getPriceEach() {
+		return priceEach;
+	}
 
-    public Double getPriceEach() {
-        return priceEach;
-    }
+	public void setPriceEach(Double priceEach) {
+		this.priceEach = priceEach;
+	}
 
-    public void setPriceEach(Double priceEach) {
-        this.priceEach = priceEach;
-    }
+	public Short getOrderLineNumber() {
+		return orderLineNumber;
+	}
 
-    public Short getOrderLineNumber() {
-        return orderLineNumber;
-    }
-
-    public void setOrderLineNumber(Short orderLineNumber) {
-        this.orderLineNumber = orderLineNumber;
-    }
+	public void setOrderLineNumber(Short orderLineNumber) {
+		this.orderLineNumber = orderLineNumber;
+	}
 
 	public List<String> getProductCode() {
 		return productCode;
@@ -67,5 +60,25 @@ public class OrderDetail {
 
 	public void setProductCode(List<String> productCode) {
 		this.productCode = productCode;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		OrderDetail that = (OrderDetail) o;
+		return Objects.equals(getOrderNumber(), that.getOrderNumber())
+				&& Objects.equals(getProductCode(), that.getProductCode())
+				&& Objects.equals(getQuantityOrdered(), that.getQuantityOrdered())
+				&& Objects.equals(getPriceEach(), that.getPriceEach())
+				&& Objects.equals(getOrderLineNumber(), that.getOrderLineNumber());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getOrderNumber(), getProductCode(), getQuantityOrdered(), getPriceEach(),
+				getOrderLineNumber());
 	}
 }

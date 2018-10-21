@@ -1,21 +1,22 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "employees")
 public class Employee {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer employeeNumber;
+
+    @OneToMany(mappedBy = "salesRepEmployeeNumber", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Customer> customers = new ArrayList<>();
 	
 	@NotNull
 	@Size(max=50)
@@ -36,7 +37,8 @@ public class Employee {
 	@NotNull
 	@Size(max=10)
 	@ManyToOne
-	private String officeCode;
+    @JoinColumn(name = "officeCode")
+	private Office officeCode;
 	
 	private Integer reportsTo;
 	
@@ -84,11 +86,11 @@ public class Employee {
 		this.email = email;
 	}
 
-	public String getOfficeCode() {
+	public Office getOfficeCode() {
 		return officeCode;
 	}
 
-	public void setOfficeCode(String officeCode) {
+	public void setOfficeCode(Office officeCode) {
 		this.officeCode = officeCode;
 	}
 
@@ -106,5 +108,26 @@ public class Employee {
 
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Employee employee = (Employee) o;
+		return Objects.equals(getEmployeeNumber(), employee.getEmployeeNumber()) &&
+				Objects.equals(customers, employee.customers) &&
+				Objects.equals(getLastName(), employee.getLastName()) &&
+				Objects.equals(getFirstName(), employee.getFirstName()) &&
+				Objects.equals(getExtension(), employee.getExtension()) &&
+				Objects.equals(getEmail(), employee.getEmail()) &&
+				Objects.equals(getOfficeCode(), employee.getOfficeCode()) &&
+				Objects.equals(getReportsTo(), employee.getReportsTo()) &&
+				Objects.equals(getJobTitle(), employee.getJobTitle());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getEmployeeNumber(), customers, getLastName(), getFirstName(), getExtension(), getEmail(), getOfficeCode(), getReportsTo(), getJobTitle());
 	}
 }

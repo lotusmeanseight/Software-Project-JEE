@@ -13,7 +13,6 @@ import java.util.List;
 public class CustomerView {
 
     private Customer customer;
-
     @Inject
     private CustomerService service;
 
@@ -44,7 +43,7 @@ public class CustomerView {
     }
 
     public String delete(Customer customer) {
-        service.deleteById(customer.getCustomerNumber().longValue());
+        service.deleteById(customer.getCustomerNumber());
         return null;
 	}
 }

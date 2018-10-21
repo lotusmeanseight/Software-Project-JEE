@@ -1,24 +1,21 @@
 package de.ostfalia.gruppe5.models;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "payments")
-public class Payment {
+public class Payment implements Serializable {
 	
 	@Id
 	@NotNull
 	@ManyToOne
-	private Integer customerNumber;
+	@JoinColumn(name = "customerNumber")
+	private Customer customerNumber;
 	
 	@Id
 	@Size(max=50)
@@ -31,11 +28,11 @@ public class Payment {
 	@NotNull
 	private Double amount;
 
-	public Integer getCustomerNumber() {
+	public Customer getCustomerNumber() {
 		return customerNumber;
 	}
 
-	public void setCustomerNumber(Integer customerNumber) {
+	public void setCustomerNumber(Customer customerNumber) {
 		this.customerNumber = customerNumber;
 	}
 
@@ -62,7 +59,20 @@ public class Payment {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-	
-	
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Payment payment = (Payment) o;
+		return Objects.equals(getCustomerNumber(), payment.getCustomerNumber()) &&
+				Objects.equals(getCheckNumber(), payment.getCheckNumber()) &&
+				Objects.equals(getPaymentDate(), payment.getPaymentDate()) &&
+				Objects.equals(getAmount(), payment.getAmount());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getCustomerNumber(), getCheckNumber(), getPaymentDate(), getAmount());
+	}
 }

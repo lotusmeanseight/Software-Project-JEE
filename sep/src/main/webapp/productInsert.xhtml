@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+
+<h:head>
+    <title>Product Insert</title>
+    <h:head>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+</h:head>
+<body>
+<h1>Einfuegen</h1>
+<h:form>
+    <h:panelGrid columns="2">
+        Produkt Name: <h:inputText value="#{productView.product.productName}"/>
+        Produkt Linie: <h:inputText value="#{productView.product.productLine}"/>
+        Produkt Größe: <h:inputText value="#{productView.product.productScale}"/>
+        Produkt Händler: <h:inputText value="#{productView.product.productVendor}"/>
+        Produkt Beschreibung: <h:inputText value="#{productView.product.productDescription}"/>
+        Anzahl auf Lager: <h:inputText value="#{productView.product.quantityInStock}"/>
+        Kaufpreis: <h:inputText value="#{productView.product.buyPrice}"/>
+        MSRP: <h:inputText value="#{productView.product.MSRP}"/>
+    </h:panelGrid>
+    <h:commandButton action="#{productView.save}" value="Einfuegen">
+    </h:commandButton>
+    <h:button styleClass="button" value="Liste" outcome="products"/>
+</h:form>
+</body>
+
+</html>

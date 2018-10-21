@@ -1,12 +1,9 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Entity
 @Table(name = "products")
@@ -15,12 +12,13 @@ public class Product {
 	@Id
 	@Size(max=15)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String productCode;
-	
+    @ManyToOne
+    private ProductLine productCode;
+
 	@NotNull
 	@Size(max=80)
 	private String productName;
-	
+
 	@NotNull
 	@Size(max=50)
 	private String productLine;
@@ -45,11 +43,11 @@ public class Product {
 	@NotNull
 	private Double MSRP;
 
-	public String getProductCode() {
+    public ProductLine getProductCode() {
 		return productCode;
 	}
 
-	public void setProductCode(String productCode) {
+    public void setProductCode(ProductLine productCode) {
 		this.productCode = productCode;
 	}
 
@@ -117,6 +115,24 @@ public class Product {
 		MSRP = mSRP;
 	}
 
-	
-	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Product product = (Product) o;
+		return Objects.equals(getProductCode(), product.getProductCode()) &&
+				Objects.equals(getProductName(), product.getProductName()) &&
+				Objects.equals(getProductLine(), product.getProductLine()) &&
+				Objects.equals(getProductScale(), product.getProductScale()) &&
+				Objects.equals(getProductVendor(), product.getProductVendor()) &&
+				Objects.equals(getProductDescription(), product.getProductDescription()) &&
+				Objects.equals(getQuantityInStock(), product.getQuantityInStock()) &&
+				Objects.equals(getBuyPrice(), product.getBuyPrice()) &&
+				Objects.equals(getMSRP(), product.getMSRP());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getProductCode(), getProductName(), getProductLine(), getProductScale(), getProductVendor(), getProductDescription(), getQuantityInStock(), getBuyPrice(), getMSRP());
+	}
 }

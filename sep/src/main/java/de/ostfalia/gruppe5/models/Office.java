@@ -1,12 +1,11 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "offices")
@@ -16,7 +15,10 @@ public class Office {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Size(max=10)
 	private String officeCode;
-	
+
+    @OneToMany(mappedBy = "officeCode", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Employee> employees = new ArrayList<>();
+
 	@NotNull
 	@Size(max=50)
 	private String city;
@@ -118,7 +120,26 @@ public class Office {
 	public void setTerritory(String territory) {
 		this.territory = territory;
 	}
-	
-	
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Office office = (Office) o;
+		return Objects.equals(getOfficeCode(), office.getOfficeCode()) &&
+				Objects.equals(employees, office.employees) &&
+				Objects.equals(getCity(), office.getCity()) &&
+				Objects.equals(getPhone(), office.getPhone()) &&
+				Objects.equals(getAddressLine1(), office.getAddressLine1()) &&
+				Objects.equals(getAddressLine2(), office.getAddressLine2()) &&
+				Objects.equals(getState(), office.getState()) &&
+				Objects.equals(getCountry(), office.getCountry()) &&
+				Objects.equals(getPostalCode(), office.getPostalCode()) &&
+				Objects.equals(getTerritory(), office.getTerritory());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(getOfficeCode(), employees, getCity(), getPhone(), getAddressLine1(), getAddressLine2(), getState(), getCountry(), getPostalCode(), getTerritory());
+	}
 }

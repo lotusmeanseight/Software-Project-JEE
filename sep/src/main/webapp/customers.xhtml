@@ -15,25 +15,62 @@
                  selectionMode="single" styleClass="customer-table" headerClass="customer-table-header" rowClasses="customer-table-odd-row,customer-table-even-row">
         <h:column>
             <f:facet name="header">ID</f:facet>
-            <h:outputText id="id" value="#{customer.id}"/>
+            <h:outputText id="id" value="#{customer.customerNumber}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Firma</f:facet>
+            <h:outputText id="name" value="#{customer.customerName}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Name</f:facet>
-            <h:outputText id="lastName" value="#{customer.lastname}"/>
+            <h:outputText id="lastName" value="#{customer.contactLastName}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Vorname</f:facet>
-            <h:outputText id="firstName" value="#{customer.firstname}"/>
+            <h:outputText id="firstName" value="#{customer.contactFirstName}"/>
         </h:column>
         <h:column>
-            <f:facet name="header">Geburtsdatum</f:facet>
-            <h:outputText id="birthDate" value="#{customer.birthdate}"/>
+            <f:facet name="header">Telefonnummer</f:facet>
+            <h:outputText id="phone" value="#{customer.phone}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">1. Adresse</f:facet>
+            <h:outputText id="firstAdressline" value="#{customer.addressLine1}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">2. Adresse</f:facet>
+            <h:outputText id="secondAdressLine" value="#{customer.addressLine2}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Stadt</f:facet>
+            <h:outputText id="city" value="#{customer.city}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Staat</f:facet>
+            <h:outputText id="state" value="#{customer.state}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Postleitzahl</f:facet>
+            <h:outputText id="postalcode" value="#{customer.postalCode}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Land</f:facet>
+            <h:outputText id="country" value="#{customer.country}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Repräsentant</f:facet>
+            <h:outputText id="employeenumber" value="#{customer.salesRepEmployeeNumber}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Kreditlimit</f:facet>
+            <h:outputText id="limit" value="#{customer.creditLimit}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
             <h:commandButton action="customerEdit" value="Aktualisieren" >
                 <f:setPropertyActionListener target="#{customerView.customer}" value="#{customer}" />
-                <f:setPropertyActionListener target="#{customerView.customer.id}" value="#{customer.id}" />
+                <f:setPropertyActionListener target="#{customerView.customer.customerNumber}"
+                                             value="#{customer.customerNumber}"/>
             </h:commandButton>
         </h:column>
         <h:column>
@@ -44,6 +81,7 @@
 </h:form>
 <h:form>
     <h:commandButton action="customerInsert" value="Einfuegen" />
+    <h:commandButton action="employees" value="Mitarbeiter"/>
 </h:form>
 </body>
 </html>
