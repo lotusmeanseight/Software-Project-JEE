@@ -17,6 +17,7 @@ public class OrderDetail implements Serializable {
     @ManyToOne
     @Size(max = 15)
     private Product productCode;
+
     private Integer quantityOrdered;
     private Double priceEach;
     private Short orderLineNumber;

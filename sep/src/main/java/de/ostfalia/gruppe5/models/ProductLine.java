@@ -23,7 +23,8 @@ public class ProductLine implements Serializable {
 	
 	private String htmlDescription;
 	
-	private Serializable BLOB;
+	private byte [] BLOB;
+
 
 	public String getProductLine() {
 		return productLine;
@@ -49,13 +50,15 @@ public class ProductLine implements Serializable {
 		this.htmlDescription = htmlDescription;
 	}
 
-	public Serializable getBLOB() {
+	public byte[] getBLOB() {
 		return BLOB;
 	}
 
-	public void setBLOB(Serializable bLOB) {
-		BLOB = bLOB;
+	public void setBLOB(byte[] BLOB) {
+		this.BLOB = BLOB;
 	}
+
+
 
 	@Override
 	public boolean equals(Object o) {
