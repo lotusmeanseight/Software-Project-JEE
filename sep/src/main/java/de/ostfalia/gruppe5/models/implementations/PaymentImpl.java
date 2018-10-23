@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "Payment")
 @Table(name = "payments")
 public class PaymentImpl implements Payment {
 	

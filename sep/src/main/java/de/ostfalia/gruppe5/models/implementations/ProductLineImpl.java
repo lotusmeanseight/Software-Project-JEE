@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "ProductLine")
 @Table(name = "productlines")
 public class ProductLineImpl implements ProductLine {
 

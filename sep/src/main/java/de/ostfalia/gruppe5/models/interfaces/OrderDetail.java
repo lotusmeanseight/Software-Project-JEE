@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface OrderDetail extends Serializable {
-    Integer getOrderNumber();
 
-    void setOrderNumber(Integer orderNumber);
+    Integer getOrder();
+
+    void setOrder(Order order);
 
     Integer getQuantityOrdered();
 

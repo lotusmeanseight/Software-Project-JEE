@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "Customer")
 @Table(name = "customers")
 public class CustomerImpl implements Customer {
 

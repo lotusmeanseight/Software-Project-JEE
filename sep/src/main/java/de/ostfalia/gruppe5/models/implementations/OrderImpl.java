@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-@Entity
+@Entity(name = "Order")
 @Table(name = "orders")
 public class OrderImpl implements Order {
 

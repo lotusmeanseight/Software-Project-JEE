@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@Entity
+@Entity(name = "Product")
 @Table(name = "products")
 public class ProductImpl implements Product {
 	

@@ -20,7 +20,7 @@
         Kommentar: <h:inputText value="#{orderView.order.comments}"/>
         Kundennummer: <h:inputText value="#{orderView.order.customerNumber}"/>
     </h:panelGrid>
-    <h:inputHidden value="#{orderView.order.orderNumber}"/>
+    <h:inputHidden value="#{orderView.order.order}"/>
    <h:commandButton action="#{orderView.update(orderView.order)}" value="Aktualisieren">
         <f:setPropertyActionListener target="#{orderView.order}" value="#{orderView.order}" />
     </h:commandButton>

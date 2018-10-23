@@ -15,7 +15,7 @@
                  selectionMode="single" styleClass="customer-table" headerClass="customer-table-header" rowClasses="customer-table-odd-row,customer-table-even-row">
         <h:column>
             <f:facet name="header">Bestellnummer</f:facet>
-            <h:outputText id="orderNumber" value="#{order.orderNumber}"/>
+            <h:outputText id="order" value="#{order.order}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Bestelldatum</f:facet>
@@ -46,8 +46,8 @@
             <f:facet name="header">Aktualisieren</f:facet>
             <h:commandButton action="orderEdit" value="Aktualisieren" >
                 <f:setPropertyActionListener target="#{orderView.order}" value="#{order}" />
-                <f:setPropertyActionListener target="#{orderView.order.orderNumber}"
-                                             value="#{order.orderNumber}"/>
+                <f:setPropertyActionListener target="#{orderView.order.order}"
+                                             value="#{order.order}"/>
             </h:commandButton>
         </h:column>
         <h:column>
