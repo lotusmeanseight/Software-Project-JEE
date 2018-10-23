@@ -1,7 +1,6 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.models.interfaces.Employee;
-import de.ostfalia.gruppe5.models.implementations.EmployeeImpl;
+import de.ostfalia.gruppe5.models.Employee;
 import de.ostfalia.gruppe5.services.EmployeeService;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,7 +17,7 @@ public class EmployeeView {
     private EmployeeService service;
 
     public EmployeeView() {
-        employee = new EmployeeImpl();
+        employee = new Employee();
     }
 
     public List<Employee> getEmployees() {

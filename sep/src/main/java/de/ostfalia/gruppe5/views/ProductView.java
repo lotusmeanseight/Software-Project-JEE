@@ -6,8 +6,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.ostfalia.gruppe5.models.interfaces.Product;
-import de.ostfalia.gruppe5.models.implementations.ProductImpl;
+import de.ostfalia.gruppe5.models.Product;
 import de.ostfalia.gruppe5.services.ProductService;
 
 @Named
@@ -20,7 +19,7 @@ public class ProductView {
 	private ProductService service;
 
 	public ProductView() {
-		product = new ProductImpl();
+		product = new Product();
 	}
 
 	public List<Product> getProducts() {

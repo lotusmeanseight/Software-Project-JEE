@@ -8,9 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import de.ostfalia.gruppe5.models.implementations.CustomerImpl;
-import de.ostfalia.gruppe5.models.implementations.EmployeeImpl;
-
 public class CustomerIT {
 
     EntityManager entityManager;

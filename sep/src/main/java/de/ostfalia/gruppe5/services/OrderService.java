@@ -6,8 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import de.ostfalia.gruppe5.models.interfaces.Order;
-import de.ostfalia.gruppe5.models.implementations.OrderImpl;
+import de.ostfalia.gruppe5.models.Order;
 
 @Stateless
 public class OrderService {
@@ -24,7 +23,7 @@ public class OrderService {
 	}
 
 	private Order findById(Integer id) {
-		return entityManager.find(OrderImpl.class, id);
+		return entityManager.find(Order.class, id);
 	}
 
 	public void deleteById(Integer id) {

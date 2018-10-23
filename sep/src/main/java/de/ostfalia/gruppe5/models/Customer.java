@@ -1,9 +1,4 @@
-package de.ostfalia.gruppe5.models.implementations;
-
-import de.ostfalia.gruppe5.models.interfaces.Customer;
-import de.ostfalia.gruppe5.models.interfaces.Employee;
-import de.ostfalia.gruppe5.models.interfaces.Order;
-import de.ostfalia.gruppe5.models.interfaces.Payment;
+package de.ostfalia.gruppe5.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "Customer")
+@Entity
 @Table(name = "customers")
-public class CustomerImpl implements Customer {
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,132 +64,106 @@ public class CustomerImpl implements Customer {
 
     private Double creditLimit;
 
-    @Override
     public Integer getCustomerNumber() {
         return customerNumber;
     }
 
-    @Override
     public void setCustomerNumber(Integer customerNumber) {
         this.customerNumber = customerNumber;
     }
 
-    @Override
     public String getCustomerName() {
         return customerName;
     }
 
-    @Override
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
 
-    @Override
     public String getContactLastName() {
         return contactLastName;
     }
 
-    @Override
     public void setContactLastName(String contactLastName) {
         this.contactLastName = contactLastName;
     }
 
-    @Override
     public String getContactFirstName() {
         return contactFirstName;
     }
 
-    @Override
     public void setContactFirstName(String contactFirstName) {
         this.contactFirstName = contactFirstName;
     }
 
-    @Override
     public String getPhone() {
         return phone;
     }
 
-    @Override
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    @Override
     public String getAddressLine1() {
         return addressLine1;
     }
 
-    @Override
     public void setAddressLine1(String addressLine1) {
         this.addressLine1 = addressLine1;
     }
 
-    @Override
     public String getAddressLine2() {
         return addressLine2;
     }
 
-    @Override
     public void setAddressLine2(String addressLine2) {
         this.addressLine2 = addressLine2;
     }
 
-    @Override
     public String getCity() {
         return city;
     }
 
-    @Override
     public void setCity(String city) {
         this.city = city;
     }
 
-    @Override
     public String getState() {
         return state;
     }
 
-    @Override
     public void setState(String state) {
         this.state = state;
     }
 
-    @Override
     public String getPostalCode() {
         return postalCode;
     }
 
-    @Override
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
-    @Override
     public String getCountry() {
         return country;
     }
 
-    @Override
     public void setCountry(String country) {
         this.country = country;
     }
 
-    @Override
     public Employee getSalesRepEmployeeNumber() {
         return salesRepEmployeeNumber;
     }
 
-    @Override
     public void setSalesRepEmployeeNumber(Employee salesRepEmployeeNumber) {
         this.salesRepEmployeeNumber = salesRepEmployeeNumber;
     }
 
-    @Override
     public Double getCreditLimit() {
         return creditLimit;
     }
 
-    @Override
     public void setCreditLimit(Double creditLimit) {
         this.creditLimit = creditLimit;
     }
@@ -203,7 +172,7 @@ public class CustomerImpl implements Customer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CustomerImpl customer = (CustomerImpl) o;
+        Customer customer = (Customer) o;
         return Objects.equals(getCustomerNumber(), customer.getCustomerNumber()) &&
                 Objects.equals(orders, customer.orders) &&
                 Objects.equals(payments, customer.payments) &&

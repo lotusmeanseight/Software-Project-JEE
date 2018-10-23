@@ -1,21 +1,19 @@
-package de.ostfalia.gruppe5.models.implementations;
-
-import de.ostfalia.gruppe5.models.interfaces.Order;
-import de.ostfalia.gruppe5.models.interfaces.OrderDetail;
+package de.ostfalia.gruppe5.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-@Entity(name = "OrderDetail")
+@Entity
 @Table(name = "orderdetails")
-public class OrderDetailImpl implements OrderDetail {
+public class OrderDetail implements Serializable {
 
     @OneToOne
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Order order;
+    private Integer orderNumber;
     @OneToMany
     @Size(max = 15)
     @PrimaryKeyJoinColumn
@@ -24,52 +22,42 @@ public class OrderDetailImpl implements OrderDetail {
     private Double priceEach;
     private Short orderLineNumber;
 
-    @Override
-    public Integer getOrder() {
-        return order.getOrderNumber();
+    public Integer getOrderNumber() {
+        return orderNumber;
     }
 
-    @Override
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
-    @Override
     public Integer getQuantityOrdered() {
         return quantityOrdered;
     }
 
-    @Override
     public void setQuantityOrdered(Integer quantityOrdered) {
         this.quantityOrdered = quantityOrdered;
     }
 
-    @Override
     public Double getPriceEach() {
         return priceEach;
     }
 
-    @Override
     public void setPriceEach(Double priceEach) {
         this.priceEach = priceEach;
     }
 
-    @Override
     public Short getOrderLineNumber() {
         return orderLineNumber;
     }
 
-    @Override
     public void setOrderLineNumber(Short orderLineNumber) {
         this.orderLineNumber = orderLineNumber;
     }
 
-    @Override
     public List<String> getProductCode() {
         return productCode;
     }
 
-    @Override
     public void setProductCode(List<String> productCode) {
         this.productCode = productCode;
     }
@@ -81,7 +69,7 @@ public class OrderDetailImpl implements OrderDetail {
         if (o == null || getClass() != o.getClass())
             return false;
         OrderDetail that = (OrderDetail) o;
-        return Objects.equals(getOrder(), that.getOrder())
+        return Objects.equals(getOrderNumber(), that.getOrderNumber())
                 && Objects.equals(getProductCode(), that.getProductCode())
                 && Objects.equals(getQuantityOrdered(), that.getQuantityOrdered())
                 && Objects.equals(getPriceEach(), that.getPriceEach())
@@ -90,7 +78,7 @@ public class OrderDetailImpl implements OrderDetail {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOrder(), getProductCode(), getQuantityOrdered(), getPriceEach(),
+        return Objects.hash(getOrderNumber(), getProductCode(), getQuantityOrdered(), getPriceEach(),
                 getOrderLineNumber());
     }
 }

@@ -1,6 +1,6 @@
 package de.ostfalia.gruppe5.services;
 
-import de.ostfalia.gruppe5.models.interfaces.OrderDetail;
+import de.ostfalia.gruppe5.models.OrderDetail;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

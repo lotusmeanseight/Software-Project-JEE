@@ -1,25 +1,18 @@
-import java.time.LocalDateTime;
+import de.ostfalia.gruppe5.models.*;
 
-import de.ostfalia.gruppe5.models.implementations.CustomerImpl;
-import de.ostfalia.gruppe5.models.implementations.EmployeeImpl;
-import de.ostfalia.gruppe5.models.implementations.OfficeImpl;
-import de.ostfalia.gruppe5.models.implementations.OrderDetailImpl;
-import de.ostfalia.gruppe5.models.implementations.OrderImpl;
-import de.ostfalia.gruppe5.models.implementations.PaymentImpl;
-import de.ostfalia.gruppe5.models.implementations.ProductImpl;
-import de.ostfalia.gruppe5.models.implementations.ProductLineImpl;
+import java.time.LocalDateTime;
 
 public class ExampleData {
 
 	
-	CustomerImpl customer = new CustomerImpl();
-	EmployeeImpl employee = new EmployeeImpl();
-	OfficeImpl office = new OfficeImpl();
-	OrderDetailImpl orderDetail = new OrderDetailImpl();
-	OrderImpl order = new OrderImpl();
-	PaymentImpl payment = new PaymentImpl();
-	ProductImpl product = new ProductImpl();
-	ProductLineImpl productLine = new ProductLineImpl();
+	Customer customer = new Customer();
+	Employee employee = new Employee();
+	Office office = new Office();
+	OrderDetail orderDetail = new OrderDetail();
+	Order order = new Order();
+	Payment payment = new Payment();
+	Product product = new Product();
+	ProductLine productLine = new ProductLine();
     
 	public ExampleData() {
 		//Customer

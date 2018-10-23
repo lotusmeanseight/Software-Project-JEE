@@ -1,7 +1,6 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.models.implementations.OrderDetailImpl;
-import de.ostfalia.gruppe5.models.interfaces.OrderDetail;
+import de.ostfalia.gruppe5.models.OrderDetail;
 import de.ostfalia.gruppe5.services.OrderDetailService;
 
 import javax.enterprise.context.RequestScoped;
@@ -16,7 +15,7 @@ public class OrderDetailView {
     private OrderDetailService service;
 
     public OrderDetailView(){
-        this.orderDetail = new OrderDetailImpl();
+        this.orderDetail = new OrderDetail();
     }
 
     public String save() {

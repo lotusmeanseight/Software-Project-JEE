@@ -6,8 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import de.ostfalia.gruppe5.models.interfaces.Product;
-import de.ostfalia.gruppe5.models.implementations.ProductImpl;
+import de.ostfalia.gruppe5.models.Product;
 
 @Stateless
 public class ProductService {
@@ -24,7 +23,7 @@ public class ProductService {
 	}
 
 	private Product findById(String id) {
-		return entityManager.find(ProductImpl.class, id);
+		return entityManager.find(Product.class, id);
 	}
 
 	public void deleteById(String id) {

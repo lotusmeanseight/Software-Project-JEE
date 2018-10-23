@@ -1,7 +1,6 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.models.interfaces.Customer;
-import de.ostfalia.gruppe5.models.implementations.CustomerImpl;
+import de.ostfalia.gruppe5.models.Customer;
 import de.ostfalia.gruppe5.services.CustomerService;
 
 import javax.enterprise.context.RequestScoped;
@@ -18,7 +17,7 @@ public class CustomerView {
     private CustomerService service;
 
     public CustomerView() {
-        customer = new CustomerImpl();
+        customer = new Customer();
     }
 
     public Customer getCustomer() {
