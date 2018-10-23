@@ -13,20 +13,21 @@ public class OrderDetail implements Serializable {
     @OneToOne
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderNumber;
+    private Order orderNumber;
+
     @OneToMany
     @Size(max = 15)
     @PrimaryKeyJoinColumn
-    private List<String> productCode;
+    private List<Product> productCode;
     private Integer quantityOrdered;
     private Double priceEach;
     private Short orderLineNumber;
 
-    public Integer getOrderNumber() {
+    public Order getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(Integer orderNumber) {
+    public void setOrderNumber(Order orderNumber) {
         this.orderNumber = orderNumber;
     }
 
@@ -54,11 +55,11 @@ public class OrderDetail implements Serializable {
         this.orderLineNumber = orderLineNumber;
     }
 
-    public List<String> getProductCode() {
+    public List<Product> getProductCode() {
         return productCode;
     }
 
-    public void setProductCode(List<String> productCode) {
+    public void setProductCode(List<Product> productCode) {
         this.productCode = productCode;
     }
 
