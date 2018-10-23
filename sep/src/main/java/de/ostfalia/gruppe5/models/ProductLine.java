@@ -20,10 +20,11 @@ public class ProductLine implements Serializable {
 	private List<Product> productList = new ArrayList<>();
 
 	private String textDescription;
-
+	
 	private String htmlDescription;
+	
+	private byte [] BLOB;
 
-	private Serializable BLOB;
 
 	public String getProductLine() {
 		return productLine;
@@ -49,12 +50,12 @@ public class ProductLine implements Serializable {
 		this.htmlDescription = htmlDescription;
 	}
 
-	public Serializable getBLOB() {
+	public byte[] getBLOB() {
 		return BLOB;
 	}
 
-	public void setBLOB(Serializable bLOB) {
-		BLOB = bLOB;
+	public void setBLOB(byte[] BLOB) {
+		this.BLOB = BLOB;
 	}
 
 	@Override
