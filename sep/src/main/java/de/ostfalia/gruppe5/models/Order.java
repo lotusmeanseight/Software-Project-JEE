@@ -1,16 +1,9 @@
 package de.ostfalia.gruppe5.models;
 
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Objects;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "orders")
@@ -79,12 +72,12 @@ public class Order {
         this.comments = comments;
     }
 
-    public Customer getCustomerNumber() {
-        return customerNumber;
+    public Integer getCustomerNumber() {
+        return customerNumber.getCustomerNumber();
     }
 
-    public void setCustomerNumber(Customer customerNumber) {
-        this.customerNumber = customerNumber;
+    public void setCustomerNumber(Integer customerNumber) {
+        this.customerNumber.setCustomerNumber(customerNumber);
     }
 
     public LocalDateTime getOrderDate() {
