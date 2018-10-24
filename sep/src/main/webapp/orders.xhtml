@@ -41,24 +41,26 @@
             <f:facet name="header">Kundennummer</f:facet>
             <h:outputText id="customerNumber" value="#{order.customerNumber}"/>
         </h:column>
-        
-        <h:column>
-            <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="orderEdit" value="Aktualisieren" >
-                <f:setPropertyActionListener target="#{orderView.order}" value="#{order}" />
-                <f:setPropertyActionListener target="#{orderView.order.order}"
-                                             value="#{order.order}"/>
-            </h:commandButton>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Loeschen</f:facet>
-            <h:commandButton action="#{orderView.delete(order)}" value="Loeschen"/>
-        </h:column>
+
+        <!-- <h:column>
+             <f:facet name="header">Aktualisieren</f:facet>
+             <h:commandButton action="orderEdit" value="Aktualisieren" >
+                 <f:setPropertyActionListener target="#{orderView.order}" value="#{order}" />
+                 <f:setPropertyActionListener target="#{orderView.order.order}"
+                                              value="#{order.order}"/>
+             </h:commandButton>
+         </h:column>
+         <h:column>
+             <f:facet name="header">Loeschen</f:facet>
+             <h:commandButton action="#{orderView.delete(order)}" value="Loeschen"/>
+         </h:column>
+         auskommentiert weil keine CRUD Funktionalitäten neben Read? -->
     </h:dataTable>
 </h:form>
 <h:form>
     <h:commandButton action="orderInsert" value="Einfuegen" />
-    <h:commandButton action="orders" value="Bestellungen"/>
+    <h:commandButton action="menuSelection" value="Menue"/>
+    <h:commandButton action="orders" value="Nach oben Springen"/>
 </h:form>
 </body>
 </html>
