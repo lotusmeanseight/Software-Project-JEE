@@ -48,7 +48,7 @@
         </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="employeeEdit" value="Aktualisieren">
+            <h:commandButton action="employee/employeeEdit" value="Aktualisieren">
                 <f:setPropertyActionListener target="#{employeeView.employee}" value="#{employee}"/>
                 <f:setPropertyActionListener target="#{employeeView.employee.employeeNumber}"
                                              value="#{employee.employeeNumber}"/>
@@ -61,9 +61,9 @@
     </h:dataTable>
 </h:form>
 <h:form>
-    <h:commandButton action="employeeInsert" value="Einfuegen"/>
+    <h:commandButton action="employee/employeeInsert" value="Einfuegen"/>
     <h:commandButton action="menuSelection" value="Menue"/>
-    <h:commandButton action="customers" value="Nach oben Springen"/>
+    <h:commandButton action="employee/employees" value="Nach oben Springen"/>
 </h:form>
 </body>
 </html>

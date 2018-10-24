@@ -152,8 +152,8 @@ public class Customer {
         this.country = country;
     }
 
-    public Integer getSalesRepEmployeeNumber() {
-        return salesRepEmployeeNumber.getEmployeeNumber();
+    public Employee getSalesRepEmployeeNumber() {
+        return salesRepEmployeeNumber;
     }
 
     public void setSalesRepEmployeeNumber(Integer salesRepEmployeeNumber) {
