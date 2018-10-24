@@ -19,6 +19,7 @@
         Bestellmenge: <h:outputText value="#{orderDetailView.order.quantityOrdered}"/>
         Preis pro Einheit: <h:outputText value="#{orderDetailView.order.priceEach}"/>
     </h:panelGrid>
+    <h:inputHidden value="#{orderDetailView.order.orderNumber}"/>
     <h:button styleClass="button" value="Liste" outcome="orders"/>
 </h:form>
 </body>
