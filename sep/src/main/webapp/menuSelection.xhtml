@@ -14,7 +14,7 @@
 <h:form>
 <h1>Bitte waehlen Sie aus der Liste aus, welchen Datensatz Sie tabellarisch angezeigt haben moechten</h1>
 
-Datensatz: <h:selectOneMenu value="#{menu.menuItem}"
+Datensatz: <h:selectOneMenu 
     onchange="window.location = this.options[this.selectedIndex].value">
     <f:selectItem itemLabel="Bitte waehlen.." />
     <f:selectItem itemLabel="Customers" itemValue="customers.jsf" />
