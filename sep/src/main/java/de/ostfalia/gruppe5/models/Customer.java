@@ -152,12 +152,12 @@ public class Customer {
         this.country = country;
     }
 
-    public Employee getSalesRepEmployeeNumber() {
-        return salesRepEmployeeNumber;
+    public Integer getSalesRepEmployeeNumber() {
+        return salesRepEmployeeNumber.getEmployeeNumber();
     }
 
-    public void setSalesRepEmployeeNumber(Employee salesRepEmployeeNumber) {
-        this.salesRepEmployeeNumber = salesRepEmployeeNumber;
+    public void setSalesRepEmployeeNumber(Integer salesRepEmployeeNumber) {
+        this.salesRepEmployeeNumber.setEmployeeNumber(salesRepEmployeeNumber);
     }
 
     public Double getCreditLimit() {

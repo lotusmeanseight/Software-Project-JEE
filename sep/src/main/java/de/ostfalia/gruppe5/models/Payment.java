@@ -28,12 +28,12 @@ public class Payment implements Serializable {
     @NotNull
     private Double amount;
 
-    public Customer getCustomerNumber() {
-        return customerNumber;
+    public Integer getCustomerNumber() {
+        return customerNumber.getCustomerNumber();
     }
 
-    public void setCustomerNumber(Customer customerNumber) {
-        this.customerNumber = customerNumber;
+    public void setCustomerNumber(Integer customerNumber) {
+        this.customerNumber.setCustomerNumber(customerNumber);
     }
 
     public String getCheckNumber() {

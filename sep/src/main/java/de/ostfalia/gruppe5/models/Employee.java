@@ -86,12 +86,12 @@ public class Employee {
         this.email = email;
     }
 
-    public Office getOfficeCode() {
-        return officeCode;
+    public String getOfficeCode() {
+        return officeCode.getOfficeCode();
     }
 
-    public void setOfficeCode(Office officeCode) {
-        this.officeCode = officeCode;
+    public void setOfficeCode(String officeCode) {
+        this.officeCode.setOfficeCode(officeCode);
     }
 
     public Integer getReportsTo() {
