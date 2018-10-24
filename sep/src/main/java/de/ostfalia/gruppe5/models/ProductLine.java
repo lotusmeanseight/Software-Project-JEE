@@ -22,8 +22,8 @@ public class ProductLine implements Serializable {
 	private String textDescription;
 	
 	private String htmlDescription;
-	
-	private byte [] BLOB;
+
+	private byte[] image;
 
 
 	public String getProductLine() {
@@ -51,11 +51,11 @@ public class ProductLine implements Serializable {
 	}
 
 	public byte[] getBLOB() {
-		return BLOB;
+		return image;
 	}
 
-	public void setBLOB(byte[] BLOB) {
-		this.BLOB = BLOB;
+	public void setBLOB(byte[] image) {
+		this.image = image;
 	}
 
 	@Override

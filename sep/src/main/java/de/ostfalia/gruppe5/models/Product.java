@@ -14,6 +14,7 @@ public class Product implements Serializable {
     @Size(max=15)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ManyToOne
+    @JoinColumn(name = "productCode")
     private ProductLine productCode;
 
     @NotNull
