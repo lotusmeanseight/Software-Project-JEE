@@ -1,0 +1,40 @@
+
+sprint—review-3
+Gruppe 5
+
+Software Engineering Projekt: Realisierung eines Warenwirtschaftssystems
+
+Projektstart: 27.09.2018
+Projektende : 20.12.2018
+
+=================================================
+
+Sprint 3
+
+Sprintanfang: 11.10.2018
+Sprintende  : 24.10.2018 (24.00 Uhr)
+
+
+• Bugs der letzten Version/Mängel des letzten Sprints: 
+	- Upload der Bewertung des ersten Sprints
+	- Upload des Sprint-Reviews des ersten Sprints
+	- Verwendung der Merge Funktion des Entity Managers (statt der Update Methode)
+• Testen: 
+	- Testen des JPA O/R Mappings für alle Entities (ProductLineIT.class, ProductIT.class, PaymentIT.class, OrderDetailIT.class, OfficeIT.class, EmployeeIT.class)
+• Daten:
+	- Anlegen der Entities mit ihren Attributen
+	- Realisierung der Beziehungen zwischen den Entities
+• Implementierung des Master Detail Patterns für alle Entities:
+	- Einzelne Listen für jede Entity, in denen jeder Eintrag durch einen Lösch- und Editier Button gelöscht bzw. aktualisiert werden kann
+	- Unterhalb der Listen befindet sich jeweils ein Button zum Einfügen neuer Einträge
+	- Aktualisierung und Einfügen von Einträgen mittels HTML Input Elemente in dafür vorgesehenen separaten JSF Seiten 
+	- Implementierung der erforderlichen Views sowie Services
+• Einbinden der vorgegebenen pom.xml
+• Definieren der Data Source 
+• Design: 
+	- Einhaltung eines konsistenten Designs auf Basis eines eingebundenen CSS Files in den JS Seiten 
+	- Implementierung einer geeigneten Navigationsstruktur mit einer Menü Seite, von der die restlichen Seiten aus aufgerufen werden können 
+
+
+
+
