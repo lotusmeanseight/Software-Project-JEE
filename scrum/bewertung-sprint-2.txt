@@ -1,0 +1,6 @@
+Gruppe 5:
+- Bewertung von Sprint 1 gelöscht, review von Sprint 1 ebenso
+- CustomerService.update() viel einfacher mit em.merge()
+- CustomerService.update() nicht verwendeter Return-Wert
+Zielerreichung: 90%
+
