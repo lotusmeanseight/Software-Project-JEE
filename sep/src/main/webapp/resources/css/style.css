@@ -1,21 +1,21 @@
-.customer-table{
+.table{
     border-collapse:collapse;
 }
 
-.customer-table-header{
+.table-header{
     text-align:center;
     background:no-repeat;
     padding: 8px 4px 8px 4px;
 }
 
-.customer-table-even-row{
+.table-even-row{
     text-align:center;
     padding: 8px;
     border-top:1px solid #f2f2f2;
     background-color: #f3f3f3;
 }
 
-.customer-table-odd-row{
+.table-odd-row{
     text-align:center;
     padding: 8px;
     border-top:1px solid #555555;
