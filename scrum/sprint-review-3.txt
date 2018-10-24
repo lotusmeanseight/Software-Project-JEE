@@ -18,14 +18,15 @@ Sprintende  : 24.10.2018 (24.00 Uhr)
 • Bugs der letzten Version/Mängel des letzten Sprints: 
 	- Upload der Bewertung des ersten Sprints
 	- Upload des Sprint-Reviews des ersten Sprints
-	- Verwendung der Merge Funktion des Entity Managers (statt der Update Methode)
+	- Verwendung der Merge Funktion des Entity Managers 
 • Testen: 
-	- Testen des JPA O/R Mappings für alle Entities (ProductLineIT.class, ProductIT.class, PaymentIT.class, OrderDetailIT.class, OfficeIT.class, EmployeeIT.class)
+	- Aufgrund Probleme mit der Data Source wurden auf Tests verzichtet (da Hibernate Dependency erforderlich gewesen wäre)
 • Daten:
 	- Anlegen der Entities mit ihren Attributen
-	- Realisierung der Beziehungen zwischen den Entities
+	- Identifikation von Fehlern im Datenbank Schema
+	- Teilweise Realisierung der Beziehungen zwischen den Entities (die Beziehungen fur folgende Entities noch fehlend: OrderDetail, Product und ProductLines) 
 • Implementierung des Master Detail Patterns für alle Entities:
-	- Einzelne Listen für jede Entity, in denen jeder Eintrag durch einen Lösch- und Editier Button gelöscht bzw. aktualisiert werden kann
+	- Einzelne Listen für jede Entity, in denen jeder Eintrag durch einen Lösch- und Editier Button gelöscht bzw. aktualisiert werden kann (Aktualisieren bei folgenden Entities inkorrekt: Offices, OrderDetail, Payment, ProductLine)
 	- Unterhalb der Listen befindet sich jeweils ein Button zum Einfügen neuer Einträge
 	- Aktualisierung und Einfügen von Einträgen mittels HTML Input Elemente in dafür vorgesehenen separaten JSF Seiten 
 	- Implementierung der erforderlichen Views sowie Services
