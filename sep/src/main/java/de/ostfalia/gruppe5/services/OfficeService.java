@@ -44,7 +44,7 @@ public class OfficeService {
 //	   }
 
     public void deleteById(String id) {
-    
+            entityManager.remove(findById(id));
     }
 
     public List<Office> getAllOffices() {
