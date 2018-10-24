@@ -15,7 +15,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeNumber;
 
-    @OneToMany(mappedBy = "salesRepEmployeeNumber", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "salesRepEmployeeNumber")
     private List<Customer> customers = new ArrayList<>();
 
     @NotNull

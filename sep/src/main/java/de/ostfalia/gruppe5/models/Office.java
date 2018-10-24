@@ -16,7 +16,7 @@ public class Office {
     @Size(max=10)
     private String officeCode;
 
-    @OneToMany(mappedBy = "officeCode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "officeCode")
     private List<Employee> employees = new ArrayList<>();
 
     @NotNull

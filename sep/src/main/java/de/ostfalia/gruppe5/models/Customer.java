@@ -15,10 +15,10 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerNumber;
 
-    @OneToMany(mappedBy = "customerNumber", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customerNumber")
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "customerNumber", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customerNumber")
     private List<Payment> payments = new ArrayList<>();
 
     @NotNull
