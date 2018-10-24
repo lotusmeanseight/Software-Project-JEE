@@ -65,7 +65,6 @@
 				<configuration>
 					<header>Software-Engineering-Projekt Master</header>
 					<doctitle>Software-Engineering-Projekt Master</doctitle>
-					<!-- <footer>Copyright &#169; 2018 Bernd Müller.</footer> -->
 				</configuration>
 			</plugin>
 		</plugins>
