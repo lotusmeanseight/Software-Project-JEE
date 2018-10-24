@@ -68,7 +68,7 @@
         </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="customer/customerEdit" value="Aktualisieren" >
+            <h:commandButton action="customerEdit" value="Aktualisieren" >
                 <f:setPropertyActionListener target="#{customerView.customer}" value="#{customer}" />
                 <f:setPropertyActionListener target="#{customerView.customer.customerNumber}"
                                              value="#{customer.customerNumber}"/>
@@ -81,9 +81,9 @@
     </h:dataTable>
 </h:form>
 <h:form>
-    <h:commandButton action="customer/customerInsert" value="Einfuegen" />
-    <h:commandButton action="menuSelection" value="Menue"/>
-    <h:commandButton action="customer/customers" value="Nach oben Springen"/>
+    <h:commandButton action="customerInsert" value="Einfuegen" />
+    <h:commandButton action="/menuSelection" value="Menue"/>
+    <h:commandButton action="customers" value="Nach oben Springen"/>
 </h:form>
 </body>
 </html>

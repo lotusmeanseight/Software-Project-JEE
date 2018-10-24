@@ -26,7 +26,7 @@
     <h:commandButton action="#{employeeView.update(employeeView.employee)}" value="Aktualisieren">
         <f:setPropertyActionListener target="#{employeeView.employee}" value="#{employeeView.employee}"/>
     </h:commandButton>
-    <h:button styleClass="button" value="Liste" outcome="employees"/>
+    <h:button styleClass="button" value="Liste" outcome="employee/employees"/>
 </h:form>
 </body>
 </html>
