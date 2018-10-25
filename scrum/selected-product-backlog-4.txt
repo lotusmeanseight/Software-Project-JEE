@@ -4,31 +4,31 @@ Gruppe 5
 Software Engineering Projekt: Realisierung eines Warenwirtschaftssystems
 
 Projektstart: 27.09.2018
-Projektende : 20.12.2018
+Projektende: 20.12.2018
 
 =================================================
 
 Sprint 4
 
 Sprintanfang: 25.10.2018
-Sprintende : 7.11.2018 (24.00 Uhr)
+Sprintende: 07.11.2018 (24.00 Uhr)
 
 • Nachbesserung der Versäumnisse des letzten Sprintes:
   - Beziehungen zwischen Order, OrderDetails, Products und ProductLines über JPA akkurat abbilden.
-  - CRUD Funktionalitäten sicherstellen die durch JPA Beziehungen nicht funktioniert haben, u.a
+  - CRUD Funktionalitäten sicherstellen, die durch JPA Beziehungen nicht funktioniert haben, u.a
   Update einiger Stammdaten, Read von Products.
 • Migration der Datenbank von H2 auf PostgreSQL:
   - Sicherstellung das Applikation / Hibernate nicht die auf dem Produktivsystem befindene Datenbank löscht.
 • Refactoring der Projektstruktur nach dem Entity-Control-Boundary Pattern:
   - Aufteilung der Klassen in passende Entity, Control und Boundary Pakete.
-• Erweiterung der Crud Funktionalitäten auf Binärdaten:
-  - Die in Produktlines vorhandene Graphik darstellen und es ermöglichen das neue Graphiken in gängigen Bildformaten 
-  hochgeladen werden können
-• Pageination für Datatables aller Stammdaten:
+• Erweiterung der CRUD Funktionalitäten auf Binärdaten:
+  - Die in Produktlines vorhandene Graphik darstellen und es ermöglichen, dass neue Graphiken in gängigen Bildformaten 
+  hochgeladen werden können.
+• Pagination für Datatables aller Stammdaten:
   - Durchblättern von Stammdaten, immer nur n Einträge anzeigen.
 • Authentifizierung und Autorisierung:
-  - Generische Klassenhierarchie zur Abbildung der Rollen im Zusammenhang mit einem Nutzer,
-  dies soll es leichter machen in Zukunft noch weitere Rollen hinzuzufügen als die aktuell geforderten
+  - Generische Klassenhierarchie zur Abbildung der Rollen im Zusammenhang mit einem Nutzer.
+  Dies soll es leichter machen, in Zukunft noch weitere Rollen hinzuzufügen als die aktuell geforderten
   Mitarbeiter und Kundenrollen.
   - Mitarbeiter (Interne Nutzer) werden durch die Employees Tabelle über LastName und EmployeeNumber identifiziert
   und haben regulären Zugriff auf alle Stammdaten.
@@ -36,5 +36,5 @@ Sprintende : 7.11.2018 (24.00 Uhr)
   und haben nur Zugriff auf Read der eigenen Bestellungen.
   - Anmeldemaske für die View erstellen.
 • Performanz Optimierung:
-  - Aktuelle Misstände hinsichtlich Performance Losses durch Datenbank zugriffe reduzieren,
-  dies beinhaltet Methoden in den Services welche mit dem EntityManager direkt mit der Datenbank kommunizieren.
+  - Aktuelle Misstände hinsichtlich Performance Losses durch Datenbank Zugriffe reduzieren.
+  Dies beinhaltet Methoden in den Services, welche mit dem EntityManager direkt mit der Datenbank kommunizieren.
