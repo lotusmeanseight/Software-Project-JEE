@@ -13,9 +13,7 @@ public class Product implements Serializable {
     @Id
     @Size(max=15)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ManyToOne
-    @JoinColumn(name = "productCode")
-    private ProductLine productCode;
+    private String productCode;
 
     @NotNull
     @Size(max=80)
@@ -23,7 +21,9 @@ public class Product implements Serializable {
 
     @NotNull
     @Size(max=50)
-    private String productLine;
+    @ManyToOne
+    @JoinColumn(name = "productline")
+    private ProductLine productLine;
 
     @NotNull
     @Size(max=10)
@@ -45,11 +45,11 @@ public class Product implements Serializable {
     @NotNull
     private Double MSRP;
 
-    public ProductLine getProductCode() {
+    public String getProductCode() {
         return productCode;
     }
 
-    public void setProductCode(ProductLine productCode) {
+    public void setProductCode(String productCode) {
         this.productCode = productCode;
     }
 
@@ -62,11 +62,11 @@ public class Product implements Serializable {
     }
 
     public String getProductLine() {
-        return productLine;
+        return productLine.getProductLine();
     }
 
     public void setProductLine(String productLine) {
-        this.productLine = productLine;
+        this.productLine.setProductLine(productLine);
     }
 
     public String getProductScale() {

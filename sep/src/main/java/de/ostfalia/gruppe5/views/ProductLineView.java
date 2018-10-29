@@ -1,9 +1,7 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.models.Product;
 import de.ostfalia.gruppe5.models.ProductLine;
 import de.ostfalia.gruppe5.services.ProductLineService;
-import de.ostfalia.gruppe5.services.ProductService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
