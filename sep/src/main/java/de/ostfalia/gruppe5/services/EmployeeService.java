@@ -3,11 +3,13 @@ package de.ostfalia.gruppe5.services;
 
 import de.ostfalia.gruppe5.models.Employee;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@RolesAllowed("internal-user")
 @Stateless
 public class EmployeeService {
 

@@ -2,12 +2,16 @@ package de.ostfalia.gruppe5.services;
 
 import java.util.List;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import de.ostfalia.gruppe5.models.Order;
 
+@DeclareRoles({"internal-user", "customer"})
+@RolesAllowed("internal-user")
 @Stateless
 public class OrderService {
 
@@ -22,6 +26,7 @@ public class OrderService {
 		entityManager.persist(order);
 	}
 
+	@RolesAllowed("customer")
 	private Order findById(Integer id) {
 		return entityManager.find(Order.class, id);
 	}
