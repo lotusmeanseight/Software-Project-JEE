@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -13,13 +14,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- VERSIONS -->
-        <java.version>1.8</java.version>
+		<java.version>1.8</java.version>
 		<javaee.version>8.0</javaee.version>
 		<junit.version>4.12</junit.version>
 		<!-- PLUGINS -->
-        <maven.war.plugin.version>3.2.2</maven.war.plugin.version>
-        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
-        <maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
+		<maven.war.plugin.version>3.2.2</maven.war.plugin.version>
+		<maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+		<maven.javadoc.plugin.version>3.0.1</maven.javadoc.plugin.version>
 	</properties>
 
 	<dependencies>
@@ -36,6 +37,7 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
