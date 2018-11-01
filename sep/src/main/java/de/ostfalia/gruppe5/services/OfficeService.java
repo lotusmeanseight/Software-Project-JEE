@@ -22,11 +22,11 @@ public class OfficeService {
         entityManager.persist(office);
     }
 
-    private Office findById(String id) {
+    private Office findById(Integer id) {
         return entityManager.find(Office.class, id);
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Integer id) {
             entityManager.remove(findById(id));
     }
 
