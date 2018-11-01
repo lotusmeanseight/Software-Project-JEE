@@ -14,6 +14,8 @@ public class CustomInMemoryIdentityStore implements IdentityStore {
     @Override
     public CredentialValidationResult validate(Credential credential) {
 
+    	System.out.println("Hier im CredentialValidationResult");
+    	
         UsernamePasswordCredential login = (UsernamePasswordCredential) credential;
 
         if (login.getCaller().equals("admin@mail.com") && login.getPasswordAsString().equals("ADMIN1234")) {
