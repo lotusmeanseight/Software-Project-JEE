@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +16,9 @@ public class Product implements Serializable {
     @Size(max=15)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String productCode;
+
+    @OneToMany(mappedBy = "productCode")
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
     @NotNull
     @Size(max=80)
