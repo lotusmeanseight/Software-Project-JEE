@@ -13,7 +13,6 @@ public class Office {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Size(max=10)
     private Integer officeCode;
 
     @OneToMany(mappedBy = "officeCode")

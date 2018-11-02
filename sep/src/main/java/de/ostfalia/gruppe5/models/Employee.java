@@ -35,7 +35,6 @@ public class Employee {
     private String email;
 
     @NotNull
-    @Size(max=10)
     @ManyToOne
     @JoinColumn(name = "officeCode")
     private Office officeCode;
