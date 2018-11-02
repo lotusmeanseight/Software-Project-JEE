@@ -43,11 +43,11 @@
             <h:outputText id="customerNumber" value="#{order.customerNumber}"/>
         </h:column>
         
-<!--         <h:column> -->
-<!--             <f:facet name="header">Order Details</f:facet> -->
-<!--             <h:commandButton action="/orderDetails/orderDetails" value="View"> -->
-<!--             </h:commandButton> -->
-<!--         </h:column> -->
+        <h:column>
+            <f:facet name="header">Order Details</f:facet>
+            <h:commandButton action="/orderDetailsCustomerRole" value="View">
+            </h:commandButton>
+        </h:column>
     </h:dataTable>
 </h:form>
 </body>
