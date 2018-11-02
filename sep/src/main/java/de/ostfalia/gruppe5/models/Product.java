@@ -25,7 +25,6 @@ public class Product implements Serializable {
     private String productName;
 
     @NotNull
-    @Size(max=50)
     @ManyToOne
     @JoinColumn(name = "productline")
     private ProductLine productLine;
@@ -66,8 +65,8 @@ public class Product implements Serializable {
         this.productName = productName;
     }
 
-    public String getProductLine() {
-        return productLine.getProductLine();
+    public ProductLine getProductLine() {
+        return productLine;
     }
 
     public void setProductLine(String productLine) {
