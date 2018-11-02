@@ -20,11 +20,13 @@ public class EmployeeIdentityStore implements IdentityStore {
 	@Override
 	public CredentialValidationResult validate(Credential credential) {
 		UsernamePasswordCredential login = (UsernamePasswordCredential) credential;
-		
-//    	CusentityManager.createQuery("select  from Customers where " + , String.class);
 
-		if (login.getCaller().equals("admin@mail.com") && login.getPasswordAsString().equals("ADMIN1234")) {
-			return new CredentialValidationResult("admin", new HashSet<>(Arrays.asList("EMPLOYEE")));
+		String lastName = entityManager.createQuery(
+				"select p.LASTNAME from EMPLOYEES where p.EMPLOYEENUMBER is " + login.getPasswordAsString(),
+				String.class).getResultList().get(0);
+
+		if (login.getCaller().equals(lastName)) {
+			return new CredentialValidationResult(lastName, new HashSet<>(Arrays.asList("EMPLOYEE")));
 		} else {
 			return CredentialValidationResult.NOT_VALIDATED_RESULT;
 		}

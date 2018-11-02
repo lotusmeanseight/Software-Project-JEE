@@ -24,12 +24,10 @@ import java.io.IOException;
 public class LoginBacking {
 
     @NotEmpty
-    @Size(min = 8)
     private String password;
 
     @NotEmpty
-    @Email
-    private String email;
+    private String lastName;
 
     @Inject
     private SecurityContext securityContext;
@@ -62,7 +60,7 @@ public class LoginBacking {
         return securityContext.authenticate(
                 (HttpServletRequest) externalContext.getRequest(),
                 (HttpServletResponse) externalContext.getResponse(),
-                AuthenticationParameters.withParams().credential(new UsernamePasswordCredential(email, password))
+                AuthenticationParameters.withParams().credential(new UsernamePasswordCredential(lastName, password))
         );
     }
 
@@ -74,11 +72,13 @@ public class LoginBacking {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+    
 }

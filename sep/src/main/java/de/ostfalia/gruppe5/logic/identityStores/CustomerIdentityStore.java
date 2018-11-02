@@ -21,10 +21,12 @@ public class CustomerIdentityStore implements IdentityStore {
 	public CredentialValidationResult validate(Credential credential) {
 		UsernamePasswordCredential login = (UsernamePasswordCredential) credential;
 
-//    	entityManager.createQuery("select  from Customers where " +  , String.class);
+		String lastName = entityManager.createQuery(
+				"select p.CONTACTLASTNAME from CUSTOMERS where p.CUSTOMERNUMBER is " + login.getPasswordAsString(),
+				String.class).getResultList().get(0);
 
-		if (login.getCaller().equals("user@mail.com") && login.getPasswordAsString().equals("USER1234")) {
-			return new CredentialValidationResult("user", new HashSet<>(Arrays.asList("CUSTOMER")));
+		if (login.getCaller().equals(lastName)) {
+			return new CredentialValidationResult(lastName, new HashSet<>(Arrays.asList("CUSTOMER")));
 		} else {
 			return CredentialValidationResult.NOT_VALIDATED_RESULT;
 		}
