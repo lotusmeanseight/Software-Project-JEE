@@ -86,11 +86,11 @@ public class Employee {
         this.email = email;
     }
 
-    public String getOfficeCode() {
+    public Integer getOfficeCode() {
         return officeCode.getOfficeCode();
     }
 
-    public void setOfficeCode(String officeCode) {
+    public void setOfficeCode(Integer officeCode) {
         this.officeCode.setOfficeCode(officeCode);
     }
 

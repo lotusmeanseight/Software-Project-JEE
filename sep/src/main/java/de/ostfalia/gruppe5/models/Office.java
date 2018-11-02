@@ -14,7 +14,7 @@ public class Office {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Size(max=10)
-    private String officeCode;
+    private Integer officeCode;
 
     @OneToMany(mappedBy = "officeCode")
     private List<Employee> employees = new ArrayList<>();
@@ -49,11 +49,11 @@ public class Office {
     @Size(max=10)
     private String territory;
 
-    public String getOfficeCode() {
+    public Integer getOfficeCode() {
         return officeCode;
     }
 
-    public void setOfficeCode(String officeCode) {
+    public void setOfficeCode(Integer officeCode) {
         this.officeCode = officeCode;
     }
 
