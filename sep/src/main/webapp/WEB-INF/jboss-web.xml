@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jboss-web>
+
+    <security-domain>jaspitest</security-domain>
+
+</jboss-web>
+
+
+
+        jaspitest is prepared security domain in WildFly
+
+
+
+<security-domain name="jaspitest" cache-type="default">
+
+<authentication-jaspi>
+
+    <login-module-stack name="dummy">
+
+        <login-module code="Dummy" flag="optional"/>
+
+    </login-module-stack>
+
+    <auth-module code="Dummy"/>
+
+</authentication-jaspi>
+
+</security-domain>

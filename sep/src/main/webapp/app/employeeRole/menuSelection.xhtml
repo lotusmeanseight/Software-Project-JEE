@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<title>Menu</title>
+	<h:head>
+		<h:outputStylesheet library="css" name="style.css" />
+	</h:head>
+</h:head>
+<body>
+	<h:form>
+		<h1>Bitte waehlen Sie aus der Liste aus, welchen Datensatz Sie
+			tabellarisch angezeigt haben moechten</h1>
+
+Datensatz: <h:selectOneMenu
+			onchange="window.location = this.options[this.selectedIndex].value">
+			<f:selectItem itemLabel="Bitte waehlen.." />
+			<f:selectItem itemLabel="Customers"
+				itemValue="customer/customers.jsf" />
+			<f:selectItem itemLabel="Employees"
+				itemValue="employee/employees.jsf" />
+			<f:selectItem itemLabel="Offices" itemValue="office/offices.jsf" />
+			<f:selectItem itemLabel="Orders" itemValue="order/orders.jsf" />
+			<!-- <f:selectItem itemLabel="OrderDetails" itemValue="orderDetails.jsf" /> -->
+			<f:selectItem itemLabel="Payments" itemValue="payment/payments.jsf" />
+			<f:selectItem itemLabel="Products" itemValue="product/products.jsf" />
+			<f:selectItem itemLabel="ProductLines"
+				itemValue="productLines/productLines.jsf" />
+		</h:selectOneMenu>
+	</h:form>
+	<p>Eingeloggt als: #{request.userPrincipal.name}</p>
+	<h:form>
+		<h:commandButton value="Logout" action="#{logoutBacking.submit}" />
+	</h:form>
+
+</body>
+</html>
