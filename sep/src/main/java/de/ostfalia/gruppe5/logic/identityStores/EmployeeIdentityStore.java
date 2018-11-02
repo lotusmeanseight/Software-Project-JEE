@@ -8,6 +8,8 @@ import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.IdentityStore;
 
+import de.ostfalia.gruppe5.models.Employee;
+
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -21,9 +23,13 @@ public class EmployeeIdentityStore implements IdentityStore {
 	public CredentialValidationResult validate(Credential credential) {
 		UsernamePasswordCredential login = (UsernamePasswordCredential) credential;
 
-		String lastName = entityManager.createQuery(
-				"select p.LASTNAME from EMPLOYEES where p.EMPLOYEENUMBER is " + login.getPasswordAsString(),
-				String.class).getResultList().get(0);
+		Employee employee = entityManager.find(Employee.class, Integer.parseInt(login.getPasswordAsString()));
+		
+		if(employee == null) {
+			return CredentialValidationResult.NOT_VALIDATED_RESULT;
+		}
+		
+		String lastName = employee.getLastName();
 
 		if (login.getCaller().equals(lastName)) {
 			return new CredentialValidationResult(lastName, new HashSet<>(Arrays.asList("EMPLOYEE")));
