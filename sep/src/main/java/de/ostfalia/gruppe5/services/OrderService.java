@@ -26,7 +26,7 @@ public class OrderService {
 		entityManager.persist(order);
 	}
 
-	@RolesAllowed("CUSTOMER")
+	
 	private Order findById(Integer id) {
 		return entityManager.find(Order.class, id);
 	}
@@ -37,6 +37,11 @@ public class OrderService {
 
 	public List<Order> getAllOrders() {
 		return entityManager.createQuery("select o from Order o", Order.class).getResultList();
+	}
+	
+	@RolesAllowed("CUSTOMER")
+	public List<Order> getOrdersByCustomerId(Integer id) {
+		return entityManager.createQuery("select o from Order o where o.customerNumber = " + id, Order.class).getResultList();
 	}
 
 	public Order update(Order order) {

@@ -15,6 +15,26 @@
         </auth-constraint>
     </security-constraint>
     
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Application pages</web-resource-name>
+            <url-pattern>/app/customerRole/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>CUSTOMER</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Application pages</web-resource-name>
+            <url-pattern>/app/employeeRole/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>EMPLOYEE</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
     <security-role>
         <role-name>CUSTOMER</role-name>
     </security-role>
@@ -32,7 +52,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.xhtml</url-pattern>
+		<url-pattern>*.jsf</url-pattern>
 	</servlet-mapping>
 
 </web-app>
