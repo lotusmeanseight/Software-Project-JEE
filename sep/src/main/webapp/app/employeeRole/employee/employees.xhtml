@@ -36,7 +36,7 @@
         </h:column>
         <h:column>
             <f:facet name="header">Office Code</f:facet>
-            <h:outputText id="officeCode" value="#{employee.officeCode}"/>
+            <h:outputText id="officeCode" value="#{employee.officeCode.officeCode}"/>
         </h:column>
         <h:column>
             <f:facet name="header">Vorgesetzter</f:facet>
@@ -48,7 +48,7 @@
         </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="employeeEdit" value="Aktualisieren">
+            <h:commandButton action="employeeEdit?faces-redirect=true" value="Aktualisieren">
                 <f:setPropertyActionListener target="#{employeeView.employee}" value="#{employee}"/>
                 <f:setPropertyActionListener target="#{employeeView.employee.employeeNumber}"
                                              value="#{employee.employeeNumber}"/>

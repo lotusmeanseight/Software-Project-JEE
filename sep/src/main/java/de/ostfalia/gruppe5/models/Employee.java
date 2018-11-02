@@ -34,7 +34,6 @@ public class Employee {
     @Size(max=100)
     private String email;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "officeCode")
     private Office officeCode;
@@ -85,8 +84,8 @@ public class Employee {
         this.email = email;
     }
 
-    public Integer getOfficeCode() {
-        return officeCode.getOfficeCode();
+    public Office getOfficeCode() {
+        return officeCode;
     }
 
     public void setOfficeCode(Integer officeCode) {
