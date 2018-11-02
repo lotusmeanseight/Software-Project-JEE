@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@RolesAllowed("internal-user")
+@RolesAllowed("EMPLOYEE")
 @Stateless
 public class PaymentService {
 

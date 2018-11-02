@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@RolesAllowed("internal-user")
+@RolesAllowed("EMPLOYEE")
 @Stateless
 public class OrderDetailService {
     @PersistenceContext(name = "simple")

@@ -10,8 +10,8 @@ import javax.persistence.PersistenceContext;
 
 import de.ostfalia.gruppe5.models.Order;
 
-@DeclareRoles({"internal-user", "customer"})
-@RolesAllowed("internal-user")
+@DeclareRoles({"EMPLOYEE", "CUSTOMER"})
+@RolesAllowed("EMPLOYEE")
 @Stateless
 public class OrderService {
 
@@ -26,7 +26,7 @@ public class OrderService {
 		entityManager.persist(order);
 	}
 
-	@RolesAllowed("customer")
+	@RolesAllowed("CUSTOMER")
 	private Order findById(Integer id) {
 		return entityManager.find(Order.class, id);
 	}

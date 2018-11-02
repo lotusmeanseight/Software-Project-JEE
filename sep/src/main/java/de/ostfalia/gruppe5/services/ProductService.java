@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 
 import de.ostfalia.gruppe5.models.Product;
 
-@RolesAllowed("internal-user")
+@RolesAllowed("EMPLOYEE")
 @Stateless
 public class ProductService {
 
