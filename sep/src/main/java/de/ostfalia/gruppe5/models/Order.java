@@ -3,6 +3,8 @@ package de.ostfalia.gruppe5.models;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +14,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderNumber;
+
+    @OneToMany(mappedBy = "orderNumber")
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
     private LocalDateTime orderDate;
 
