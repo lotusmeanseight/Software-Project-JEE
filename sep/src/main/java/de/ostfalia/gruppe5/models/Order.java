@@ -81,10 +81,6 @@ public class Order {
         return customerNumber.getCustomerNumber();
     }
 
-    public void setCustomerNumber(Integer customerNumber) {
-        this.customerNumber.setCustomerNumber(customerNumber);
-    }
-
     public LocalDateTime getOrderDate() {
         return orderDate;
     }

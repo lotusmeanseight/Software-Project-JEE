@@ -68,10 +68,6 @@ public class Customer {
         return customerNumber;
     }
 
-    public void setCustomerNumber(Integer customerNumber) {
-        this.customerNumber = customerNumber;
-    }
-
     public String getCustomerName() {
         return customerName;
     }
