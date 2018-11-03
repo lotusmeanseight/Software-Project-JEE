@@ -1,4 +1,4 @@
-package de.ostfalia.gruppe5.views.Converter;
+package de.ostfalia.gruppe5.views.converters;
 
 import de.ostfalia.gruppe5.models.Employee;
 
