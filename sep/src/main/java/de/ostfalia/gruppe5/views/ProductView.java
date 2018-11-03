@@ -1,13 +1,12 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.List;
+import de.ostfalia.gruppe5.models.Product;
+import de.ostfalia.gruppe5.services.ProductService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import de.ostfalia.gruppe5.models.Product;
-import de.ostfalia.gruppe5.services.ProductService;
+import java.util.List;
 
 @Named
 @RequestScoped
@@ -32,7 +31,7 @@ public class ProductView {
 	}
 
 	public String delete(Product product) {
-		service.deleteById(product.getProductLine());
+		service.deleteById(product.getProductCode());
 		return null;
 	}
 
