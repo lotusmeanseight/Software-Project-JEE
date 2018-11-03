@@ -32,10 +32,6 @@ public class Payment implements Serializable {
         return customerNumber.getCustomerNumber();
     }
 
-    public void setCustomerNumber(Integer customerNumber) {
-        this.customerNumber.setCustomerNumber(customerNumber);
-    }
-
     public String getCheckNumber() {
         return checkNumber;
     }

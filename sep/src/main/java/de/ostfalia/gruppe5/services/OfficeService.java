@@ -24,7 +24,7 @@ public class OfficeService {
         entityManager.persist(office);
     }
 
-    private Office findById(Integer id) {
+    public Office findById(Integer id) {
         return entityManager.find(Office.class, id);
     }
 

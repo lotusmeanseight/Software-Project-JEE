@@ -12,7 +12,6 @@ import java.util.Objects;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerNumber;
 
     @OneToMany(mappedBy = "customerNumber")
@@ -156,8 +155,8 @@ public class Customer {
         return salesRepEmployeeNumber;
     }
 
-    public void setSalesRepEmployeeNumber(Integer salesRepEmployeeNumber) {
-        this.salesRepEmployeeNumber.setEmployeeNumber(salesRepEmployeeNumber);
+    public void setSalesRepEmployeeNumber(Employee salesRepEmployeeNumber) {
+        this.salesRepEmployeeNumber = salesRepEmployeeNumber;
     }
 
     public Double getCreditLimit() {

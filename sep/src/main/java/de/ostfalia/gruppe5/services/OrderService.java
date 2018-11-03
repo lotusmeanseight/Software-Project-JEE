@@ -1,14 +1,13 @@
 package de.ostfalia.gruppe5.services;
 
-import java.util.List;
+import de.ostfalia.gruppe5.models.Order;
 
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import de.ostfalia.gruppe5.models.Order;
+import java.util.List;
 
 @DeclareRoles({"EMPLOYEE", "CUSTOMER"})
 @RolesAllowed("EMPLOYEE")
@@ -26,8 +25,8 @@ public class OrderService {
 		entityManager.persist(order);
 	}
 
-	
-	private Order findById(Integer id) {
+
+	public Order findById(Integer id) {
 		return entityManager.find(Order.class, id);
 	}
 

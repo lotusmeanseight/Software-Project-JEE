@@ -24,7 +24,7 @@ public class EmployeeService {
         entityManager.persist(employee);
     }
 
-    private Employee findById(Integer id) {
+    public Employee findById(Integer id) {
         return entityManager.find(Employee.class, id);
     }
 

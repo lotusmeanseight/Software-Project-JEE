@@ -44,6 +44,25 @@ public class Employee {
     @Size(max=50)
     private String jobTitle;
 
+
+    public void addCustomer(Customer customer) {
+        if (customers.contains(customer)) {
+            return;
+        }
+
+        customers.add(customer);
+        customer.setSalesRepEmployeeNumber(this);
+    }
+
+    public void removeCustomer(Customer customer) {
+        if (!customers.contains(customer)) {
+            return;
+        }
+        customers.remove(customer);
+        customer.setSalesRepEmployeeNumber(null);
+    }
+
+
     public Integer getEmployeeNumber() {
         return employeeNumber;
     }
