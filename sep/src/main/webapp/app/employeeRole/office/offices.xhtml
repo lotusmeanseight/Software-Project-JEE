@@ -53,7 +53,7 @@
         
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="officeEdit?faces-redirect=true" value="Aktualisieren">
+            <h:commandButton action="officeEdit" value="Aktualisieren">
                 <f:setPropertyActionListener target="#{officeView.office}" value="#{office}"/>
                 <f:setPropertyActionListener target="#{officeView.office.officeCode}"
                                              value="#{office.officeCode}"/>
