@@ -1,6 +1,9 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -12,7 +15,6 @@ import java.util.Objects;
 public class Office {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer officeCode;
 
     @OneToMany(mappedBy = "officeCode")

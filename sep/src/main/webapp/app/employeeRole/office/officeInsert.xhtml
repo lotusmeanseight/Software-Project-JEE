@@ -4,15 +4,16 @@
 >
 
 <h:head>
-    <title>Offices Insert</title>
+    <title>Office Insert</title>
     <h:head>
         <h:outputStylesheet library="css" name="style.css"/>
     </h:head>
 </h:head>
 <body>
-<h1>Einfuegen</h1>
+<h1>Einfügen</h1>
 <h:form>
     <h:panelGrid columns="2">
+        Office Code: <h:inputText value="#{officeView.office.officeCode}"/>
         Stadt: <h:inputText value="#{officeView.office.city}"/>
         Telefon: <h:inputText value="#{officeView.office.phone}"/>
         Adresse: <h:inputText value="#{officeView.office.addressLine1}"/>
