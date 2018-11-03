@@ -23,7 +23,7 @@ public class ProductLineService {
         entityManager.persist(productLine);
     }
 
-    private ProductLine findById(String id) {
+    public ProductLine findById(String id) {
         return entityManager.find(ProductLine.class, id);
     }
 

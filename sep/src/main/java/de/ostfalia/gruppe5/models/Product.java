@@ -14,7 +14,6 @@ public class Product implements Serializable {
 
     @Id
     @Size(max=15)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String productCode;
 
     @OneToMany(mappedBy = "productCode")
@@ -69,8 +68,8 @@ public class Product implements Serializable {
         return productLine;
     }
 
-    public void setProductLine(String productLine) {
-        this.productLine.setProductLine(productLine);
+    public void setProductLine(ProductLine productLine) {
+        this.productLine = productLine;
     }
 
     public String getProductScale() {
