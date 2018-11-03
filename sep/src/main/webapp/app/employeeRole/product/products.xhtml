@@ -59,10 +59,11 @@
                                              value="#{product.productCode}"/>
             </h:commandButton>
         </h:column>
-        <h:column>
-            <f:facet name="header">Loeschen</f:facet>
-            <h:commandButton action="#{productView.delete(product)}" value="Loeschen"/>
-        </h:column>
+        <!--  <h:column>
+              <f:facet name="header">Loeschen</f:facet>
+              <h:commandButton action="#{productView.delete(product)}" value="Loeschen"/>
+          </h:column> commented out, look at commit message of product branch or
+          pull request associated with the branch -->
     </h:dataTable>
 </h:form>
 <h:form>
