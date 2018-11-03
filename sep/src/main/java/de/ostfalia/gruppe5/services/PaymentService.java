@@ -24,7 +24,7 @@ public class PaymentService {
         entityManager.persist(payment);
     }
 
-    private Payment findById(String id) {
+    public Payment findById(String id) {
         return entityManager.find(Payment.class, id);
     }
 

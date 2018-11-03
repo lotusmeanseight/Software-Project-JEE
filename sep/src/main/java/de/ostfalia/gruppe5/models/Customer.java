@@ -12,7 +12,6 @@ import java.util.Objects;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerNumber;
 
     @OneToMany(mappedBy = "customerNumber")
@@ -66,6 +65,10 @@ public class Customer {
 
     public Integer getCustomerNumber() {
         return customerNumber;
+    }
+
+    public void setCustomerNumber(Integer customerNumber) {
+        this.customerNumber = customerNumber;
     }
 
     public String getCustomerName() {

@@ -23,7 +23,7 @@ public class CustomerService {
         em.persist(customer);
     }
 
-    private Customer findById(Integer id) {
+    public Customer findById(Integer id) {
         return em.find(Customer.class, id);
     }
 

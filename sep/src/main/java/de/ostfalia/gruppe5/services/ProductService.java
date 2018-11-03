@@ -1,13 +1,12 @@
 package de.ostfalia.gruppe5.services;
 
-import java.util.List;
+import de.ostfalia.gruppe5.models.Product;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import de.ostfalia.gruppe5.models.Product;
+import java.util.List;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
@@ -24,7 +23,7 @@ public class ProductService {
 		entityManager.persist(product);
 	}
 
-	private Product findById(String id) {
+	public Product findById(String id) {
 		return entityManager.find(Product.class, id);
 	}
 
