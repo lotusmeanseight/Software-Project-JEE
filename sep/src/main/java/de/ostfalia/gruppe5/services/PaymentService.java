@@ -32,6 +32,10 @@ public class PaymentService {
         entityManager.remove(findById(id));
     }
 
+    public void delete(Payment payment) {
+        entityManager.remove(entityManager.merge(payment));
+    }
+
     public List<Payment> getAllPayments() {
         return entityManager.createQuery("select p from Payment p", Payment.class).getResultList();
     }
