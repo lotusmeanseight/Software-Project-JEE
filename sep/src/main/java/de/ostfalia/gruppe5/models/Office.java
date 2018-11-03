@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Office {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer officeCode;
 
     @OneToMany(mappedBy = "officeCode")

@@ -1,37 +1,31 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.List;
+import de.ostfalia.gruppe5.models.Office;
+import de.ostfalia.gruppe5.services.OfficeService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
-import de.ostfalia.gruppe5.models.Office;
-import de.ostfalia.gruppe5.services.OfficeService;
-
-@Named
 @RequestScoped
+@Named
 public class OfficeView {
 
 	private Office office;
-
 	@Inject
 	private OfficeService service;
 
 	public OfficeView() {
-		office = new Office();
-	}
+        setOffice(new Office());
+    }
 
-	public void setOffice(Office office) {
-		this.office = office;
-	}
-
-	public List<Office> getOffice() {
+    public List<Office> getOffices() {
 		return service.getAllOffices();
 	}
 
 	public String save() {
-		service.save(office);
+        service.save(getOffice());
 		return null;
 	}
 
@@ -46,4 +40,11 @@ public class OfficeView {
 	}
 
 
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
+    }
 }

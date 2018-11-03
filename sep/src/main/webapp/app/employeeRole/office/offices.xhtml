@@ -11,7 +11,7 @@
 </h:head>
 <body>
 <h:form id="product_datatable_form">
-    <h:dataTable id="product_datatable_data" value="#{officeView.office}" var="office" border="1"
+    <h:dataTable id="product_datatable_data" value="#{officeView.offices}" var="office" border="1"
                  selectionMode="single" styleClass="customer-table" headerClass="customer-table-header"
                  rowClasses="customer-table-odd-row,customer-table-even-row">
         <h:column>
@@ -53,7 +53,7 @@
         
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="officeEdit" value="Aktualisieren">
+            <h:commandButton action="officeEdit?faces-redirect=true" value="Aktualisieren">
                 <f:setPropertyActionListener target="#{officeView.office}" value="#{office}"/>
                 <f:setPropertyActionListener target="#{officeView.office.officeCode}"
                                              value="#{office.officeCode}"/>

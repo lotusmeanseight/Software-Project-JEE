@@ -1,16 +1,20 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 
 <h:head>
-    <title>Offices Insert</title>
+    <title>Office Edit</title>
     <h:head>
         <h:outputStylesheet library="css" name="style.css"/>
     </h:head>
 </h:head>
 <body>
-<h1>Einfuegen</h1>
+<h1>Aktualisieren</h1>
 <h:form>
     <h:panelGrid columns="2">
         Stadt: <h:inputText value="#{officeView.office.city}"/>
@@ -22,7 +26,9 @@
         Postleitzahl: <h:inputText value="#{officeView.office.postalCode}"/>
         Region: <h:inputText value="#{officeView.office.territory}"/>
     </h:panelGrid>
-    <h:commandButton action="#{officeView.save}" value="Einfuegen">
+    <h:inputHidden value="#{officeView.office.officeCode}" />
+    <h:commandButton action="#{officeView.update(officeView.office)}" value="Aktualisieren">
+    	<f:setPropertyActionListener target="#{officeView.office}" value="#{officeView.office}"/>
     </h:commandButton>
     <h:button styleClass="button" value="Liste" outcome="offices"/>
 </h:form>

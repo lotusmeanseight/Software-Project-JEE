@@ -32,6 +32,10 @@ public class OfficeService {
             entityManager.remove(findById(id));
     }
 
+    public void delete(Office office) {
+        entityManager.remove(entityManager.merge(office));
+    }
+
     public List<Office> getAllOffices() {
         return entityManager.createQuery("select o from Office o", Office.class).getResultList();
     }
