@@ -156,8 +156,8 @@ public class Customer {
         return salesRepEmployeeNumber;
     }
 
-    public void setSalesRepEmployeeNumber(Integer salesRepEmployeeNumber) {
-        this.salesRepEmployeeNumber.setEmployeeNumber(salesRepEmployeeNumber);
+    public void setSalesRepEmployeeNumber(Employee salesRepEmployeeNumber) {
+        this.salesRepEmployeeNumber = salesRepEmployeeNumber;
     }
 
     public Double getCreditLimit() {
