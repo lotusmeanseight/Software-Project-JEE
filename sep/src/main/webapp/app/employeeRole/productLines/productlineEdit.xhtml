@@ -10,17 +10,26 @@
     </h:head>
 </h:head>
 <body>
-<h1>Einfuegen</h1>
+<h1>Aktualisieren</h1>
 <h:form>
     <h:panelGrid columns="2">
         Beschreibung (Text): <h:inputText value="#{productLineView.productLine.textDescription}"/>
         Beschreibung (Html): <h:inputText value="#{productLineView.productLine.htmlDescription}"/>
-        Bild: <h:inputText value="#{productLineView.productLine.BLOB}"/>
     </h:panelGrid>
     <h:inputHidden value="#{productLineView.productLine.productLine}"/>
     <h:commandButton action="#{productLineView.update(productLineView.productLine)}" value="Aktualisieren">
     </h:commandButton>
     <h:button styleClass="button" value="Liste" outcome="productLines"/>
+</h:form>
+<h:form id="form" enctype="multipart/form-data">
+    <h:messages/>
+    <h:panelGrid columns="2">
+        <h:outputText value="File:"/>
+        <h:inputFile id="file" value="#{uploadView.imageFile}"
+                     validator="#{uploadView.validateFile}"/>
+    </h:panelGrid>
+
+    <h:commandButton value="Upload File" action="#{uploadView.uploadFile}"/>
 </h:form>
 </body>
 
