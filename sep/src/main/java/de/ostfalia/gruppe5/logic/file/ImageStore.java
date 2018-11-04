@@ -1,4 +1,4 @@
-package de.ostfalia.gruppe5.logic.fileStores;
+package de.ostfalia.gruppe5.logic.file;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
