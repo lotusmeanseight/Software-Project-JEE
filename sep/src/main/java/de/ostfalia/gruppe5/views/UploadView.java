@@ -21,6 +21,7 @@ public class UploadView implements Serializable {
     private String fileContent;
     private final List<String> supportedFileTypes = new ArrayList<>();
     private static final int MAX_FILESIZE = 1024 * 500; //512 kilobyte
+    private byte[] blob;
 
     public UploadView() {
         supportedFileTypes.add("image/jpeg");
@@ -55,6 +56,7 @@ public class UploadView implements Serializable {
                     null);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
+        setBLOB(fileContent.getBytes());
     }
 
     public Part getImageFile() {
@@ -67,5 +69,13 @@ public class UploadView implements Serializable {
 
     public String getFileContent() {
         return fileContent;
+    }
+
+    public byte[] getBLOB() {
+        return blob;
+    }
+
+    public void setBLOB(byte[] blob) {
+        this.blob = blob;
     }
 }
