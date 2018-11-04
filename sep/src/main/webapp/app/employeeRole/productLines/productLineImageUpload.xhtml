@@ -11,16 +11,19 @@
 </head>
 <body>
 <h:form id="form" enctype="multipart/form-data">
-<h:messages/>
-<h:panelGrid columns="2">
-    <h:outputText value="Bild:"/>
-    <h:inputFile id="file" value="#{imageStore.imageFile}"
-                 validator="#{imageStore.validateFile}"/>
-    <h:commandButton value="Upload File" action="#{imageStore.uploadFile}">
-        <f:actionListener binding="#{productLineView.productLine.setBLOB(imageStore.BLOB)}"/>
-    </h:commandButton>
-</h:panelGrid>
+    <h:messages/>
+    <h:panelGrid columns="2">
+        <h:outputText value="Bild:"/>
+        <h:inputFile id="file" value="#{imageStore.imageFile}"
+                     validator="#{imageStore.validateFile}"/>
+        <h:commandButton value="Upload File" action="#{imageStore.uploadFile}">
+            <h:inputHidden value="#{productLineView.productLine.productLine}"/>
+            <f:actionListener binding="#{productLineView.productLine.setBLOB(imageStore.BLOB)}"/>
+            <f:actionListener binding="#{productLineView.update(productLineView.productLine)}"/>
+        </h:commandButton>
+    </h:panelGrid>
+</h:form>
 <h:button styleClass="button" value="Liste" outcome="productLines"/>
-<h:form/>
+
 </body>
 </html>
