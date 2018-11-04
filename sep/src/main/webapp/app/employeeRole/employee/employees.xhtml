@@ -11,9 +11,9 @@
 </h:head>
 <body>
 <h:form id="employee_datatable_form">
-    <h:dataTable id="employee_datatable_data" value="#{employeeView.employees}" var="employee" border="1"
+    <h:dataTable id="employee_datatable_data" value="#{employeeView.employeeDataModel}" binding="#{employeeView.table}" var="employee" border="1"
                  selectionMode="single" styleClass="table" headerClass="table-header"
-                 rowClasses="table-odd-row,table-even-row">
+                 rowClasses="table-odd-row,table-even-row" first="0" rows="#{employeeView.rowsOnPage}">
         <h:column>
             <f:facet name="header">ID</f:facet>
             <h:outputText id="id" value="#{employee.employeeNumber}"/>
@@ -58,12 +58,19 @@
             <f:facet name="header">Loeschen</f:facet>
             <h:commandButton action="#{employeeView.delete(employee)}" value="Loeschen"/>
         </h:column>
+        <f:facet name="footer">
+        	<h:commandButton value="Erste Seite" action="#{employeeView.goToFirstPage()}"
+        	disabled="#{employeeView.table.first eq 0}" />
+        	<h:commandButton value="Vorherige Seite" action="#{employeeView.goToPreviousPage()}"
+        	disabled="#{employeeView.table.first eq 0}" />
+        	<h:commandButton value="Nächste Seite" action="#{employeeView.goToNextPage()}"
+        	disabled="#{employeeView.table.first + employeeView.table.rows ge employeeView.table.rowCount}"/>
+        	<h:commandButton value="Letzte Seite" action="#{employeeView.goToLastPage()}"
+        	disabled="#{employeeView.table.rows ge employeeView.table.rowCount}" />
+            <h:commandButton action="employeeInsert" value="Einfuegen" />
+            <h:commandButton value="Menue" action="menuSelection"/>
+        </f:facet>
     </h:dataTable>
-</h:form>
-<h:form>
-    <h:commandButton action="employeeInsert" value="Einfuegen"/>
-    <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
-    <h:commandButton action="employees" value="Nach oben Springen"/>
 </h:form>
 </body>
 </html>

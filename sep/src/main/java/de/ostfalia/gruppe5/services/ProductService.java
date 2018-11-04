@@ -1,12 +1,15 @@
 package de.ostfalia.gruppe5.services;
 
-import de.ostfalia.gruppe5.models.Product;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
+import javax.persistence.Query;
+
+import de.ostfalia.gruppe5.models.Product;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
@@ -38,4 +41,17 @@ public class ProductService {
 	public Product update(Product product) {
 		return entityManager.merge(product);
 	}
+
+	public HashSet<Product> getAllProductsLazy(int first, int max) {
+		Query query = entityManager.createNamedQuery("Product.findAll");
+		query.setFirstResult(first);
+		query.setMaxResults(max);
+		return new HashSet(query.getResultList());
+	}
+
+	public int countProducts() {
+		Query query = entityManager.createNamedQuery("Product.countAll");
+		return ((Long) query.getSingleResult()).intValue();
+	}
+
 }

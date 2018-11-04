@@ -1,11 +1,17 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "productlines")
@@ -16,15 +22,14 @@ public class ProductLine implements Serializable {
 	@Size(max = 50)
 	private String productLine;
 
-    @OneToMany(mappedBy = "productLine")
+	@OneToMany(mappedBy = "productLine")
 	private List<Product> productList = new ArrayList<>();
 
 	private String textDescription;
-	
+
 	private String htmlDescription;
 
 	private byte[] image;
-
 
 	public String getProductLine() {
 		return productLine;
@@ -60,14 +65,15 @@ public class ProductLine implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		ProductLine that = (ProductLine) o;
-		return Objects.equals(getProductLine(), that.getProductLine()) &&
-				Objects.equals(productList, that.productList) &&
-				Objects.equals(getTextDescription(), that.getTextDescription()) &&
-				Objects.equals(getHtmlDescription(), that.getHtmlDescription()) &&
-				Objects.equals(getBLOB(), that.getBLOB());
+		return Objects.equals(getProductLine(), that.getProductLine()) && Objects.equals(productList, that.productList)
+				&& Objects.equals(getTextDescription(), that.getTextDescription())
+				&& Objects.equals(getHtmlDescription(), that.getHtmlDescription())
+				&& Objects.equals(getBLOB(), that.getBLOB());
 	}
 
 	@Override
