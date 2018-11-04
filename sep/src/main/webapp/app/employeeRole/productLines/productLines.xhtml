@@ -28,7 +28,12 @@
         </h:column>
         <h:column>
             <f:facet name="header">Bild</f:facet>
-            <h:outputText id="picture" value="#{productline.BLOB}"/>
+            <h:button value="Anschauen" outcome="productLineImageView"/>
+            <h:commandButton action="productLineImageUpload" value="Hochladen">
+                <f:setPropertyActionListener target="#{productLineView.productLine}" value="#{productline}"/>
+                <f:setPropertyActionListener target="#{productLineView.productLine.productLine}"
+                                             value="#{productline.productLine}"/>
+            </h:commandButton>
         </h:column>
 
 

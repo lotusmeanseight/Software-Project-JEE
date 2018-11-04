@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
 >
 
 <h:head>
@@ -13,20 +12,10 @@
 <body>
 <h1>Aktualisieren</h1>
 <h:form id="form" enctype="multipart/form-data">
-    <h:panelGrid columns="2">
-    </h:panelGrid>
     <h:messages/>
     <h:panelGrid columns="2">
         Beschreibung (Text): <h:inputText value="#{productLineView.productLine.textDescription}"/>
         Beschreibung (Html): <h:inputText value="#{productLineView.productLine.htmlDescription}"/>
-        <h:outputText value="Bild:"/>
-        <h:inputFile id="file" value="#{uploadView.imageFile}"
-                     validator="#{uploadView.validateFile}"/>
-        <h:commandButton value="Upload File" action="#{uploadView.uploadFile}">
-            <f:actionListener binding="#{productLineView.productLine.setBLOB(uploadView.BLOB)}"/>
-        </h:commandButton>
-    </h:panelGrid>
-
     <h:commandButton action="#{productLineView.update(productLineView.productLine)}" value="Aktualisieren">
         <h:inputHidden value="#{productLineView.productLine.productLine}"/>
     </h:commandButton>

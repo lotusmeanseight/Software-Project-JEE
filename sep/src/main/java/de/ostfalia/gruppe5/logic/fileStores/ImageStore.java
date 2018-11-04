@@ -1,4 +1,4 @@
-package de.ostfalia.gruppe5.views;
+package de.ostfalia.gruppe5.logic.fileStores;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -15,29 +15,30 @@ import java.util.Scanner;
 
 @ViewScoped
 @Named
-public class UploadView implements Serializable {
+public class ImageStore implements Serializable {
 
     private Part imageFile;
     private String fileContent;
     private final List<String> supportedFileTypes = new ArrayList<>();
-    private static final int MAX_FILESIZE = 1024 * 500; //512 kilobyte
+    private static final int MAX_FILESIZE = 1024 * 500; //512 kilobytes
     private byte[] blob;
 
-    public UploadView() {
+    public ImageStore() {
         supportedFileTypes.add("image/jpeg");
         supportedFileTypes.add("image/png");
         supportedFileTypes.add("image/gif");
         supportedFileTypes.add("image/jpg");
         supportedFileTypes.add("image/tif");
-        supportedFileTypes.add("image/tiff");
     }
 
     public void validateFile(FacesContext context, UIComponent component, Object val) {
         List<FacesMessage> messages = new ArrayList<>();
         Part file = (Part) val;
+
         if (file.getSize() > MAX_FILESIZE) {
             messages.add(new FacesMessage("File:Size -> larger than 512 kb"));
         }
+
         if (!supportedFileTypes.contains(file.getContentType())) {
             messages.add(new FacesMessage("File:Type -> image type not supported"));
         }
