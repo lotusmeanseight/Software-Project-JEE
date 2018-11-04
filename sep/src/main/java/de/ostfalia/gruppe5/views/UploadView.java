@@ -35,10 +35,10 @@ public class UploadView implements Serializable {
         List<FacesMessage> messages = new ArrayList<>();
         Part file = (Part) val;
         if (file.getSize() > MAX_FILESIZE) {
-            messages.add(new FacesMessage("File too big"));
+            messages.add(new FacesMessage("File:Size -> larger than 512 kb"));
         }
         if (!supportedFileTypes.contains(file.getContentType())) {
-            messages.add(new FacesMessage("File Type not supported"));
+            messages.add(new FacesMessage("File:Type -> image type not supported"));
         }
 
         if (!messages.isEmpty()) {
