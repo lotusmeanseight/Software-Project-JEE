@@ -20,7 +20,7 @@ public class UploadView implements Serializable {
     private Part imageFile;
     private String fileContent;
     private final List<String> supportedFileTypes = new ArrayList<>();
-    private static final int MAX_FILESIZE = (1024 * 1000) * 500; //512 kilobyte
+    private static final int MAX_FILESIZE = 1024 * 500; //512 kilobyte
 
     public UploadView() {
         supportedFileTypes.add("image/jpeg");
