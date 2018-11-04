@@ -18,7 +18,10 @@
                      validator="#{imageUploader.validateFile}"/>
         <h:commandButton value="Upload File" action="#{imageUploader.uploadFile}">
             <h:inputHidden value="#{productLineView.productLine.productLine}"/>
-            <f:actionListener binding="#{productLineView.productLine.setBLOB(imageUploader.BLOB)}"/>
+            <h:inputHidden value="#{productLineView.productLine.htmlDescription}"/>
+            <h:inputHidden value="#{productLineView.productLine.textDescription}"/>
+            <h:inputHidden value="#{productLineView.productLine.BLOB}"/>
+            <f:actionListener binding="${productLineView.productLine.setBLOB(imageUploader.BLOB)}"/>
             <f:actionListener binding="#{productLineView.update(productLineView.productLine)}"/>
         </h:commandButton>
     </h:panelGrid>

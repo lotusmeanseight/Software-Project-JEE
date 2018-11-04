@@ -57,7 +57,6 @@ public class ImageUploader implements Serializable {
                     null);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
-        setBLOB(fileContent.getBytes());
     }
 
     public Part getImageFile() {
