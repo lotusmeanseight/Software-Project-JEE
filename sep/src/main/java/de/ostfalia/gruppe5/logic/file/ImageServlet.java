@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/image/*")
-public class ProductLineImageServlet extends HttpServlet {
+public class ImageServlet extends HttpServlet {
 
     @Inject
     private ProductLineService productLineService;

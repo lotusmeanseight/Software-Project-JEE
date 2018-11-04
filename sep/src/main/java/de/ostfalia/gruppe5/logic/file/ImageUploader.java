@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 @ViewScoped
 @Named
-public class ImageStore implements Serializable {
+public class ImageUploader implements Serializable {
 
     private Part imageFile;
     private String fileContent;
@@ -23,7 +23,7 @@ public class ImageStore implements Serializable {
     private static final int MAX_FILESIZE = 1024 * 500; //512 kilobytes
     private byte[] blob;
 
-    public ImageStore() {
+    public ImageUploader() {
         supportedFileTypes.add("image/jpeg");
         supportedFileTypes.add("image/png");
         supportedFileTypes.add("image/gif");

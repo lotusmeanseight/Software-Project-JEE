@@ -14,11 +14,11 @@
     <h:messages/>
     <h:panelGrid columns="2">
         <h:outputText value="Bild:"/>
-        <h:inputFile id="file" value="#{imageStore.imageFile}"
-                     validator="#{imageStore.validateFile}"/>
-        <h:commandButton value="Upload File" action="#{imageStore.uploadFile}">
+        <h:inputFile id="file" value="#{imageUploader.imageFile}"
+                     validator="#{imageUploader.validateFile}"/>
+        <h:commandButton value="Upload File" action="#{imageUploader.uploadFile}">
             <h:inputHidden value="#{productLineView.productLine.productLine}"/>
-            <f:actionListener binding="#{productLineView.productLine.setBLOB(imageStore.BLOB)}"/>
+            <f:actionListener binding="#{productLineView.productLine.setBLOB(imageUploader.BLOB)}"/>
             <f:actionListener binding="#{productLineView.update(productLineView.productLine)}"/>
         </h:commandButton>
     </h:panelGrid>
