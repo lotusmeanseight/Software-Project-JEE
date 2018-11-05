@@ -11,11 +11,11 @@ public class OrderDetail implements Serializable {
     @EmbeddedId
     private OrderDetailsID id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("orderNumber")
     private Order orderNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("productCode")
     private Product productCode;
 

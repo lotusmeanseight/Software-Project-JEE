@@ -16,7 +16,7 @@ public class ProductLine implements Serializable {
 	@Size(max = 50)
 	private String productLine;
 
-    @OneToMany(mappedBy = "productLine")
+    @OneToMany(mappedBy = "productLine", fetch = FetchType.LAZY)
 	private List<Product> productList = new ArrayList<>();
 
 	private String textDescription;

@@ -15,7 +15,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeNumber;
 
-    @OneToMany(mappedBy = "salesRepEmployeeNumber")
+    @OneToMany(mappedBy = "salesRepEmployeeNumber", fetch = FetchType.LAZY)
     private List<Customer> customers = new ArrayList<>();
 
     @NotNull
@@ -34,7 +34,7 @@ public class Employee {
     @Size(max=100)
     private String email;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "officeCode")
     private Office officeCode;
 
