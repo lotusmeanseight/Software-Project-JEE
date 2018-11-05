@@ -12,17 +12,17 @@
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
     <ui:define name="content">
-        <h1>Einfuegen</h1>
-        <h:form>
-            <h:panelGrid columns="2">
-                Beschreibung (Text): <h:inputText value="#{productLineView.productLine.textDescription}"/>
-                Beschreibung (Html): <h:inputText value="#{productLineView.productLine.htmlDescription}"/>
-                Bild: <h:inputText value="#{productLineView.productLine.BLOB}"/>
-            </h:panelGrid>
-            <h:commandButton action="#{productLineView.save}" value="Einfuegen">
-            </h:commandButton>
-            <h:button styleClass="button" value="Liste" outcome="productLines"/>
-        </h:form>
+<h1>Einfuegen</h1>
+<h:form>
+    <h:panelGrid columns="2">
+        Beschreibung (Text): <h:inputTextarea value="#{productLineView.productLine.textDescription}"/>
+        Beschreibung (Html): <h:inputTextarea value="#{productLineView.productLine.htmlDescription}"/>
+        Bild: <h:inputText value="#{productLineView.productLine.image}"/>
+    </h:panelGrid>
+    <h:commandButton action="#{productLineView.save}" value="Einfuegen">
+    </h:commandButton>
+    <h:button styleClass="button" value="Liste" outcome="productLines"/>
+</h:form>        
     </ui:define>
 </ui:composition>
 </body>
