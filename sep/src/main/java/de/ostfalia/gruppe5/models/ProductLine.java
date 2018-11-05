@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Basic;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -22,14 +23,16 @@ public class ProductLine implements Serializable {
 	@Size(max = 50)
 	private String productLine;
 
-	@OneToMany(mappedBy = "productLine")
+    @OneToMany(mappedBy = "productLine")
 	private List<Product> productList = new ArrayList<>();
 
 	private String textDescription;
-
+	
 	private String htmlDescription;
 
+	@Basic
 	private byte[] image;
+
 
 	public String getProductLine() {
 		return productLine;
@@ -55,11 +58,11 @@ public class ProductLine implements Serializable {
 		this.htmlDescription = htmlDescription;
 	}
 
-	public byte[] getBLOB() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setBLOB(byte[] image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
@@ -70,14 +73,15 @@ public class ProductLine implements Serializable {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		ProductLine that = (ProductLine) o;
-		return Objects.equals(getProductLine(), that.getProductLine()) && Objects.equals(productList, that.productList)
-				&& Objects.equals(getTextDescription(), that.getTextDescription())
-				&& Objects.equals(getHtmlDescription(), that.getHtmlDescription())
-				&& Objects.equals(getBLOB(), that.getBLOB());
+		return Objects.equals(getProductLine(), that.getProductLine()) &&
+				Objects.equals(productList, that.productList) &&
+				Objects.equals(getTextDescription(), that.getTextDescription()) &&
+				Objects.equals(getHtmlDescription(), that.getHtmlDescription()) &&
+				Objects.equals(getImage(), that.getImage());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getProductLine(), productList, getTextDescription(), getHtmlDescription(), getBLOB());
+		return Objects.hash(getProductLine(), productList, getTextDescription(), getHtmlDescription(), getImage());
 	}
 }

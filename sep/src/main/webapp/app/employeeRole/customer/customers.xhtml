@@ -5,11 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
->
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <body>
+<ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="content">
 <h:form id="customer_datatable_form">
     <h:dataTable id="customer_datatable_data" binding="#{customerView.table}" value="#{customerView.customerDataModel}" var="customer" border="1"
                  selectionMode="single" styleClass="table" headerClass="table-header"
@@ -79,18 +81,20 @@
             <h:commandButton action="#{customerView.delete(customer)}" value="Loeschen"/>
         </h:column>
         <f:facet name="footer">
-        	<h:commandButton value="Erste Seite" action="#{customerView.goToFirstPage()}"
-        	disabled="#{customerView.table.first eq 0}" />
-        	<h:commandButton value="Vorherige Seite" action="#{customerView.goToPreviousPage()}"
-        	disabled="#{customerView.table.first eq 0}" />
-        	<h:commandButton value="Nächste Seite" action="#{customerView.goToNextPage()}"
-        	disabled="#{customerView.table.first + customerView.table.rows ge customerView.table.rowCount}"/>
-        	<h:commandButton value="Letzte Seite" action="#{customerView.goToLastPage()}"
-        	disabled="#{customerView.table.rows ge customerView.table.rowCount}" />
+            <h:commandButton value="Erste Seite" action="#{customerView.goToFirstPage()}"
+                             disabled="#{customerView.table.first eq 0}" />
+            <h:commandButton value="Vorherige Seite" action="#{customerView.goToPreviousPage()}"
+                             disabled="#{customerView.table.first eq 0}" />
+            <h:commandButton value="Nächste Seite" action="#{customerView.goToNextPage()}"
+                             disabled="#{customerView.table.first + customerView.table.rows ge customerView.table.rowCount}"/>
+            <h:commandButton value="Letzte Seite" action="#{customerView.goToLastPage()}"
+                             disabled="#{customerView.table.rows ge customerView.table.rowCount}" />
             <h:commandButton action="customerInsert" value="Einfuegen" />
-            <h:commandButton value="Menue" action="employeeRole/menuSelection"/>
+            <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
         </f:facet>
     </h:dataTable>
 </h:form>
+</ui:define>
+</ui:composition>
 </body>
 </html>

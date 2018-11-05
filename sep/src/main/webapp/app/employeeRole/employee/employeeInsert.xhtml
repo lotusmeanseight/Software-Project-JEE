@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
->
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <title>Employee Insert</title>
@@ -10,9 +10,12 @@
     </h:head>
 </h:head>
 <body>
+<ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="content">
 <h1>Einfuegen</h1>
 <h:form>
     <h:panelGrid columns="2">
+        Nummer: <h:inputText value="#{employeeView.employee.employeeNumber}"/>
         Name: <h:inputText value="#{employeeView.employee.lastName}"/>
         Vorname: <h:inputText value="#{employeeView.employee.firstName}"/>
         Erweiterung: <h:inputText value="#{employeeView.employee.extension}"/>
@@ -25,6 +28,8 @@
     </h:commandButton>
     <h:button styleClass="button" value="Liste" outcome="employees"/>
 </h:form>
+    </ui:define>
+</ui:composition>
 </body>
 
 </html>

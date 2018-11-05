@@ -15,41 +15,42 @@ import de.ostfalia.gruppe5.models.Customer;
 @Stateless
 public class CustomerService {
 
-	@PersistenceContext(unitName = "simple")
-	EntityManager em;
+    @PersistenceContext(unitName = "simple")
+    EntityManager entityManager;
 
 	public CustomerService() {
 	}
 
-	public void save(Customer customer) {
-		em.persist(customer);
-	}
+    public void save(Customer customer) {
+        entityManager.persist(customer);
+    }
 
-	public Customer findById(Integer id) {
-		return em.find(Customer.class, id);
-	}
+    public Customer findById(Integer id) {
+        return entityManager.find(Customer.class, id);
+    }
 
-	public void deleteById(Integer id) {
-		em.remove(findById(id));
-	}
+    public void deleteById(Integer id) {
+        entityManager.remove(findById(id));
+    }
 
-	public List<Customer> getAllCustomers() {
-		return em.createQuery("SELECT c from Customer c", Customer.class).getResultList();
-	}
+    public List<Customer> getAllCustomers() {
+        return entityManager.createQuery("SELECT c from Customer c", Customer.class).getResultList();
+    }
 
-	public Customer update(Customer customer) {
-		return em.merge(customer);
-	}
+
+    public Customer update(Customer customer) {
+        return entityManager.merge(customer);
+    }
 
 	public HashSet<Customer> getAllCustomersLazy(int first, int max) {
-		Query query = em.createNamedQuery("Customer.findAll");
+		Query query = entityManager.createNamedQuery("Customer.findAll");
 		query.setFirstResult(first);
 		query.setMaxResults(max);
 		return new HashSet(query.getResultList());
 	}
 
 	public int countCustomers() {
-		Query query = em.createNamedQuery("Customer.countAll");
+		Query query = entityManager.createNamedQuery("Customer.countAll");
 		return ((Long) query.getSingleResult()).intValue();
 	}
 }
