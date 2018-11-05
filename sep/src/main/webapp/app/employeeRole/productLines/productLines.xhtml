@@ -11,9 +11,9 @@
 </h:head>
 <body>
 <h:form id="productlines_datatable_form">
-    <h:dataTable id="productlines_datatable_data" value="#{productLineView.productLines}" var="productline" border="1"
+    <h:dataTable id="productlines_datatable_data" value="#{productLineView.productLines}" binding="#{productLineView.table}" var="productline" border="1"
                  selectionMode="single" styleClass="table" headerClass="table-header"
-                 rowClasses="table-odd-row,table-even-row">
+                 rowClasses="table-odd-row,table-even-row" first="0" rows="#{productLineView.rowsOnPage}">
         <h:column>
             <f:facet name="header">Product Line</f:facet>
             <h:outputText id="productLine" value="#{productline.productLine}"/>
@@ -44,12 +44,20 @@
             <f:facet name="header">Loeschen</f:facet>
             <h:commandButton action="#{productLineView.delete(productline)}" value="Loeschen"/>
         </h:column>
+        <f:facet name="footer">
+        	<h:commandButton value="Erste Seite" action="#{productLineView.goToFirstPage()}"
+        	disabled="#{productLineView.table.first eq 0}" />
+        	<h:commandButton value="Vorherige Seite" action="#{productLineView.goToPreviousPage()}"
+        	disabled="#{productLineView.table.first eq 0}" />
+        	<h:commandButton value="Nächste Seite" action="#{productLineView.goToNextPage()}"
+        	disabled="#{productLineView.table.first + productLineView.table.rows ge productLineView.table.rowCount}"/>
+        	<h:commandButton value="Letzte Seite" action="#{productLineView.goToLastPage()}"
+        	disabled="#{productLineView.table.rows ge productLineView.table.rowCount}" />
+            <h:commandButton action="productlineInsert" value="Einfuegen" />
+            <h:commandButton value="Menue" action="menuSelection"/>
+             </f:facet>
     </h:dataTable>
 </h:form>
-<h:form>
-    <h:commandButton action="productlineInsert" value="Einfuegen" />
-    <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
-    <h:commandButton action="productLines" value="Nach oben Springen"/>
-</h:form>
+
 </body>
 </html>

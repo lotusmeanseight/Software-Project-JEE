@@ -11,9 +11,9 @@
 </h:head>
 <body>
 <h:form id="product_datatable_form">
-    <h:dataTable id="product_datatable_data" value="#{officeView.offices}" var="office" border="1"
-                 selectionMode="single" styleClass="customer-table" headerClass="customer-table-header"
-                 rowClasses="customer-table-odd-row,customer-table-even-row">
+    <h:dataTable id="product_datatable_data" value="#{officeView.offices}" binding="#{officeView.table}" var="office" border="1"
+                 selectionMode="single" styleClass="table" headerClass="table-header"
+                 rowClasses="table-odd-row,table-even-row" first="0" rows="#{officeView.rowsOnPage}">
         <h:column>
             <f:facet name="header">Office Code</f:facet>
             <h:outputText id="officeCode" value="#{office.officeCode}"/>
@@ -63,7 +63,17 @@
             <f:facet name="header">Loeschen</f:facet>
             <h:commandButton action="#{officeView.delete(office)}" value="Loeschen"/>
         </h:column>
-        
+        <f:facet name="footer">
+        	<h:commandButton value="Erste Seite" action="#{officeView.goToFirstPage()}"
+        	disabled="#{officeView.table.first eq 0}" />
+        	<h:commandButton value="Vorherige Seite" action="#{officeView.goToPreviousPage()}"
+        	disabled="#{officeView.table.first eq 0}" />
+        	<h:commandButton value="Nächste Seite" action="#{officeView.goToNextPage()}"
+        	disabled="#{officeView.table.first + officeView.table.rows ge officeView.table.rowCount}"/>
+        	<h:commandButton value="Letzte Seite" action="#{officeView.goToLastPage()}"
+        	disabled="#{officeView.table.rows ge officeView.table.rowCount}" />
+            <h:commandButton value="Menue" action="menuSelection"/>
+        </f:facet>
     </h:dataTable>
 </h:form>
 </body>

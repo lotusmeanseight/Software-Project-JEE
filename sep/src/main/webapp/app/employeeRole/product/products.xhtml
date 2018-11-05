@@ -11,9 +11,9 @@
 </h:head>
 <body>
 <h:form id="product_datatable_form">
-    <h:dataTable id="product_datatable_data" value="#{productView.products}" var="product" border="1"
+    <h:dataTable id="product_datatable_data" value="#{productView.productDataModel}" binding="#{productView.table}" var="product" border="1"
                  selectionMode="single" styleClass="table" headerClass="table-header"
-                 rowClasses="table-odd-row,table-even-row">
+                 rowClasses="table-odd-row,table-even-row" first="0" rows="#{customerView.rowsOnPage}">
         <h:column>
             <f:facet name="header">Produkt Code</f:facet>
             <h:outputText id="productCode" value="#{product.productCode}"/>
@@ -64,12 +64,19 @@
               <h:commandButton action="#{productView.delete(product)}" value="Loeschen"/>
           </h:column> commented out, look at commit message of product branch or
           pull request associated with the branch -->
+          <f:facet name="footer">
+        	<h:commandButton value="Erste Seite" action="#{productView.goToFirstPage()}"
+        	disabled="#{productView.table.first eq 0}" />
+        	<h:commandButton value="Vorherige Seite" action="#{productView.goToPreviousPage()}"
+        	disabled="#{productView.table.first eq 0}" />
+        	<h:commandButton value="Nächste Seite" action="#{productView.goToNextPage()}"
+        	disabled="#{productView.table.first + productView.table.rows ge productView.table.rowCount}"/>
+        	<h:commandButton value="Letzte Seite" action="#{productView.goToLastPage()}"
+        	disabled="#{productView.table.rows ge productView.table.rowCount}" />
+            <h:commandButton action="productInsert" value="Einfuegen" />
+            <h:commandButton value="Menue" action="employeeRole/menuSelection"/>
+        </f:facet>
     </h:dataTable>
-</h:form>
-<h:form>
-    <h:commandButton action="productInsert" value="Einfuegen"/>
-    <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
-    <h:commandButton action="products" value="Nach oben Springen"/>
 </h:form>
 </body>
 </html>

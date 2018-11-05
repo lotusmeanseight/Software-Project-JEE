@@ -11,9 +11,9 @@
 <body>
 	<h:form id="order_datatable_form">
 		<h:dataTable id="order_datatable_data"
-			value="#{orderViewCustomerRole.orders}" var="order" border="1"
+			value="#{orderViewCustomerRole.orders}" binding="#{orderViewCustomerRole.table}" var="order" border="1"
 			selectionMode="single" styleClass="table" headerClass="table-header"
-			rowClasses="table-odd-row,table-even-row">
+			rowClasses="table-odd-row,table-even-row" first="0" rows="#{orderViewCustomerRole.rowsOnPage}">
 			<h:column>
 				<f:facet name="header">Bestellnummer</f:facet>
 				<h:outputText id="order" value="#{order.orderNumber}" />
@@ -48,6 +48,17 @@
 				<h:commandButton action="/orderDetailsCustomerRole" value="View">
 				</h:commandButton>
 			</h:column>
+			<f:facet name="footer">
+        	<h:commandButton value="Erste Seite" action="#{orderViewCustomerRole.goToFirstPage()}"
+        	disabled="#{orderViewCustomerRole.table.first eq 0}" />
+        	<h:commandButton value="Vorherige Seite" action="#{orderViewCustomerRole.goToPreviousPage()}"
+        	disabled="#{orderViewCustomerRole.table.first eq 0}" />
+        	<h:commandButton value="Nächste Seite" action="#{orderViewCustomerRole.goToNextPage()}"
+        	disabled="#{orderViewCustomerRole.table.first + orderViewCustomerRole.table.rows ge orderViewCustomerRole.table.rowCount}"/>
+        	<h:commandButton value="Letzte Seite" action="#{orderViewCustomerRole.goToLastPage()}"
+        	disabled="#{orderViewCustomerRole.table.rows ge orderViewCustomerRole.table.rowCount}" />
+           
+             </f:facet>
 		</h:dataTable>
 	</h:form>
 	<p>Eingeloggt als: #{request.userPrincipal.name}</p>
