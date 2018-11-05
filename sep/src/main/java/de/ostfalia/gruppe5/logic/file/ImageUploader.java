@@ -1,10 +1,14 @@
 package de.ostfalia.gruppe5.logic.file;
 
+import de.ostfalia.gruppe5.models.ProductLine;
+import de.ostfalia.gruppe5.services.ProductLineService;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Part;
 import java.io.IOException;
@@ -21,7 +25,9 @@ public class ImageUploader implements Serializable {
     private String fileContent;
     private final List<String> supportedFileTypes = new ArrayList<>();
     private static final int MAX_FILESIZE = 1024 * 500; //512 kilobytes
-    private byte[] blob;
+    private byte[] image;
+    @Inject
+    private ProductLineService productLineService;
 
     public ImageUploader() {
         supportedFileTypes.add("image/jpeg");
@@ -48,7 +54,7 @@ public class ImageUploader implements Serializable {
         }
     }
 
-    public void uploadFile() {
+    public void uploadFile(String productLine) {
         try {
             fileContent = new Scanner(imageFile.getInputStream()).useDelimiter("\\A").next();
         } catch (IOException e) {
@@ -57,6 +63,11 @@ public class ImageUploader implements Serializable {
                     null);
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
+
+        setImage(fileContent.getBytes());
+        ProductLine databaseLine = productLineService.findById(productLine);
+        databaseLine.setImage(getImage());
+        productLineService.update(databaseLine);
     }
 
     public Part getImageFile() {
@@ -71,11 +82,11 @@ public class ImageUploader implements Serializable {
         return fileContent;
     }
 
-    public byte[] getBLOB() {
-        return blob;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setBLOB(byte[] blob) {
-        this.blob = blob;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

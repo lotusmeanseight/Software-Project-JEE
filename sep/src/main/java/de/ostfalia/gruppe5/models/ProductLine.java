@@ -23,6 +23,7 @@ public class ProductLine implements Serializable {
 	
 	private String htmlDescription;
 
+	@Basic
 	private byte[] image;
 
 
@@ -50,11 +51,11 @@ public class ProductLine implements Serializable {
 		this.htmlDescription = htmlDescription;
 	}
 
-	public byte[] getBLOB() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setBLOB(byte[] image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 
@@ -67,11 +68,11 @@ public class ProductLine implements Serializable {
 				Objects.equals(productList, that.productList) &&
 				Objects.equals(getTextDescription(), that.getTextDescription()) &&
 				Objects.equals(getHtmlDescription(), that.getHtmlDescription()) &&
-				Objects.equals(getBLOB(), that.getBLOB());
+				Objects.equals(getImage(), that.getImage());
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getProductLine(), productList, getTextDescription(), getHtmlDescription(), getBLOB());
+		return Objects.hash(getProductLine(), productList, getTextDescription(), getHtmlDescription(), getImage());
 	}
 }

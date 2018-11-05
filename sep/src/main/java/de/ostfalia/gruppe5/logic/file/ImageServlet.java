@@ -31,7 +31,7 @@ public class ImageServlet extends HttpServlet {
             return;
         }
         response.reset();
-        byte[] image = productLine.getBLOB();
+        byte[] image = productLine.getImage();
         //have to find out the content type associated with the image....
         response.setContentType("image/jpeg");
         response.setContentLength(image.length);

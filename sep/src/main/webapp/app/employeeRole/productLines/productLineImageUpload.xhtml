@@ -4,7 +4,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+>
 
 <head>
     <title>Bild:</title>
@@ -16,13 +16,11 @@
         <h:outputText value="Bild:"/>
         <h:inputFile id="file" value="#{imageUploader.imageFile}"
                      validator="#{imageUploader.validateFile}"/>
-        <h:commandButton value="Upload File" action="#{imageUploader.uploadFile}">
+        <h:commandButton value="Upload File"
+                         action="#{imageUploader.uploadFile(productLineView.productLine.productLine)}">
             <h:inputHidden value="#{productLineView.productLine.productLine}"/>
             <h:inputHidden value="#{productLineView.productLine.htmlDescription}"/>
             <h:inputHidden value="#{productLineView.productLine.textDescription}"/>
-            <h:inputHidden value="#{productLineView.productLine.BLOB}"/>
-            <f:actionListener binding="${productLineView.productLine.setBLOB(imageUploader.BLOB)}"/>
-            <f:actionListener binding="#{productLineView.update(productLineView.productLine)}"/>
         </h:commandButton>
     </h:panelGrid>
 </h:form>
