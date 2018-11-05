@@ -68,7 +68,7 @@
         	<h:commandButton value="Letzte Seite" action="#{employeeView.goToLastPage()}"
         	disabled="#{employeeView.table.rows ge employeeView.table.rowCount}" />
             <h:commandButton action="employeeInsert" value="Einfuegen" />
-            <h:commandButton value="Menue" action="menuSelection"/>
+            <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
         </f:facet>
     </h:dataTable>
 </h:form>

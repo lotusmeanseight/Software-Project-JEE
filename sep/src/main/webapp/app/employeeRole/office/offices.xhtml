@@ -72,7 +72,7 @@
         	disabled="#{officeView.table.first + officeView.table.rows ge officeView.table.rowCount}"/>
         	<h:commandButton value="Letzte Seite" action="#{officeView.goToLastPage()}"
         	disabled="#{officeView.table.rows ge officeView.table.rowCount}" />
-            <h:commandButton value="Menue" action="menuSelection"/>
+            <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
         </f:facet>
     </h:dataTable>
 </h:form>

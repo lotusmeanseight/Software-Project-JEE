@@ -54,7 +54,7 @@
         	<h:commandButton value="Letzte Seite" action="#{paymentView.goToLastPage()}"
         	disabled="#{paymentView.table.rows ge paymentiew.table.rowCount}" />
             <h:commandButton action="paymentInsert" value="Einfuegen" />
-            <h:commandButton value="Menue" action="menuSelection"/>
+            <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
         </f:facet>
     </h:dataTable>
 </h:form>
