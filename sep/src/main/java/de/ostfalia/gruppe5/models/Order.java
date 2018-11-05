@@ -15,7 +15,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderNumber;
 
-    @OneToMany(mappedBy = "orderNumber")
+    @OneToMany(mappedBy = "orderNumber", fetch = FetchType.LAZY)
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
     private LocalDateTime orderDate;
@@ -29,7 +29,7 @@ public class Order {
 
     private String comments;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerNumber")
     private Customer customerNumber;
 

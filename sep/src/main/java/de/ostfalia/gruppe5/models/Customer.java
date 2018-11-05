@@ -14,10 +14,10 @@ public class Customer {
     @Id
     private Integer customerNumber;
 
-    @OneToMany(mappedBy = "customerNumber")
+    @OneToMany(mappedBy = "customerNumber", fetch = FetchType.LAZY)
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "customerNumber")
+    @OneToMany(mappedBy = "customerNumber", fetch = FetchType.LAZY)
     private List<Payment> payments = new ArrayList<>();
 
     @NotNull
@@ -57,7 +57,7 @@ public class Customer {
     @Size(max = 50)
     private String country;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "salesRepEmployeeNumber")
     private Employee salesRepEmployeeNumber;
 
