@@ -16,6 +16,8 @@
     <h:panelGrid columns="2">
         Beschreibung (Text): <h:inputText value="#{productLineView.productLine.textDescription}"/>
         Beschreibung (Html): <h:inputText value="#{productLineView.productLine.htmlDescription}"/>
+    </h:panelGrid>
+    <h:inputHidden value="#{productLineView.productLine.productLine}"/>
     <h:commandButton action="#{productLineView.update(productLineView.productLine)}" value="Aktualisieren">
         <h:inputHidden value="#{productLineView.productLine.productLine}"/>
     </h:commandButton>
