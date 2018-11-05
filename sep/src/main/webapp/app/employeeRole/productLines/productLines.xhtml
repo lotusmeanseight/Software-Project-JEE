@@ -28,7 +28,11 @@
         </h:column>
         <h:column>
             <f:facet name="header">Bild</f:facet>
-            <h:button value="Anschauen" outcome="productLineImageView"/>
+            <h:commandButton action="productLineImageView?faces-redirect=true" value="Anschauen">
+                <f:setPropertyActionListener target="#{productLineView.productLine}" value="#{productline}"/>
+                <f:setPropertyActionListener target="#{productLineView.productLine.productLine}"
+                                             value="#{productline.productLine}"/>
+            </h:commandButton>
             <h:commandButton action="productLineImageUpload" value="Hochladen">
                 <f:setPropertyActionListener target="#{productLineView.productLine}" value="#{productline}"/>
                 <f:setPropertyActionListener target="#{productLineView.productLine.productLine}"

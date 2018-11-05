@@ -7,10 +7,6 @@
     <title>Bild:</title>
 </head>
 <body>
-<h:dataTable value="#{productLineView.productLine.image}" var="image">
-    <h:column>
-        <h:graphicImage value="images/#{productLineView.productLine.productLine}"/>
-    </h:column>
-</h:dataTable>
+<h:graphicImage value="/image?id=#{productLineView.productLine.productLine}"/>
 </body>
 </html>
