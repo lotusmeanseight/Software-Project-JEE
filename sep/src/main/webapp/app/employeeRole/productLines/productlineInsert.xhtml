@@ -13,8 +13,8 @@
 <h1>Einfuegen</h1>
 <h:form>
     <h:panelGrid columns="2">
-        Beschreibung (Text): <h:inputText value="#{productLineView.productLine.textDescription}"/>
-        Beschreibung (Html): <h:inputText value="#{productLineView.productLine.htmlDescription}"/>
+        Beschreibung (Text): <h:inputTextarea value="#{productLineView.productLine.textDescription}"/>
+        Beschreibung (Html): <h:inputTextarea value="#{productLineView.productLine.htmlDescription}"/>
         Bild: <h:inputText value="#{productLineView.productLine.image}"/>
     </h:panelGrid>
     <h:commandButton action="#{productLineView.save}" value="Einfuegen">
