@@ -1,11 +1,18 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Basic;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "productlines")
@@ -61,8 +68,10 @@ public class ProductLine implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		ProductLine that = (ProductLine) o;
 		return Objects.equals(getProductLine(), that.getProductLine()) &&
 				Objects.equals(productList, that.productList) &&

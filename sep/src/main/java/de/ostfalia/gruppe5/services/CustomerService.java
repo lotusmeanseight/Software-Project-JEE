@@ -1,12 +1,15 @@
 package de.ostfalia.gruppe5.services;
 
-import de.ostfalia.gruppe5.models.Customer;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
+import javax.persistence.Query;
+
+import de.ostfalia.gruppe5.models.Customer;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
@@ -15,9 +18,8 @@ public class CustomerService {
     @PersistenceContext(unitName = "simple")
     EntityManager entityManager;
 
-
-    public CustomerService() {
-    }
+	public CustomerService() {
+	}
 
     public void save(Customer customer) {
         entityManager.persist(customer);
@@ -39,4 +41,16 @@ public class CustomerService {
     public Customer update(Customer customer) {
         return entityManager.merge(customer);
     }
+
+	public HashSet<Customer> getAllCustomersLazy(int first, int max) {
+		Query query = entityManager.createNamedQuery("Customer.findAll");
+		query.setFirstResult(first);
+		query.setMaxResults(max);
+		return new HashSet(query.getResultList());
+	}
+
+	public int countCustomers() {
+		Query query = entityManager.createNamedQuery("Customer.countAll");
+		return ((Long) query.getSingleResult()).intValue();
+	}
 }

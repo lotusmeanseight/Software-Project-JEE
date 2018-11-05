@@ -1,12 +1,24 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@NamedQueries({ @NamedQuery(name = "Employee.countAll", query = "SELECT COUNT(e) FROM Employee e"),
+		@NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e") })
 @Entity
 @Table(name = "employees")
 public class Employee {
@@ -17,21 +29,21 @@ public class Employee {
     @OneToMany(mappedBy = "salesRepEmployeeNumber")
     private List<Customer> customers = new ArrayList<>();
 
-    @NotNull
-    @Size(max=50)
-    private String lastName;
+	@NotNull
+	@Size(max = 50)
+	private String lastName;
 
-    @NotNull
-    @Size(max=50)
-    private String firstName;
+	@NotNull
+	@Size(max = 50)
+	private String firstName;
 
-    @NotNull
-    @Size(max=10)
-    private String extension;
+	@NotNull
+	@Size(max = 10)
+	private String extension;
 
-    @NotNull
-    @Size(max=100)
-    private String email;
+	@NotNull
+	@Size(max = 100)
+	private String email;
 
     @ManyToOne
     @JoinColumn(name = "officeCode")
@@ -39,44 +51,42 @@ public class Employee {
 
     private Integer reportsTo;
 
-    @NotNull
-    @Size(max=50)
-    private String jobTitle;
+	@NotNull
+	@Size(max = 50)
+	private String jobTitle;
 
+	public void addCustomer(Customer customer) {
+		if (customers.contains(customer)) {
+			return;
+		}
 
-    public void addCustomer(Customer customer) {
-        if (customers.contains(customer)) {
-            return;
-        }
+		customers.add(customer);
+		customer.setSalesRepEmployeeNumber(this);
+	}
 
-        customers.add(customer);
-        customer.setSalesRepEmployeeNumber(this);
-    }
+	public void removeCustomer(Customer customer) {
+		if (!customers.contains(customer)) {
+			return;
+		}
+		customers.remove(customer);
+		customer.setSalesRepEmployeeNumber(null);
+	}
 
-    public void removeCustomer(Customer customer) {
-        if (!customers.contains(customer)) {
-            return;
-        }
-        customers.remove(customer);
-        customer.setSalesRepEmployeeNumber(null);
-    }
+	public Integer getEmployeeNumber() {
+		return employeeNumber;
+	}
 
+	public void setEmployeeNumber(Integer employeeNumber) {
+		this.employeeNumber = employeeNumber;
+	}
 
-    public Integer getEmployeeNumber() {
-        return employeeNumber;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setEmployeeNumber(Integer employeeNumber) {
-        this.employeeNumber = employeeNumber;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
     public String getFirstName() {
         return firstName;
@@ -104,10 +114,6 @@ public class Employee {
 
     public Office getOfficeCode() {
         return officeCode;
-    }
-
-    public void setOfficeCode(Integer officeCode) {
-        this.getOfficeCode().setOfficeCode(officeCode);
     }
 
     public Integer getReportsTo() {

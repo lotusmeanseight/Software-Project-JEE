@@ -1,12 +1,17 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.models.Product;
-import de.ostfalia.gruppe5.services.ProductService;
+import java.util.HashSet;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.List;
+
+import de.ostfalia.gruppe5.models.DataModel;
+import de.ostfalia.gruppe5.models.Product;
+import de.ostfalia.gruppe5.services.ProductService;
 
 @Named
 @RequestScoped
@@ -17,12 +22,69 @@ public class ProductView {
 	@Inject
 	private ProductService service;
 
+	private DataModel productDataModel;
+	private HtmlDataTable table;
+	private int rowsOnPage;
+	private int allRowsCount = 0;
+
+	@PostConstruct
+	public void initHashSet() {
+		rowsOnPage = 10; // Gibt die Anzahl an Einträgen an, die Pro Seite abgebildet werden
+		allRowsCount = service.countProducts(); // Zählt die Einträge in der Datenbank
+		lazyDataLoading(0);
+	}
+
+	private void lazyDataLoading(int first) {
+		HashSet<Product> dataHashSet = service.getAllProductsLazy(first, rowsOnPage);
+		productDataModel = new DataModel(dataHashSet, allRowsCount, rowsOnPage);
+	}
+
 	public ProductView() {
 		product = new Product();
 	}
 
 	public List<Product> getProducts() {
 		return service.getAllProducts();
+	}
+
+	public DataModel getProductDataModel() {
+		return productDataModel;
+	}
+
+	public void setProductDataModel(DataModel productDataModel) {
+		this.productDataModel = productDataModel;
+	}
+
+	public HtmlDataTable getTable() {
+		return table;
+	}
+
+	public void setTable(HtmlDataTable table) {
+		this.table = table;
+	}
+
+	public int getRowsOnPage() {
+		return rowsOnPage;
+	}
+
+	public void setRowsOnPage(int rowsOnPage) {
+		this.rowsOnPage = rowsOnPage;
+	}
+
+	public int getAllRowsCount() {
+		return allRowsCount;
+	}
+
+	public void setAllRowsCount(int allRowsCount) {
+		this.allRowsCount = allRowsCount;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public String save() {
@@ -40,12 +102,34 @@ public class ProductView {
 		return null;
 	}
 
-	public Product getProduct() {
-		return product;
+	public void goToFirstPage() {
+		table.setFirst(0);
+		lazyDataLoading(0);
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void goToPreviousPage() {
+		table.setFirst(table.getFirst() - table.getRows());
+		lazyDataLoading(table.getFirst());
+	}
+
+	public void goToNextPage() {
+		table.setFirst(table.getFirst() + table.getRows());
+		lazyDataLoading(table.getFirst());
+	}
+
+	public void goToLastPage() {
+		int totalRows = table.getRowCount();
+		int displayRows = table.getRows();
+		int full = totalRows / displayRows;
+		int modulo = totalRows % displayRows;
+
+		if (modulo > 0) {
+			table.setFirst(full * displayRows);
+		} else {
+			table.setFirst((full - 1) * displayRows);
+		}
+
+		lazyDataLoading(table.getFirst());
 	}
 
 }
