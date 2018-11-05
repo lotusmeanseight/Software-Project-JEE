@@ -21,7 +21,8 @@ public class EmployeeConverter implements Converter<Employee> {
             return null;
         }
 
-        return entityManager.find(Employee.class, s);
+        Integer employeeID = Integer.parseInt(s);
+        return entityManager.find(Employee.class, employeeID);
     }
 
     @Override

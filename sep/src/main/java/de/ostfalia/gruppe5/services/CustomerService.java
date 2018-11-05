@@ -13,30 +13,30 @@ import java.util.List;
 public class CustomerService {
 
     @PersistenceContext(unitName = "simple")
-    EntityManager em;
+    EntityManager entityManager;
 
 
     public CustomerService() {
     }
 
     public void save(Customer customer) {
-        em.persist(customer);
+        entityManager.persist(customer);
     }
 
     public Customer findById(Integer id) {
-        return em.find(Customer.class, id);
+        return entityManager.find(Customer.class, id);
     }
 
     public void deleteById(Integer id) {
-        em.remove(findById(id));
+        entityManager.remove(findById(id));
     }
 
     public List<Customer> getAllCustomers() {
-        return em.createQuery("SELECT c from Customer c", Customer.class).getResultList();
+        return entityManager.createQuery("SELECT c from Customer c", Customer.class).getResultList();
     }
 
 
     public Customer update(Customer customer) {
-        return em.merge(customer);
+        return entityManager.merge(customer);
     }
 }

@@ -12,7 +12,6 @@ import java.util.Objects;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employeeNumber;
 
     @OneToMany(mappedBy = "salesRepEmployeeNumber")
@@ -108,7 +107,7 @@ public class Employee {
     }
 
     public void setOfficeCode(Integer officeCode) {
-        this.officeCode.setOfficeCode(officeCode);
+        this.getOfficeCode().setOfficeCode(officeCode);
     }
 
     public Integer getReportsTo() {
@@ -146,5 +145,9 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(getEmployeeNumber(), customers, getLastName(), getFirstName(), getExtension(), getEmail(), getOfficeCode(), getReportsTo(), getJobTitle());
+    }
+
+    public void setOfficeCode(Office officeCode) {
+        this.officeCode = officeCode;
     }
 }
