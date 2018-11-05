@@ -10,17 +10,19 @@
     </h:head>
 </h:head>
 <body>
-<h1>Einfuegen</h1>
-<h:form>
+<h1>Aktualisieren</h1>
+<h:form id="form" enctype="multipart/form-data">
+    <h:messages/>
     <h:panelGrid columns="2">
-        Beschreibung (Text): <h:inputTextarea value="#{productLineView.productLine.textDescription}"/>
-        Beschreibung (Html): <h:inputTextarea value="#{productLineView.productLine.htmlDescription}"/>
-        Bild: <h:inputText value="#{productLineView.productLine.BLOB}"/>
+        Beschreibung (Text): <h:inputText value="#{productLineView.productLine.textDescription}"/>
+        Beschreibung (Html): <h:inputText value="#{productLineView.productLine.htmlDescription}"/>
     </h:panelGrid>
     <h:inputHidden value="#{productLineView.productLine.productLine}"/>
     <h:commandButton action="#{productLineView.update(productLineView.productLine)}" value="Aktualisieren">
+        <h:inputHidden value="#{productLineView.productLine.productLine}"/>
     </h:commandButton>
     <h:button styleClass="button" value="Liste" outcome="productLines"/>
+    </h:panelGrid>
 </h:form>
 </body>
 
