@@ -16,7 +16,7 @@ public class ProductLine implements Serializable {
 	@Size(max = 50)
 	private String productLine;
 
-    @OneToMany(mappedBy = "productLine", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "productLine", fetch = FetchType.LAZY)
 	private List<Product> productList = new ArrayList<>();
 
 	private String textDescription;
@@ -61,8 +61,10 @@ public class ProductLine implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 		ProductLine that = (ProductLine) o;
 		return Objects.equals(getProductLine(), that.getProductLine()) &&
 				Objects.equals(productList, that.productList) &&

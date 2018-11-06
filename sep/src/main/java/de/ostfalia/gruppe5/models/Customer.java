@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@NamedQueries({@NamedQuery(name = "Customer.countAll", query = "SELECT COUNT(c) FROM Customer c"),
+        @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")})
 @Entity
 @Table(name = "customers")
 public class Customer {

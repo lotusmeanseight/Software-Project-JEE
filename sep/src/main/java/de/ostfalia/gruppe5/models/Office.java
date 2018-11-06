@@ -1,10 +1,6 @@
 package de.ostfalia.gruppe5.models;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -22,33 +18,33 @@ public class Office {
     private List<Employee> employees = new ArrayList<>();
 
     @NotNull
-    @Size(max=50)
+    @Size(max = 50)
     private String city;
 
     @NotNull
-    @Size(max=50)
+    @Size(max = 50)
     private String phone;
 
     @NotNull
-    @Size(max=50)
+    @Size(max = 50)
     private String addressLine1;
 
-    @Size(max=50)
+    @Size(max = 50)
     private String addressLine2;
 
-    @Size(max=50)
+    @Size(max = 50)
     private String state;
 
     @NotNull
-    @Size(max=50)
+    @Size(max = 50)
     private String country;
 
     @NotNull
-    @Size(max=15)
+    @Size(max = 15)
     private String postalCode;
 
     @NotNull
-    @Size(max=10)
+    @Size(max = 10)
     private String territory;
 
     public Integer getOfficeCode() {

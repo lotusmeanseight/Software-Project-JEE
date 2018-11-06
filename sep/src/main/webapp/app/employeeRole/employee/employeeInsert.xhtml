@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<title>Employee Insert</title>
-	<h:head>
-		<h:outputStylesheet library="css" name="style.css" />
-	</h:head>
+    <title>Employee Insert</title>
+    <h:head>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
 </h:head>
 <body>
-	<ui:composition template="/TemplateLayout.xhtml">
-		<ui:define name="content">
-			<h1>Einfuegen</h1>
-			<h:form>
-				<h:panelGrid columns="2">
+<ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="content">
+        <h1>Einfuegen</h1>
+        <h:form>
+            <h:panelGrid columns="2">
                 Name: <h:inputText
-						value="#{employeeView.employee.lastName}" />
+                    value="#{employeeView.employee.lastName}"/>
                 Vorname: <h:inputText
-						value="#{employeeView.employee.firstName}" />
+                    value="#{employeeView.employee.firstName}"/>
                 Erweiterung: <h:inputText
-						value="#{employeeView.employee.extension}" />
+                    value="#{employeeView.employee.extension}"/>
                 Email: <h:inputText
-						value="#{employeeView.employee.email}" />
+                    value="#{employeeView.employee.email}"/>
                 Office Code: <h:inputText
-						value="#{employeeView.employee.officeCode}" />
+                    value="#{employeeView.employee.officeCode}"/>
                 Vorgesetzer: <h:inputText
-						value="#{employeeView.employee.reportsTo}" />
+                    value="#{employeeView.employee.reportsTo}"/>
                 Position: <h:inputText
-						value="#{employeeView.employee.jobTitle}" />
-				</h:panelGrid>
-				<h:commandButton action="#{employeeView.save}" value="Einfuegen">
-				</h:commandButton>
-				<h:button styleClass="button" value="Liste" outcome="employees" />
-			</h:form>
-		</ui:define>
-	</ui:composition>
+                    value="#{employeeView.employee.jobTitle}"/>
+            </h:panelGrid>
+            <h:commandButton action="#{employeeView.save}" value="Einfuegen">
+            </h:commandButton>
+            <h:button styleClass="button" value="Liste" outcome="employees"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
 </body>
 
 </html>
