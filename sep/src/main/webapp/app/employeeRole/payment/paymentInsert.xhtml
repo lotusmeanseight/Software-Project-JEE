@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
->
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <title>Payment Insert</title>
@@ -10,16 +10,20 @@
     </h:head>
 </h:head>
 <body>
-<h1>Einfuegen</h1>
-<h:form>
-    <h:panelGrid columns="2">
-        Zahlungsdatum: <h:inputText value="#{paymentView.payment.paymentDate}"/>
-        Betrag: <h:inputText value="#{paymentView.payment.amount}"/>
-    </h:panelGrid>
-    <h:commandButton action="#{paymentView.save}" value="Einfuegen">
-    </h:commandButton>
-    <h:button styleClass="button" value="Liste" outcome="payments"/>
-</h:form>
+<ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="content">
+        <h1>Einfuegen</h1>
+        <h:form>
+            <h:panelGrid columns="2">
+                Zahlungsdatum: <h:inputText value="#{paymentView.payment.paymentDate}"/>
+                Betrag: <h:inputText value="#{paymentView.payment.amount}"/>
+            </h:panelGrid>
+            <h:commandButton action="#{paymentView.save}" value="Einfuegen">
+            </h:commandButton>
+            <h:button styleClass="button" value="Liste" outcome="payments"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
 </body>
 
 </html>

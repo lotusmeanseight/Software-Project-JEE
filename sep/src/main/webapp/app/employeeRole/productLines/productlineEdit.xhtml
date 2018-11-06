@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
->
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-    <title>Produktline Edit</title>
-    <h:head>
-        <h:outputStylesheet library="css" name="style.css"/>
-    </h:head>
+	<title>Produktline Edit</title>
+	<h:head>
+		<h:outputStylesheet library="css" name="style.css" />
+	</h:head>
 </h:head>
 <body>
-<h1>Aktualisieren</h1>
-<h:form id="form" enctype="multipart/form-data">
-    <h:messages/>
-    <h:panelGrid columns="2">
-        Beschreibung (Text): <h:inputTextarea value="#{productLineView.productLine.textDescription}"/>
-        Beschreibung (Html): <h:inputTextarea value="#{productLineView.productLine.htmlDescription}"/>
-    </h:panelGrid>
-    <h:inputHidden value="#{productLineView.productLine.productLine}"/>
-    <h:commandButton action="#{productLineView.update(productLineView.productLine)}" value="Aktualisieren">
-        <h:inputHidden value="#{productLineView.productLine.productLine}"/>
-    </h:commandButton>
-    <h:button styleClass="button" value="Liste" outcome="productLines"/>
-</h:form>
+	<ui:composition template="/TemplateLayout.xhtml">
+		<ui:define name="content">
+			<h1>Aktualisieren</h1>
+			<h:form id="form" enctype="multipart/form-data">
+				<h:messages />
+				<h:panelGrid columns="2">
+        Beschreibung (Text): <h:inputTextarea
+						value="#{productLineView.productLine.textDescription}" />
+        Beschreibung (Html): <h:inputTextarea
+						value="#{productLineView.productLine.htmlDescription}" />
+				</h:panelGrid>
+				<h:inputHidden value="#{productLineView.productLine.productLine}" />
+				<h:commandButton
+					action="#{productLineView.update(productLineView.productLine)}"
+					value="Aktualisieren">
+					<h:inputHidden value="#{productLineView.productLine.productLine}" />
+				</h:commandButton>
+				<h:button styleClass="button" value="Liste" outcome="productLines" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+
 </body>
 
 </html>
