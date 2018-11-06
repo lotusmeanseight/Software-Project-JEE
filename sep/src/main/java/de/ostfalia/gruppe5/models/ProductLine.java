@@ -12,7 +12,6 @@ import java.util.Objects;
 public class ProductLine implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Size(max = 50)
 	private String productLine;
 

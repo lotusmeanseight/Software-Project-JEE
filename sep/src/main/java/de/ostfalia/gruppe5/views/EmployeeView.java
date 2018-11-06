@@ -1,16 +1,15 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.HashSet;
+import de.ostfalia.gruppe5.models.DataModel;
+import de.ostfalia.gruppe5.models.Employee;
+import de.ostfalia.gruppe5.services.EmployeeService;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import de.ostfalia.gruppe5.models.DataModel;
-import de.ostfalia.gruppe5.models.Employee;
-import de.ostfalia.gruppe5.services.EmployeeService;
+import java.util.HashSet;
 
 @RequestScoped
 @Named

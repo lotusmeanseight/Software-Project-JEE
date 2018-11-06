@@ -31,6 +31,6 @@ public class EmployeeConverter implements Converter<Employee> {
             return "";
         }
 
-        return employee.toString();
+        return employee.getEmployeeNumber().toString();
     }
 }
