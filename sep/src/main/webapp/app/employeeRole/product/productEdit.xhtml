@@ -13,25 +13,33 @@
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
     <ui:define name="content">
-        <h1>Einfuegen</h1>        
-<h1>Einfuegen</h1>
-<h:form>
-    <h:panelGrid columns="2">
-        Produkt Name: <h:inputText value="#{productView.product.productName}"/>
-        Produkt Linie: <h:inputText value="#{productView.product.productLine}"/>
-        Produkt Größe: <h:inputText value="#{productView.product.productScale}"/>
-        Produkt Händler: <h:inputText value="#{productView.product.productVendor}"/>
-        Produkt Beschreibung: <h:inputTextarea value="#{productView.product.productDescription}"/>
-        Anzahl auf Lager: <h:inputText value="#{productView.product.quantityInStock}"/>
-        Kaufpreis: <h:inputText value="#{productView.product.buyPrice}"/>
-        MSRP: <h:inputText value="#{productView.product.MSRP}"/>
-    </h:panelGrid>
-    <h:inputHidden value="#{productView.product.productCode}" />
-    <h:commandButton action="#{productView.update(productView.product)}" value="Aktualisieren">
-    	<f:setPropertyActionListener target="#{productView.product}" value="#{productView.product}"/>
-    </h:commandButton>
-    <h:button styleClass="button" value="Liste" outcome="products"/>
-</h:form>
+        <h1>Einfuegen</h1>
+        <h:form>
+            <h:panelGrid columns="2">
+                Produkt Name: <h:inputText
+                    value="#{productView.product.productName}"/>
+                Produkt Linie: <h:inputText
+                    value="#{productView.product.productLine}"/>
+                Produkt Größe: <h:inputText
+                    value="#{productView.product.productScale}"/>
+                Produkt Händler: <h:inputText
+                    value="#{productView.product.productVendor}"/>
+                Produkt Beschreibung: <h:inputText
+                    value="#{productView.product.productDescription}"/>
+                Anzahl auf Lager: <h:inputText
+                    value="#{productView.product.quantityInStock}"/>
+                Kaufpreis: <h:inputText
+                    value="#{productView.product.buyPrice}"/>
+                MSRP: <h:inputText value="#{productView.product.MSRP}"/>
+            </h:panelGrid>
+            <h:inputHidden value="#{productView.product.productCode}"/>
+            <h:commandButton action="#{productView.update(productView.product)}"
+                             value="Aktualisieren">
+                <f:setPropertyActionListener target="#{productView.product}"
+                                             value="#{productView.product}"/>
+            </h:commandButton>
+            <h:button styleClass="button" value="Liste" outcome="products"/>
+        </h:form>
     </ui:define>
 </ui:composition>
 </body>

@@ -1,21 +1,11 @@
 package de.ostfalia.gruppe5.models;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @NamedQueries({ @NamedQuery(name = "Employee.countAll", query = "SELECT COUNT(e) FROM Employee e"),
 		@NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e") })
@@ -26,7 +16,7 @@ public class Employee {
     @Id
     private Integer employeeNumber;
 
-    @OneToMany(mappedBy = "salesRepEmployeeNumber")
+    @OneToMany(mappedBy = "salesRepEmployeeNumber", fetch = FetchType.LAZY)
     private List<Customer> customers = new ArrayList<>();
 
 	@NotNull
@@ -45,7 +35,7 @@ public class Employee {
 	@Size(max = 100)
 	private String email;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "officeCode")
     private Office officeCode;
 

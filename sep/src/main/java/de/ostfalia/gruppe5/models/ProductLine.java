@@ -1,18 +1,11 @@
 package de.ostfalia.gruppe5.models;
 
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Basic;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "productlines")
@@ -23,7 +16,7 @@ public class ProductLine implements Serializable {
 	@Size(max = 50)
 	private String productLine;
 
-    @OneToMany(mappedBy = "productLine")
+	@OneToMany(mappedBy = "productLine", fetch = FetchType.LAZY)
 	private List<Product> productList = new ArrayList<>();
 
 	private String textDescription;
