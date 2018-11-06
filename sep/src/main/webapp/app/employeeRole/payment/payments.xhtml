@@ -41,6 +41,8 @@
                 <f:setPropertyActionListener target="#{paymentView.payment}" value="#{payment}" />
                 <f:setPropertyActionListener target="#{paymentView.payment.checkNumber}"
                                              value="#{payment.checkNumber}"/>
+                <f:setPropertyActionListener target="#{paymentView.payment.customerNumber}"
+                                             value="#{payment.customerNumber}"/>
             </h:commandButton>
         </h:column>
         <h:column>

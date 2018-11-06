@@ -31,6 +31,6 @@ public class OfficeConverter implements Converter<Office> {
             return "";
         }
 
-        return office.toString();
+        return office.getOfficeCode().toString();
     }
 }

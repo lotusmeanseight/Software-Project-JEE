@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @NamedQueries({@NamedQuery(name = "Payment.countAll", query = "SELECT COUNT(p) FROM Payment p"),
@@ -25,13 +25,17 @@ public class Payment implements Serializable {
     private String checkNumber;
 
     @NotNull
-    private LocalDateTime paymentDate;
+    private LocalDate paymentDate;
 
     @NotNull
     private Double amount;
 
-    public Integer getCustomerNumber() {
-        return customerNumber.getCustomerNumber();
+    public Customer getCustomerNumber() {
+        return customerNumber;
+    }
+
+    public void setCustomerNumber(Customer customerNumber) {
+        this.customerNumber = customerNumber;
     }
 
     public String getCheckNumber() {
@@ -42,11 +46,11 @@ public class Payment implements Serializable {
         this.checkNumber = checkNumber;
     }
 
-    public LocalDateTime getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(LocalDateTime paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 
@@ -73,4 +77,5 @@ public class Payment implements Serializable {
     public int hashCode() {
         return Objects.hash(getCustomerNumber(), getCheckNumber(), getPaymentDate(), getAmount());
     }
+
 }
