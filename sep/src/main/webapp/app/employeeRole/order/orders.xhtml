@@ -5,11 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
 >
 <h:head>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <body>
+<ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="content">
 <h:form id="order_datatable_form">
     <h:dataTable id="order_datatable_data" value="#{orderView.orderDataModel}" binding="#{orderView.table}" var="order" border="1"
                  selectionMode="single" styleClass="table" headerClass="table-header"
@@ -42,24 +45,26 @@
             <f:facet name="header">Kundennummer</f:facet>
             <h:outputText id="customerNumber" value="#{order.customerNumber}"/>
         </h:column>
-        
+
         <h:column>
             <f:facet name="header">Order Details</f:facet>
             <h:commandButton action="/orderDetails/orderDetails" value="View">
             </h:commandButton>
         </h:column>
         <f:facet name="footer">
-        	<h:commandButton value="Erste Seite" action="#{orderView.goToFirstPage()}"
-        	disabled="#{orderView.table.first eq 0}" />
-        	<h:commandButton value="Vorherige Seite" action="#{orderView.goToPreviousPage()}"
-        	disabled="#{orderView.table.first eq 0}" />
-        	<h:commandButton value="Nächste Seite" action="#{orderView.goToNextPage()}"
-        	disabled="#{orderView.table.first + orderView.table.rows ge orderView.table.rowCount}"/>
-        	<h:commandButton value="Letzte Seite" action="#{orderView.goToLastPage()}"
-        	disabled="#{orderView.table.rows ge orderView.table.rowCount}" />
-            <h:commandButton value="Menue" action="/app/employeeRole/menuSelection"/>
+            <h:commandButton value="Erste Seite" action="#{orderView.goToFirstPage()}"
+                             disabled="#{orderView.table.first eq 0}" />
+            <h:commandButton value="Vorherige Seite" action="#{orderView.goToPreviousPage()}"
+                             disabled="#{orderView.table.first eq 0}" />
+            <h:commandButton value="Nächste Seite" action="#{orderView.goToNextPage()}"
+                             disabled="#{orderView.table.first + orderView.table.rows ge orderView.table.rowCount}"/>
+            <h:commandButton value="Letzte Seite" action="#{orderView.goToLastPage()}"
+                             disabled="#{orderView.table.rows ge orderView.table.rowCount}" />
+            <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
         </f:facet>
     </h:dataTable>
 </h:form>
+    </ui:define>
+</ui:composition>
 </body>
 </html>

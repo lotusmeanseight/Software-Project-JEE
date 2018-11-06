@@ -5,11 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
 >
 <h:head>
     <h:outputStylesheet library="css" name="style.css"/>
 </h:head>
 <body>
+<ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="content">
 <h:form id="product_datatable_form">
     <h:dataTable id="product_datatable_data" value="#{productView.productDataModel}" binding="#{productView.table}" var="product" border="1"
                  selectionMode="single" styleClass="table" headerClass="table-header"
@@ -50,7 +53,7 @@
             <f:facet name="header">MSRP</f:facet>
             <h:outputText id="msrp" value="#{product.MSRP}"/>
         </h:column>
-        
+
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
             <h:commandButton action="productEdit" value="Aktualisieren">
@@ -64,19 +67,21 @@
               <h:commandButton action="#{productView.delete(product)}" value="Loeschen"/>
           </h:column> commented out, look at commit message of product branch or
           pull request associated with the branch -->
-          <f:facet name="footer">
-        	<h:commandButton value="Erste Seite" action="#{productView.goToFirstPage()}"
-        	disabled="#{productView.table.first eq 0}" />
-        	<h:commandButton value="Vorherige Seite" action="#{productView.goToPreviousPage()}"
-        	disabled="#{productView.table.first eq 0}" />
-        	<h:commandButton value="Nächste Seite" action="#{productView.goToNextPage()}"
-        	disabled="#{productView.table.first + productView.table.rows ge productView.table.rowCount}"/>
-        	<h:commandButton value="Letzte Seite" action="#{productView.goToLastPage()}"
-        	disabled="#{productView.table.rows ge productView.table.rowCount}" />
+        <f:facet name="footer">
+            <h:commandButton value="Erste Seite" action="#{productView.goToFirstPage()}"
+                             disabled="#{productView.table.first eq 0}" />
+            <h:commandButton value="Vorherige Seite" action="#{productView.goToPreviousPage()}"
+                             disabled="#{productView.table.first eq 0}" />
+            <h:commandButton value="Nächste Seite" action="#{productView.goToNextPage()}"
+                             disabled="#{productView.table.first + productView.table.rows ge productView.table.rowCount}"/>
+            <h:commandButton value="Letzte Seite" action="#{productView.goToLastPage()}"
+                             disabled="#{productView.table.rows ge productView.table.rowCount}" />
             <h:commandButton action="productInsert" value="Einfuegen" />
-              <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
+            <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
         </f:facet>
     </h:dataTable>
 </h:form>
+    </ui:define>
+</ui:composition>
 </body>
 </html>

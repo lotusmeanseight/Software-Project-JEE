@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
+@NamedQueries({@NamedQuery(name = "Product.countAll", query = "SELECT COUNT(p) FROM Product p"),
+        @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {

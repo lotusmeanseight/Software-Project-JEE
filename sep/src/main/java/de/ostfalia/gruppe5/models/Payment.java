@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@NamedQueries({@NamedQuery(name = "Payment.countAll", query = "SELECT COUNT(p) FROM Payment p"),
+        @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p")})
 @Entity
 @Table(name = "payments")
 public class Payment implements Serializable {
