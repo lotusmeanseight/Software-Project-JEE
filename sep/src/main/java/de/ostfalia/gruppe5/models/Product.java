@@ -19,7 +19,7 @@ public class Product implements Serializable {
     @Size(max = 15)
     private String productCode;
 
-    @OneToMany(mappedBy = "productCode", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "productCode")
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
     @NotNull
@@ -27,7 +27,7 @@ public class Product implements Serializable {
     private String productName;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "productline")
     private ProductLine productLine;
 

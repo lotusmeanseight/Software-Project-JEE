@@ -11,12 +11,12 @@ public class OrderDetail implements Serializable {
     @EmbeddedId
     private OrderDetailsID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("orderNumber")
     @JoinColumn(name = "orderNumber")
     private Order orderNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("productCode")
     @JoinColumn(name = "productCode")
     private Product productCode;
