@@ -3,15 +3,12 @@ package de.ostfalia.gruppe5.logic.file;
 import de.ostfalia.gruppe5.models.ProductLine;
 import de.ostfalia.gruppe5.services.ProductLineService;
 
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet("/image")
 public class ImageServlet extends HttpServlet {
@@ -38,14 +35,13 @@ public class ImageServlet extends HttpServlet {
         }
         
         System.out.println("Danach: " + productLine.getProductLine());
-        
-        response.reset(); //Hier koennte ein Fehler sein.
+
+        //  response.reset(); //Hier koennte ein Fehler sein.
         byte[] image = productLine.getImage();
         
         //have to find out the content type associated with the image....
         response.setContentType("image/jpg");
-        response.setContentLength(image.length);
-
+        // response.setContentLength(image.length);
         response.getOutputStream().write(image);
 //        response.flushBuffer();
 //        response.getOutputStream().close();
