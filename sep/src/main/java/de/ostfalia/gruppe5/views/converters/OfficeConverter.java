@@ -1,6 +1,6 @@
 package de.ostfalia.gruppe5.views.converters;
 
-import de.ostfalia.gruppe5.models.Office;
+import de.ostfalia.gruppe5.business.entity.Office;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

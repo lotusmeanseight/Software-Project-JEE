@@ -2,7 +2,7 @@ package de.ostfalia.gruppe5.views.comparators;
 
 import java.util.Comparator;
 
-import de.ostfalia.gruppe5.models.Customer;
+import de.ostfalia.gruppe5.business.entity.Customer;
 
 public class CustomerComparator implements Comparator<Customer> {
 

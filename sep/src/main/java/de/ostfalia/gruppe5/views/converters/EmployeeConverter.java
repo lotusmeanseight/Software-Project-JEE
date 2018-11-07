@@ -1,6 +1,6 @@
 package de.ostfalia.gruppe5.views.converters;
 
-import de.ostfalia.gruppe5.models.Employee;
+import de.ostfalia.gruppe5.business.entity.Employee;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

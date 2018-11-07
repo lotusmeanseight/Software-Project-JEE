@@ -2,7 +2,7 @@ package de.ostfalia.gruppe5.views.comparators;
 
 import java.util.Comparator;
 
-import de.ostfalia.gruppe5.models.Employee;
+import de.ostfalia.gruppe5.business.entity.Employee;
 
 public class EmployeeComparator implements Comparator<Employee> {
 

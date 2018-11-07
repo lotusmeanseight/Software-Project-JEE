@@ -7,8 +7,8 @@ import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.ostfalia.gruppe5.models.Office;
-import de.ostfalia.gruppe5.services.OfficeService;
+import de.ostfalia.gruppe5.business.entity.Office;
+import de.ostfalia.gruppe5.business.boundary.OfficeService;
 
 @RequestScoped
 @Named

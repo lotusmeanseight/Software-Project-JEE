@@ -8,9 +8,9 @@ import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.ostfalia.gruppe5.models.DataModel;
-import de.ostfalia.gruppe5.models.Payment;
-import de.ostfalia.gruppe5.services.PaymentService;
+import de.ostfalia.gruppe5.business.entity.DataModel;
+import de.ostfalia.gruppe5.business.entity.Payment;
+import de.ostfalia.gruppe5.business.boundary.PaymentService;
 
 @Named
 @RequestScoped

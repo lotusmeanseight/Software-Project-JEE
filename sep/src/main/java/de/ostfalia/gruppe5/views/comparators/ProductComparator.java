@@ -2,7 +2,7 @@ package de.ostfalia.gruppe5.views.comparators;
 
 import java.util.Comparator;
 
-import de.ostfalia.gruppe5.models.Product;
+import de.ostfalia.gruppe5.business.entity.Product;
 
 public class ProductComparator implements Comparator<Product> {
 

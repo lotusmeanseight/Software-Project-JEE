@@ -1,6 +1,6 @@
 package de.ostfalia.gruppe5.views.comparators;
 
-import de.ostfalia.gruppe5.models.Payment;
+import de.ostfalia.gruppe5.business.entity.Payment;
 
 import java.util.Comparator;
 
