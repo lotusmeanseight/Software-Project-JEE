@@ -40,9 +40,9 @@ public class ImageServlet extends HttpServlet {
         
         response.reset(); //Hier koennte ein Fehler sein.
         byte[] image = productLine.getImage();
-        System.out.println("Hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiieeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeerrr: " + image);
+        
         //have to find out the content type associated with the image....
-        response.setContentType("jpeg");
+        response.setContentType("jpg");
         response.setContentLength(image.length);
 
         response.getOutputStream().write(image);
