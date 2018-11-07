@@ -11,6 +11,9 @@
 </h:head>
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="header">
+        <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    </ui:define>
     <ui:define name="content">
         <h:form id="productlines_datatable_form">
             <h:dataTable id="productlines_datatable_data" value="#{productLineView.productLines}"
@@ -76,7 +79,7 @@
                     <h:commandButton value="Letzte Seite" action="#{productLineView.goToLastPage()}"
                                      disabled="#{productLineView.table.rows ge productLineView.table.rowCount}"/>
                     <h:commandButton action="productlineInsert" value="Einfuegen"/>
-                    <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
+
                 </f:facet>
 
             </h:dataTable>

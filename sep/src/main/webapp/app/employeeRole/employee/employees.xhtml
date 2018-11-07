@@ -12,6 +12,9 @@
 </h:head>
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="header">
+        <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    </ui:define>
     <ui:define name="content">
 <h:form id="employee_datatable_form">
     <h:dataTable id="employee_datatable_data" value="#{employeeView.employeeDataModel}" binding="#{employeeView.table}" var="employee" border="1"
@@ -71,7 +74,6 @@
             <h:commandButton value="Letzte Seite" action="#{employeeView.goToLastPage()}"
                              disabled="#{employeeView.table.rows ge employeeView.table.rowCount}" />
             <h:commandButton action="employeeInsert" value="Einfuegen" />
-            <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
         </f:facet>
     </h:dataTable>
 </h:form>

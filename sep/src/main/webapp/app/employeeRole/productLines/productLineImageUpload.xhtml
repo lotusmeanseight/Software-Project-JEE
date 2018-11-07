@@ -4,12 +4,18 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
 >
 
 <head>
     <title>Bild:</title>
 </head>
 <body>
+<ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="header">
+        <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    </ui:define>
+    <ui:define name="content">
 <h:form id="form" enctype="multipart/form-data">
     <h:messages/>
     <h:panelGrid columns="2">
@@ -25,6 +31,8 @@
     </h:panelGrid>
 </h:form>
 <h:button styleClass="button" value="Liste" outcome="productLines"/>
+</ui:define>
+</ui:composition>
 
 </body>
 </html>

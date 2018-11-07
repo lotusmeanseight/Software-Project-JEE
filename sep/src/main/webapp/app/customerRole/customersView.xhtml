@@ -11,66 +11,65 @@
 </h:head>
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
-	<ui:define name="content">
-		<h:form id="order_datatable_form">
-	<h:dataTable id="order_datatable_data"
-				 value="#{orderViewCustomerRole.orders}" binding="#{orderViewCustomerRole.table}" var="order" border="1"
-				 selectionMode="single" styleClass="table" headerClass="table-header"
-				 rowClasses="table-odd-row,table-even-row" first="0" rows="#{orderViewCustomerRole.rowsOnPage}">
-			<h:column>
-				<f:facet name="header">Bestellnummer</f:facet>
-				<h:outputText id="order" value="#{order.orderNumber}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Bestelldatum</f:facet>
-				<h:outputText id="orderDate" value="#{order.orderDate}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Bedarfstermin</f:facet>
-				<h:outputText id="requiredDate" value="#{order.requiredDate}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Versanddatum</f:facet>
-				<h:outputText id="shippedDate" value="#{order.shippedDate}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Status</f:facet>
-				<h:outputText id="status" value="#{order.status}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Kommentar</f:facet>
-				<h:outputText id="comments" value="#{order.comments}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Kundennummer</f:facet>
-				<h:outputText id="customerNumber" value="#{order.customerNumber}" />
-			</h:column>
+    <ui:define name="header">
+        <ui:include src="/app/customerRole/HeaderCustomer.xhtml"/>
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="order_datatable_form">
+            <h:dataTable id="order_datatable_data"
+                         value="#{orderViewCustomerRole.orders}" binding="#{orderViewCustomerRole.table}" var="order"
+                         border="1"
+                         selectionMode="single" styleClass="table" headerClass="table-header"
+                         rowClasses="table-odd-row,table-even-row" first="0" rows="#{orderViewCustomerRole.rowsOnPage}">
+                <h:column>
+                    <f:facet name="header">Bestellnummer</f:facet>
+                    <h:outputText id="order" value="#{order.orderNumber}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Bestelldatum</f:facet>
+                    <h:outputText id="orderDate" value="#{order.orderDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Bedarfstermin</f:facet>
+                    <h:outputText id="requiredDate" value="#{order.requiredDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Versanddatum</f:facet>
+                    <h:outputText id="shippedDate" value="#{order.shippedDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    <h:outputText id="status" value="#{order.status}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Kommentar</f:facet>
+                    <h:outputText id="comments" value="#{order.comments}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Kundennummer</f:facet>
+                    <h:outputText id="customerNumber" value="#{order.customerNumber}"/>
+                </h:column>
 
-			<h:column>
-				<f:facet name="header">Order Details</f:facet>
-				<h:commandButton action="orderDetailsCustomerRole" value="View">
-					<f:setPropertyActionListener target="#{orderViewCustomerRole.order}" value="#{order}"/>
-					<f:setPropertyActionListener target="#{orderViewCustomerRole.order.orderNumber}"
-												 value="#{order.orderNumber}"/>
-				</h:commandButton>
-			</h:column>
-			<f:facet name="footer">
-        	<h:commandButton value="Erste Seite" action="#{orderViewCustomerRole.goToFirstPage()}"
-        	disabled="#{orderViewCustomerRole.table.first eq 0}" />
-        	<h:commandButton value="Vorherige Seite" action="#{orderViewCustomerRole.goToPreviousPage()}"
-        	disabled="#{orderViewCustomerRole.table.first eq 0}" />
-        	<h:commandButton value="Nächste Seite" action="#{orderViewCustomerRole.goToNextPage()}"
-        	disabled="#{orderViewCustomerRole.table.first + orderViewCustomerRole.table.rows ge orderViewCustomerRole.table.rowCount}"/>
-        	<h:commandButton value="Letzte Seite" action="#{orderViewCustomerRole.goToLastPage()}"
-        	disabled="#{orderViewCustomerRole.table.rows ge orderViewCustomerRole.table.rowCount}" />
+                <h:column>
+                    <f:facet name="header">Order Details</f:facet>
+                    <h:commandButton action="orderDetailsCustomerRole" value="View">
+                        <f:setPropertyActionListener target="#{orderViewCustomerRole.order}" value="#{order}"/>
+                        <f:setPropertyActionListener target="#{orderViewCustomerRole.order.orderNumber}"
+                                                     value="#{order.orderNumber}"/>
+                    </h:commandButton>
+                </h:column>
+                <f:facet name="footer">
+                    <h:commandButton value="Erste Seite" action="#{orderViewCustomerRole.goToFirstPage()}"
+                                     disabled="#{orderViewCustomerRole.table.first eq 0}"/>
+                    <h:commandButton value="Vorherige Seite" action="#{orderViewCustomerRole.goToPreviousPage()}"
+                                     disabled="#{orderViewCustomerRole.table.first eq 0}"/>
+                    <h:commandButton value="Nächste Seite" action="#{orderViewCustomerRole.goToNextPage()}"
+                                     disabled="#{orderViewCustomerRole.table.first + orderViewCustomerRole.table.rows ge orderViewCustomerRole.table.rowCount}"/>
+                    <h:commandButton value="Letzte Seite" action="#{orderViewCustomerRole.goToLastPage()}"
+                                     disabled="#{orderViewCustomerRole.table.rows ge orderViewCustomerRole.table.rowCount}"/>
 
-             </f:facet>
-		</h:dataTable>
-	</h:form>
-	<p>Eingeloggt als: #{request.userPrincipal.name}</p>
-
-        <h:form>
-            <h:commandButton value="Logout" action="#{logoutBacking.submit}"/>
+                </f:facet>
+            </h:dataTable>
         </h:form>
     </ui:define>
 </ui:composition>

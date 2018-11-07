@@ -12,57 +12,61 @@
 </h:head>
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="header">
+        <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    </ui:define>
     <ui:define name="content">
-<h:form id="order_datatable_form">
-    <h:dataTable id="payment_datatable_data" value="#{paymentView.paymentDataModel}" binding="#{paymentView.table}" var="payment" border="1"
-                 selectionMode="single" styleClass="table" headerClass="table-header"
-                 rowClasses="table-odd-row,table-even-row" first="0" rows="#{paymentView.rowsOnPage}">
-        <h:column>
-            <f:facet name="header">Kundennummer</f:facet>
-            <h:outputText id="customerNumber" value="#{payment.customerNumber}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Check Nummer</f:facet>
-            <h:outputText id="checkNumber" value="#{payment.checkNumber}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Zahlungsdatum</f:facet>
-            <h:outputText id="paymentDate" value="#{payment.paymentDate}"/>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Betrag</f:facet>
-            <h:outputText id="amount" value="#{payment.amount}"/>
-        </h:column>
+        <h:form id="order_datatable_form">
+            <h:dataTable id="payment_datatable_data" value="#{paymentView.paymentDataModel}"
+                         binding="#{paymentView.table}" var="payment" border="1"
+                         selectionMode="single" styleClass="table" headerClass="table-header"
+                         rowClasses="table-odd-row,table-even-row" first="0" rows="#{paymentView.rowsOnPage}">
+                <h:column>
+                    <f:facet name="header">Kundennummer</f:facet>
+                    <h:outputText id="customerNumber" value="#{payment.customerNumber}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Check Nummer</f:facet>
+                    <h:outputText id="checkNumber" value="#{payment.checkNumber}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Zahlungsdatum</f:facet>
+                    <h:outputText id="paymentDate" value="#{payment.paymentDate}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Betrag</f:facet>
+                    <h:outputText id="amount" value="#{payment.amount}"/>
+                </h:column>
 
 
-        <h:column>
-            <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="paymentEdit" value="Aktualisieren" >
-                <f:setPropertyActionListener target="#{paymentView.payment}" value="#{payment}" />
-                <f:setPropertyActionListener target="#{paymentView.payment.customerNumber}"
-                                             value="#{payment.customerNumber}"/>
-                <f:setPropertyActionListener target="#{paymentView.payment.checkNumber}"
-                                             value="#{payment.checkNumber}"/>
-            </h:commandButton>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Loeschen</f:facet>
-            <h:commandButton action="#{paymentView.delete(payment)}" value="Loeschen"/>
-        </h:column>
-        <f:facet name="footer">
-            <h:commandButton value="Erste Seite" action="#{paymentView.goToFirstPage()}"
-                             disabled="#{paymentView.table.first eq 0}" />
-            <h:commandButton value="Vorherige Seite" action="#{paymentView.goToPreviousPage()}"
-                             disabled="#{paymentView.table.first eq 0}" />
-            <h:commandButton value="Nächste Seite" action="#{paymentView.goToNextPage()}"
-                             disabled="#{paymentView.table.first + paymentView.table.rows ge paymentView.table.rowCount}"/>
-            <h:commandButton value="Letzte Seite" action="#{paymentView.goToLastPage()}"
-                             disabled="#{paymentView.table.rows ge paymentiew.table.rowCount}" />
-            <h:commandButton action="paymentInsert" value="Einfuegen" />
-            <h:button value="Menue" outcome="/app/employeeRole/menuSelection"/>
-        </f:facet>
-    </h:dataTable>
-</h:form>
+                <h:column>
+                    <f:facet name="header">Aktualisieren</f:facet>
+                    <h:commandButton action="paymentEdit" value="Aktualisieren">
+                        <f:setPropertyActionListener target="#{paymentView.payment}" value="#{payment}"/>
+                        <f:setPropertyActionListener target="#{paymentView.payment.customerNumber}"
+                                                     value="#{payment.customerNumber}"/>
+                        <f:setPropertyActionListener target="#{paymentView.payment.checkNumber}"
+                                                     value="#{payment.checkNumber}"/>
+                    </h:commandButton>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Loeschen</f:facet>
+                    <h:commandButton action="#{paymentView.delete(payment)}" value="Loeschen"/>
+                </h:column>
+                <f:facet name="footer">
+                    <h:commandButton value="Erste Seite" action="#{paymentView.goToFirstPage()}"
+                                     disabled="#{paymentView.table.first eq 0}"/>
+                    <h:commandButton value="Vorherige Seite" action="#{paymentView.goToPreviousPage()}"
+                                     disabled="#{paymentView.table.first eq 0}"/>
+                    <h:commandButton value="Nächste Seite" action="#{paymentView.goToNextPage()}"
+                                     disabled="#{paymentView.table.first + paymentView.table.rows ge paymentView.table.rowCount}"/>
+                    <h:commandButton value="Letzte Seite" action="#{paymentView.goToLastPage()}"
+                                     disabled="#{paymentView.table.rows ge paymentiew.table.rowCount}"/>
+                    <h:commandButton action="paymentInsert" value="Einfuegen"/>
+
+                </f:facet>
+            </h:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
 </body>

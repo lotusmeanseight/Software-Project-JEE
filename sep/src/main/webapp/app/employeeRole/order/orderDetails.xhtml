@@ -12,6 +12,9 @@
 </h:head>
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="header">
+        <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    </ui:define>
     <ui:define name="content">
         <h:form id="order_datatable_form">
             <h:dataTable id="employee_datatable_data"

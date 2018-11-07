@@ -50,7 +50,7 @@ public class LoginBacking {
                 case SUCCESS:
                     facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Login succeed", null));
                     if(securityContext.isCallerInRole("EMPLOYEE")) {
-                    	externalContext.redirect(externalContext.getRequestContextPath() + "/app/employeeRole/menuSelection.jsf");
+                    	externalContext.redirect(externalContext.getRequestContextPath() + "/app/employeeRole/customer/customers.jsf");
                     } else {
                     	externalContext.redirect(externalContext.getRequestContextPath() + "/app/customerRole/customersView.jsf");
                     }

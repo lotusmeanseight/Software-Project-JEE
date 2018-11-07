@@ -11,6 +11,9 @@
 </h:head>
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="header">
+        <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    </ui:define>
     <ui:define name="content">
         <h1>Aktualisieren</h1>
         <h:form id="form" enctype="multipart/form-data">
