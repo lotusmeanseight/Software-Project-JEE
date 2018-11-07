@@ -1,15 +1,17 @@
 package de.ostfalia.gruppe5.services;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import de.ostfalia.gruppe5.models.Employee;
+import de.ostfalia.gruppe5.views.comparators.EmployeeComparator;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
@@ -42,11 +44,15 @@ public class EmployeeService {
 		return entityManager.merge(employee);
 	}
 
-	public HashSet<Employee> getAllEmployeesLazy(int first, int max) {
-		Query query = entityManager.createNamedQuery("Employee.findAll");
+	public TreeSet<Employee> getAllEmployeesLazy(int first, int max) {
+		TypedQuery<Employee> query = entityManager.createNamedQuery("Employee.findAll", Employee.class);
 		query.setFirstResult(first);
 		query.setMaxResults(max);
-		return new HashSet(query.getResultList());
+		TreeSet<Employee> treeSet = new TreeSet<Employee>(new EmployeeComparator());
+		for (Employee e : query.getResultList()) {
+			treeSet.add(e);
+		}
+		return treeSet;
 	}
 
 	public int countEmployees() {

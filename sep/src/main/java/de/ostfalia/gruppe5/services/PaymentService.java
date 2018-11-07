@@ -1,15 +1,17 @@
 package de.ostfalia.gruppe5.services;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import de.ostfalia.gruppe5.models.Payment;
+import de.ostfalia.gruppe5.views.comparators.PaymentComparator;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
@@ -46,11 +48,15 @@ public class PaymentService {
 		return entityManager.merge(payment);
 	}
 
-	public HashSet<Payment> getAllPaymentsLazy(int first, int max) {
-		Query query = entityManager.createNamedQuery("Payment.findAll");
+	public TreeSet<Payment> getAllPaymentsLazy(int first, int max) {
+		TypedQuery<Payment> query = entityManager.createNamedQuery("Payment.findAll", Payment.class);
 		query.setFirstResult(first);
 		query.setMaxResults(max);
-		return new HashSet(query.getResultList());
+		TreeSet<Payment> treeSet = new TreeSet<Payment>(new PaymentComparator());
+		for (Payment p : query.getResultList()) {
+			treeSet.add(p);
+		}
+		return treeSet;
 	}
 
 	public int countPayments() {

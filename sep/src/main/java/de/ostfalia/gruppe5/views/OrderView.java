@@ -1,7 +1,6 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.TreeSet;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -28,23 +27,19 @@ public class OrderView {
 	private int allRowsCount = 0;
 
 	@PostConstruct
-	public void initHashSet() {
+	public void initSet() {
 		rowsOnPage = 10; // Gibt die Anzahl an Einträgen an, die Pro Seite abgebildet werden
 		allRowsCount = service.countOrders(); // Zählt die Einträge in der Datenbank
 		lazyDataLoading(0);
 	}
 
 	private void lazyDataLoading(int first) {
-		HashSet<Order> dataHashSet = service.getAllOrdersLazy(first, rowsOnPage);
-		orderDataModel = new DataModel(dataHashSet, allRowsCount, rowsOnPage);
+		TreeSet<Order> dataTreeSet = service.getAllOrdersLazy(first, rowsOnPage);
+		orderDataModel = new DataModel(dataTreeSet, allRowsCount, rowsOnPage);
 	}
 
 	public OrderView() {
 		order = new Order();
-	}
-
-	public List<Order> getOrders() {
-		return service.getAllOrders();
 	}
 
 	public String save() {

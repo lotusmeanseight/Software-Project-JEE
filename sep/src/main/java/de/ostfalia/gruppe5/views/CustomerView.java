@@ -1,6 +1,6 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.HashSet;
+import java.util.TreeSet;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -32,8 +32,8 @@ public class CustomerView {
 	}
 
 	private void lazyDataLoading(int first) {
-		HashSet<Customer> dataHashSet = service.getAllCustomersLazy(first, rowsOnPage);
-		customerDataModel = new DataModel(dataHashSet, allRowsCount, rowsOnPage);
+		TreeSet<Customer> dataTreeSet = service.getAllCustomersLazy(first, rowsOnPage);
+		customerDataModel = new DataModel(dataTreeSet, allRowsCount, rowsOnPage);
 	}
 
 	public CustomerView() {
@@ -47,10 +47,6 @@ public class CustomerView {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-
-//	public HashSet<Customer> getCustomers() {
-//		return service.getAllCustomersLazy(first, rows);
-//	}
 
 	public DataModel getCustomerDataModel() {
 		return customerDataModel;

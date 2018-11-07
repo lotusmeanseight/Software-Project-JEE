@@ -1,7 +1,6 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.TreeSet;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -27,15 +26,15 @@ public class PaymentView {
 	private int allRowsCount = 0;
 
 	@PostConstruct
-	public void initHashSet() {
+	public void initSet() {
 		rowsOnPage = 10; // Gibt die Anzahl an Einträgen an, die Pro Seite abgebildet werden
 		allRowsCount = service.countPayments(); // Zählt die Einträge in der Datenbank
 		lazyDataLoading(0);
 	}
 
 	private void lazyDataLoading(int first) {
-		HashSet<Payment> dataHashSet = service.getAllPaymentsLazy(first, rowsOnPage);
-		paymentDataModel = new DataModel(dataHashSet, allRowsCount, rowsOnPage);
+		TreeSet<Payment> dataTreeSet = service.getAllPaymentsLazy(first, rowsOnPage);
+		paymentDataModel = new DataModel(dataTreeSet, allRowsCount, rowsOnPage);
 	}
 
 	public PaymentView() {
@@ -48,10 +47,6 @@ public class PaymentView {
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
-	}
-
-	public List<Payment> getPayments() {
-		return service.getAllPayments();
 	}
 
 	public DataModel getPaymentDataModel() {

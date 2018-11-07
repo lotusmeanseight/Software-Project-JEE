@@ -21,7 +21,6 @@ public class Payment implements Serializable {
 
     @Id
     @Size(max = 50)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String checkNumber;
 
     @NotNull

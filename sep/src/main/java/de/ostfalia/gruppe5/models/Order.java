@@ -17,7 +17,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderNumber;
 
-    @OneToMany(mappedBy = "orderNumber", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "orderNumber")
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
     private LocalDateTime orderDate;

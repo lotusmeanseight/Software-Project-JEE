@@ -1,15 +1,16 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.models.DataModel;
-import de.ostfalia.gruppe5.models.Employee;
-import de.ostfalia.gruppe5.services.EmployeeService;
+import java.util.TreeSet;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.HashSet;
+
+import de.ostfalia.gruppe5.models.DataModel;
+import de.ostfalia.gruppe5.models.Employee;
+import de.ostfalia.gruppe5.services.EmployeeService;
 
 @RequestScoped
 @Named
@@ -29,20 +30,16 @@ public class EmployeeView {
 	private int allRowsCount = 0;
 
 	@PostConstruct
-	public void initHashSet() {
+	public void initSet() {
 		rowsOnPage = 10; // Gibt die Anzahl an Einträgen an, die Pro Seite abgebildet werden
 		allRowsCount = service.countEmployees(); // Zählt die Einträge in der Datenbank
 		lazyDataLoading(0);
 	}
 
 	private void lazyDataLoading(int first) {
-		HashSet<Employee> dataHashSet = service.getAllEmployeesLazy(first, rowsOnPage);
-		employeeDataModel = new DataModel(dataHashSet, allRowsCount, rowsOnPage);
+		TreeSet<Employee> dataTreeSet = service.getAllEmployeesLazy(first, rowsOnPage);
+		employeeDataModel = new DataModel(dataTreeSet, allRowsCount, rowsOnPage);
 	}
-
-//	public List<Employee> getEmployees() {
-//		return service.getAllEmployees();
-//	}
 
 	public int getRowsOnPage() {
 		return rowsOnPage;

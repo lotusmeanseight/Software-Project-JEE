@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 @FacesConverter(forClass = LocalDate.class, managed = true)
 public class LocalDateConverter implements Converter<LocalDate> {
 
-    private static final String FORMAT = "yyyy-mm-dd";
+    private static final String FORMAT = "yyyy-MM-dd";
 
     @Override
     public LocalDate getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {

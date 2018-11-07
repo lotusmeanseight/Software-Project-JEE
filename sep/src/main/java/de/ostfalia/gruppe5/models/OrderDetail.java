@@ -11,12 +11,14 @@ public class OrderDetail implements Serializable {
     @EmbeddedId
     private OrderDetailsID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("orderNumber")
+    @JoinColumn(name = "orderNumber")
     private Order orderNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @MapsId("productCode")
+    @JoinColumn(name = "productCode")
     private Product productCode;
 
     private Integer quantityOrdered;
@@ -76,5 +78,17 @@ public class OrderDetail implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, orderNumber, productCode, quantityOrdered, priceEach, orderLineNumber);
+    }
+
+    public void setOrderNumber(Order orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public void setProductCode(Product productCode) {
+        this.productCode = productCode;
+    }
+
+    public void setId(OrderDetailsID id) {
+        this.id = id;
     }
 }
