@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<body>
+<ui:composition>
+    <table style="width:100%">
+        <tr>
+            <td>
+                <h:form>
+                    <h:selectOneMenu
+                            onchange="window.location = this.options[this.selectedIndex].value">
+                        <f:selectItem itemLabel="Bitte waehlen.."/>
+                        <f:selectItem itemLabel="Customers"
+                                      itemValue="../customer/customers.jsf"/>
+                        <f:selectItem itemLabel="Employees"
+                                      itemValue="../employee/employees.jsf"/>
+                        <f:selectItem itemLabel="Offices"
+                                      itemValue="../office/offices.jsf"/>
+                        <f:selectItem itemLabel="Orders"
+                                      itemValue="../order/orders.jsf"/>
+                        <!-- <f:selectItem itemLabel="OrderDetails" itemValue="orderDetails.jsf" /> -->
+                        <f:selectItem itemLabel="Payments"
+                                      itemValue="../payment/payments.jsf"/>
+                        <f:selectItem itemLabel="Products"
+                                      itemValue="../product/products.jsf"/>
+                        <f:selectItem itemLabel="ProductLines"
+                                      itemValue="../productLines/productLines.jsf"/>
+                    </h:selectOneMenu>
+                </h:form>
+            </td>
+            <td>
+                <p>Eingeloggt als: #{request.userPrincipal.name}</p>
+            </td>
+            <td>
+                <h:form>
+                    <h:commandButton value="Logout" action="#{logoutBacking.submit}"/>
+                </h:form>
+            </td>
+        </tr>
+    </table>
+</ui:composition>
+</body>
+</html>

@@ -1,21 +1,27 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.models.OrderDetail;
-import de.ostfalia.gruppe5.services.OrderDetailService;
+import de.ostfalia.gruppe5.business.entity.OrderDetail;
+import de.ostfalia.gruppe5.business.boundary.OrderDetailService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.List;
 
 @Named
 @RequestScoped
 public class OrderDetailView {
+
     private OrderDetail orderDetail;
     @Inject
     private OrderDetailService service;
 
     public OrderDetailView(){
         this.orderDetail = new OrderDetail();
+    }
+
+    public List<OrderDetail> getOrderDetails(Integer orderNumber) {
+        return service.getAllOrderDetails(orderNumber);
     }
 
     public String save() {
@@ -28,11 +34,11 @@ public class OrderDetailView {
         return null;
     }
 
-    public OrderDetail getOrder() {
+    public OrderDetail getOrderDetail() {
         return orderDetail;
     }
 
-    public void setOrder(OrderDetail orderDetail) {
+    public void setOrderDetail(OrderDetail orderDetail) {
         this.orderDetail = orderDetail;
     }
 }

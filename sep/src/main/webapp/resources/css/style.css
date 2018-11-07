@@ -28,6 +28,13 @@ input[type=text] {
     border: 3px solid #555;
 }
 
+output[type=text] {
+	padding: 12px 20px;
+    margin: 8px;
+    box-sizing: border-box;
+    border: 3px solid #555;
+}
+
 input[type=button] {
     width: 128px;
     margin: 7px 5px 7px;
