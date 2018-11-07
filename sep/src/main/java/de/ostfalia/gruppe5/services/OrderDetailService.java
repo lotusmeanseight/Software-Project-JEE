@@ -23,6 +23,7 @@ public class OrderDetailService {
         return entityManager.merge(orderDetail);
     }
 
+    @RolesAllowed({"CUSTOMER", "EMPLOYEE"})
     public List<OrderDetail> getAllOrderDetails(Integer orderNumber) {
         TypedQuery<OrderDetail> query = entityManager.createQuery("Select o from OrderDetail o " +
                 "where o.orderNumber.orderNumber = :orderNumber", OrderDetail.class);
