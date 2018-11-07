@@ -3,6 +3,7 @@ package de.ostfalia.gruppe5.logic.file;
 import de.ostfalia.gruppe5.models.ProductLine;
 import de.ostfalia.gruppe5.services.ProductLineService;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,11 +43,14 @@ public class ImageServlet extends HttpServlet {
         byte[] image = productLine.getImage();
         
         //have to find out the content type associated with the image....
-        response.setContentType("jpg");
+        response.setContentType("image/jpg");
         response.setContentLength(image.length);
 
         response.getOutputStream().write(image);
-        response.getOutputStream().close();
+//        response.flushBuffer();
+//        response.getOutputStream().close();
+        
+        
     }
 
     private int notFoundError() {
