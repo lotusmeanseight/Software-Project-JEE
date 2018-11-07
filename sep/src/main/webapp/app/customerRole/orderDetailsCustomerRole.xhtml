@@ -15,7 +15,7 @@
     <ui:define name="content">
         <h:form id="order_datatable_form">
             <h:dataTable id="employee_datatable_data"
-                         value="#{orderDetailViewCustomerRole.getOrderDetails(orderDetailViewCustomerRole.orderDetail.orderNumber)}"
+                         value="#{orderDetailViewCustomerRole.getOrderDetails(orderViewCustomerRole.order.orderNumber)}"
                          var="orderDetail"
                          border="1"
                          selectionMode="single" styleClass="table" headerClass="table-header"
