@@ -1,0 +1,37 @@
+﻿
+sprint—review-4
+Gruppe 5
+
+Software Engineering Projekt: Realisierung eines Warenwirtschaftssystems
+
+Projektstart: 27.09.2018
+Projektende : 20.12.2018
+
+=================================================
+
+Sprint 4
+
+Sprintanfang: 25.10.2018
+Sprintende: 07.11.2018 (24.00 Uhr)
+
+Einteilung der Teilleitungen:
+
+Georg Göring: 140%
+René Blumenau: 120%
+Bastian Huppertz: 120%
+Lukas Brötje: 120%
+Kasra Kakar: 0%
+
+• Versäumnisse des dritten Sprintes nachgeholt.
+  - JPA Beziehungen zwischen Order, Product, und OrderDetails realisiert.
+  - Navigation zwischen den Seiten funktioniert.
+  - CRUD Insert/Update aller Stammdaten wurden behoben.
+• Datenbankmigration von H2 auf Postgres verlief erfolgreich.
+• Authentifizierung und Autorisierung mit Rollen realisiert.
+  - EmployeeRole (interner Mitarbeiter) welche zugriff auf alle Tabellen und ihre CRUD-Funkionalitäten hat.
+  - CustomerRole (Kunde) welcher lesenden Zugriff auf seine Orders und OrderDetails hat. 
+• Pagination funktioniert mit Einschränkungen 
+  - Post Construct lädt immer die ersten zehn Einträge.
+• Performanz optimierung durch lazy-fetching auf passenden Spalten der Datenbank realisiert.
+• CRUD Funktionalitäten für das Bild (Binärdaten) geschaffen. 
+• Paketstruktur nach Entity-Control-Boundary Pattern umgesetzt. 
