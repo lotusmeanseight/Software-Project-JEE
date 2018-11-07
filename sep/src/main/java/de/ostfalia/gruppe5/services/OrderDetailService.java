@@ -6,6 +6,8 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
@@ -19,5 +21,12 @@ public class OrderDetailService {
 
     public OrderDetail update(OrderDetail orderDetail) {
         return entityManager.merge(orderDetail);
+    }
+
+    public List<OrderDetail> getAllOrderDetails(Integer orderNumber) {
+        TypedQuery<OrderDetail> query = entityManager.createQuery("Select o from OrderDetail o " +
+                "where o.orderNumber.orderNumber = :orderNumber", OrderDetail.class);
+        query.setParameter("orderNumber", orderNumber);
+        return query.getResultList();
     }
 }

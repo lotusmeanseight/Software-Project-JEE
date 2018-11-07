@@ -48,7 +48,9 @@
 
         <h:column>
             <f:facet name="header">Order Details</f:facet>
-            <h:commandButton action="/orderDetails/orderDetails" value="View">
+            <h:commandButton action="orderDetails" value="View">
+                <f:setPropertyActionListener target="#{orderView.order}" value="#{order}"/>
+                <f:setPropertyActionListener target="#{orderView.order.orderNumber}" value="#{order.orderNumber}"/>
             </h:commandButton>
         </h:column>
         <f:facet name="footer">
