@@ -18,7 +18,7 @@
         Zahlungsdatum: <h:inputText value="#{paymentView.payment.paymentDate}"/>
         Betrag: <h:inputText value="#{paymentView.payment.amount}"/>
     </h:panelGrid>
-
+    <h:inputHidden value="#{paymentView.payment.customerNumber}"/>
     <h:inputHidden value="#{paymentView.payment.checkNumber}"/>
     <h:commandButton action="#{paymentView.update(paymentView.payment)}" value="Aktualisieren">
     </h:commandButton>

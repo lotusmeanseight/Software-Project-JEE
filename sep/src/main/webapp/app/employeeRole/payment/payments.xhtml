@@ -39,10 +39,10 @@
             <f:facet name="header">Aktualisieren</f:facet>
             <h:commandButton action="paymentEdit" value="Aktualisieren" >
                 <f:setPropertyActionListener target="#{paymentView.payment}" value="#{payment}" />
-                <f:setPropertyActionListener target="#{paymentView.payment.checkNumber}"
-                                             value="#{payment.checkNumber}"/>
                 <f:setPropertyActionListener target="#{paymentView.payment.customerNumber}"
                                              value="#{payment.customerNumber}"/>
+                <f:setPropertyActionListener target="#{paymentView.payment.checkNumber}"
+                                             value="#{payment.checkNumber}"/>
             </h:commandButton>
         </h:column>
         <h:column>
