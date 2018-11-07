@@ -1,7 +1,7 @@
 package de.ostfalia.gruppe5.services;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
@@ -9,8 +9,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import de.ostfalia.gruppe5.models.Order;
+import de.ostfalia.gruppe5.views.comparators.OrderComparator;
 
 @DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
 @RolesAllowed("EMPLOYEE")
@@ -50,11 +52,15 @@ public class OrderService {
 		return entityManager.merge(order);
 	}
 
-	public HashSet<Order> getAllOrdersLazy(int first, int max) {
-		Query query = entityManager.createNamedQuery("Order.findAll");
+	public TreeSet<Order> getAllOrdersLazy(int first, int max) {
+		TypedQuery<Order> query = entityManager.createNamedQuery("Order.findAll", Order.class);
 		query.setFirstResult(first);
 		query.setMaxResults(max);
-		return new HashSet(query.getResultList());
+		TreeSet<Order> treeSet = new TreeSet<Order>(new OrderComparator());
+		for (Order o : query.getResultList()) {
+			treeSet.add(o);
+		}
+		return treeSet;
 	}
 
 	public int countOrders() {

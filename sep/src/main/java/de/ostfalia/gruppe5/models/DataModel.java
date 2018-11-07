@@ -1,6 +1,6 @@
 package de.ostfalia.gruppe5.models;
 
-import java.util.HashSet;
+import java.util.TreeSet;
 
 import javax.faces.model.CollectionDataModel;
 
@@ -9,24 +9,24 @@ public class DataModel extends CollectionDataModel {
 	private int rowIndex = -1;
 	private int allRowsCount;
 	private int pageSize;
-	private HashSet hashSet;
+	private TreeSet treeSet;
 
 	public DataModel() {
 	}
 
-	public DataModel(HashSet hashSet, int allRowsCount, int pageSize) {
-		this.hashSet = hashSet;
+	public DataModel(TreeSet treeSet, int allRowsCount, int pageSize) {
+		this.treeSet = treeSet;
 		this.allRowsCount = allRowsCount;
 		this.pageSize = pageSize;
 	}
 
 	@Override
 	public boolean isRowAvailable() {
-		if (hashSet == null) {
+		if (treeSet == null) {
 			return false;
 		}
 		int c_rowIndex = getRowIndex();
-		if (c_rowIndex >= 0 && c_rowIndex < hashSet.size()) {
+		if (c_rowIndex >= 0 && c_rowIndex < treeSet.size()) {
 			return true;
 		} else {
 			return false;
@@ -40,13 +40,13 @@ public class DataModel extends CollectionDataModel {
 
 	@Override
 	public Object getRowData() {
-		if (hashSet == null) {
+		if (treeSet == null) {
 			return null;
 		} else if (!isRowAvailable()) {
 			throw new IllegalArgumentException();
 		} else {
 			int dataIndex = getRowIndex();
-			Object[] arrayView = hashSet.toArray();
+			Object[] arrayView = treeSet.toArray();
 			return arrayView[dataIndex];
 		}
 	}
@@ -63,11 +63,11 @@ public class DataModel extends CollectionDataModel {
 
 	@Override
 	public Object getWrappedData() {
-		return hashSet;
+		return treeSet;
 	}
 
 	@Override
-	public void setWrappedData(Object hashSet) {
-		this.hashSet = (HashSet) hashSet;
+	public void setWrappedData(Object treeSet) {
+		this.treeSet = (TreeSet) treeSet;
 	}
 }
