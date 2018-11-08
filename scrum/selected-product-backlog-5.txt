@@ -1,0 +1,40 @@
+Product Backlog
+Gruppe 5
+
+Software Engineering Projekt: Realisierung eines Warenwirtschaftssystems
+
+Projektstart: 27.09.2018
+Projektende: 20.12.2018
+
+=================================================
+
+Sprint 5 - REST
+
+Sprintanfang: 8.11.2018
+Sprintende: 21.11.2018 (24.00 Uhr)
+
+• Pagination Bug aus dem letzten Sprint beheben
+  - Einführung eines Indizes für den Table oder die Änderung von einer RequestScoped auf eine ViewScoped Bean
+  für die Klasse oder den Datatable.
+• JAXB Annotationen an die Entity (Pojo) Klassen anhängen, damit diese dann erfolgreich in JSON Dateien in der
+REST API verarbeitet werden können.
+• Ressourcen Definition über JAX-RS für alle Entity Klassen, einschließlich OrderDetails nach Beispiel im Sprint Dokument.
+• Integrationstests der REST API mit der Clientseitigen Referenz Implementierung der JAX-RS von JBoss namens RESTeasy.
+  - Tests auf Response Codes
+  - Tests auf Response Dateien (JSON)
+  - Tests für GET, PUT, POST, DELETE Operationen
+• Authentifizierung und Autorisierung für REST Ressourcen
+  - Angelehnte an die Authentifizierung und Autorisierung in JSF mit Mitarbeiter und Kunden Rollen
+  die gleiche Zugriffsrechte wie auf der JSF Oberfläche haben.
+  - Eine Applikationsauthentizierung mit einem Custom HTTP Header namens "SEP-Authorization" mit den Daten "<user>:<password>".
+
+
+=================================================
+
+Product Backlog
+Gruppe 5
+
+Software Engineering Projekt: Realisierung eines Warenwirtschaftssystems
+
+Projektstart: 27.09.2018
+Projektende: 20.12.2018
