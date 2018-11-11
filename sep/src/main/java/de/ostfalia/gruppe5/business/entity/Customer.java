@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@NamedQueries({ @NamedQuery(name = "Customer.countAll", query = "SELECT COUNT(c) FROM Customer c"),
+@NamedQueries({ @NamedQuery(name = "countAllCustomer", query = "SELECT COUNT(c) FROM Customer c"),
 		@NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c") })
 @Entity
 @Table(name = "customers")

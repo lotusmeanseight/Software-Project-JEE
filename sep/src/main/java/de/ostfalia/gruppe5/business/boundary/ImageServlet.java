@@ -27,7 +27,7 @@ public class ImageServlet extends HttpServlet {
             return;
         }
 
-        ProductLine productLine = productLineService.findById(productLine_id);
+        ProductLine productLine = productLineService.find(productLine_id);
         
         if (productLine == null) {
             response.sendError(notFoundError());

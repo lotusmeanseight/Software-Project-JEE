@@ -17,55 +17,15 @@ import de.ostfalia.gruppe5.views.comparators.OrderComparator;
 @DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class OrderService {
-
-	@PersistenceContext(name = "simple")
-	EntityManager entityManager;
-
+public class OrderService extends AbstractLazyJPAService<Order> {
 	public OrderService() {
-
-	}
-
-	public void save(Order order) {
-		entityManager.persist(order);
-	}
-
-	public Order findById(Integer id) {
-		return entityManager.find(Order.class, id);
-	}
-
-	public void deleteById(Integer id) {
-		entityManager.remove(findById(id));
-	}
-
-	public List<Order> getAllOrders() {
-		return entityManager.createQuery("select o from Order o", Order.class).getResultList();
+		settClass(Order.class);
 	}
 
 	@RolesAllowed("CUSTOMER")
 	public List<Order> getOrdersByCustomerId(Integer id) {
-		return entityManager.createQuery("select o from Order o where o.customerNumber = " + id, Order.class)
+		return getEntityManager().createQuery("select o from Order o where o.customerNumber = " + id, Order.class)
 				.getResultList();
-	}
-
-	public Order update(Order order) {
-		return entityManager.merge(order);
-	}
-
-	public TreeSet<Order> getAllOrdersLazy(int first, int max) {
-		TypedQuery<Order> query = entityManager.createNamedQuery("Order.findAll", Order.class);
-		query.setFirstResult(first);
-		query.setMaxResults(max);
-		TreeSet<Order> treeSet = new TreeSet<Order>(new OrderComparator());
-		for (Order o : query.getResultList()) {
-			treeSet.add(o);
-		}
-		return treeSet;
-	}
-
-	public int countOrders() {
-		Query query = entityManager.createNamedQuery("Order.countAll");
-		return ((Long) query.getSingleResult()).intValue();
 	}
 
 }
