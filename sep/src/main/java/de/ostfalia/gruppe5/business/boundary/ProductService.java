@@ -37,7 +37,7 @@ public class ProductService extends AbstractLazyJPAService<Product> {
 
     @POST
     @Path("/")
-    public String postProduct(String productURI) {
+    public String postProduct(@HeaderParam("uri") String productURI) {
         Product product = new Product();
         product.setProductDescription(productURI);
         this.getEntityManager().merge(product);
