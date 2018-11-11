@@ -74,7 +74,7 @@ public class ImageUploader implements Serializable {
         }
 
         setImage(image);
-        ProductLine databaseLine = productLineService.findById(productLine);
+        ProductLine databaseLine = productLineService.find(productLine);
         databaseLine.setImage(getImage());
         productLineService.update(databaseLine);
     }

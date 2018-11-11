@@ -11,21 +11,15 @@ import java.util.List;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class OrderDetailService {
-    @PersistenceContext(name = "simple")
-    EntityManager entityManager;
+public class OrderDetailService extends AbstractJPAService<OrderDetail> {
 
-    public void save(OrderDetail orderDetail) {
-        entityManager.persist(orderDetail);
-    }
-
-    public OrderDetail update(OrderDetail orderDetail) {
-        return entityManager.merge(orderDetail);
+    public OrderDetailService(){
+        settClass(OrderDetail.class);
     }
 
     @RolesAllowed({"CUSTOMER", "EMPLOYEE"})
     public List<OrderDetail> getAllOrderDetails(Integer orderNumber) {
-        TypedQuery<OrderDetail> query = entityManager.createQuery("Select o from OrderDetail o " +
+        TypedQuery<OrderDetail> query = getEntityManager().createQuery("Select o from OrderDetail o " +
                 "where o.orderNumber.orderNumber = :orderNumber", OrderDetail.class);
         query.setParameter("orderNumber", orderNumber);
         return query.getResultList();
