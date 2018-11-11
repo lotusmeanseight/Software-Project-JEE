@@ -20,9 +20,6 @@ ALTER DATABASE classicmodels OWNER TO postgres;
 
 \connect classicmodels
 
-CREATE ROLE sep with password 'sep' LOGIN;
-ALTER ROLE SEP SUPERUSER;
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
