@@ -14,7 +14,7 @@ public abstract class AbstractLazyJPAService<T> extends AbstractJPAService<T> {
     }
 
     public int countT(){
-        Query query = getEntityManager().createNamedQuery("countAll" + gettClass().getSimpleName());
+        Query query = getEntityManager().createNamedQuery(gettClass().getSimpleName() + ".countAll" );
         List<Long> resultList = query.getResultList();
         return resultList.get(0).intValue();
     }
