@@ -19,39 +19,13 @@ public class ProductLineView {
 	@Inject
 	private ProductLineService service;
 
-	private HtmlDataTable table;
-	private int rowsOnPage = 10;
 
 	public ProductLineView() {
 		productLine = new ProductLine();
 	}
 
 	public List<ProductLine> getProductLines() {
-		return service.getAllProductLines();
-	}
-
-	public HtmlDataTable getTable() {
-		return table;
-	}
-
-	public void setTable(HtmlDataTable table) {
-		this.table = table;
-	}
-
-	public int getRowsOnPage() {
-		return rowsOnPage;
-	}
-
-	public void setRowsOnPage(int rowsOnPage) {
-		this.rowsOnPage = rowsOnPage;
-	}
-
-	public ProductLine getProductLine() {
-		return productLine;
-	}
-
-	public void setProductLine(ProductLine productLine) {
-		this.productLine = productLine;
+		return service.findAll();
 	}
 
 	public String save() {
@@ -68,31 +42,4 @@ public class ProductLineView {
 		service.update(productLine);
 		return null;
 	}
-
-	public void goToFirstPage() {
-		table.setFirst(0);
-	}
-
-	public void goToPreviousPage() {
-		table.setFirst(table.getFirst() - table.getRows());
-	}
-
-	public void goToNextPage() {
-		table.setFirst(table.getFirst() + table.getRows());
-	}
-
-	public void goToLastPage() {
-		int totalRows = table.getRowCount();
-		int displayRows = table.getRows();
-		int full = totalRows / displayRows;
-		int modulo = totalRows % displayRows;
-
-		if (modulo > 0) {
-			table.setFirst(full * displayRows);
-		} else {
-			table.setFirst((full - 1) * displayRows);
-		}
-
-	}
-
 }
