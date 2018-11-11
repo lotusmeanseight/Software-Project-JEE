@@ -1,19 +1,11 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
+import de.ostfalia.gruppe5.business.boundary.CustomerService;
+import de.ostfalia.gruppe5.business.entity.Customer;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.DependsOn;
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import de.ostfalia.gruppe5.business.entity.Customer;
-import de.ostfalia.gruppe5.business.entity.DataModel;
-import de.ostfalia.gruppe5.business.boundary.CustomerService;
 
 @RequestScoped
 @Named

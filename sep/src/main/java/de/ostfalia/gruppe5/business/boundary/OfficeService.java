@@ -1,11 +1,9 @@
 package de.ostfalia.gruppe5.business.boundary;
 
+import de.ostfalia.gruppe5.business.entity.Office;
+
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import de.ostfalia.gruppe5.business.entity.Office;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless

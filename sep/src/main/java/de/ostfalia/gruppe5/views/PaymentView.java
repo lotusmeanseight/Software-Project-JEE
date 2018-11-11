@@ -1,16 +1,11 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.TreeSet;
+import de.ostfalia.gruppe5.business.boundary.PaymentService;
+import de.ostfalia.gruppe5.business.entity.Payment;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import de.ostfalia.gruppe5.business.entity.DataModel;
-import de.ostfalia.gruppe5.business.entity.Payment;
-import de.ostfalia.gruppe5.business.boundary.PaymentService;
 
 @Named
 @RequestScoped

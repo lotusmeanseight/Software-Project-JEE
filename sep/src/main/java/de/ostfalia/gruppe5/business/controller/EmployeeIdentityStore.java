@@ -1,5 +1,8 @@
 package de.ostfalia.gruppe5.business.controller;
 
+import de.ostfalia.gruppe5.business.entity.Employee;
+import de.ostfalia.gruppe5.business.entity.EmployeeUser;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -8,10 +11,6 @@ import javax.security.enterprise.credential.Credential;
 import javax.security.enterprise.credential.UsernamePasswordCredential;
 import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.IdentityStore;
-
-import de.ostfalia.gruppe5.business.entity.Employee;
-import de.ostfalia.gruppe5.business.entity.EmployeeUser;
-
 import java.util.Arrays;
 import java.util.HashSet;
 

@@ -1,8 +1,8 @@
 package de.ostfalia.gruppe5.views.comparators;
 
-import java.util.Comparator;
-
 import de.ostfalia.gruppe5.business.entity.Product;
+
+import java.util.Comparator;
 
 public class ProductComparator implements Comparator<Product> {
 

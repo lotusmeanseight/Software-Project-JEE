@@ -1,10 +1,8 @@
 package de.ostfalia.gruppe5.business.entity;
 
+import javax.faces.model.CollectionDataModel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedSet;
-
-import javax.faces.model.CollectionDataModel;
 
 public class DataModel<E> extends CollectionDataModel<E> {
 

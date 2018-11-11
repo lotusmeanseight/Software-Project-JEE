@@ -1,8 +1,8 @@
 package de.ostfalia.gruppe5.views.comparators;
 
-import java.util.Comparator;
-
 import de.ostfalia.gruppe5.business.entity.Order;
+
+import java.util.Comparator;
 
 public class OrderComparator implements Comparator<Order> {
 

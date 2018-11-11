@@ -1,18 +1,11 @@
 package de.ostfalia.gruppe5.business.boundary;
 
-import java.util.List;
-import java.util.TreeSet;
+import de.ostfalia.gruppe5.business.entity.Order;
 
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
-import de.ostfalia.gruppe5.business.entity.Order;
-import de.ostfalia.gruppe5.views.comparators.OrderComparator;
+import java.util.List;
 
 @DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
 @RolesAllowed("EMPLOYEE")

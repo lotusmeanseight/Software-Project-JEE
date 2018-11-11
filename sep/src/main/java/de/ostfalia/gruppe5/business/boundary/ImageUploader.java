@@ -1,7 +1,6 @@
 package de.ostfalia.gruppe5.business.boundary;
 
 import de.ostfalia.gruppe5.business.entity.ProductLine;
-import de.ostfalia.gruppe5.business.boundary.ProductLineService;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
