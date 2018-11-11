@@ -1,16 +1,11 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.TreeSet;
-
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.ostfalia.gruppe5.business.entity.DataModel;
-import de.ostfalia.gruppe5.business.entity.Product;
 import de.ostfalia.gruppe5.business.boundary.ProductService;
+import de.ostfalia.gruppe5.business.entity.Product;
 
 @Named
 @RequestScoped
@@ -21,45 +16,11 @@ public class ProductView {
 	@Inject
 	private ProductService service;
 
-	private DataModel productDataModel;
-	private HtmlDataTable table;
-	private int rowsOnPage;
-	private int allRowsCount = 0;
+	@Inject
+	private ProductDataTable datatable;
 
 	public ProductView() {
 		product = new Product();
-	}
-
-	public DataModel getProductDataModel() {
-		return productDataModel;
-	}
-
-	public void setProductDataModel(DataModel productDataModel) {
-		this.productDataModel = productDataModel;
-	}
-
-	public HtmlDataTable getTable() {
-		return table;
-	}
-
-	public void setTable(HtmlDataTable table) {
-		this.table = table;
-	}
-
-	public int getRowsOnPage() {
-		return rowsOnPage;
-	}
-
-	public void setRowsOnPage(int rowsOnPage) {
-		this.rowsOnPage = rowsOnPage;
-	}
-
-	public int getAllRowsCount() {
-		return allRowsCount;
-	}
-
-	public void setAllRowsCount(int allRowsCount) {
-		this.allRowsCount = allRowsCount;
 	}
 
 	public Product getProduct() {
@@ -84,4 +45,9 @@ public class ProductView {
 		service.update(product);
 		return null;
 	}
+
+	public ProductDataTable getDatatable() {
+		return datatable;
+	}
+
 }

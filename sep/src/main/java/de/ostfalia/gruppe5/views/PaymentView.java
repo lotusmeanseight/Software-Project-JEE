@@ -1,16 +1,11 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.TreeSet;
-
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.ostfalia.gruppe5.business.entity.DataModel;
-import de.ostfalia.gruppe5.business.entity.Payment;
 import de.ostfalia.gruppe5.business.boundary.PaymentService;
+import de.ostfalia.gruppe5.business.entity.Payment;
 
 @Named
 @RequestScoped
@@ -19,8 +14,9 @@ public class PaymentView {
 	private Payment payment;
 	@Inject
 	private PaymentService service;
-	private int rowsOnPage;
-	private int allRowsCount = 0;
+
+	@Inject
+	private PaymentDataTable datatable;
 
 	public PaymentView() {
 		payment = new Payment();
@@ -47,6 +43,10 @@ public class PaymentView {
 	public String delete(Payment payment) {
 		service.delete(payment);
 		return null;
+	}
+
+	public PaymentDataTable getDatatable() {
+		return datatable;
 	}
 
 }
