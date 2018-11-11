@@ -1,12 +1,21 @@
 package de.ostfalia.gruppe5.business.entity;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+@NamedQueries({ @NamedQuery(name = "ProductLine.countAll", query = "SELECT COUNT(p) FROM ProductLine p"),
+		@NamedQuery(name = "ProductLine.findAll", query = "SELECT p FROM ProductLine p") })
 @Entity
 @Table(name = "productlines")
 public class ProductLine implements Serializable {
@@ -19,12 +28,11 @@ public class ProductLine implements Serializable {
 	private List<Product> productList = new ArrayList<>();
 
 	private String textDescription;
-	
+
 	private String htmlDescription;
 
 	@Basic
 	private byte[] image;
-
 
 	public String getProductLine() {
 		return productLine;
@@ -65,11 +73,10 @@ public class ProductLine implements Serializable {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		ProductLine that = (ProductLine) o;
-		return Objects.equals(getProductLine(), that.getProductLine()) &&
-				Objects.equals(productList, that.productList) &&
-				Objects.equals(getTextDescription(), that.getTextDescription()) &&
-				Objects.equals(getHtmlDescription(), that.getHtmlDescription()) &&
-				Objects.equals(getImage(), that.getImage());
+		return Objects.equals(getProductLine(), that.getProductLine()) && Objects.equals(productList, that.productList)
+				&& Objects.equals(getTextDescription(), that.getTextDescription())
+				&& Objects.equals(getHtmlDescription(), that.getHtmlDescription())
+				&& Objects.equals(getImage(), that.getImage());
 	}
 
 	@Override
