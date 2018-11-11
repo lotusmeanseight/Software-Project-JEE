@@ -18,13 +18,15 @@ public class OfficeView {
 	@Inject
 	private OfficeService service;
 
+	private HtmlDataTable table;
+	private int rowsOnPage = 10;
 
 	public OfficeView() {
 		setOffice(new Office());
 	}
 
 	public List<Office> getOffices() {
-		return service.findAll();
+		return service.getAllOffices();
 	}
 
 	public Office getOffice() {
@@ -33,6 +35,22 @@ public class OfficeView {
 
 	public void setOffice(Office office) {
 		this.office = office;
+	}
+
+	public HtmlDataTable getTable() {
+		return table;
+	}
+
+	public void setTable(HtmlDataTable table) {
+		this.table = table;
+	}
+
+	public int getRowsOnPage() {
+		return rowsOnPage;
+	}
+
+	public void setRowsOnPage(int rowsOnPage) {
+		this.rowsOnPage = rowsOnPage;
 	}
 
 	public String save() {
@@ -49,4 +67,31 @@ public class OfficeView {
 		service.update(office);
 		return null;
 	}
+
+	public void goToFirstPage() {
+		table.setFirst(0);
+	}
+
+	public void goToPreviousPage() {
+		table.setFirst(table.getFirst() - table.getRows());
+	}
+
+	public void goToNextPage() {
+		table.setFirst(table.getFirst() + table.getRows());
+	}
+
+	public void goToLastPage() {
+		int totalRows = table.getRowCount();
+		int displayRows = table.getRows();
+		int full = totalRows / displayRows;
+		int modulo = totalRows % displayRows;
+
+		if (modulo > 0) {
+			table.setFirst(full * displayRows);
+		} else {
+			table.setFirst((full - 1) * displayRows);
+		}
+
+	}
+
 }

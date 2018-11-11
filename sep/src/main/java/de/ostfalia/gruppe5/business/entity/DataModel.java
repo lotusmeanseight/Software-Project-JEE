@@ -1,30 +1,36 @@
 package de.ostfalia.gruppe5.business.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.faces.model.CollectionDataModel;
 
-public class DataModel<E> extends CollectionDataModel<E> {
+public class DataModel extends CollectionDataModel {
 
 	private int rowIndex = -1;
 	private int allRowsCount;
 	private int pageSize;
-	private List<E> list;
+	private TreeSet treeSet;
 
 	public DataModel() {
 	}
 
-	public DataModel(List<E> list, int allRowsCount, int pageSize) {
-		this.list = list;
+	public DataModel(TreeSet treeSet, int allRowsCount, int pageSize) {
+		this.treeSet = treeSet;
 		this.allRowsCount = allRowsCount;
 		this.pageSize = pageSize;
 	}
 
 	@Override
 	public boolean isRowAvailable() {
-		return list != null && getRowIndex() >= 0 && getRowIndex() < list.size();
+		if (treeSet == null) {
+			return false;
+		}
+		int c_rowIndex = getRowIndex();
+		if (c_rowIndex >= 0 && c_rowIndex < treeSet.size()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -33,11 +39,15 @@ public class DataModel<E> extends CollectionDataModel<E> {
 	}
 
 	@Override
-	public E getRowData() {
-		if(!isRowAvailable()){
+	public Object getRowData() {
+		if (treeSet == null) {
+			return null;
+		} else if (!isRowAvailable()) {
 			throw new IllegalArgumentException();
-		}else{
-			return list.get(getRowIndex());
+		} else {
+			int dataIndex = getRowIndex();
+			Object[] arrayView = treeSet.toArray();
+			return arrayView[dataIndex];
 		}
 	}
 
@@ -53,11 +63,11 @@ public class DataModel<E> extends CollectionDataModel<E> {
 
 	@Override
 	public Object getWrappedData() {
-		return list;
+		return treeSet;
 	}
 
 	@Override
-	public void setWrappedData(Object list) {
-		this.list = (ArrayList<E>) list;
+	public void setWrappedData(Object treeSet) {
+		this.treeSet = (TreeSet) treeSet;
 	}
 }
