@@ -22,7 +22,7 @@ public class ProductLineView {
 	ProductLineDataTable datatable;
 
 	public ProductLineView() {
-		productLine = new ProductLine();
+		setProductLine(new ProductLine());
 	}
 
 	public List<ProductLine> getProductLines() {
@@ -30,7 +30,7 @@ public class ProductLineView {
 	}
 
 	public String save() {
-		service.save(productLine);
+		service.save(getProductLine());
 		return null;
 	}
 
@@ -48,4 +48,11 @@ public class ProductLineView {
 		return datatable;
 	}
 
+	public ProductLine getProductLine() {
+		return productLine;
+	}
+
+	public void setProductLine(ProductLine productLine) {
+		this.productLine = productLine;
+	}
 }

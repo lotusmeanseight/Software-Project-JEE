@@ -15,7 +15,7 @@ public abstract class AbstractLazyJPAService<T> extends AbstractJPAService<T> {
         query.setFirstResult(first);
         query.setMaxResults(max);
         return query.getResultList();
-    } 
+    }
 
     @RolesAllowed("EMPLOYEE")
     public int countT(){
