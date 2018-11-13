@@ -15,8 +15,7 @@ public class LocalDateConverter implements Converter<LocalDate> {
     @Override
     public LocalDate getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(FORMAT);
-        LocalDate localDate = LocalDate.parse(s, formatter);
-        return localDate;
+        return LocalDate.parse(s, formatter);
     }
 
     @Override

@@ -9,6 +9,7 @@ import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.Transient;
 import javax.servlet.http.Part;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +21,7 @@ import java.util.List;
 @Named
 public class ImageUploader implements Serializable {
 
+    @Transient
     private Part imageFile;
     private final List<String> supportedFileTypes = new ArrayList<>();
     private static final int MAX_FILESIZE = 1024 * 500; //512 kilobytes
@@ -53,15 +55,14 @@ public class ImageUploader implements Serializable {
     }
 
     public void uploadFile(String productLine) {
-        byte[] image = null;
+        byte[] uploadImage = null;
         try {
-            //fileContent = new Scanner(imageFile.getInputStream()).useDelimiter("\\A").next();
             InputStream inputStream = imageFile.getInputStream();
             long length = imageFile.getSize();
-            image = new byte[(int) length];
+            uploadImage = new byte[(int) length];
             int offset = 0;
             int current = 0;
-            while (offset < image.length && (current = inputStream.read(image, offset, image.length - offset)) >= 0) {
+            while (offset < uploadImage.length && (current = inputStream.read(uploadImage, offset, uploadImage.length - offset)) >= 0) {
                 offset += current;
             }
             inputStream.close();
@@ -72,7 +73,7 @@ public class ImageUploader implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
 
-        setImage(image);
+        setImage(uploadImage);
         ProductLine databaseLine = productLineService.find(productLine);
         databaseLine.setImage(getImage());
         productLineService.update(databaseLine);

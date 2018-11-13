@@ -6,12 +6,14 @@ import de.ostfalia.gruppe5.business.entity.DataModel;
 import javax.annotation.PostConstruct;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.List;
 
 public abstract class Datatable<T extends AbstractLazyJPAService, E> implements Serializable {
 
     private DataModel dataModel;
+    @Transient
     private HtmlDataTable table;
     private int rowsOnPage;
     private int allRowsCount = 0;
