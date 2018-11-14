@@ -1,6 +1,7 @@
 package de.ostfalia.gruppe5.business.boundary;
 
 import de.ostfalia.gruppe5.business.entity.Order;
+
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
