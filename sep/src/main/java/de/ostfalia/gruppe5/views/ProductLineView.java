@@ -1,13 +1,12 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.List;
+import de.ostfalia.gruppe5.business.boundary.ProductLineService;
+import de.ostfalia.gruppe5.business.entity.ProductLine;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import de.ostfalia.gruppe5.business.boundary.ProductLineService;
-import de.ostfalia.gruppe5.business.entity.ProductLine;
+import java.util.List;
 
 @Named
 @RequestScoped

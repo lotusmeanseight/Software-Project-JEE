@@ -1,12 +1,10 @@
 package de.ostfalia.gruppe5.business.boundary;
 
-import java.util.List;
-
+import de.ostfalia.gruppe5.business.entity.Order;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-
-import de.ostfalia.gruppe5.business.entity.Order;
+import java.util.List;
 
 @DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
 @RolesAllowed("EMPLOYEE")

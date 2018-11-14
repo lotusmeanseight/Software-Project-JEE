@@ -1,9 +1,8 @@
 package de.ostfalia.gruppe5.business.boundary;
 
+import de.ostfalia.gruppe5.business.entity.ProductLine;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-
-import de.ostfalia.gruppe5.business.entity.ProductLine;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
