@@ -12,7 +12,6 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/api")
 @DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
 @BasicAuthenticationMechanismDefinition
-@FacesConfig
 public class MyApplication extends Application {
     public MyApplication() {
     }
