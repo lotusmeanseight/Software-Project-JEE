@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import javax.security.enterprise.authentication.mechanism.http.BasicAuthenticationMechanismDefinition;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -12,16 +13,17 @@ import de.ostfalia.gruppe5.business.entity.OrderDetail;
 import de.ostfalia.gruppe5.business.entity.Product;
 import de.ostfalia.gruppe5.business.entity.ProductLine;
 
+
 @RolesAllowed("EMPLOYEE")
 @Stateless
-@Path("products")
+@Path("/products")
 public class ProductService extends AbstractLazyJPAService<Product> {
 
     public ProductService() {
         settClass(Product.class);
     }
 
-
+    @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Product> getProducts() {
