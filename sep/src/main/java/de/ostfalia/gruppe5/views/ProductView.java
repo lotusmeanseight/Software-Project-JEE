@@ -1,7 +1,6 @@
 package de.ostfalia.gruppe5.views;
 
 import de.ostfalia.gruppe5.business.boundary.ProductService;
-import de.ostfalia.gruppe5.business.entity.DataModel;
 import de.ostfalia.gruppe5.business.entity.Product;
 
 import javax.enterprise.context.RequestScoped;

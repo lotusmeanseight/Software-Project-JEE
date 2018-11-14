@@ -1,18 +1,11 @@
 package de.ostfalia.gruppe5.business.entity;
 
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 @NamedQueries({ @NamedQuery(name = "ProductLine.countAll", query = "SELECT COUNT(p) FROM ProductLine p"),
 		@NamedQuery(name = "ProductLine.findAll", query = "SELECT p FROM ProductLine p") })
