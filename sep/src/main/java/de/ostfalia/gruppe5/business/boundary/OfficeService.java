@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class OfficeService extends AbstractJPAService<Office> {
+public class OfficeService extends AbstractLazyJPAService<Office> {
 
 	public OfficeService() {
 		settClass(Office.class);

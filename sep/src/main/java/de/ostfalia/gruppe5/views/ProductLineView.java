@@ -17,9 +17,11 @@ public class ProductLineView {
 	@Inject
 	private ProductLineService service;
 
+	@Inject
+	ProductLineDataTable datatable;
 
 	public ProductLineView() {
-		productLine = new ProductLine();
+		setProductLine(new ProductLine());
 	}
 
 	public List<ProductLine> getProductLines() {
@@ -27,7 +29,7 @@ public class ProductLineView {
 	}
 
 	public String save() {
-		service.save(productLine);
+		service.save(getProductLine());
 		return null;
 	}
 
@@ -39,5 +41,17 @@ public class ProductLineView {
 	public String update(ProductLine productLine) {
 		service.update(productLine);
 		return null;
+	}
+
+	public ProductLineDataTable getDatatable() {
+		return datatable;
+	}
+
+	public ProductLine getProductLine() {
+		return productLine;
+	}
+
+	public void setProductLine(ProductLine productLine) {
+		this.productLine = productLine;
 	}
 }

@@ -14,8 +14,9 @@ public class PaymentView {
 	private Payment payment;
 	@Inject
 	private PaymentService service;
-	private int rowsOnPage;
-	private int allRowsCount = 0;
+
+	@Inject
+	private PaymentDataTable datatable;
 
 	public PaymentView() {
 		payment = new Payment();
@@ -42,6 +43,10 @@ public class PaymentView {
 	public String delete(Payment payment) {
 		service.delete(payment);
 		return null;
+	}
+
+	public PaymentDataTable getDatatable() {
+		return datatable;
 	}
 
 }

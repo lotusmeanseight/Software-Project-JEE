@@ -13,9 +13,12 @@ import java.util.List;
 public class OfficeView {
 
 	private Office office;
+
 	@Inject
 	private OfficeService service;
 
+	@Inject
+	private OfficeDataTable datatable;
 
 	public OfficeView() {
 		setOffice(new Office());
@@ -47,4 +50,9 @@ public class OfficeView {
 		service.update(office);
 		return null;
 	}
+
+	public OfficeDataTable getDatatable() {
+		return datatable;
+	}
+
 }

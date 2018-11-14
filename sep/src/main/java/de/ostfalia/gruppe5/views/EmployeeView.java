@@ -14,6 +14,8 @@ public class EmployeeView {
 	private Employee employee;
 	@Inject
 	private EmployeeService service;
+	@Inject
+	private EmployeeDataTable datatable;
 
 	public EmployeeView() {
 		employee = new Employee();
@@ -32,6 +34,18 @@ public class EmployeeView {
 	public String update(Employee employee) {
 		service.update(employee);
 		return null;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public EmployeeDataTable getDatatable() {
+		return datatable;
 	}
 
 }

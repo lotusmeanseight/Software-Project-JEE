@@ -5,7 +5,6 @@ import de.ostfalia.gruppe5.business.entity.DataModel;
 import de.ostfalia.gruppe5.business.entity.Order;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,10 +17,8 @@ public class OrderView {
 	@Inject
 	private OrderService service;
 
-	private DataModel orderDataModel;
-	private HtmlDataTable table;
-	private int rowsOnPage;
-	private int allRowsCount = 0;
+	@Inject
+	private OrderDataTable datatable;
 
 	public OrderView() {
 		order = new Order();
@@ -48,6 +45,10 @@ public class OrderView {
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+
+	public OrderDataTable getDatatable() {
+		return datatable;
 	}
 
 }

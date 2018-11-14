@@ -13,7 +13,7 @@ public class CustomerView {
 
 	private Customer customer;
 	@Inject
-    private CustomerService service;
+	private CustomerService service;
 	@Inject
 	private CustomerDataTable datatable;
 

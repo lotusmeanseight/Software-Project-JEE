@@ -17,9 +17,9 @@
     </ui:define>
     <ui:define name="content">
 <h:form id="employee_datatable_form">
-    <h:dataTable id="employee_datatable_data" value="#{employeeView.employeeDataModel}" binding="#{employeeView.table}" var="employee" border="1"
+    <h:dataTable id="employee_datatable_data" value="#{employeeView.datatable.dataModel}" binding="#{employeeView.datatable.table}" var="employee" border="1"
                  selectionMode="single" styleClass="table" headerClass="table-header"
-                 rowClasses="table-odd-row,table-even-row" first="0" rows="#{employeeView.rowsOnPage}">
+                 rowClasses="table-odd-row,table-even-row" first="0" rows="#{employeeView.datatable.rowsOnPage}">
         <h:column>
             <f:facet name="header">ID</f:facet>
             <h:outputText id="id" value="#{employee.employeeNumber}"/>
@@ -65,14 +65,14 @@
             <h:commandButton action="#{employeeView.delete(employee)}" value="Loeschen"/>
         </h:column>
         <f:facet name="footer">
-            <h:commandButton value="Erste Seite" action="#{employeeView.goToFirstPage()}"
-                             disabled="#{employeeView.table.first eq 0}" />
-            <h:commandButton value="Vorherige Seite" action="#{employeeView.goToPreviousPage()}"
-                             disabled="#{employeeView.table.first eq 0}" />
-            <h:commandButton value="Nächste Seite" action="#{employeeView.goToNextPage()}"
-                             disabled="#{employeeView.table.first + employeeView.table.rows ge employeeView.table.rowCount}"/>
-            <h:commandButton value="Letzte Seite" action="#{employeeView.goToLastPage()}"
-                             disabled="#{employeeView.table.rows ge employeeView.table.rowCount}" />
+            <h:commandButton value="Erste Seite" action="#{employeeView.datatable.goToFirstPage()}"
+                             disabled="#{employeeView.datatable.table.first eq 0}" />
+            <h:commandButton value="Vorherige Seite" action="#{employeeView.datatable.goToPreviousPage()}"
+                             disabled="#{employeeView.datatable.table.first eq 0}" />
+            <h:commandButton value="Nächste Seite" action="#{employeeView.datatable.goToNextPage()}"
+                             disabled="#{employeeView.datatable.table.first + employeeView.datatable.table.rows ge employeeView.datatable.table.rowCount}"/>
+            <h:commandButton value="Letzte Seite" action="#{employeeView.datatable.goToLastPage()}"
+                             disabled="#{employeeView.datatable.table.rows ge employeeView.datatable.table.rowCount}" />
             <h:commandButton action="employeeInsert" value="Einfuegen" />
         </f:facet>
     </h:dataTable>

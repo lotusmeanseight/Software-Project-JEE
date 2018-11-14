@@ -13,8 +13,12 @@ import java.util.List;
 public class OrderDetailViewCustomerRole {
 
 	private OrderDetail orderDetail;
+	
     @Inject
     private OrderDetailService service;
+    
+    @Inject 
+    private OrderDataTable datatable;
 
     public OrderDetailViewCustomerRole() {
     }
