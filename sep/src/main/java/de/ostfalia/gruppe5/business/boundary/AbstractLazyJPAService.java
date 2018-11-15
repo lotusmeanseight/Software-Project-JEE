@@ -11,7 +11,7 @@ public abstract class AbstractLazyJPAService<T> extends AbstractJPAService<T> {
 
     @RolesAllowed("EMPLOYEE")
     public List<T> getAllTLazy(int first, int max){
-        TypedQuery<T> query = getEntityManager().createNamedQuery(gettClass().getSimpleName() + ".findAll", gettClass());
+        TypedQuery<T> query = getEntityManager().createNamedQuery(getEntityClass().getSimpleName() + ".findAll", getEntityClass());
         query.setFirstResult(first);
         query.setMaxResults(max);
         return query.getResultList();
@@ -19,7 +19,7 @@ public abstract class AbstractLazyJPAService<T> extends AbstractJPAService<T> {
 
     @RolesAllowed("EMPLOYEE")
     public int countT(){
-        Query query = getEntityManager().createNamedQuery(gettClass().getSimpleName() + ".countAll" );
+        Query query = getEntityManager().createNamedQuery(getEntityClass().getSimpleName() + ".countAll" );
         List<Long> resultList = query.getResultList();
         return resultList.get(0).intValue();
     }

@@ -12,7 +12,7 @@ import java.util.List;
 public class OrderDetailService extends AbstractJPAService<OrderDetail> {
 
     public OrderDetailService(){
-        settClass(OrderDetail.class);
+        setEntityClass(OrderDetail.class);
     }
 
     @RolesAllowed({"CUSTOMER", "EMPLOYEE"})

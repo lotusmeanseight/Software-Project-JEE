@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 public class CustomerService extends AbstractLazyJPAService<Customer> {
 
 	public CustomerService() {
-		settClass(Customer.class);
+		setEntityClass(Customer.class);
 
 	}
 

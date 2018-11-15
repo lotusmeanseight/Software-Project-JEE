@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 public class OfficeService extends AbstractLazyJPAService<Office> {
 
 	public OfficeService() {
-		settClass(Office.class);
+		setEntityClass(Office.class);
 	}
 
 }

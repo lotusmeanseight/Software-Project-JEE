@@ -6,21 +6,21 @@ import java.util.List;
 
 public abstract class AbstractJPAService<T> {
 
-    private Class<T> tClass;
+    private Class<T> entityClass;
 
     @PersistenceContext
     private EntityManager entityManager;
 
     public T find(final String id){
-        return getEntityManager().find(tClass, id);
+        return getEntityManager().find(entityClass, id);
     }
 
     public T find(final Integer id){
-        return getEntityManager().find(tClass, id);
+        return getEntityManager().find(entityClass, id);
     }
 
     public List<T> findAll(){
-          return getEntityManager().createQuery("select t from" + tClass.getName() + "t", tClass).getResultList();
+          return getEntityManager().createQuery("select t from" + entityClass.getName() + "t", entityClass).getResultList();
     }
 
     public void save(final T entity){
@@ -43,12 +43,12 @@ public abstract class AbstractJPAService<T> {
         return getEntityManager().merge(entity);
     }
 
-    public Class<T> gettClass() {
-        return tClass;
+    public Class<T> getEntityClass() {
+        return entityClass;
     }
 
-    public void settClass(Class<T> tClass) {
-        this.tClass = tClass;
+    public void setEntityClass(Class<T> entityClass) {
+        this.entityClass = entityClass;
     }
 
 

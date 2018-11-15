@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 public class ProductService extends AbstractLazyJPAService<Product> {
 
 	public ProductService() {
-		settClass(Product.class);
+		setEntityClass(Product.class);
 	}
 
 }

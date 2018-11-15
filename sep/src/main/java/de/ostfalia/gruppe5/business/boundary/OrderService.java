@@ -12,7 +12,7 @@ import java.util.List;
 @Stateless
 public class OrderService extends AbstractLazyJPAService<Order> {
 	public OrderService() {
-		settClass(Order.class);
+		setEntityClass(Order.class);
 	}
 
 	@RolesAllowed("CUSTOMER")
