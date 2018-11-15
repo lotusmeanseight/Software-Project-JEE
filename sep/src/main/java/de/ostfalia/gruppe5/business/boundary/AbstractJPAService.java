@@ -1,9 +1,13 @@
 package de.ostfalia.gruppe5.business.boundary;
 
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@DeclareRoles({"EMPLOYEE, CUSTOMER"})
+@RolesAllowed("EMPLOYEE")
 public abstract class AbstractJPAService<T> {
 
     private Class<T> entityClass;
@@ -51,7 +55,7 @@ public abstract class AbstractJPAService<T> {
         this.entityClass = entityClass;
     }
 
-
+    @RolesAllowed({"EMPLOYEE,CUSTOMER"})
     public EntityManager getEntityManager() {
         return entityManager;
     }
