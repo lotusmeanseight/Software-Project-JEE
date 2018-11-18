@@ -20,7 +20,7 @@ public class Payment implements Serializable {
 
     @Id
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "customerNumber")
     private Customer customerNumber;
 
