@@ -64,7 +64,7 @@ public class Customer {
 	@Size(max = 50)
 	private String country;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "salesRepEmployeeNumber")
 	private Employee salesRepEmployeeNumber;
 
