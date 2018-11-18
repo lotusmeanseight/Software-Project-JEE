@@ -4,6 +4,10 @@ import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @DeclareRoles({"EMPLOYEE, CUSTOMER"})
@@ -24,7 +28,12 @@ public abstract class AbstractJPAService<T> {
     }
 
     public List<T> findAll(){
-          return getEntityManager().createQuery("select t from" + entityClass.getName() + "t", entityClass).getResultList();
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
+        Root<T> root = criteriaQuery.from(entityClass);
+        CriteriaQuery<T> all = criteriaQuery.select(root);
+        TypedQuery<T> allQuery = entityManager.createQuery(all);
+        return allQuery.getResultList();
     }
 
     public void save(final T entity){
