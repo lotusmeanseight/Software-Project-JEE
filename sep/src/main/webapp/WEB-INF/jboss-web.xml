@@ -2,28 +2,25 @@
 
 <jboss-web>
 
-    <security-domain>jaspitest</security-domain>
+	<security-domain>jaspitest</security-domain>
 
 </jboss-web>
+<!-- jaspitest is prepared security domain in WildFly -->
 
 
 
-        jaspitest is prepared security domain in WildFly
+<!-- <security-domain name="jaspitest" cache-type="default"> -->
 
+<!-- 	<authentication-jaspi> -->
 
+<!-- 		<login-module-stack name="dummy"> -->
 
-<security-domain name="jaspitest" cache-type="default">
+<!-- 			<login-module code="Dummy" flag="optional" /> -->
 
-<authentication-jaspi>
+<!-- 		</login-module-stack> -->
 
-    <login-module-stack name="dummy">
+<!-- 		<auth-module code="Dummy" /> -->
 
-        <login-module code="Dummy" flag="optional"/>
+<!-- 	</authentication-jaspi> -->
 
-    </login-module-stack>
-
-    <auth-module code="Dummy"/>
-
-</authentication-jaspi>
-
-</security-domain>
+<!-- </security-domain> -->

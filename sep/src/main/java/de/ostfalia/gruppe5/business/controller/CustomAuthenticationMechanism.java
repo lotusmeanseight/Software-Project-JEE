@@ -27,13 +27,10 @@ public class CustomAuthenticationMechanism implements HttpAuthenticationMechanis
 		// TODO Auto-generated method stub
 		
 		if(request.getHeader("SEP-Authorization") != null) {
-			String data = request.getParameterNames().nextElement();
-			
-			String[] partsOfData = data.split(":");
-			
-			String name = partsOfData[0];
-			String password = partsOfData[1];
-			
+			String name = request.getParameterNames().nextElement();
+			System.out.println("Hiiiiiiiiiiiiiiiiiiiiiiiiiiieeeeeeeeeeeeeeeeeeeeeeerrrrr: " + name);
+			String password = request.getParameter(name);
+			System.out.println("Hiiiiiiiiiiiiiiiiiiiiiiiiiiieeeeeeeeeeeeeeeeeeeeeeerrrrr: " + password);
 			UsernamePasswordCredential credential = new UsernamePasswordCredential(name, password); 
 			
 			CredentialValidationResult result = identityStoreHandler.validate(credential);
@@ -55,7 +52,7 @@ public class CustomAuthenticationMechanism implements HttpAuthenticationMechanis
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return httpMessageContext.doNothing();
 		
 	}
 
