@@ -40,7 +40,7 @@ public class Employee {
 	@Size(max = 100)
 	private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "officeCode")
     private Office officeCode;
 
