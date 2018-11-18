@@ -33,6 +33,7 @@ public abstract class AbstractJPAService<T> {
         Root<T> root = criteriaQuery.from(entityClass);
         CriteriaQuery<T> all = criteriaQuery.select(root);
         TypedQuery<T> allQuery = entityManager.createQuery(all);
+
         return allQuery.getResultList();
     }
 

@@ -2,10 +2,15 @@ package de.ostfalia.gruppe5.business.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class OrderDetailsID implements Serializable {
 
     @Column(name = "orderNumber")

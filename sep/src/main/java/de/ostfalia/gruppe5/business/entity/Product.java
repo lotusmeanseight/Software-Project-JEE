@@ -3,6 +3,9 @@ package de.ostfalia.gruppe5.business.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,8 @@ import java.util.Objects;
         @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")})
 @Entity
 @Table(name = "products")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Product implements Serializable {
 
     @Id

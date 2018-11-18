@@ -3,6 +3,9 @@ package de.ostfalia.gruppe5.business.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -11,6 +14,8 @@ import java.util.Objects;
         @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p")})
 @Entity
 @Table(name = "payments")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Payment implements Serializable {
 
     @Id

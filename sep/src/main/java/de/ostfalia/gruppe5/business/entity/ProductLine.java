@@ -2,6 +2,9 @@ package de.ostfalia.gruppe5.business.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,8 @@ import java.util.Objects;
 		@NamedQuery(name = "ProductLine.findAll", query = "SELECT p FROM ProductLine p") })
 @Entity
 @Table(name = "productlines")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class ProductLine implements Serializable {
 
 	@Id
