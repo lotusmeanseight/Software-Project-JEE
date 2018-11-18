@@ -33,6 +33,7 @@ public class OfficeRessource {
 
     @GET
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Office getOffice(@PathParam("id") Integer id){
         return service.find(id);
     }
