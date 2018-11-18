@@ -3,6 +3,9 @@ package de.ostfalia.gruppe5.business.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +14,8 @@ import java.util.Objects;
 		@NamedQuery(name = "Office.findAll", query = "SELECT o FROM Office o") })
 @Entity
 @Table(name = "offices")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Office {
 
 	@Id
@@ -142,4 +147,5 @@ public class Office {
 		return Objects.hash(getOfficeCode(), employees, getCity(), getPhone(), getAddressLine1(), getAddressLine2(),
 				getState(), getCountry(), getPostalCode(), getTerritory());
 	}
+
 }

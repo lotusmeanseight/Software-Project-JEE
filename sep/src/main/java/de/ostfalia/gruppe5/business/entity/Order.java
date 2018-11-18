@@ -2,6 +2,9 @@ package de.ostfalia.gruppe5.business.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,8 @@ import java.util.Objects;
         @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o")})
 @Entity
 @Table(name = "orders")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Order {
 
     @Id
