@@ -1,6 +1,7 @@
-package de.ostfalia.gruppe5.business.boundary;
+package de.ostfalia.gruppe5.business.boundary.rest;
 
-import de.ostfalia.gruppe5.business.entity.Office;
+import de.ostfalia.gruppe5.business.boundary.ProductLineService;
+import de.ostfalia.gruppe5.business.entity.ProductLine;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -14,26 +15,26 @@ import java.util.List;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-@Path("offices")
-public class OfficeRessource {
+@Path("productlines")
+public class ProductLineRessource {
+
+    public ProductLineRessource(){
+    }
 
     @Inject
-    private OfficeService service;
-
-    public OfficeRessource(){
-    }
+    private ProductLineService service;
 
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Office> getOffices(){
+    public List<ProductLine> getProductLines(){
         return service.findAll();
     }
 
     @GET
     @Path("/{id}")
-    public Office getOffice(@PathParam("id") Integer id){
+    @Produces(MediaType.APPLICATION_JSON)
+    public ProductLine getProductLine(@PathParam("id") String id){
         return service.find(id);
     }
-
 }

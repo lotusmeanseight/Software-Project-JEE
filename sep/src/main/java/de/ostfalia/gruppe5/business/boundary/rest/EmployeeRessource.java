@@ -1,5 +1,6 @@
-package de.ostfalia.gruppe5.business.boundary;
+package de.ostfalia.gruppe5.business.boundary.rest;
 
+import de.ostfalia.gruppe5.business.boundary.EmployeeService;
 import de.ostfalia.gruppe5.business.entity.Employee;
 
 import javax.annotation.security.RolesAllowed;
