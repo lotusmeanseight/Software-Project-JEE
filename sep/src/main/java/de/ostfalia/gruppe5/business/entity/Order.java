@@ -5,6 +5,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +26,11 @@ public class Order {
     @OneToMany(mappedBy = "orderNumber")
     private List<OrderDetail> orderDetails = new ArrayList<>();
 
-    private LocalDateTime orderDate;
+    private LocalDate orderDate;
 
-    private LocalDateTime requiredDate;
+    private LocalDate requiredDate;
 
-    private LocalDateTime shippedDate;
+    private LocalDate shippedDate;
 
     @Size(max = 15)
     private String status;
@@ -52,19 +53,19 @@ public class Order {
         this.orderNumber = orderNumber;
     }
 
-    public LocalDateTime getRequiredDate() {
+    public LocalDate getRequiredDate() {
         return requiredDate;
     }
 
-    public void setRequiredDate(LocalDateTime requiredDate) {
+    public void setRequiredDate(LocalDate requiredDate) {
         this.requiredDate = requiredDate;
     }
 
-    public LocalDateTime getShippedDate() {
+    public LocalDate getShippedDate() {
         return shippedDate;
     }
 
-    public void setShippedDate(LocalDateTime shippedDate) {
+    public void setShippedDate(LocalDate shippedDate) {
         this.shippedDate = shippedDate;
     }
 
@@ -88,11 +89,11 @@ public class Order {
         return customerNumber.getCustomerNumber();
     }
 
-    public LocalDateTime getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -116,5 +117,9 @@ public class Order {
     public int hashCode() {
         return Objects.hash(getOrderNumber(), getOrderDate(), getRequiredDate(), getShippedDate(), getStatus(),
                 getComments(), getCustomerNumber());
+    }
+
+    public void setCustomerNumber(Customer customerNumber) {
+        this.customerNumber = customerNumber;
     }
 }
