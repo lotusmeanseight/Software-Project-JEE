@@ -12,7 +12,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
 
-public class JSONProductLine {
+public class XMLProductLine {
     private ProductLine productLine;
 
     @Before
@@ -25,7 +25,7 @@ public class JSONProductLine {
     }
 
     @Test
-    public void exampleJSON(){
+    public void exampleXML(){
         try {
             JAXBContext context = JAXBContext.newInstance(ProductLine.class);
             Marshaller marshaller = context.createMarshaller();

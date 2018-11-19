@@ -13,7 +13,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
 
-public class JSONEmployee {
+public class XMLEmployee {
     private Employee employee;
 
     @Before
@@ -32,7 +32,7 @@ public class JSONEmployee {
     }
 
     @Test
-    public void exampleJSON(){
+    public void exampleXML(){
         try {
             JAXBContext context = JAXBContext.newInstance(Employee.class);
             Marshaller marshaller = context.createMarshaller();
