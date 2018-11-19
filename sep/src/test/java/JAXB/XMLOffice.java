@@ -1,7 +1,6 @@
 package JAXB;
 
-import de.ostfalia.gruppe5.business.entity.Customer;
-import de.ostfalia.gruppe5.business.entity.Payment;
+import de.ostfalia.gruppe5.business.entity.Office;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,30 +11,28 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 
-public class JSONPayment {
-    private Payment payment;
+public class XMLOffice {
+
+    private Office office;
 
     @Before
     public void setup(){
-        payment = new Payment();
-        payment.setAmount(111.11);
-        payment.setCheckNumber("ASRA");
-        Customer tempCustomer = new Customer();
-        tempCustomer.setCustomerNumber(5000);
-        payment.setCustomerNumber(tempCustomer);
-        payment.setPaymentDate(LocalDate.now());
+        office = new Office();
+        office.setOfficeCode(25);
+        office.setCity("Wolfenbuettel");
+        office.setState("USA");
+        office.setCountry("Deutschland");
+        office.setTerritory("Heideland");
     }
 
-
     @Test
-    public void exampleJSON(){
+    public void exampleXML(){
         try {
-            JAXBContext context = JAXBContext.newInstance(Payment.class);
+            JAXBContext context = JAXBContext.newInstance(Office.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(payment, System.out);
+            marshaller.marshal(office, System.out);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -44,14 +41,14 @@ public class JSONPayment {
     @Test
     public void hasValidMapping(){
         try {
-            JAXBContext context = JAXBContext.newInstance(Payment.class);
+            JAXBContext context = JAXBContext.newInstance(Office.class);
             Marshaller marshaller = context.createMarshaller();
             Unmarshaller unmarshaller = context.createUnmarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            File file = File.createTempFile("test","payment");
-            marshaller.marshal(payment, file);
-            Payment paymentJSON = (Payment) unmarshaller.unmarshal(file);
-            Assert.assertEquals(payment, paymentJSON);
+            File file = File.createTempFile("test","office");
+            marshaller.marshal(office, file);
+            Office officeJSON = (Office) unmarshaller.unmarshal(file);
+            Assert.assertEquals(office, officeJSON);
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (IOException e) {

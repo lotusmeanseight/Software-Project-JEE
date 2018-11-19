@@ -14,16 +14,13 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class JSONOrder {
+public class XMLOrder {
     private Order order;
 
     @Before
     public void setup(){
         order = new Order();
         order.setComments("Funny, Great, Awesome");
-        order.setOrderDate(LocalDate.now());
-        order.setRequiredDate(LocalDate.now());
-        order.setShippedDate(LocalDate.now());
         order.setStatus("Donezo");
         Customer tempCustomer = new Customer();
         tempCustomer.setCustomerNumber(5000);
@@ -32,7 +29,7 @@ public class JSONOrder {
 
 
     @Test
-    public void exampleJSON(){
+    public void exampleXML(){
         try {
             JAXBContext context = JAXBContext.newInstance(Order.class);
             Marshaller marshaller = context.createMarshaller();
