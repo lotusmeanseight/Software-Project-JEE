@@ -79,13 +79,4 @@ public class ProductRessource {
         Product product = productService.find(id);
         return product.getProductLine();
     }
-
-    @GET
-    @Path("/{id}/orderDetails")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<OrderDetail> getProductOrderDetails(@PathParam("id") String id) {
-        Product product = productService.find(id);
-        //TODO Method for getting orderDetails for product
-        return new ArrayList<>();
-    }
 }
