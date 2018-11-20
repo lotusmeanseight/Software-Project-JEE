@@ -4,8 +4,7 @@ import javax.security.enterprise.authentication.mechanism.http.BasicAuthenticati
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@BasicAuthenticationMechanismDefinition
-@ApplicationPath("api")
+@ApplicationPath("/api")
 public class MyApplication extends Application {
     public MyApplication() {
     }
