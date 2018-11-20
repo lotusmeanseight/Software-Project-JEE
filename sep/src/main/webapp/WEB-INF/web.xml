@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/webapp_4_0.xsd"
-         version="4.0">
-	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/webapp_4_0.xsd"
+	version="4.0">
+
 	<security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Application pages</web-resource-name>
-            <url-pattern>/app/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>EMPLOYEE</role-name>
-            <role-name>CUSTOMER</role-name>
-        </auth-constraint>
-    </security-constraint>
-    
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Application pages</web-resource-name>
-            <url-pattern>/app/customerRole/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>CUSTOMER</role-name>
-        </auth-constraint>
-    </security-constraint>
-    
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Application pages</web-resource-name>
-            <url-pattern>/app/employeeRole/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>EMPLOYEE</role-name>
-        </auth-constraint>
-    </security-constraint>
-    
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Rest Services</web-resource-name>
-            <url-pattern>/api/*</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>EMPLOYEE</role-name>
-            <role-name>CUSTOMER</role-name>
-        </auth-constraint>
-    </security-constraint>
-    
-    <security-role>
-        <role-name>CUSTOMER</role-name>
-    </security-role>
-    <security-role>
-        <role-name>EMPLOYEE</role-name>
-    </security-role>
-    
+		<web-resource-collection>
+			<web-resource-name>Application pages</web-resource-name>
+			<url-pattern>/app/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>EMPLOYEE</role-name>
+			<role-name>CUSTOMER</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Application pages</web-resource-name>
+			<url-pattern>/app/customerRole/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>CUSTOMER</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Application pages</web-resource-name>
+			<url-pattern>/app/employeeRole/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>EMPLOYEE</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Rest Services</web-resource-name>
+			<url-pattern>/api/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>EMPLOYEE</role-name>
+			<role-name>CUSTOMER</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-role>
+		<role-name>CUSTOMER</role-name>
+	</security-role>
+	<security-role>
+		<role-name>EMPLOYEE</role-name>
+	</security-role>
+
 	<welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
-    <servlet>
+	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
