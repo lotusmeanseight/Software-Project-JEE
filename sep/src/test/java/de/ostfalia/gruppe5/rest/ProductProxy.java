@@ -1,5 +1,7 @@
 package de.ostfalia.gruppe5.rest;
 
+import de.ostfalia.gruppe5.business.entity.ProductLine;
+
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -29,5 +31,10 @@ public interface ProductProxy {
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    Response putProduct(@PathParam("id") String id,String productJson);
+    Response putProduct(@PathParam("id") String id, String productJson);
+
+    @GET
+    @Path("/{id}/assignedproductLine")
+    @Produces(MediaType.APPLICATION_JSON)
+    ProductLine getProductAssignedProductLine(@PathParam("id") String id);
 }

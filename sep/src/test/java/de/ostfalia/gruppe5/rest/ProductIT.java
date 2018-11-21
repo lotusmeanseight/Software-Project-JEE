@@ -8,10 +8,12 @@ import org.junit.Test;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
+import javax.json.JsonValue;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ProductIT {
@@ -62,12 +64,18 @@ public class ProductIT {
 
     @Test
     public void testPost() {
-        String id ="S01_0000";
+        String id ="";
         ResteasyClient client = (ResteasyClient) ResteasyClientBuilder.newClient();
         ResteasyWebTarget web = client.target(target);
         web.register(new BasicAuthentication(username, password));
         ProductProxy productProxy = web.proxy(ProductProxy.class);
+        JsonArray arrayBefore = productProxy.getAllProducts();
         productProxy.createProduct(this.generateTestProduct(id));
+        JsonArray arrayAfter = productProxy.getAllProducts();
+        id = arrayAfter.get(arrayAfter.size()-1).asJsonObject().getString("productCode");
+        assertNotEquals(arrayBefore.get(arrayBefore.size()-1).asJsonObject().getString("productCode"), id);
+        System.out.println(id);
+        productProxy.deleteProduct(id);
     }
 
     @Test
@@ -84,18 +92,23 @@ public class ProductIT {
 
     @Test
     public void testDeleteSpecific() {
-        String id ="S02_0000";
+        String id ="";
 //        Create product
         ResteasyClient client = (ResteasyClient) ResteasyClientBuilder.newClient();
         ResteasyWebTarget web = client.target(target);
         web.register(new BasicAuthentication(username, password));
         ProductProxy productProxy = web.proxy(ProductProxy.class);
         productProxy.createProduct(this.generateTestProduct(id));
+        JsonArray array = productProxy.getAllProducts();
+        JsonObject jsonForId = array.get(array.size() - 1).asJsonObject();
+        id = jsonForId.getString("productCode");
+        System.out.println("id is "+id);
         JsonObject productById = productProxy.getProductById(id);
         assertEquals(id, productById.get("productCode").toString().replaceAll("\"", ""));
 //        Delete product
         Response response = productProxy.deleteProduct(id);
         assertEquals(200, response.getStatus());
+//        System.out.println(response.readEntity(String.class));
         JsonObject json = response.readEntity(JsonObject.class);
         json.keySet().stream().forEach(key -> System.out.println(key + ": " + json.get(key)));
         assertEquals(id, json.get("productCode").toString().replaceAll("\"", ""));
@@ -104,14 +117,18 @@ public class ProductIT {
 
     @Test
     public void testPut() {
-        String id ="S03_0000";
+        String id ="";
 //        Create Product
         ResteasyClient client = (ResteasyClient) ResteasyClientBuilder.newClient();
         ResteasyWebTarget web = client.target(target);
         web.register(new BasicAuthentication(username, password));
         ProductProxy productProxy = web.proxy(ProductProxy.class);
         productProxy.createProduct(this.generateTestProduct(id,100));
-        JsonObject json = productProxy.getProductById(id);
+//        JsonObject json = productProxy.getProductById(id);
+        JsonArray array = productProxy.getAllProducts();
+        JsonObject json = array.get(array.size() - 1).asJsonObject();
+        id = json.getString("productCode");
+        System.out.println("id is "+id);
         assertEquals(100, json.getInt("quantityInStock"));
 
 //        Modify Product
@@ -122,6 +139,22 @@ public class ProductIT {
 //        Delete product
         Response response = productProxy.deleteProduct(id);
         assertEquals(200, response.getStatus());
+    }
+
+    @Test
+    public void testGetAssignedProductLine(){
+        String id ="";
+//        Create Product
+        ResteasyClient client = (ResteasyClient) ResteasyClientBuilder.newClient();
+        ResteasyWebTarget web = client.target(target);
+        web.register(new BasicAuthentication(username, password));
+        ProductProxy productProxy = web.proxy(ProductProxy.class);
+        JsonArray array = productProxy.getAllProducts();
+        JsonObject jsonForId = array.get(array.size() - 1).asJsonObject();
+        id = jsonForId.getString("productCode");
+        JsonObject productLineDirect = array.get(array.size() - 1).asJsonObject().getJsonObject("productLine");
+        JsonObject productLineIndirect = productProxy.getProductById(id).getJsonObject("productLine");
+        assertEquals(productLineDirect,productLineIndirect);
     }
 
     private boolean validate(JsonObject jsonObject) {

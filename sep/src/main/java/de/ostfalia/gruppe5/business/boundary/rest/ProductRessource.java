@@ -8,6 +8,8 @@ import de.ostfalia.gruppe5.business.entity.ProductLine;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.json.JsonObject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
@@ -24,6 +26,8 @@ public class ProductRessource {
     private ProductLineService productLineService;
     @Context
     private UriInfo uriinfo;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @GET
     @Path("/")
@@ -48,7 +52,7 @@ public class ProductRessource {
         System.out.println(json);
         System.out.println("############# Product");
         Product product = new Product();
-        product.setProductCode(json.getString("productCode"));
+        product.setProductCode(productService.nextID());
         populateProduct(json, product);
         System.out.println("############# ProductLine");
         productService.save(product);
@@ -89,7 +93,14 @@ public class ProductRessource {
             return Response.status(400).build();
         }
         populateProduct(json,product);
-        productService.getEntityManager().merge(product);
+        System.out.println("+++++++++++++++++");
+        System.out.println(product.getProductCode());
+        System.out.println(product.getBuyPrice());
+        System.out.println(product.getMSRP());
+        System.out.println(product.getProductName());
+        System.out.println(product.getQuantityInStock());
+        System.out.println("+++++++++++++++++");
+        productService.update(product);
 
         GenericEntity<Product> entity = new GenericEntity<>(productService.find(id), Product.class);
         return Response.ok().entity(entity).build();
@@ -100,6 +111,7 @@ public class ProductRessource {
      */
     @DELETE
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteProduct(@PathParam("id") String id) {
         System.out.println("############################################### DELETE");
         Product product = productService.find(id);
