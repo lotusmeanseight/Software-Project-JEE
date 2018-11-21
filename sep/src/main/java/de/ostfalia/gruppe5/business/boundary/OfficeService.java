@@ -12,9 +12,9 @@ public class OfficeService extends AbstractLazyJPAService<Office> {
 
 	@Override
 	public void save(Office entity) {
-		TypedQuery<Integer> customerTypedQuery = getEntityManager().createQuery("select MAX(o.officeCode) " +
+		TypedQuery<Integer> officeTypedQuery = getEntityManager().createQuery("select MAX(o.officeCode) " +
 				"from Office o", Integer.class);
-		entity.setOfficeCode(customerTypedQuery.getResultList().get(0)+1);
+		entity.setOfficeCode(officeTypedQuery.getResultList().get(0)+1);
 		super.save(super.update(entity));
 	}
 

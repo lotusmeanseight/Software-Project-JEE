@@ -39,12 +39,6 @@ public class CustomerRessource {
 	public CustomerRessource() {
 	}
 
-	@GET
-	@Path("/hello")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String sayHello() {
-		return "Hello World!";
-	}
 
 	@GET
 	@Path("/")
