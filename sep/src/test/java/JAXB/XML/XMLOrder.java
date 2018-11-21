@@ -1,6 +1,7 @@
-package JAXB;
+package JAXB.XML;
 
-import de.ostfalia.gruppe5.business.entity.ProductLine;
+import de.ostfalia.gruppe5.business.entity.Customer;
+import de.ostfalia.gruppe5.business.entity.Order;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,26 +12,29 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 
-public class XMLProductLine {
-    private ProductLine productLine;
+public class XMLOrder {
+    private Order order;
 
     @Before
     public void setup(){
-        productLine = new ProductLine();
-        productLine.setProductLine("Motorcycles");
-        productLine.setImage(null);
-        productLine.setHtmlDescription("Lorem");
-        productLine.setTextDescription("Ipsum");
+        order = new Order();
+        order.setComments("Funny, Great, Awesome");
+        order.setStatus("Donezo");
+        Customer tempCustomer = new Customer();
+        tempCustomer.setCustomerNumber(5000);
+        order.setCustomerNumber(tempCustomer);
     }
+
 
     @Test
     public void exampleXML(){
         try {
-            JAXBContext context = JAXBContext.newInstance(ProductLine.class);
+            JAXBContext context = JAXBContext.newInstance(Order.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(productLine, System.out);
+            marshaller.marshal(order, System.out);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -39,14 +43,14 @@ public class XMLProductLine {
     @Test
     public void hasValidMapping(){
         try {
-            JAXBContext context = JAXBContext.newInstance(ProductLine.class);
+            JAXBContext context = JAXBContext.newInstance(Order.class);
             Marshaller marshaller = context.createMarshaller();
             Unmarshaller unmarshaller = context.createUnmarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            File file = File.createTempFile("test","productLine");
-            marshaller.marshal(productLine, file);
-            ProductLine productLineJSON = (ProductLine) unmarshaller.unmarshal(file);
-            Assert.assertEquals(productLine, productLineJSON);
+            File file = File.createTempFile("test","order");
+            marshaller.marshal(order, file);
+            Order orderJSON = (Order) unmarshaller.unmarshal(file);
+            Assert.assertEquals(order, orderJSON);
         } catch (JAXBException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -54,4 +58,6 @@ public class XMLProductLine {
         }
 
     }
+
+
 }

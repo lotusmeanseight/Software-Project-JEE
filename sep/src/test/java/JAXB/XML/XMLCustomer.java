@@ -1,4 +1,4 @@
-package JAXB;
+package JAXB.XML;
 
 import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.Employee;
