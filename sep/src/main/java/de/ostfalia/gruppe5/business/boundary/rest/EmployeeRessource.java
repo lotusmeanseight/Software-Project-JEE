@@ -73,7 +73,7 @@ public class EmployeeRessource {
         employee.setReportsTo(json.getInt("reportsTo"));
 
         JsonObject officeJson = json.getJsonObject("officeCode");
-        String officeId = officeJson.getString("officeCode");
+        Integer officeId = Integer.parseInt(officeJson.get("officeCode").toString());
         Office office = this.officeService.find(officeId);
         employee.setOfficeCode(office);
         employee.setJobTitle(json.getString("jobTitle"));
@@ -84,7 +84,7 @@ public class EmployeeRessource {
     @Path("/{id}")
     public Response putEmployee(@PathParam("id") String id, JsonObject json) {
         System.out.println("############################################### PUT");
-        Employee employee = service.find(id);
+        Employee employee = service.find(Integer.parseInt(id));
         String jsonId = json.getString("employeeNumber");
         if (!employee.getEmployeeNumber().equals(jsonId)) {
             System.out.println("################ "+id+" not same as "+jsonId);
@@ -103,7 +103,7 @@ public class EmployeeRessource {
         System.out.println("+++++++++++++++++");
         service.update(employee);
 
-        GenericEntity<Employee> entity = new GenericEntity<>(service.find(id), Employee.class);
+        GenericEntity<Employee> entity = new GenericEntity<>(service.find(Integer.parseInt(id)), Employee.class);
         return Response.ok().entity(entity).build();
     }
 
@@ -112,7 +112,7 @@ public class EmployeeRessource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteProduct(@PathParam("id") String id) {
         System.out.println("############################################### DELETE");
-        Employee employee = service.find(id);
+        Employee employee = service.find(Integer.parseInt(id));
         if (employee == null) {
             return Response.status(404).build();
         }
