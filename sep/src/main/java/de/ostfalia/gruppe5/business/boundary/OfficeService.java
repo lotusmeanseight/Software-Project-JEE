@@ -20,7 +20,6 @@ public class OfficeService extends AbstractLazyJPAService<Office> {
 
 	public Integer nextID(){
 		Integer lastID = this.getEntityManager().createQuery("select MAX(o.officeCode) from Office o", Integer.class).getSingleResult();
-		System.out.println("lastID:"+lastID);
 		lastID++;
 		return lastID;
 	}

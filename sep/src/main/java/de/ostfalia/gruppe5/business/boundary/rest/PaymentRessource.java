@@ -69,7 +69,7 @@ public class PaymentRessource {
     @PUT
     @Path("/{id}")
     public Response putPayment(@PathParam(("id")) String id, JsonObject jsonObject){
-        Payment payment = paymentService.find(id);
+        Payment payment = paymentService.find(Integer.parseInt(id));
         String jsonID = jsonObject.getString("checkNumber");
         if(!payment.getCheckNumber().equals(jsonID)){
             return Response.status(400).build();
@@ -78,7 +78,7 @@ public class PaymentRessource {
         paymentService.update(payment);
 
         GenericEntity<Payment> entity = new GenericEntity<>
-                (paymentService.find(id), Payment.class);
+                (paymentService.find(Integer.parseInt(id)), Payment.class);
         return Response.ok().entity(entity).build();
     }
 
@@ -86,7 +86,7 @@ public class PaymentRessource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deletePayment(@PathParam("id") String id){
-        Payment payment = paymentService.find(id);
+        Payment payment = paymentService.find(Integer.parseInt(id));
         if(payment == null){
             return Response.status(404).build();
         }else{
@@ -101,7 +101,7 @@ public class PaymentRessource {
     @Path("/{id}/assignedCustomer")
     @Produces(MediaType.APPLICATION_JSON)
     public Customer getPaymentAssignedCustomer(@PathParam("id") String id){
-        return paymentService.find(id).getCustomerNumber();
+        return paymentService.find(Integer.parseInt(id)).getCustomerNumber();
     }
 
 }

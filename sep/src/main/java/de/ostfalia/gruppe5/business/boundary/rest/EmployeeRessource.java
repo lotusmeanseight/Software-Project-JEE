@@ -51,14 +51,9 @@ public class EmployeeRessource {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postEmployee(JsonObject json) {
-        System.out.println("############################################### POST");
-        System.out.println(json);
-        System.out.println("############# Employee");
         Employee employee = new Employee();
         populateEmployee(json, employee);
-        System.out.println("############# Office");
         service.save(employee);
-        System.out.println("############# Response");
         Employee parsed = service.find(employee.getEmployeeNumber());
         UriBuilder builder = uriinfo.getRequestUriBuilder();
         URI uri = builder.path(EmployeeRessource.class, "getEmployee").build(parsed.getEmployeeNumber());
@@ -83,24 +78,12 @@ public class EmployeeRessource {
     @PUT
     @Path("/{id}")
     public Response putEmployee(@PathParam("id") String id, JsonObject json) {
-        System.out.println("############################################### PUT");
         Employee employee = service.find(Integer.parseInt(id));
         String jsonId = json.getString("employeeNumber");
         if (!employee.getEmployeeNumber().equals(jsonId)) {
-            System.out.println("################ "+id+" not same as "+jsonId);
             return Response.status(400).build();
         }
         populateEmployee(json,employee);
-        System.out.println("+++++++++++++++++");
-        System.out.println(employee.getEmployeeNumber());
-        System.out.println(employee.getFirstName());
-        System.out.println(employee.getLastName());
-        System.out.println(employee.getEmail());
-        System.out.println(employee.getExtension());
-        System.out.println(employee.getJobTitle());
-        System.out.println(employee.getReportsTo());
-        System.out.println(employee.getOfficeCode());
-        System.out.println("+++++++++++++++++");
         service.update(employee);
 
         GenericEntity<Employee> entity = new GenericEntity<>(service.find(Integer.parseInt(id)), Employee.class);
@@ -110,14 +93,12 @@ public class EmployeeRessource {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteProduct(@PathParam("id") String id) {
-        System.out.println("############################################### DELETE");
+    public Response deleteEmployee(@PathParam("id") String id) {
         Employee employee = service.find(Integer.parseInt(id));
         if (employee == null) {
             return Response.status(404).build();
         }
         GenericEntity<Employee> entity = new GenericEntity<>(employee, Employee.class);
-        //TODO detached entity
         service.deleteById(id);
         return Response.ok().entity(entity).build();
     }

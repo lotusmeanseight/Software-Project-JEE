@@ -22,7 +22,6 @@ public class ProductService extends AbstractLazyJPAService<Product> {
 
 	public String nextID(){
 		String lastID = this.getEntityManager().createQuery("select MAX(p.productCode) from Product p", String.class).getSingleResult();
-		System.out.println("lastID:"+lastID);
 		String[] array = lastID.split("_");
 		String id = array[array.length-1];
 		Integer nextID = Integer.parseInt(id);
@@ -33,7 +32,6 @@ public class ProductService extends AbstractLazyJPAService<Product> {
 			sb.append("_");
 		}
 		sb.append(nextID);
-		System.out.println("nextID:"+sb.toString());
 		return sb.toString();
 	}
 

@@ -48,15 +48,10 @@ public class ProductRessource {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postProduct(JsonObject json) {
-        System.out.println("############################################### POST");
-        System.out.println(json);
-        System.out.println("############# Product");
         Product product = new Product();
         product.setProductCode(productService.nextID());
         populateProduct(json, product);
-        System.out.println("############# ProductLine");
         productService.save(product);
-        System.out.println("############# Response");
         Product parsed = productService.find(product.getProductCode());
         UriBuilder builder = uriinfo.getRequestUriBuilder();
         URI uri = builder.path(ProductRessource.class, "getProduct").build(parsed.getProductCode());
@@ -82,41 +77,27 @@ public class ProductRessource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response putProduct(@PathParam("id") String id, JsonObject json) {
-        System.out.println("############################################### PUT");
         Product product = productService.find(id);
         String jsonId = json.getString("productCode");
         if (!product.getProductCode().equals(jsonId)) {
-            System.out.println("################ "+id+" not same as "+jsonId);
             return Response.status(400).build();
         }
         populateProduct(json,product);
-        System.out.println("+++++++++++++++++");
-        System.out.println(product.getProductCode());
-        System.out.println(product.getBuyPrice());
-        System.out.println(product.getMSRP());
-        System.out.println(product.getProductName());
-        System.out.println(product.getQuantityInStock());
-        System.out.println("+++++++++++++++++");
         productService.update(product);
 
         GenericEntity<Product> entity = new GenericEntity<>(productService.find(id), Product.class);
         return Response.ok().entity(entity).build();
     }
 
-    /*
-     * Delete nur für Produkte die noch nie bestellt wurden!.
-     */
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteProduct(@PathParam("id") String id) {
-        System.out.println("############################################### DELETE");
         Product product = productService.find(id);
         if (product == null) {
             return Response.status(404).build();
         }
         GenericEntity<Product> entity = new GenericEntity<>(product, Product.class);
-        //TODO detached entity
         productService.deleteById(id);
         return Response.ok().build();
     }

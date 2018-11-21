@@ -49,7 +49,7 @@ public class OrderIT extends BasicIT<OrderProxy> {
         web.register(new BasicAuthentication(this.getUsername(), this.getPassword()));
         OrderProxy employeeProxy = web.proxy(OrderProxy.class);
         JsonObject office = employeeProxy.getAssignedCustomer(id);
-        System.out.println(office.toString());
+
         assertEquals(expected, office.toString());
     }
 
@@ -63,7 +63,7 @@ public class OrderIT extends BasicIT<OrderProxy> {
         web.register(new BasicAuthentication(this.getUsername(), this.getPassword()));
         OrderProxy employeeProxy = web.proxy(OrderProxy.class);
         JsonObject office = employeeProxy.getOrderDetails(id);
-        System.out.println(office.toString());
+
         assertEquals(expected, office.toString());
     }
 }

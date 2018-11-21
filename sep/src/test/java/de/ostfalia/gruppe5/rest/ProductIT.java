@@ -45,7 +45,6 @@ public class ProductIT extends BasicIT<ProductProxy> {
         Response response = web.request(MediaType.APPLICATION_JSON).header("SEP-Authorization", this.getUsername() + ":" + this.getPassword()).get();
         assertEquals(200, response.getStatus());
         JsonObject json = response.readEntity(JsonObject.class);
-        json.keySet().stream().forEach(key -> System.out.println(key + ": " + json.get(key)));
         assertEquals(this.getTestId(), json.get(this.getPrimaryKey()).toString().replaceAll("\"", ""));
         response.close();
     }
