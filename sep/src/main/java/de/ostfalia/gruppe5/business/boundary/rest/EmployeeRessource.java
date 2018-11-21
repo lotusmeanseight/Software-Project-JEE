@@ -73,7 +73,7 @@ public class EmployeeRessource {
         employee.setReportsTo(json.getInt("reportsTo"));
 
         JsonObject officeJson = json.getJsonObject("officeCode");
-        String officeId = officeJson.getString("officeCode");
+        Integer officeId = officeJson.getInt("officeCode");
         Office office = this.officeService.find(officeId);
         employee.setOfficeCode(office);
         employee.setJobTitle(json.getString("jobTitle"));
@@ -110,7 +110,7 @@ public class EmployeeRessource {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteProduct(@PathParam("id") String id) {
+    public Response deleteEmployee(@PathParam("id") String id) {
         System.out.println("############################################### DELETE");
         Employee employee = service.find(id);
         if (employee == null) {

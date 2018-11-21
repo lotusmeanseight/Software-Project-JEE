@@ -21,6 +21,12 @@ public class OrderService extends AbstractLazyJPAService<Order> {
 				.getResultList();
 	}
 
+	public Integer nextID(){
+		Integer lastID = this.getEntityManager().createQuery("select MAX(o.orderNumber) from Order o", Integer.class).getSingleResult();
+		System.out.println("lastID:"+lastID);
+		lastID++;
 
+		return lastID;
+	}
 
 }
