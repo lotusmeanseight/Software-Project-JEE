@@ -1,5 +1,6 @@
 package de.ostfalia.gruppe5.rest;
 
+import de.ostfalia.gruppe5.business.entity.ProductLine;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.Response;
 import static org.junit.Assert.assertEquals;
 
 public class ProductIT extends BasicIT<ProductProxy> {
+
     @Before
     public void init() {
         this.setProxyType(ProductProxy.class);
@@ -52,16 +54,13 @@ public class ProductIT extends BasicIT<ProductProxy> {
     public void testGetAssignedProductLine() {
         String id = "";
 //        Create Product
+        String expectedLine = "{\"productLine\":\"Motorcycles\",\"textDescription\":\"Our motorcycles are state of the art replicas of classic as well as contemporary motorcycle legends such as Harley Davidson, Ducati and Vespa. Models contain stunning details such as official logos, rotating wheels, working kickstand, front suspension, gear-shift lever, footbrake lever, and drive chain. Materials used include diecast and plastic. The models range in size from 1:10 to 1:50 scale and include numerous limited edition and several out-of-production vehicles. All models come fully assembled and ready for display in the home or office. Most include a certificate of authenticity.\",\"htmlDescription\":null,\"image\":null}";
         ResteasyClient client = (ResteasyClient) ResteasyClientBuilder.newClient();
         ResteasyWebTarget web = client.target(this.getTarget());
         web.register(new BasicAuthentication(this.getUsername(), this.getPassword()));
         ProductProxy productProxy = web.proxy(ProductProxy.class);
-        JsonArray array = productProxy.getAllEntities();
-        JsonObject jsonForId = array.get(array.size() - 1).asJsonObject();
-        id = jsonForId.getString(this.getPrimaryKey());
-        JsonObject productLineDirect = array.get(array.size() - 1).asJsonObject().getJsonObject("productLine");
-        JsonObject productLineIndirect = productProxy.getEntityById(id).getJsonObject("productLine");
-        assertEquals(productLineDirect, productLineIndirect);
+        JsonObject line = productProxy.getProductAssignedProductLine(this.getTestId());
+        assertEquals(expectedLine, line.toString());
     }
 
 }

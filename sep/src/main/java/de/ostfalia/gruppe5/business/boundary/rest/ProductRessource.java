@@ -80,6 +80,7 @@ public class ProductRessource {
 
     @PUT
     @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response putProduct(@PathParam("id") String id, JsonObject json) {
         System.out.println("############################################### PUT");
         Product product = productService.find(id);
