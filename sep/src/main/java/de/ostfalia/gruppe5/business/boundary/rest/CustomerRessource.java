@@ -40,6 +40,13 @@ public class CustomerRessource {
 	}
 
 	@GET
+	@Path("/hello")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String sayHello() {
+		return "Hello World!";
+	}
+
+	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Customer> getCustomers() {

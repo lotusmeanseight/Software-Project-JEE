@@ -75,10 +75,6 @@ public class ProductRessource {
         JsonObject productLineJson = json.getJsonObject("productLine");
         String productLineId = productLineJson.getString("productLine");
         ProductLine productLine = this.productLineService.find(productLineId);
-//        productLine.setImage(productLineJson.get("image"));
-//        productLine.setProductLine(productLineJson.getString("productLine"));
-//        productLine.setHtmlDescription(productLineJson.get("htmlDescription").toString());
-//        productLine.setTextDescription(productLineJson.getString("textDescription"));
         product.setProductLine(productLine);
     }
 
