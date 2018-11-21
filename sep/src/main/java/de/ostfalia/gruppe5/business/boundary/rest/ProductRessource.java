@@ -111,7 +111,7 @@ public class ProductRessource {
      */
     @DELETE
     @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response deleteProduct(@PathParam("id") String id) {
         System.out.println("############################################### DELETE");
         Product product = productService.find(id);
@@ -121,7 +121,7 @@ public class ProductRessource {
         GenericEntity<Product> entity = new GenericEntity<>(product, Product.class);
         //TODO detached entity
         productService.deleteById(id);
-        return Response.ok().entity(entity).build();
+        return Response.ok().build();
     }
 
     @GET
