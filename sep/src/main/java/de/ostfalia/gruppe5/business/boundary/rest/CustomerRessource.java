@@ -52,6 +52,7 @@ public class CustomerRessource {
 
 	@GET
 	@Path("/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Customer getCustomer(@PathParam("id") Integer id) {
 		return customerService.find(id);
 	}

@@ -2,6 +2,11 @@ package de.ostfalia.gruppe5.business.boundary;
 
 import de.ostfalia.gruppe5.business.entity.ProductLine;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 
@@ -9,6 +14,12 @@ import javax.ejb.Stateless;
 @Stateless
 public class ProductLineService extends AbstractLazyJPAService<ProductLine> {
 
+	private final List<String> letters = new ArrayList<>(
+			Arrays.asList("A", "B", "C", "D", "E", "F", "G",
+					"H", "I", "J", "K", "L", "M", "N", "O", "P",
+					"Q", "R", "S", "T", "U", "V", "W", "X", "Y",
+					"Z"));
+	
 	public ProductLineService() {
 		setEntityClass(ProductLine.class);
 	}
@@ -18,15 +29,24 @@ public class ProductLineService extends AbstractLazyJPAService<ProductLine> {
 		System.out.println("lastID:"+lastID);
 		String[] array = lastID.split("_");
 		String id = array[array.length-1];
-		Integer nextID = Integer.parseInt(id);
-		nextID++;
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < array.length-1; i++) {
-			sb.append(array[i]);
-			sb.append("_");
+		
+		int numberOfLetters = ThreadLocalRandom.current().nextInt(0, 5);
+				
+		int numbers = ThreadLocalRandom.current().nextInt(0, 10);
+		
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < numberOfLetters; i++) {
+			builder.append(letters.get(ThreadLocalRandom
+					.current().nextInt(0, 26)));
 		}
-		sb.append(nextID);
-		System.out.println("nextID:"+sb.toString());
-		return sb.toString();
+
+		for (int i = 0; i < numbers; i++) {
+			builder.append(ThreadLocalRandom.current()
+					.nextInt(1, 10));
+		}
+		
+		builder.append(id);
+		
+		return builder.toString();
 	}
 }
