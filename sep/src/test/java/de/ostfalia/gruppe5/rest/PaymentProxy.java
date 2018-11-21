@@ -7,10 +7,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/employees")
-public interface EmployeeProxy extends BasicProxy {
+@Path("/payments")
+public interface PaymentProxy extends BasicProxy {
     @GET
-    @Path("/{id}/assignedOffice")
+    @Path("/{id}/assignedCustomer")
     @Produces(MediaType.APPLICATION_JSON)
-    JsonObject getAssignedOffice(@PathParam("id") String id);
+    JsonObject getAssignedCustomer(@PathParam("id") String id);
 }

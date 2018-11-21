@@ -18,21 +18,11 @@ public class OfficeService extends AbstractLazyJPAService<Office> {
 		super.save(super.update(entity));
 	}
 
-	public String nextID(){
-		String lastID = this.getEntityManager().createQuery("select MAX(o.officeCode) from Office o", String.class).getSingleResult();
+	public Integer nextID(){
+		Integer lastID = this.getEntityManager().createQuery("select MAX(o.officeCode) from Office o", Integer.class).getSingleResult();
 		System.out.println("lastID:"+lastID);
-		String[] array = lastID.split("_");
-		String id = array[array.length-1];
-		Integer nextID = Integer.parseInt(id);
-		nextID++;
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < array.length-1; i++) {
-			sb.append(array[i]);
-			sb.append("_");
-		}
-		sb.append(nextID);
-		System.out.println("nextID:"+sb.toString());
-		return sb.toString();
+		lastID++;
+		return lastID;
 	}
 
 	public OfficeService() {
