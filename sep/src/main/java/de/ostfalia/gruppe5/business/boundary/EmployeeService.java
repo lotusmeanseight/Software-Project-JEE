@@ -20,7 +20,6 @@ public class EmployeeService extends AbstractLazyJPAService<Employee> {
 
 	public Integer nextID(){
 		Integer lastID = this.getEntityManager().createQuery("select MAX(e.employeeNumber) from Employee e", Integer.class).getSingleResult();
-		System.out.println("lastID:"+lastID);
 		lastID++;
 
 		return lastID;

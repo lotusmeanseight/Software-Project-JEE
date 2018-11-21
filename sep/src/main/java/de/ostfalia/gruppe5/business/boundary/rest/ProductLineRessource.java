@@ -58,15 +58,10 @@ public class ProductLineRessource {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postProductLine(JsonObject json) {
-        System.out.println("############################################### POST");
-        System.out.println(json);
-        System.out.println("############# Product");
         ProductLine productLine = new ProductLine();
         productLine.setProductLine(productLineService.nextID());
         populateProductLine(json, productLine);
-        System.out.println("############# ProductLine");
         productLineService.save(productLine);
-        System.out.println("############# Response");
         ProductLine parsed = productLineService.find(productLine.getProductLine());
         UriBuilder builder = uriinfo.getRequestUriBuilder();
         URI uri = builder.path(ProductLineRessource.class, "getProductLine").build(parsed.getProductLine());
@@ -83,20 +78,12 @@ public class ProductLineRessource {
     @PUT
     @Path("/{id}")
     public Response putProductLine(@PathParam("id") String id, JsonObject json) {
-        System.out.println("############################################### PUT");
         ProductLine productLine = productLineService.find(id);
         String jsonId = json.getString("productLine");
         if (!productLine.getProductLine().equals(jsonId)) {
-            System.out.println("################ "+id+" not same as "+jsonId);
             return Response.status(400).build();
         }
         populateProductLine(json,productLine);
-        System.out.println("+++++++++++++++++");
-        System.out.println(productLine.getProductLine());
-        System.out.println(productLine.getHtmlDescription());
-        System.out.println(productLine.getImage());
-        System.out.println(productLine.getTextDescription());
-        System.out.println("+++++++++++++++++");
         productLineService.update(productLine);
 
         GenericEntity<ProductLine> entity = new GenericEntity<>(productLineService.find(id), ProductLine.class);
@@ -107,13 +94,11 @@ public class ProductLineRessource {
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteProductLine(@PathParam("id") String id) {
-        System.out.println("############################################### DELETE");
         ProductLine productLine = productLineService.find(id);
         if (productLine == null) {
             return Response.status(404).build();
         }
         GenericEntity<ProductLine> entity = new GenericEntity<>(productLine, ProductLine.class);
-        //TODO detached entity
         productLineService.deleteById(id);
         return Response.ok().build();
     }

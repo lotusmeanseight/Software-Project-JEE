@@ -64,9 +64,6 @@ public class OrderRessource {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postOrder(JsonObject json) {
-        System.out.println("############################################### POST");
-        System.out.println(json);
-        System.out.println("############# Product");
         Order order = new Order();
         order.setOrderNumber(service.nextID());
         populateOrder(json, order);
@@ -90,11 +87,9 @@ public class OrderRessource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response putOrder(@PathParam("id") String id, JsonObject json) {
-        System.out.println("############################################### PUT");
         Order order = service.find(id);
         String jsonId = json.getString("orderNumber");
         if (!order.getOrderNumber().equals(jsonId)) {
-            System.out.println("################ "+id+" not same as "+jsonId);
             return Response.status(400).build();
         }
         populateOrder(json,order);
@@ -112,13 +107,11 @@ public class OrderRessource {
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteProduct(@PathParam("id") String id) {
-        System.out.println("############################################### DELETE");
         Order order = service.find(id);
         if (order == null) {
             return Response.status(404).build();
         }
         GenericEntity<Order> entity = new GenericEntity<>(order, Order.class);
-        //TODO detached entity
         service.deleteById(id);
         return Response.ok().build();
     }

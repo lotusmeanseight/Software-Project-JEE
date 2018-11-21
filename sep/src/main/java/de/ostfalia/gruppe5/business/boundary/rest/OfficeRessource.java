@@ -60,9 +60,6 @@ public class OfficeRessource {
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response postOffice(JsonObject json) {
-		System.out.println("############################################### POST");
-		System.out.println(json);
-		System.out.println("############# Office");
 		Office office = new Office();
 		populateOffice(json,office);
 		service.save(office);
@@ -87,13 +84,11 @@ public class OfficeRessource {
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deleteOffice(@PathParam("id") String id) {
-		System.out.println("############################################### DELETE");
 		Office office = service.find(id);
 		if (office == null) {
 			return Response.status(404).build();
 		}
 		GenericEntity<Office> entity = new GenericEntity<>(office, Office.class);
-		//TODO detached entity
 		service.deleteById(id);
 		return Response.ok().entity(entity).build();
 	}
@@ -101,24 +96,12 @@ public class OfficeRessource {
 	@PUT
 	@Path("/{id}")
 	public Response putOffice(@PathParam("id") String id, JsonObject json) {
-		System.out.println("############################################### PUT");
 		Office office = service.find(id);
 		String jsonId = json.getString("officeCode");
 		if (!office.getOfficeCode().equals(jsonId)) {
-			System.out.println("################ "+id+" not same as "+jsonId);
 			return Response.status(400).build();
 		}
 		populateOffice(json,office);
-		System.out.println("+++++++++++++++++");
-		System.out.println(office.getOfficeCode());
-		System.out.println(office.getCity());
-		System.out.println(office.getAddressLine1());
-		System.out.println(office.getAddressLine2());
-		System.out.println(office.getState());
-		System.out.println(office.getCountry());
-		System.out.println(office.getPostalCode());
-		System.out.println(office.getTerritory());
-		System.out.println("+++++++++++++++++");
 		service.update(office);
 
 		GenericEntity<Office> entity = new GenericEntity<>(service.find(id), Office.class);

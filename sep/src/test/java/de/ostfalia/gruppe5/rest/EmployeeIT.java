@@ -50,7 +50,6 @@ public class EmployeeIT extends BasicIT<EmployeeProxy> {
         web.register(new BasicAuthentication(this.getUsername(), this.getPassword()));
         EmployeeProxy employeeProxy = web.proxy(EmployeeProxy.class);
         JsonObject office = employeeProxy.getAssignedOffice(id);
-        System.out.println(office.toString());
         assertEquals(expected, office.toString());
     }
 }

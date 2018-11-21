@@ -32,7 +32,7 @@ public abstract class BasicIT<T extends BasicProxy> {
         web.register(new BasicAuthentication(username, password));
         T proxy = web.proxy(proxyType);
         JsonObject json = proxy.getEntityById(this.testId);
-        System.out.println(json);
+        
 //        json.keySet().stream().forEach(key -> System.out.println(key + ": " + json.get(key)));
         assertEquals(this.testId, json.get(primaryKey).toString().replaceAll("\"", ""));
     }
@@ -45,10 +45,9 @@ public abstract class BasicIT<T extends BasicProxy> {
         T proxy = web.proxy(proxyType);
         JsonArray jsonArray = proxy.getAllEntities();
         jsonArray.stream().forEach(json -> {
-            System.out.println(json);
+            
             JsonObject jsonObject = json.asJsonObject();
             jsonObject.keySet().stream().forEach(key -> assertTrue("object with PK " + jsonObject.get(primaryKey).toString() + " is corrupt", !jsonObject.get(primaryKey).toString().isEmpty()));
-            System.out.println();
         });
     }
 
@@ -92,7 +91,7 @@ public abstract class BasicIT<T extends BasicProxy> {
         JsonObject jsonForId = array.get(array.size() - 1).asJsonObject();
         id = jsonForId.get(primaryKey).toString().replaceAll("\"", "");
         JsonObject productById = proxy.getEntityById(id);
-        System.out.println(productById.get(primaryKey).toString().replaceAll("\"", ""));
+
         assertEquals(id, productById.get(primaryKey).toString().replaceAll("\"", ""));
 //        Delete product
         Response response = proxy.deleteEntity(id);
@@ -113,7 +112,6 @@ public abstract class BasicIT<T extends BasicProxy> {
         id = json.get(primaryKey).toString();
         if (id.contains("\""))
             id = id.replaceAll("\"", "");
-        System.out.println("id is " + id);
         String updateValue = json.get(updateKeyword).toString();
         if (updateValue.contains("\""))
             updateValue = updateValue.replaceAll("\"", "");
@@ -121,12 +119,9 @@ public abstract class BasicIT<T extends BasicProxy> {
 
 //        Modify Product
         String modifiedEntity = this.generateTestEntity(id, "0");
-        System.out.println("+++++++++");
-        System.out.println(modifiedEntity);
         proxy.putEntity(id, modifiedEntity);
         json = proxy.getEntityById(id);
-        System.out.println(json);
-        System.out.println("+++++++++");
+
         updateValue = json.get(updateKeyword).toString();
         if (updateValue.contains("\""))
             updateValue = updateValue.replaceAll("\"", "");
