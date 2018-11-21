@@ -64,7 +64,6 @@ public class OfficeRessource {
 		System.out.println(json);
 		System.out.println("############# Office");
 		Office office = new Office();
-		office.setOfficeCode(Integer.parseInt(service.nextID()));
 		populateOffice(json,office);
 		service.save(office);
 		Office parsed = service.find(office.getOfficeCode());

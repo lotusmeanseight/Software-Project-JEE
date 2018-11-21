@@ -18,6 +18,14 @@ public class EmployeeService extends AbstractLazyJPAService<Employee> {
 		super.save(super.update(entity));
 	}
 
+	public Integer nextID(){
+		Integer lastID = this.getEntityManager().createQuery("select MAX(e.employeeNumber) from Employee e", Integer.class).getSingleResult();
+		System.out.println("lastID:"+lastID);
+		lastID++;
+
+		return lastID;
+	}
+
 	public EmployeeService() {
 		setEntityClass(Employee.class);
 	}
