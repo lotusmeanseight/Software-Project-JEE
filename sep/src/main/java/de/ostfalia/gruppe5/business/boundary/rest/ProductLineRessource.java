@@ -69,7 +69,7 @@ public class ProductLineRessource {
         System.out.println("############# Response");
         ProductLine parsed = productLineService.find(productLine.getProductLine());
         UriBuilder builder = uriinfo.getRequestUriBuilder();
-        URI uri = builder.path(ProductRessource.class, "getProduct").build(parsed.getProductLine());
+        URI uri = builder.path(ProductLineRessource.class, "getProductLine").build(parsed.getProductLine());
         return Response.created(uri).build();
     }
     
