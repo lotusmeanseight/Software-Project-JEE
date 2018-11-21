@@ -76,6 +76,7 @@ public class ProductLineRessource {
     private void populateProductLine(JsonObject json, ProductLine productLine) {
     	productLine.setHtmlDescription(json.getString("htmlDescription"));
     	productLine.setTextDescription(json.getString("textDescription"));
+    	
     	productLine.setImage(json.get("image").toString().getBytes());
     }
     
