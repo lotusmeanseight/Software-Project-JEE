@@ -73,11 +73,7 @@ public class EmployeeRessource {
         employee.setReportsTo(json.getInt("reportsTo"));
 
         JsonObject officeJson = json.getJsonObject("officeCode");
-<<<<<<< HEAD
-        Integer officeId = officeJson.getInt("officeCode");
-=======
         Integer officeId = Integer.parseInt(officeJson.get("officeCode").toString());
->>>>>>> 19f6a41d215cb6a9c9e56e8fc033fd74d4cfa3ba
         Office office = this.officeService.find(officeId);
         employee.setOfficeCode(office);
         employee.setJobTitle(json.getString("jobTitle"));
