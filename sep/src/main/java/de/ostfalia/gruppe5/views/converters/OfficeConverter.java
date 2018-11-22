@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 @FacesConverter(forClass = Office.class, managed = true)
 public class OfficeConverter implements Converter<Office> {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "simple")
     private EntityManager entityManager;
 
 

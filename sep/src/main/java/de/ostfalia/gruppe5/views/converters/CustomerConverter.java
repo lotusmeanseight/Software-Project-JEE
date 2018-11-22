@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 public class CustomerConverter implements Converter<Customer> {
 
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "simple")
     private EntityManager entityManager;
 
     @Override

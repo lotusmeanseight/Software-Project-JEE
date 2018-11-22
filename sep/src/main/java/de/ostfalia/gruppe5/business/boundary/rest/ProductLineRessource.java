@@ -36,8 +36,6 @@ public class ProductLineRessource {
     private ProductLineService productLineService;
     @Context
     private UriInfo uriinfo;
-    @PersistenceContext
-    private EntityManager entityManager;
     
     @GET
     @Path("/")

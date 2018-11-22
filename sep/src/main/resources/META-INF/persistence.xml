@@ -11,4 +11,12 @@
             <!-- <property name="hibernate.hbm2ddl.auto" value="validate"/> -->
         </properties>
     </persistence-unit>
+    
+    <persistence-unit name="BLZ">
+        <jta-data-source>java:jboss/datasources/blzDS</jta-data-source>
+        <properties>
+            <property name="hibernate.show_sql" value="true"/>
+            <!-- <property name="hibernate.hbm2ddl.auto" value="validate"/> -->
+        </properties>
+    </persistence-unit>
 </persistence>

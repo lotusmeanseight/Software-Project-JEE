@@ -18,7 +18,7 @@ public abstract class AbstractJPAService<T> {
 
 	private Class<T> entityClass;
 
-	@PersistenceContext
+	@PersistenceContext(unitName = "simple")
 	private EntityManager entityManager;
 
 	public T find(final String id) {

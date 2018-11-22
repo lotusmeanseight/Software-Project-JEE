@@ -17,7 +17,7 @@ import java.util.HashSet;
 @ApplicationScoped
 public class EmployeeIdentityStore implements IdentityStore {
 
-	@PersistenceContext(name = "simple")
+	@PersistenceContext(unitName = "simple")
 	EntityManager entityManager;
 
 	@Inject

@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 @FacesConverter(forClass = Employee.class, managed = true)
 public class EmployeeConverter implements Converter<Employee> {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "simple")
     private EntityManager entityManager;
 
     @Override

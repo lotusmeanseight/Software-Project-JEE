@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 @FacesConverter(forClass = ProductLine.class, managed = true)
 public class ProductLineConverter implements Converter<ProductLine> {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "simple")
     private EntityManager entityManager;
 
     @Override
