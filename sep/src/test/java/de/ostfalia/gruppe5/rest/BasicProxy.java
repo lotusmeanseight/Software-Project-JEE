@@ -27,12 +27,10 @@ public abstract interface BasicProxy {
 
     @DELETE
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     Response deleteEntity(@PathParam("id") String id);
 
     @DELETE
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     Response deleteEntity(@PathParam("id") Integer id);
 
     @PUT

@@ -30,8 +30,8 @@ public class CustomerIT extends BasicIT<CustomerProxy, Integer> {
         ResteasyClient client = (ResteasyClient) ResteasyClientBuilder.newClient();
         ResteasyWebTarget web = client.target(this.getTarget());
         web.register(new BasicAuthentication(this.getUsername(), this.getPassword()));
-        EmployeeProxy employeeProxy = web.proxy(EmployeeProxy.class);
-        JsonObject office = employeeProxy.getAssignedOffice(id);
-        assertEquals(expected, office.toString());
+        CustomerProxy customerProxy = web.proxy(CustomerProxy.class);
+        JsonObject employee = customerProxy.getAssignedEmployee(id);
+        assertEquals(expected, employee.toString());
     }
 }

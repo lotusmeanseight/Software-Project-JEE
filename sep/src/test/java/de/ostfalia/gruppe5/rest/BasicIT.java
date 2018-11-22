@@ -158,11 +158,10 @@ public abstract class BasicIT<T extends BasicProxy, I> {
         System.out.println("++++++++++++ Generate id+update");
         String newEntity = this.testEntity;
         if (idType==(Integer.class)) {
-            newEntity = newEntity.replaceAll(primaryKeyToken, id.toString());
+            newEntity = newEntity.replaceAll(primaryKeyToken, String.valueOf(id));
         } else if (idType==(String.class)) {
-            newEntity = newEntity.replaceAll(primaryKeyToken, id.toString());
+            newEntity = newEntity.replaceAll(primaryKeyToken, String.valueOf(id));
         }
-
         newEntity = newEntity.replaceAll(updateToken, updateValue);
         return newEntity;
     }
