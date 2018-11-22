@@ -1,63 +1,38 @@
 package de.ostfalia.gruppe5.business.boundary;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
+import de.ostfalia.gruppe5.business.entity.OrderDetail;
 import de.ostfalia.gruppe5.business.entity.Product;
-import de.ostfalia.gruppe5.views.comparators.ProductComparator;
+import de.ostfalia.gruppe5.business.entity.ProductLine;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class ProductService {
-
-	@PersistenceContext
-	EntityManager entityManager;
+public class ProductService extends AbstractLazyJPAService<Product> {
 
 	public ProductService() {
-
+		setEntityClass(Product.class);
 	}
 
-	public void save(Product product) {
-		entityManager.persist(product);
-	}
-
-	public Product findById(String id) {
-		return entityManager.find(Product.class, id);
-	}
-
-	public void deleteById(String id) {
-		entityManager.remove(findById(id));
-	}
-
-	public List<Product> getAllProducts() {
-		return entityManager.createQuery("select p from Product p", Product.class).getResultList();
-	}
-
-	public Product update(Product product) {
-		return entityManager.merge(product);
-	}
-
-	public TreeSet<Product> getAllProductsLazy(int first, int max) {
-		TypedQuery<Product> query = entityManager.createNamedQuery("Product.findAll", Product.class);
-		query.setFirstResult(first);
-		query.setMaxResults(max);
-		TreeSet<Product> treeSet = new TreeSet<Product>(new ProductComparator());
-		for (Product p : query.getResultList()) {
-			treeSet.add(p);
+	public String nextID(){
+		String lastID = this.getEntityManager().createQuery("select MAX(p.productCode) from Product p", String.class).getSingleResult();
+		String[] array = lastID.split("_");
+		String id = array[array.length-1];
+		Integer nextID = Integer.parseInt(id);
+		nextID++;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < array.length-1; i++) {
+			sb.append(array[i]);
+			sb.append("_");
 		}
-		return treeSet;
-	}
-
-	public int countProducts() {
-		Query query = entityManager.createNamedQuery("Product.countAll");
-		return ((Long) query.getSingleResult()).intValue();
+		sb.append(nextID);
+		return sb.toString();
 	}
 
 }

@@ -17,9 +17,9 @@
     </ui:define>
     <ui:define name="content">
 <h:form id="order_datatable_form">
-    <h:dataTable id="order_datatable_data" value="#{orderView.orderDataModel}" binding="#{orderView.table}" var="order" border="1"
+    <h:dataTable id="order_datatable_data" value="#{orderView.datatable.dataModel}" binding="#{orderView.datatable.table}" var="order" border="1"
                  selectionMode="single" styleClass="table" headerClass="table-header"
-                 rowClasses="table-odd-row,table-even-row" first="0" rows="#{orderView.rowsOnPage}">
+                 rowClasses="table-odd-row,table-even-row" first="0" rows="#{orderView.datatable.rowsOnPage}">
         <h:column>
             <f:facet name="header">Bestellnummer</f:facet>
             <h:outputText id="order" value="#{order.orderNumber}"/>
@@ -57,14 +57,14 @@
             </h:commandButton>
         </h:column>
         <f:facet name="footer">
-            <h:commandButton value="Erste Seite" action="#{orderView.goToFirstPage()}"
-                             disabled="#{orderView.table.first eq 0}" />
-            <h:commandButton value="Vorherige Seite" action="#{orderView.goToPreviousPage()}"
-                             disabled="#{orderView.table.first eq 0}" />
-            <h:commandButton value="Nächste Seite" action="#{orderView.goToNextPage()}"
-                             disabled="#{orderView.table.first + orderView.table.rows ge orderView.table.rowCount}"/>
-            <h:commandButton value="Letzte Seite" action="#{orderView.goToLastPage()}"
-                             disabled="#{orderView.table.rows ge orderView.table.rowCount}" />
+            <h:commandButton value="Erste Seite" action="#{orderView.datatable.goToFirstPage()}"
+                             disabled="#{orderView.datatable.table.first eq 0}" />
+            <h:commandButton value="Vorherige Seite" action="#{orderView.datatable.goToPreviousPage()}"
+                             disabled="#{orderView.datatable.table.first eq 0}" />
+            <h:commandButton value="Nächste Seite" action="#{orderView.datatable.goToNextPage()}"
+                             disabled="#{orderView.datatable.table.first + orderView.datatable.table.rows ge orderView.datatable.table.rowCount}"/>
+            <h:commandButton value="Letzte Seite" action="#{orderView.datatable.goToLastPage()}"
+                             disabled="#{orderView.datatable.table.rows ge orderView.datatable.table.rowCount}" />
 
         </f:facet>
     </h:dataTable>

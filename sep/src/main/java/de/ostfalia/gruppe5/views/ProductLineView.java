@@ -1,14 +1,12 @@
 package de.ostfalia.gruppe5.views;
 
-import java.util.List;
+import de.ostfalia.gruppe5.business.boundary.ProductLineService;
+import de.ostfalia.gruppe5.business.entity.ProductLine;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import de.ostfalia.gruppe5.business.entity.ProductLine;
-import de.ostfalia.gruppe5.business.boundary.ProductLineService;
+import java.util.List;
 
 @Named
 @RequestScoped
@@ -19,43 +17,19 @@ public class ProductLineView {
 	@Inject
 	private ProductLineService service;
 
-	private HtmlDataTable table;
-	private int rowsOnPage = 10;
+	@Inject
+	ProductLineDataTable datatable;
 
 	public ProductLineView() {
-		productLine = new ProductLine();
+		setProductLine(new ProductLine());
 	}
 
 	public List<ProductLine> getProductLines() {
-		return service.getAllProductLines();
-	}
-
-	public HtmlDataTable getTable() {
-		return table;
-	}
-
-	public void setTable(HtmlDataTable table) {
-		this.table = table;
-	}
-
-	public int getRowsOnPage() {
-		return rowsOnPage;
-	}
-
-	public void setRowsOnPage(int rowsOnPage) {
-		this.rowsOnPage = rowsOnPage;
-	}
-
-	public ProductLine getProductLine() {
-		return productLine;
-	}
-
-	public void setProductLine(ProductLine productLine) {
-		this.productLine = productLine;
+		return service.findAll();
 	}
 
 	public String save() {
-		service.save(productLine);
+		service.save(getProductLine());
 		return null;
 	}
 
@@ -69,30 +43,15 @@ public class ProductLineView {
 		return null;
 	}
 
-	public void goToFirstPage() {
-		table.setFirst(0);
+	public ProductLineDataTable getDatatable() {
+		return datatable;
 	}
 
-	public void goToPreviousPage() {
-		table.setFirst(table.getFirst() - table.getRows());
+	public ProductLine getProductLine() {
+		return productLine;
 	}
 
-	public void goToNextPage() {
-		table.setFirst(table.getFirst() + table.getRows());
+	public void setProductLine(ProductLine productLine) {
+		this.productLine = productLine;
 	}
-
-	public void goToLastPage() {
-		int totalRows = table.getRowCount();
-		int displayRows = table.getRows();
-		int full = totalRows / displayRows;
-		int modulo = totalRows % displayRows;
-
-		if (modulo > 0) {
-			table.setFirst(full * displayRows);
-		} else {
-			table.setFirst((full - 1) * displayRows);
-		}
-
-	}
-
 }

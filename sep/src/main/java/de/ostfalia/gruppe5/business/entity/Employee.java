@@ -3,6 +3,9 @@ package de.ostfalia.gruppe5.business.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +14,8 @@ import java.util.Objects;
 		@NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e") })
 @Entity
 @Table(name = "employees")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class Employee {
 
     @Id
@@ -35,7 +40,7 @@ public class Employee {
 	@Size(max = 100)
 	private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "officeCode")
     private Office officeCode;
 
@@ -44,23 +49,6 @@ public class Employee {
 	@NotNull
 	@Size(max = 50)
 	private String jobTitle;
-
-	public void addCustomer(Customer customer) {
-		if (customers.contains(customer)) {
-			return;
-		}
-
-		customers.add(customer);
-		customer.setSalesRepEmployeeNumber(this);
-	}
-
-	public void removeCustomer(Customer customer) {
-		if (!customers.contains(customer)) {
-			return;
-		}
-		customers.remove(customer);
-		customer.setSalesRepEmployeeNumber(null);
-	}
 
 	public Integer getEmployeeNumber() {
 		return employeeNumber;

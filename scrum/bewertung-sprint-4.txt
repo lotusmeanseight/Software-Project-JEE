@@ -1,0 +1,13 @@
+Gruppe 5:
+- Kein (rechtzeitiges) selected-product-backlog-4.txt
+- insert.sql im Deployment
+- DataSource-Erzeugung im Deployment
+- DB-Zugriffe akzeptabel
+- Footer je nach Seitengröße über Tabelle
+- Aktualisierung auf 2. Seiten nimmt falsches Entity
+- Employee-Eingabe muss ID vergeben
+- Aktualisieren kann Bild nicht ändern
+- Warum TreeSet mit Comparator?
+Zielerreichung: 50%
+
+

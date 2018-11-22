@@ -18,7 +18,6 @@
         <h1>Einfuegen</h1>
         <h:form>
             <h:panelGrid columns="2">
-                Kundennummer: <h:inputText value="#{customerView.customer.customerNumber}"/>
                 Firma: <h:inputText value="#{customerView.customer.customerName}"/>
                 Name: <h:inputText value="#{customerView.customer.contactLastName}"/>
                 Vorname: <h:inputText value="#{customerView.customer.contactFirstName}"/>
@@ -29,8 +28,7 @@
                 Staat: <h:inputText value="#{customerView.customer.state}"/>
                 Postleitzahl: <h:inputText value="#{customerView.customer.postalCode}"/>
                 Land: <h:inputText value="#{customerView.customer.country}"/>
-                Repräsentant: <h:inputText converter="javax.faces.Integer"
-                                           value="#{customerView.customer.salesRepEmployeeNumber}"/>
+                Repräsentant: <h:inputText value="#{customerView.customer.salesRepEmployeeNumber}"/>
                 Kreditlimit: <h:inputText value="#{customerView.customer.creditLimit}"/>
             </h:panelGrid>
             <h:commandButton action="#{customerView.save}" value="Einfuegen">

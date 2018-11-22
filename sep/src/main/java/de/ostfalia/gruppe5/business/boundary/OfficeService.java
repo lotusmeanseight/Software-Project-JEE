@@ -1,47 +1,31 @@
 package de.ostfalia.gruppe5.business.boundary;
 
-import java.util.List;
+import de.ostfalia.gruppe5.business.entity.Office;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import de.ostfalia.gruppe5.business.entity.Office;
+import javax.persistence.TypedQuery;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class OfficeService {
+public class OfficeService extends AbstractLazyJPAService<Office> {
 
-	@PersistenceContext(name = "simple")
-	EntityManager entityManager;
+	@Override
+	public void save(Office entity) {
+		TypedQuery<Integer> officeTypedQuery = getEntityManager().createQuery("select MAX(o.officeCode) " +
+				"from Office o", Integer.class);
+		entity.setOfficeCode(officeTypedQuery.getResultList().get(0)+1);
+		super.save(super.update(entity));
+	}
+
+	public Integer nextID(){
+		Integer lastID = this.getEntityManager().createQuery("select MAX(o.officeCode) from Office o", Integer.class).getSingleResult();
+		lastID++;
+		return lastID;
+	}
 
 	public OfficeService() {
-
-	}
-
-	public void save(Office office) {
-		entityManager.persist(office);
-	}
-
-	public Office findById(Integer id) {
-		return entityManager.find(Office.class, id);
-	}
-
-	public void deleteById(Integer id) {
-		entityManager.remove(findById(id));
-	}
-
-	public void delete(Office office) {
-		entityManager.remove(entityManager.merge(office));
-	}
-
-	public List<Office> getAllOffices() {
-		return entityManager.createQuery("select o from Office o", Office.class).getResultList();
-	}
-
-	public Office update(Office office) {
-		return entityManager.merge(office);
+		setEntityClass(Office.class);
 	}
 
 }
