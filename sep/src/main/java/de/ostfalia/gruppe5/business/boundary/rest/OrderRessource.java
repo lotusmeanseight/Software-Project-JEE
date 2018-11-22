@@ -72,6 +72,7 @@ public class OrderRessource {
         Order order = new Order();
         order.setOrderNumber(service.nextID());
         populateOrder(json, order);
+        service.update(order);
         service.save(order);
         Order parsed = service.find(order.getOrderNumber());
         UriBuilder builder = uriinfo.getRequestUriBuilder();
@@ -80,14 +81,12 @@ public class OrderRessource {
     }
 
     private void populateOrder(JsonObject json, Order order) {
-        System.out.println("ERROR json:" + json);
-        LocalDate localDate = this.localDateFromJson(json.get("orderDate").asJsonObject());
         order.setOrderDate(localDateFromJson(json.get("orderDate").asJsonObject()));
         order.setShippedDate(localDateFromJson(json.get("shippedDate").asJsonObject()));
         order.setRequiredDate(localDateFromJson(json.get("requiredDate").asJsonObject()));
 
         order.setStatus(json.getString("status"));
-        order.setComments(json.getString("comments"));
+        order.setComments(json.get("comments").toString());
     }
 
     private LocalDate localDateFromJson(JsonObject orderDate) {
@@ -102,7 +101,6 @@ public class OrderRessource {
         String day = orderDate.get("dayOfMonth").toString();
         if (day.length()<2)
             sb.append("0");
-        System.out.println(day);
         sb.append(day);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMMM dd");
         formatter = formatter.withLocale(Locale.US);

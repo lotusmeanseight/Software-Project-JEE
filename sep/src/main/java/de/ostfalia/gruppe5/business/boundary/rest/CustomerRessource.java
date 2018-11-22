@@ -72,8 +72,7 @@ public class CustomerRessource {
     }
 
     private void populateCustomer(JsonObject jsonObject, Customer customer) {
-        System.out.println("ERROR json:"+jsonObject);
-        customer.setCustomerName(jsonObject.getString("customerName"));
+        customer.setCustomerName(jsonObject.get("customerName").toString());
         customer.setState(jsonObject.getString("state"));
         customer.setCreditLimit(Double.parseDouble(jsonObject.get("creditLimit").toString()));
         customer.setPostalCode(jsonObject.getString("postalCode"));

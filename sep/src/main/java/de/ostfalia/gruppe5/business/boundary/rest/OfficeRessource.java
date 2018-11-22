@@ -76,7 +76,7 @@ public class OfficeRessource {
 		office.setAddressLine2(json.getString("addressLine2"));
 		office.setState(json.getString("state"));
 		office.setCountry(json.getString("country"));
-		office.setPostalCode(json.getString("postalCode"));
+		office.setPostalCode(json.get("postalCode").toString());
 		office.setTerritory(json.getString("territory"));
 	}
 

@@ -2,7 +2,7 @@ package de.ostfalia.gruppe5.rest;
 
 import org.junit.Before;
 
-public class OfficeIT extends BasicIT<OfficeProxy, Integer> {
+public class OfficeIT extends BasicIT<OfficeProxy, Integer, String> {
     @Before
     public void init() {
         this.setProxyType(OfficeProxy.class);
@@ -15,9 +15,12 @@ public class OfficeIT extends BasicIT<OfficeProxy, Integer> {
                 "\"addressLine2\":\"Suite 300\"," +
                 "\"state\":\"CA\"," +
                 "\"country\":\"USA\"," +
-                "\"postalCode\":\"" + this.getUpdateToken() + "\"," +
+                "\"postalCode\":" + this.getUpdateToken() + "," +
                 "\"territory\":\"NA\"}");
         this.setUpdateKeyword("postalCode");
         this.setIdType(Integer.class);
+        this.setUpdateType(String.class);
+        this.setUpdateBase("100");
+        this.setUpdateGoal("0");
     }
 }

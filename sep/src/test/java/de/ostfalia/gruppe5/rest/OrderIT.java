@@ -12,15 +12,18 @@ import javax.json.JsonObject;
 
 import static org.junit.Assert.assertEquals;
 
-public class OrderIT extends BasicIT<OrderProxy, Integer> {
+public class OrderIT extends BasicIT<OrderProxy, Integer,String> {
     @Before
     public void init() {
         this.setProxyType(OrderProxy.class);
         this.setTestId(10100);
         this.setPrimaryKey("orderNumber");
-        this.setTestEntity("{\"orderNumber\":"+this.getPrimaryKeyToken()+",\"orderDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":6,\"dayOfWeek\":\"MONDAY\",\"leapYear\":false,\"dayOfMonth\":6,\"monthValue\":1},\"requiredDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":13,\"dayOfWeek\":\"MONDAY\",\"leapYear\":false,\"dayOfMonth\":13,\"monthValue\":1},\"shippedDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":10,\"dayOfWeek\":\"FRIDAY\",\"leapYear\":false,\"dayOfMonth\":10,\"monthValue\":1},\"status\":\"Shipped\",\"comments\":\""+this.getUpdateToken()+"\",\"customerNumber\":363}");
+        this.setTestEntity("{\"orderNumber\":"+this.getPrimaryKeyToken()+",\"orderDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":6,\"dayOfWeek\":\"MONDAY\",\"leapYear\":false,\"dayOfMonth\":6,\"monthValue\":1},\"requiredDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":13,\"dayOfWeek\":\"MONDAY\",\"leapYear\":false,\"dayOfMonth\":13,\"monthValue\":1},\"shippedDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":10,\"dayOfWeek\":\"FRIDAY\",\"leapYear\":false,\"dayOfMonth\":10,\"monthValue\":1},\"status\":\"Shipped\",\"comments\":"+this.getUpdateToken()+",\"customerNumber\":363}");
         this.setUpdateKeyword("comments");
         this.setIdType(Integer.class);
+        this.setUpdateType(String.class);
+        this.setUpdateBase("100");
+        this.setUpdateGoal("0");
     }
 
     @Test

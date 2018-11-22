@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
 
-public class ProductIT extends BasicIT<ProductProxy, String> {
+public class ProductIT extends BasicIT<ProductProxy, String, String> {
 
     @Before
     public void init() {
@@ -22,8 +22,8 @@ public class ProductIT extends BasicIT<ProductProxy, String> {
         this.setProxyType(ProductProxy.class);
         this.setTestId("S10_1678");
         this.setPrimaryKey("productCode");
-        this.setTestEntity("{\"productCode\":\"" + this.getPrimaryKeyToken() + "\"," +
-                "\"productName\":\"" + this.getUpdateToken() + "\"," +
+        this.setTestEntity("{\"productCode\":" + this.getPrimaryKeyToken() + "," +
+                "\"productName\":" + this.getUpdateToken() + "," +
                 "\"productLine\":" +
                 "{\"productLine\":\"Ships\"," +
                 "\"textDescription\":\"The perfect holiday or anniversary gift for executives, clients, friends, and family. These handcrafted model ships are unique, stunning works of art that will be treasured for generations! They come fully assembled and ready for display in the home or office. We guarantee the highest quality, and best value.\"," +
@@ -37,6 +37,9 @@ public class ProductIT extends BasicIT<ProductProxy, String> {
                 "\"msrp\":54.6}");
         this.setUpdateKeyword("productName");
         this.setIdType(String.class);
+        this.setUpdateType(String.class);
+        this.setUpdateBase("100");
+        this.setUpdateGoal("0");
     }
 
     @Test

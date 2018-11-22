@@ -64,7 +64,7 @@ public class EmployeeRessource {
         employee.setLastName(json.getString("lastName"));
         employee.setFirstName(json.getString("firstName"));
         employee.setExtension(json.getString("extension"));
-        employee.setEmail(json.getString("email"));
+        employee.setEmail(json.get("email").toString());
         employee.setReportsTo(json.getInt("reportsTo"));
 
         JsonObject officeJson = json.getJsonObject("officeCode");

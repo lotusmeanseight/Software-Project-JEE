@@ -13,23 +13,26 @@ import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.*;
 
-public abstract class BasicIT<T extends BasicProxy, I> {
+public abstract class BasicIT<T extends BasicProxy, I, U> {
 
+    private I currentEntityID;
+    private I testId;
+    private U updateBase;
+    private U updateGoal;
+    private T proxy;
+    private Class<T> proxyType;
+    private Class<I> idType;
+    private Class<U> updateType;
     private String primaryKey = "";
     private String username = "Bow";
     private String password = "1143";
-    private I testId;
-    private Class<T> proxyType;
-    private Class<I> idType;
     private String target = "http://localhost:8080/sep-gruppe-5/api";
     private String testEntity = "";
     private String updateKeyword = "";
     private String primaryKeyToken = "%pk%";
     private String updateToken = "%update%";
-    private I currentEntityID;
     private ResteasyClient client;
     private ResteasyWebTarget web;
-    private T proxy;
 
 
     public void initEnvironment() {
@@ -37,24 +40,27 @@ public abstract class BasicIT<T extends BasicProxy, I> {
         this.web = this.client.target(this.target);
         this.web.register(new BasicAuthentication(this.username, this.password));
         this.proxy = this.web.proxy(this.proxyType);
-        this.proxy.createEntity(this.generateTestEntity(this.testId, "100"));
+        this.proxy.createEntity(this.generateTestEntity(this.testId, updateBase));
         JsonArray array = this.proxy.getAllEntities();
         JsonObject jsonForId = array.get(array.size() - 1).asJsonObject();
+        U generatedValue = null;
         if (this.idType == (Integer.class)) {
             this.currentEntityID = (I) Integer.valueOf(jsonForId.get(this.primaryKey).toString());
+            generatedValue = (U) (jsonForId.get(this.updateKeyword).toString().replaceAll("\"",""));
         } else if (idType == (String.class)) {
             String idString = jsonForId.getString(this.primaryKey);
             if (idString.contains("\""))
                 idString = idString.replaceAll("\"", "");
             this.currentEntityID = (I) idString;
+            generatedValue = (U) jsonForId.getString(this.updateKeyword).replaceAll("\"","");
         } else {
             assertTrue("Type of primaryKey is not registered, ask for help!!!", false);
         }
+        assertEquals(this.updateBase, generatedValue);
 
+        if (idType == (Integer.class)) {
 
-        if (idType==(Integer.class)) {
-
-        } else if (idType==(String.class)) {
+        } else if (idType == (String.class)) {
 
         }
     }
@@ -76,12 +82,12 @@ public abstract class BasicIT<T extends BasicProxy, I> {
     public void testGetSpecific() {
         this.initEnvironment();
         JsonObject json;
-        if (idType==(Integer.class)) {
+        if (idType == (Integer.class)) {
             json = proxy.getEntityById((Integer) this.testId);
             assertEquals(this.testId, json.getInt(primaryKey));
-        } else if (idType==(String.class)) {
+        } else if (idType == (String.class)) {
             json = proxy.getEntityById((String) this.testId);
-            assertEquals(this.testId, json.getString(primaryKey));
+            assertEquals(this.testId, json.getString(primaryKey).replaceAll("\"",""));
         }
         this.cleanup();
     }
@@ -133,36 +139,42 @@ public abstract class BasicIT<T extends BasicProxy, I> {
         this.initEnvironment();
 //        Modify Product
 
-        String modifiedEntity = this.generateTestEntity(this.currentEntityID, "0");
+        String modifiedEntity = this.generateTestEntity(this.currentEntityID, updateGoal);
         JsonObject json = null;
-        if (idType==(Integer.class)) {
+        if (idType == (Integer.class)) {
             proxy.putEntity((Integer) this.currentEntityID, modifiedEntity);
             json = proxy.getEntityById((Integer) this.currentEntityID);
-        } else if (idType==(String.class)) {
+        } else if (idType == (String.class)) {
             proxy.putEntity((String) this.currentEntityID, modifiedEntity);
             json = proxy.getEntityById((String) this.currentEntityID);
         }
         System.out.println(json);
+        U updateValue = null;
+        if (idType == (Integer.class)) {
+            System.out.println("int:" + json.get(updateKeyword));
+            updateValue = (U) String.valueOf(json.get(updateKeyword)).replaceAll("\"","");
+        } else if (idType == (String.class)) {
+            System.out.println("string:" + json.get(updateKeyword));
+            updateValue = (U) json.getString(updateKeyword).replaceAll("\"","");
+        }
 
-        String updateValue = json.get(updateKeyword).toString();
-        System.out.println("updateValue: " + updateValue);
-        String quotationToken = "\"";
-        if (updateValue.contains(quotationToken))
-            updateValue = updateValue.replaceAll(quotationToken, "");
-        System.out.println("updateValue: " + updateValue);
-        assertEquals("0", updateValue);
+        assertEquals(updateGoal, updateValue);
         this.cleanup();
     }
 
-    public String generateTestEntity(I id, String updateValue) {
+    public String generateTestEntity(I id, U updateValue) {
         System.out.println("++++++++++++ Generate id+update");
         String newEntity = this.testEntity;
-        if (idType==(Integer.class)) {
+        if (idType == (Integer.class)) {
             newEntity = newEntity.replaceAll(primaryKeyToken, String.valueOf(id));
-        } else if (idType==(String.class)) {
-            newEntity = newEntity.replaceAll(primaryKeyToken, String.valueOf(id));
+        } else if (idType == (String.class)) {
+            newEntity = newEntity.replaceAll(primaryKeyToken, "\"" + String.valueOf(id) + "\"");
         }
-        newEntity = newEntity.replaceAll(updateToken, updateValue);
+        if (idType == (Integer.class)) {
+            newEntity = newEntity.replaceAll(updateToken, String.valueOf(updateValue));
+        } else if (idType == (String.class)) {
+            newEntity = newEntity.replaceAll(updateToken, "\"" + String.valueOf(updateValue) + "\"");
+        }
         System.out.println(newEntity);
         return newEntity;
     }
@@ -242,5 +254,30 @@ public abstract class BasicIT<T extends BasicProxy, I> {
 
     public void setIdType(Class<I> idType) {
         this.idType = idType;
+    }
+
+    public U getUpdateBase() {
+        return updateBase;
+    }
+
+    public void setUpdateBase(U updateBase) {
+        this.updateBase = updateBase;
+    }
+
+    public U getUpdateGoal() {
+        return updateGoal;
+    }
+
+    public void setUpdateGoal(U updateGoal) {
+        this.updateGoal = updateGoal;
+    }
+
+    public Class<U> getUpdateType() {
+        return updateType;
+    }
+
+    public void setUpdateType(Class<U> updateType) {
+        System.out.println("+++++++++++ setUpdateType to " + updateType);
+        this.updateType = updateType;
     }
 }

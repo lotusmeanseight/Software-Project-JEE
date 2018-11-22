@@ -14,7 +14,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
@@ -61,8 +63,8 @@ public class PaymentRessource {
     }
 
     private void populatePayment(JsonObject jsonObject, Payment payment){
-        payment.setPaymentDate(LocalDate.parse(jsonObject.get("paymentDate").toString()));
-        payment.setAmount(Double.parseDouble(jsonObject.getString("amount")));
+        payment.setPaymentDate(this.localDateFromJson(jsonObject.get("paymentDate").asJsonObject()));
+        payment.setAmount(Double.parseDouble(jsonObject.get("amount").toString()));
         payment.setCustomerNumber((Customer) jsonObject.get("customerNumber"));
     }
 
@@ -109,4 +111,22 @@ public class PaymentRessource {
         return payments.get(0).getCustomerNumber();
     }
 
+    private LocalDate localDateFromJson(JsonObject orderDate) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(orderDate.get("year"));
+        sb.append(" ");
+        String monthCaps = orderDate.getString("month");
+        String monthLower = monthCaps.toLowerCase();
+        String monthGood = monthLower.substring(0, 1).toUpperCase() + monthLower.substring(1);
+        sb.append(monthGood);
+        sb.append(" ");
+        String day = orderDate.get("dayOfMonth").toString();
+        if (day.length()<2)
+            sb.append("0");
+        sb.append(day);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMMM dd");
+        formatter = formatter.withLocale(Locale.US);
+        LocalDate date = LocalDate.parse(sb.toString(), formatter);
+        return date;
+    }
 }
