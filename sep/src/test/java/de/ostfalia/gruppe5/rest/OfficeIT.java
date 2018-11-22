@@ -2,11 +2,11 @@ package de.ostfalia.gruppe5.rest;
 
 import org.junit.Before;
 
-public class OfficeIT extends BasicIT<OfficeProxy> {
+public class OfficeIT extends BasicIT<OfficeProxy, Integer> {
     @Before
     public void init() {
         this.setProxyType(OfficeProxy.class);
-        this.setTestId("1");
+        this.setTestId(1);
         this.setPrimaryKey("officeCode");
         this.setTestEntity("{\"officeCode\":" + this.getPrimaryKeyToken() + "," +
                 "\"city\":\"San Francisco\"," +
@@ -18,5 +18,6 @@ public class OfficeIT extends BasicIT<OfficeProxy> {
                 "\"postalCode\":\"" + this.getUpdateToken() + "\"," +
                 "\"territory\":\"NA\"}");
         this.setUpdateKeyword("postalCode");
+        this.setIdType(Integer.class);
     }
 }

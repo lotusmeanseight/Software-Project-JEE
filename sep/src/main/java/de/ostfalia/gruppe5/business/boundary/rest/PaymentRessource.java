@@ -18,7 +18,7 @@ import java.util.List;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-@Path("payments")
+@Path("/payments")
 public class PaymentRessource {
 
     @Inject
@@ -61,7 +61,7 @@ public class PaymentRessource {
     }
 
     private void populatePayment(JsonObject jsonObject, Payment payment){
-        payment.setPaymentDate(LocalDate.parse(jsonObject.getString("paymentDate")));
+        payment.setPaymentDate(LocalDate.parse(jsonObject.get("paymentDate").toString()));
         payment.setAmount(Double.parseDouble(jsonObject.getString("amount")));
         payment.setCustomerNumber((Customer) jsonObject.get("customerNumber"));
     }
@@ -69,7 +69,7 @@ public class PaymentRessource {
     @PUT
     @Path("/{id}")
     public Response putPayment(@PathParam(("id")) String id, JsonObject jsonObject){
-        Payment payment = paymentService.find(Integer.parseInt(id));
+        Payment payment = paymentService.find(id);
         String jsonID = jsonObject.getString("checkNumber");
         if(!payment.getCheckNumber().equals(jsonID)){
             return Response.status(400).build();
@@ -78,7 +78,7 @@ public class PaymentRessource {
         paymentService.update(payment);
 
         GenericEntity<Payment> entity = new GenericEntity<>
-                (paymentService.find(Integer.parseInt(id)), Payment.class);
+                (paymentService.find(id), Payment.class);
         return Response.ok().entity(entity).build();
     }
 
@@ -86,7 +86,7 @@ public class PaymentRessource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deletePayment(@PathParam("id") String id){
-        Payment payment = paymentService.find(Integer.parseInt(id));
+        Payment payment = paymentService.find(id);
         if(payment == null){
             return Response.status(404).build();
         }else{
@@ -101,7 +101,12 @@ public class PaymentRessource {
     @Path("/{id}/assignedCustomer")
     @Produces(MediaType.APPLICATION_JSON)
     public Customer getPaymentAssignedCustomer(@PathParam("id") String id){
-        return paymentService.find(Integer.parseInt(id)).getCustomerNumber();
+        System.out.println("ERROR with id "+id);
+        List<Payment> payments = paymentService.findByCheckNumber(id);
+        System.out.println("ERROR payment "+payments.size());
+        payments.stream().forEach(System.out::println);
+        System.out.println("ERROR payment "+payments.get(0));
+        return payments.get(0).getCustomerNumber();
     }
 
 }

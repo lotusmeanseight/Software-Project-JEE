@@ -8,17 +8,17 @@ import org.jboss.resteasy.client.jaxrs.internal.BasicAuthentication;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
 
-public class ProductIT extends BasicIT<ProductProxy> {
+public class ProductIT extends BasicIT<ProductProxy, String> {
 
     @Before
     public void init() {
+        System.out.println("Before ProductIT");
         this.setProxyType(ProductProxy.class);
         this.setTestId("S10_1678");
         this.setPrimaryKey("productCode");
@@ -36,6 +36,7 @@ public class ProductIT extends BasicIT<ProductProxy> {
                 "\"buyPrice\":33.3," +
                 "\"msrp\":54.6}");
         this.setUpdateKeyword("productName");
+        this.setIdType(String.class);
     }
 
     @Test

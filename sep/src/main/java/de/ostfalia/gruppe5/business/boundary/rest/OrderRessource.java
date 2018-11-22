@@ -1,9 +1,10 @@
 package de.ostfalia.gruppe5.business.boundary.rest;
 
+import de.ostfalia.gruppe5.business.boundary.OrderDetailService;
 import de.ostfalia.gruppe5.business.boundary.OrderService;
-import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.CustomerUser;
 import de.ostfalia.gruppe5.business.entity.Order;
+import de.ostfalia.gruppe5.business.entity.OrderDetail;
 
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
@@ -19,7 +20,7 @@ import java.util.List;
 @DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
 @RolesAllowed("EMPLOYEE")
 @Stateless
-@Path("orders")
+@Path("/orders")
 public class OrderRessource {
 
     public OrderRessource(){
@@ -30,6 +31,9 @@ public class OrderRessource {
 
     @Inject
     private OrderService service;
+
+    @Inject
+    private OrderDetailService orderDetailService;
 
     @Context
     private UriInfo uriinfo;
@@ -86,9 +90,9 @@ public class OrderRessource {
     @PUT
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response putOrder(@PathParam("id") String id, JsonObject json) {
+    public Response putOrder(@PathParam("id") Integer id, JsonObject json) {
         Order order = service.find(id);
-        String jsonId = json.getString("orderNumber");
+        Integer jsonId = json.getInt("orderNumber");
         if (!order.getOrderNumber().equals(jsonId)) {
             return Response.status(400).build();
         }
@@ -106,13 +110,30 @@ public class OrderRessource {
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response deleteProduct(@PathParam("id") String id) {
+    public Response deleteProduct(@PathParam("id") Integer id) {
         Order order = service.find(id);
         if (order == null) {
             return Response.status(404).build();
         }
-        GenericEntity<Order> entity = new GenericEntity<>(order, Order.class);
         service.deleteById(id);
         return Response.ok().build();
+    }
+
+    @GET
+    @Path("/{id}/assignedCustomer")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Integer getAssignedCustomer(@PathParam("id") Integer id){
+        Order order = service.find(id);
+        return order.getCustomerNumber();
+    }
+
+
+    @GET
+    @Path("/{id}/orderDetails")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<OrderDetail> getOrderDetails(@PathParam("id") Integer id){
+        Order order = service.find(id);
+        Integer orderNumber = order.getOrderNumber();
+        return orderDetailService.getAllOrderDetails(orderNumber);
     }
 }

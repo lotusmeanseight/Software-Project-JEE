@@ -1,5 +1,6 @@
 package de.ostfalia.gruppe5.rest;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,10 +13,10 @@ public interface OrderProxy extends BasicProxy {
     @GET
     @Path("/{id}/assignedCustomer")
     @Produces(MediaType.APPLICATION_JSON)
-    JsonObject getAssignedCustomer(@PathParam("id") String id);
+    Integer getAssignedCustomer(@PathParam("id") Integer id);
 
     @GET
     @Path("/{id}/orderDetails")
     @Produces(MediaType.APPLICATION_JSON)
-    JsonObject getOrderDetails(@PathParam("id") String id);
+    JsonArray getOrderDetails(@PathParam("id") Integer id);
 }

@@ -36,8 +36,6 @@ public class ProductLineRessource {
     private ProductLineService productLineService;
     @Context
     private UriInfo uriinfo;
-    @PersistenceContext
-    private EntityManager entityManager;
     
     @GET
     @Path("/")
@@ -98,7 +96,6 @@ public class ProductLineRessource {
         if (productLine == null) {
             return Response.status(404).build();
         }
-        GenericEntity<ProductLine> entity = new GenericEntity<>(productLine, ProductLine.class);
         productLineService.deleteById(id);
         return Response.ok().build();
     }
