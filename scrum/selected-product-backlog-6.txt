@@ -1,0 +1,33 @@
+Product Backlog
+Gruppe 5
+
+Software Engineering Projekt: Realisierung eines Warenwirtschaftssystems
+
+Projektstart: 27.09.2018
+Projektende: 20.12.2018
+
+=================================================
+
+Sprint 6 - Bestellungs- und Zahlungssystem
+
+Sprintanfang: 22.11.2018
+Sprintende: 5.12.2018 (24.00 Uhr)
+
+• Die Intergrationstests für die REST API refactoren
+	- Generische Proxies erweitern und verbessern.
+	- Readability verbessern.
+	- Regex anpassen
+• Unterschiedliche Fehler in den REST Endpunkten beheben.
+• REST Endpunkt für Order erweitern
+	- Funktionalitäten für Kunden hinzufügen.
+• Realisierung eines Bestellungssystems für Mitarbeiter und Kunden
+	- Über JSF Oberfläche als auch für den REST Endpunkt
+		- Mitarbeiter für nicht Authentifizierte Kunden
+		- Authentifzierte Kunden können selber ihre Bestellungen ausführen.
+		- Zahlungen benötigen IBAN oder Bankleitzahl und Kontnummer
+	- Bean Validation Constraint für IBAN und Bankleitzahl Validierung
+		- Gültigkeit IBAN und Bankleitzahl feststellen
+	- Payments Tabelle für Scheckeinreichungen und Überweisungen über JMS realisiert.
+• Payments nach Zahlungen aus steuernachweislichen Gründen 
+nicht mehr überarbeitbar, also Anpassung des REST Endpunktes und der Tabelle auf der JSF Oberfläche.
+	- Entfernung von Lösch- und Update Funktionalitäten für Payments.
