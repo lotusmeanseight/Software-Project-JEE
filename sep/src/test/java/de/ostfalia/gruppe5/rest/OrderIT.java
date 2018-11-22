@@ -18,7 +18,7 @@ public class OrderIT extends BasicIT<OrderProxy, Integer> {
         this.setProxyType(OrderProxy.class);
         this.setTestId(10100);
         this.setPrimaryKey("orderNumber");
-        this.setTestEntity("{\"orderNumber\":"+this.getPrimaryKey()+",\"orderDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":6,\"dayOfWeek\":\"MONDAY\",\"leapYear\":false,\"dayOfMonth\":6,\"monthValue\":1},\"requiredDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":13,\"dayOfWeek\":\"MONDAY\",\"leapYear\":false,\"dayOfMonth\":13,\"monthValue\":1},\"shippedDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":10,\"dayOfWeek\":\"FRIDAY\",\"leapYear\":false,\"dayOfMonth\":10,\"monthValue\":1},\"status\":\"Shipped\",\"comments\":"+this.getUpdateToken()+",\"customerNumber\":363}");
+        this.setTestEntity("{\"orderNumber\":"+this.getPrimaryKeyToken()+",\"orderDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":6,\"dayOfWeek\":\"MONDAY\",\"leapYear\":false,\"dayOfMonth\":6,\"monthValue\":1},\"requiredDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":13,\"dayOfWeek\":\"MONDAY\",\"leapYear\":false,\"dayOfMonth\":13,\"monthValue\":1},\"shippedDate\":{\"year\":2003,\"month\":\"JANUARY\",\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"},\"era\":\"CE\",\"dayOfYear\":10,\"dayOfWeek\":\"FRIDAY\",\"leapYear\":false,\"dayOfMonth\":10,\"monthValue\":1},\"status\":\"Shipped\",\"comments\":\""+this.getUpdateToken()+"\",\"customerNumber\":363}");
         this.setUpdateKeyword("comments");
         this.setIdType(Integer.class);
     }
@@ -27,13 +27,11 @@ public class OrderIT extends BasicIT<OrderProxy, Integer> {
     public void testGetAssignedCustomer() {
         Integer id = this.getTestId();
         Integer expected = 363;
-//        Create Product
         ResteasyClient client = (ResteasyClient) ResteasyClientBuilder.newClient();
         ResteasyWebTarget web = client.target(this.getTarget());
         web.register(new BasicAuthentication(this.getUsername(), this.getPassword()));
         OrderProxy orderProxy = web.proxy(OrderProxy.class);
         Integer customer = orderProxy.getAssignedCustomer(id);
-        System.out.println(customer);
         assertEquals(expected, customer);
     }
 
@@ -50,9 +48,6 @@ public class OrderIT extends BasicIT<OrderProxy, Integer> {
         web.register(new BasicAuthentication(this.getUsername(), this.getPassword()));
         OrderProxy orderProxy = web.proxy(OrderProxy.class);
         JsonArray orderDetails = orderProxy.getOrderDetails(id);
-        System.out.println(orderDetails);
-        System.out.println(orderDetails.size());
-        orderDetails.stream().forEach(System.out::println);
         for (int i = 0; i < expected.length; i++) {
             assertEquals(expected[i],orderDetails.get(i).toString());
         }

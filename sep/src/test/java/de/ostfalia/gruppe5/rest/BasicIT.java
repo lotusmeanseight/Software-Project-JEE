@@ -163,6 +163,7 @@ public abstract class BasicIT<T extends BasicProxy, I> {
             newEntity = newEntity.replaceAll(primaryKeyToken, String.valueOf(id));
         }
         newEntity = newEntity.replaceAll(updateToken, updateValue);
+        System.out.println(newEntity);
         return newEntity;
     }
 
