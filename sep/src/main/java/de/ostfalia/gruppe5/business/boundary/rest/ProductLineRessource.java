@@ -81,7 +81,6 @@ public class ProductLineRessource {
         if (productLine == null) {
             return Response.status(404).build();
         }
-        GenericEntity<ProductLine> entity = new GenericEntity<>(productLine, ProductLine.class);
         productLineService.deleteById(id);
         return Response.ok().build();
     }

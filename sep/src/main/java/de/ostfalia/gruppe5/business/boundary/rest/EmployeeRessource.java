@@ -16,7 +16,7 @@ import java.util.List;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-@Path("employees")
+@Path("/employees")
 public class EmployeeRessource {
 
     @Inject
@@ -63,7 +63,7 @@ public class EmployeeRessource {
         employee.setLastName(json.getString("lastName"));
         employee.setFirstName(json.getString("firstName"));
         employee.setExtension(json.getString("extension"));
-        employee.setEmail(json.getString("email"));
+        employee.setEmail(json.get("email").toString());
         employee.setReportsTo(json.getInt("reportsTo"));
 
         JsonObject officeJson = json.getJsonObject("officeCode");
@@ -76,24 +76,24 @@ public class EmployeeRessource {
 
     @PUT
     @Path("/{id}")
-    public Response putEmployee(@PathParam("id") String id, JsonObject json) {
-        Employee employee = service.find(Integer.parseInt(id));
-        String jsonId = json.getString("employeeNumber");
+    public Response putEmployee(@PathParam("id") Integer id, JsonObject json) {
+        Employee employee = service.find(id);
+        int jsonId = json.getInt("employeeNumber");
         if (!employee.getEmployeeNumber().equals(jsonId)) {
             return Response.status(400).build();
         }
         populateEmployee(json,employee);
         service.update(employee);
 
-        GenericEntity<Employee> entity = new GenericEntity<>(service.find(Integer.parseInt(id)), Employee.class);
+        GenericEntity<Employee> entity = new GenericEntity<>(service.find(id), Employee.class);
         return Response.ok().entity(entity).build();
     }
 
     @DELETE
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteEmployee(@PathParam("id") String id) {
-        Employee employee = service.find(Integer.parseInt(id));
+    public Response deleteEmployee(@PathParam("id") Integer id) {
+        Employee employee = service.find(id);
         if (employee == null) {
             return Response.status(404).build();
         }
@@ -102,5 +102,11 @@ public class EmployeeRessource {
         return Response.ok().entity(entity).build();
     }
 
-
+    @GET
+    @Path("/{id}/assignedOffice")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Office getAssignedOffice(@PathParam("id") Integer id){
+        Employee employee = service.find(id);
+        return employee.getOfficeCode();
+    }
 }

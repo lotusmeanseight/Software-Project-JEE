@@ -68,14 +68,14 @@ public class OfficeRessource {
 		office.setAddressLine2(json.getString("addressLine2"));
 		office.setState(json.getString("state"));
 		office.setCountry(json.getString("country"));
-		office.setPostalCode(json.getString("postalCode"));
+		office.setPostalCode(json.get("postalCode").toString());
 		office.setTerritory(json.getString("territory"));
 	}
 
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteOffice(@PathParam("id") String id) {
+	public Response deleteOffice(@PathParam("id") Integer id) {
 		Office office = service.find(id);
 		if (office == null) {
 			return Response.status(404).build();
@@ -87,9 +87,9 @@ public class OfficeRessource {
 
 	@PUT
 	@Path("/{id}")
-	public Response putOffice(@PathParam("id") String id, JsonObject json) {
+	public Response putOffice(@PathParam("id") Integer id, JsonObject json) {
 		Office office = service.find(id);
-		String jsonId = json.getString("officeCode");
+		int jsonId = json.getInt("officeCode");
 		if (!office.getOfficeCode().equals(jsonId)) {
 			return Response.status(400).build();
 		}
