@@ -1,6 +1,8 @@
 package JAXB.XML;
 
-import de.ostfalia.gruppe5.business.entity.*;
+import de.ostfalia.gruppe5.business.entity.Order;
+import de.ostfalia.gruppe5.business.entity.OrderDetail;
+import de.ostfalia.gruppe5.business.entity.Product;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -4,7 +4,6 @@ import de.ostfalia.gruppe5.business.boundary.EmployeeService;
 import de.ostfalia.gruppe5.business.boundary.OfficeService;
 import de.ostfalia.gruppe5.business.entity.Employee;
 import de.ostfalia.gruppe5.business.entity.Office;
-import de.ostfalia.gruppe5.business.entity.ProductLine;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;

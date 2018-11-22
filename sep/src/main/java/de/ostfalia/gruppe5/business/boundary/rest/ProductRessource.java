@@ -8,8 +8,6 @@ import de.ostfalia.gruppe5.business.entity.ProductLine;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.json.JsonObject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;

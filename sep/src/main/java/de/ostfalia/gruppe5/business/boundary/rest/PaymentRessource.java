@@ -4,7 +4,6 @@ import de.ostfalia.gruppe5.business.boundary.CustomerService;
 import de.ostfalia.gruppe5.business.boundary.PaymentService;
 import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.Payment;
-import de.ostfalia.gruppe5.business.entity.Product;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;

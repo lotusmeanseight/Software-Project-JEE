@@ -12,7 +12,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class XMLPayment {
     private Payment payment;

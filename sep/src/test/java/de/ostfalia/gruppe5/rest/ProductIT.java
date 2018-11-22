@@ -1,6 +1,5 @@
 package de.ostfalia.gruppe5.rest;
 
-import de.ostfalia.gruppe5.business.entity.ProductLine;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -8,7 +7,6 @@ import org.jboss.resteasy.client.jaxrs.internal.BasicAuthentication;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

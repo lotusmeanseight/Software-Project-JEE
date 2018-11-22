@@ -1,8 +1,5 @@
 package de.ostfalia.gruppe5.business.controller;
 
-import static java.lang.String.format;
-import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.security.enterprise.AuthenticationException;
@@ -14,6 +11,9 @@ import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.IdentityStoreHandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static java.lang.String.format;
+import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
 
 @RequestScoped
 public class CustomAuthenticationMechanism implements HttpAuthenticationMechanism {

@@ -1,7 +1,6 @@
 package de.ostfalia.gruppe5.business.boundary.rest;
 
 import de.ostfalia.gruppe5.business.boundary.OrderService;
-import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.CustomerUser;
 import de.ostfalia.gruppe5.business.entity.Order;
 

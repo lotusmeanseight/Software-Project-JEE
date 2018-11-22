@@ -2,13 +2,12 @@ package de.ostfalia.gruppe5.business.boundary;
 
 import de.ostfalia.gruppe5.business.entity.ProductLine;
 
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.Stateless;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
