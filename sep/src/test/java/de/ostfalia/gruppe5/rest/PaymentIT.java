@@ -18,7 +18,60 @@ public class PaymentIT extends BasicIT<PaymentProxy, String, Integer> {
         this.setTestId("HQ55022");
         this.setPrimaryKey("checkNumber");
         this.setUpdateKeyword("amount");
-        this.setTestEntity("{\"customerNumber\":{\"customerNumber\":112,\"customerName\":\"Signal Gift Stores\",\"contactLastName\":\"King\",\"contactFirstName\":\"Jean\",\"phone\":\"7025551838\",\"addressLine1\":\"8489 Strong St.\",\"addressLine2\":null,\"city\":\"Las Vegas\",\"state\":\"NV\",\"postalCode\":\"83030\",\"country\":\"USA\",\"salesRepEmployeeNumber\":{\"employeeNumber\":1166,\"lastName\":\"Thompson\",\"firstName\":\"Leslie\",\"extension\":\"x4065\",\"email\":\"lthompson@classicmodelcars.com\",\"officeCode\":{\"officeCode\":1,\"city\":\"San Francisco\",\"phone\":\"+1 650 219 4782\",\"addressLine1\":\"100 Market Street\",\"addressLine2\":\"Suite 300\",\"state\":\"CA\",\"country\":\"USA\",\"postalCode\":\"94080\",\"territory\":\"NA\"},\"reportsTo\":1143,\"jobTitle\":\"Sales Rep\"},\"creditLimit\":71800.0},\"checkNumber\":" + this.getPrimaryKeyToken() + ",\"paymentDate\":{\"year\":2003,\"month\":\"JUNE\",\"era\":\"CE\",\"dayOfYear\":157,\"dayOfWeek\":\"FRIDAY\",\"leapYear\":false,\"dayOfMonth\":6,\"monthValue\":6,\"chronology\":{\"calendarType\":\"iso8601\",\"id\":\"ISO\"}},\"amount\":32641.98}");
+        this.setTestEntity("" +
+                "{" +
+                "\"customerNumber\":" +
+                "{" +
+                "\"customerNumber\":112," +
+                "\"customerName\":\"Signal Gift Stores\"," +
+                "\"contactLastName\":\"King\"," +
+                "\"contactFirstName\":\"Jean\"," +
+                "\"phone\":\"7025551838\"," +
+                "\"addressLine1\":\"8489 Strong St.\"," +
+                "\"addressLine2\":null," +
+                "\"city\":\"Las Vegas\"," +
+                "\"state\":\"NV\"," +
+                "\"postalCode\":\"83030\"," +
+                "\"country\":\"USA\"," +
+                "\"salesRepEmployeeNumber\":" +
+                "{" +
+                "\"employeeNumber\":1166," +
+                "\"lastName\":\"Thompson\"," +
+                "\"firstName\":\"Leslie\"," +
+                "\"extension\":\"x4065\"," +
+                "\"email\":\"lthompson@classicmodelcars.com\"," +
+                "\"officeCode\":" +
+                "{" +
+                "\"officeCode\":1," +
+                "\"city\":\"San Francisco\"," +
+                "\"phone\":\"+1 650 219 4782\"," +
+                "\"addressLine1\":\"100 Market Street\"," +
+                "\"addressLine2\":\"Suite 300\"," +
+                "\"state\":\"CA\"," +
+                "\"country\":\"USA\"," +
+                "\"postalCode\":\"94080\"," +
+                "\"territory\":\"NA\"}," +
+                "\"reportsTo\":1143," +
+                "\"jobTitle\":\"Sales Rep\"}," +
+                "\"creditLimit\":71800.0}," +
+                "\"checkNumber\":" + this.getPrimaryKeyToken() + "," +
+                "\"paymentDate\":" +
+                "{" +
+                "\"year\":2003," +
+                "\"month\":\"JUNE\"," +
+                "\"era\":\"CE\"," +
+                "\"dayOfYear\":157," +
+                "\"dayOfWeek\":\"FRIDAY\"," +
+                "\"leapYear\":false," +
+                "\"dayOfMonth\":6," +
+                "\"monthValue\":6," +
+                "\"chronology\":" +
+                "{" +
+                "\"calendarType\":\"iso8601\"," +
+                "\"id\":\"ISO\"" +
+                "}" +
+                "}," +
+                "\"amount\":32641.98}");
         this.setIdType(String.class);
         this.setUpdateType(Integer.class);
         this.setUpdateBase(100);

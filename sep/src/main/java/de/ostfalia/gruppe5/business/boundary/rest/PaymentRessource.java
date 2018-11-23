@@ -54,17 +54,35 @@ public class PaymentRessource {
         Payment payment = new Payment();
         populatePayment(jsonObject, payment);
         paymentService.save(payment);
-        Payment parsed = paymentService.find(payment.getCheckNumber());
+//        List<Payment> parsedList = paymentService.findByCheckNumber(payment.getCheckNumber());
+//        Payment parsed = parsedList.get(0);
+//        UriBuilder builder = uriinfo.getRequestUriBuilder();
+//        URI uri = builder.path(PaymentRessource.class, "getPayment")
+//                .build(parsed.getCheckNumber());
+//        return Response.created(uri).build(
+
+        //TODO customerNumber ist customer-object und wird von EJB als null erkannt
+        //TODO warum passiert die scheiße?
         UriBuilder builder = uriinfo.getRequestUriBuilder();
         URI uri = builder.path(PaymentRessource.class, "getPayment")
-                .build(parsed.getCheckNumber());
+                .build(payment.getCheckNumber());
         return Response.created(uri).build();
     }
 
     private void populatePayment(JsonObject jsonObject, Payment payment){
+        System.out.println("ERROR==============="+jsonObject.toString());
+        JsonObject customerNumberJson = jsonObject.get("customerNumber").asJsonObject();
+        String customerNumberString = customerNumberJson.get("customerNumber").toString();
+        System.out.println("ERROR+++++++++++++++"+customerNumberString);
+        if (customerNumberString.contains("\""))
+            customerNumberString.replaceAll("\"","");
+        System.out.println("ERROR+++++++++++++++"+customerNumberString);
+        int customerNumber = Integer.parseInt(customerNumberString);
+        System.out.println("ERROR###############"+customerNumber);
+        Customer customer = this.customerService.find(customerNumber);
+        payment.setCustomerNumber(customer);
         payment.setPaymentDate(this.localDateFromJson(jsonObject.get("paymentDate").asJsonObject()));
         payment.setAmount(Double.parseDouble(jsonObject.get("amount").toString()));
-        payment.setCustomerNumber((Customer) jsonObject.get("customerNumber"));
     }
 
     @PUT
