@@ -203,4 +203,36 @@ public class Customer {
 				getPostalCode(), getCountry(), getSalesRepEmployeeNumber(), getCreditLimit());
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		sb.append(this.getCustomerNumber());
+		sb.append(",");
+		sb.append(this.getCustomerName());
+		sb.append(",");
+		sb.append(this.getContactFirstName());
+		sb.append(",");
+		sb.append(this.getContactLastName());
+		sb.append(",");
+		sb.append(this.getSalesRepEmployeeNumber());
+		sb.append(",");
+		sb.append(this.getCountry());
+		sb.append(",");
+		sb.append(this.getState());
+		sb.append(",");
+		sb.append(this.getCity());
+		sb.append(",");
+		sb.append(this.getAddressLine1());
+		sb.append(",");
+		sb.append(this.getAddressLine2());
+		sb.append(",");
+		sb.append(this.getCreditLimit());
+		sb.append(",");
+		sb.append(this.getPostalCode());
+		sb.append(",");
+		sb.append(this.getPhone());
+		sb.append("]");
+		return sb.toString();
+	}
 }

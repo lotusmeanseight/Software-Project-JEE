@@ -19,7 +19,7 @@ import java.util.Objects;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderNumber;
 
     @OneToMany(mappedBy = "orderNumber")
@@ -120,5 +120,26 @@ public class Order {
 
     public void setCustomerNumber(Customer customerNumber) {
         this.customerNumber = customerNumber;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        sb.append(this.getOrderNumber());
+        sb.append(",");
+        sb.append(this.getCustomerNumber());
+        sb.append(",");
+        sb.append(this.getComments());
+        sb.append(",");
+        sb.append(this.getStatus());
+        sb.append(",");
+        sb.append(this.getOrderDate());
+        sb.append(",");
+        sb.append(this.getShippedDate());
+        sb.append(",");
+        sb.append(this.getRequiredDate());
+        sb.append("]");
+        return sb.toString();
     }
 }

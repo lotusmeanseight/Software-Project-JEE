@@ -1,7 +1,9 @@
 package de.ostfalia.gruppe5.business.boundary.rest;
 
+import de.ostfalia.gruppe5.business.boundary.CustomerService;
 import de.ostfalia.gruppe5.business.boundary.OrderDetailService;
 import de.ostfalia.gruppe5.business.boundary.OrderService;
+import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.CustomerUser;
 import de.ostfalia.gruppe5.business.entity.Order;
 import de.ostfalia.gruppe5.business.entity.OrderDetail;
@@ -33,6 +35,9 @@ public class OrderRessource {
 
     @Inject
     private OrderService service;
+
+    @Inject
+    private CustomerService customerService;
 
     @Inject
     private OrderDetailService orderDetailService;
@@ -70,13 +75,15 @@ public class OrderRessource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postOrder(JsonObject json) {
         Order order = new Order();
-        order.setOrderNumber(service.nextID());
+        Integer orderNumber = service.nextID();
+        order.setOrderNumber(orderNumber);
         populateOrder(json, order);
+        System.out.println("ERROR +++++++++++++order:"+order.toString());
         service.update(order);
-        service.save(order);
-        Order parsed = service.find(order.getOrderNumber());
+//        service.save(order);
+//        Order parsed = service.find(order.getOrderNumber());
         UriBuilder builder = uriinfo.getRequestUriBuilder();
-        URI uri = builder.path(OrderRessource.class, "getOrder").build(parsed.getOrderNumber());
+        URI uri = builder.path(OrderRessource.class, "getOrder").build(order.getOrderNumber());
         return Response.created(uri).build();
     }
 
@@ -84,9 +91,14 @@ public class OrderRessource {
         order.setOrderDate(localDateFromJson(json.get("orderDate").asJsonObject()));
         order.setShippedDate(localDateFromJson(json.get("shippedDate").asJsonObject()));
         order.setRequiredDate(localDateFromJson(json.get("requiredDate").asJsonObject()));
-
         order.setStatus(json.getString("status"));
         order.setComments(json.get("comments").toString());
+
+        int customerNumber = json.getInt("customerNumber");
+        Customer customer = customerService.find(customerNumber);
+        System.out.println("ERROR +++++++++++++customer:"+customer.toString());
+
+        order.setCustomerNumber(customer);
     }
 
     private LocalDate localDateFromJson(JsonObject orderDate) {
