@@ -19,10 +19,10 @@ public class OrderDetailsID implements Serializable {
     @Column(name = "productCode")
     private String productCode;
 
-    private OrderDetailsID() {
+    public OrderDetailsID() {
     }
 
-    private OrderDetailsID(Integer orderNumber, String productCode) {
+    public OrderDetailsID(Integer orderNumber, String productCode) {
         this.orderNumber = orderNumber;
         this.productCode = productCode;
     }
