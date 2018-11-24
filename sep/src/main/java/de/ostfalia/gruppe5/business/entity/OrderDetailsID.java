@@ -52,18 +52,19 @@ public class OrderDetailsID implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
             try {
-                sb.append("[");
+                sb.append(", ");
                 sb.append(field.getName());
                 sb.append("=");
                 sb.append(field.get(this));
-                sb.append("] ");
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         });
-        return sb.toString();
+        sb.append("]");
+        String toString = "[" + sb.toString().subSequence(2, sb.length());
+        return toString;
     }
 }

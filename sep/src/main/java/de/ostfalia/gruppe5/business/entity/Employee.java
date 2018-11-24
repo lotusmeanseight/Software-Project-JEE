@@ -11,8 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-@NamedQueries({ @NamedQuery(name = "Employee.countAll", query = "SELECT COUNT(e) FROM Employee e"),
-		@NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e") })
+@NamedQueries({@NamedQuery(name = "Employee.countAll", query = "SELECT COUNT(e) FROM Employee e"),
+        @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")})
 @Entity
 @Table(name = "employees")
 @XmlRootElement
@@ -25,21 +25,21 @@ public class Employee {
     @OneToMany(mappedBy = "salesRepEmployeeNumber", fetch = FetchType.LAZY)
     private List<Customer> customers = new ArrayList<>();
 
-	@NotNull
-	@Size(max = 50)
-	private String lastName;
+    @NotNull
+    @Size(max = 50)
+    private String lastName;
 
-	@NotNull
-	@Size(max = 50)
-	private String firstName;
+    @NotNull
+    @Size(max = 50)
+    private String firstName;
 
-	@NotNull
-	@Size(max = 10)
-	private String extension;
+    @NotNull
+    @Size(max = 10)
+    private String extension;
 
-	@NotNull
-	@Size(max = 100)
-	private String email;
+    @NotNull
+    @Size(max = 100)
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "officeCode")
@@ -47,25 +47,25 @@ public class Employee {
 
     private Integer reportsTo;
 
-	@NotNull
-	@Size(max = 50)
-	private String jobTitle;
+    @NotNull
+    @Size(max = 50)
+    private String jobTitle;
 
-	public Integer getEmployeeNumber() {
-		return employeeNumber;
-	}
+    public Integer getEmployeeNumber() {
+        return employeeNumber;
+    }
 
-	public void setEmployeeNumber(Integer employeeNumber) {
-		this.employeeNumber = employeeNumber;
-	}
+    public void setEmployeeNumber(Integer employeeNumber) {
+        this.employeeNumber = employeeNumber;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -138,18 +138,21 @@ public class Employee {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
-            try {
-                sb.append("[");
-                sb.append(field.getName());
-                sb.append("=");
-                sb.append(field.get(this));
-                sb.append("] ");
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+            if (!field.getName().equals("customers")) {
+                try {
+                    sb.append(", ");
+                    sb.append(field.getName());
+                    sb.append("=");
+                    sb.append(field.get(this));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
             }
         });
-        return sb.toString();
+        sb.append("]");
+        String toString = "[" + sb.toString().subSequence(2, sb.length());
+        return toString;
     }
 }
