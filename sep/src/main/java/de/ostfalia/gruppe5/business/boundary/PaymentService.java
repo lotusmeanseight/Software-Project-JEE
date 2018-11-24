@@ -5,10 +5,7 @@ import de.ostfalia.gruppe5.business.entity.Payment;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless

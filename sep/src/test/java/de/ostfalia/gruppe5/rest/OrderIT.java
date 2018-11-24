@@ -8,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.json.JsonArray;
-import javax.json.JsonObject;
 
 import static org.junit.Assert.assertEquals;
 
