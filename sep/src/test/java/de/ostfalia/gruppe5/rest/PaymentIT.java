@@ -9,9 +9,11 @@ import org.junit.Test;
 
 import javax.json.JsonObject;
 
+import java.math.BigDecimal;
+
 import static org.junit.Assert.assertEquals;
 
-public class PaymentIT extends BasicIT<PaymentProxy, String, Integer> {
+public class PaymentIT extends BasicIT<PaymentProxy, String, BigDecimal> {
     @Before
     public void init() {
         this.setProxyType(PaymentProxy.class);
@@ -71,11 +73,11 @@ public class PaymentIT extends BasicIT<PaymentProxy, String, Integer> {
                 "\"id\":\"ISO\"" +
                 "}" +
                 "}," +
-                "\"amount\":32641.98}");
+                "\"amount\":"+this.getUpdateToken()+"}");
         this.setIdType(String.class);
-        this.setUpdateType(Integer.class);
-        this.setUpdateBase(100);
-        this.setUpdateGoal(0);
+        this.setUpdateType(BigDecimal.class);
+        this.setUpdateBase(new BigDecimal(100.5));
+        this.setUpdateGoal(new BigDecimal(0.5));
     }
 
     @Test

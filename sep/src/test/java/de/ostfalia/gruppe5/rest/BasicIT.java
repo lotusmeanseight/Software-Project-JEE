@@ -11,6 +11,10 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.core.Response;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
 import static org.junit.Assert.*;
 
 public abstract class BasicIT<T extends BasicProxy, I, U> {
@@ -44,31 +48,54 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         JsonArray array = this.proxy.getAllEntities();
         JsonObject jsonForId = array.get(array.size() - 1).asJsonObject();
         U generatedValue = null;
+        System.out.println("jsonForId:"+jsonForId.toString());
         if (this.idType == (Integer.class)) {
             this.currentEntityID = (I) Integer.valueOf(jsonForId.get(this.primaryKey).toString());
-            generatedValue = (U) (jsonForId.get(this.updateKeyword).toString().replaceAll("\"",""));
+            generatedValue = (U) jsonForId.get(this.updateKeyword).toString().replaceAll("(\\\\)*\"","");
         } else if (idType == (String.class)) {
-            String idString = jsonForId.getString(this.primaryKey);
+            String idString = jsonForId.get(this.primaryKey).toString();
             if (idString.contains("\""))
                 idString = idString.replaceAll("\"", "");
             this.currentEntityID = (I) idString;
-            generatedValue = (U) jsonForId.getString(this.updateKeyword).replaceAll("\"","");
+
+            generatedValue = (U) jsonForId.get(this.updateKeyword).toString().replaceAll("(\\\\)*\"","");
         } else {
             assertTrue("Type of primaryKey is not registered, ask for help!!!", false);
         }
-        assertEquals(this.updateBase, generatedValue);
+        System.out.println(jsonForId.get(this.updateKeyword).getValueType());
+        System.out.println("generatedValue:"+generatedValue);
 
-        if (idType == (Integer.class)) {
-
-        } else if (idType == (String.class)) {
-
+        if (this.updateType == (Integer.class)) {
+            assertEquals(updateBase, generatedValue);
+        } else if (this.updateType == (String.class)) {
+            assertEquals(updateBase, generatedValue);
+        } else if (this.updateType == (BigDecimal.class)) {
+            DecimalFormat df = new DecimalFormat();
+            df.setParseBigDecimal(true);
+            BigDecimal bd = new BigDecimal(0);
+            try {
+                bd = (BigDecimal) df.parse(generatedValue.toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            assertEquals(updateBase, bd);
+        }else{
+            assertTrue("Type of updateValue is not registered, ask for help!!!", false);
         }
+
+        System.out.println("############");
+        System.out.println(this.idType);
+        System.out.println(this.currentEntityID);
+        System.out.println("############");
     }
 
     public void cleanup() {
         System.out.println("++++++++ After BasicIT");
         Response response = null;
-
+        System.out.println("############");
+        System.out.println(this.idType);
+        System.out.println(this.currentEntityID);
+        System.out.println("############");
         if (idType == (Integer.class)) {
             response = this.proxy.deleteEntity((Integer) this.currentEntityID);
         } else if (idType == (String.class)) {
@@ -99,6 +126,7 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         jsonArray.stream().forEach(json -> {
             JsonObject jsonObject = json.asJsonObject();
             jsonObject.keySet().stream().forEach(key -> assertTrue("object with PK " + jsonObject.get(primaryKey).toString() + " is corrupt", !jsonObject.get(primaryKey).toString().isEmpty()));
+            System.out.println(json.toString());
         });
         this.cleanup();
     }
@@ -150,32 +178,50 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         }
         System.out.println(json);
         U updateValue = null;
-        if (idType == (Integer.class)) {
+        if (this.updateType == (Integer.class)) {
             System.out.println("int:" + json.get(updateKeyword));
             updateValue = (U) String.valueOf(json.get(updateKeyword)).replaceAll("\"","");
-        } else if (idType == (String.class)) {
+            assertEquals(updateGoal, updateValue);
+        } else if (this.updateType == (String.class)) {
             System.out.println("string:" + json.get(updateKeyword));
             updateValue = (U) json.getString(updateKeyword).replaceAll("\"","");
+            assertEquals(updateGoal, updateValue);
+        } else if (this.updateType == (BigDecimal.class)) {
+            DecimalFormat df = new DecimalFormat();
+            df.setParseBigDecimal(true);
+            BigDecimal bd = new BigDecimal(0);
+            try {
+                bd = (BigDecimal) df.parse(json.getString(updateKeyword).replaceAll("\"",""));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            assertEquals(updateGoal, bd);
         }
-
-        assertEquals(updateGoal, updateValue);
         this.cleanup();
     }
 
     public String generateTestEntity(I id, U updateValue) {
-        System.out.println("++++++++++++ Generate id+update");
+        System.out.println("++++++++++++ Generate id:"+id+" + update:"+updateValue);
         String newEntity = this.testEntity;
+
         if (idType == (Integer.class)) {
             newEntity = newEntity.replaceAll(primaryKeyToken, String.valueOf(id));
         } else if (idType == (String.class)) {
-            newEntity = newEntity.replaceAll(primaryKeyToken, "\"" + String.valueOf(id) + "\"");
+            newEntity = newEntity.replaceAll(primaryKeyToken, "\""+(String)id+"\"");
         }
-        if (idType == (Integer.class)) {
-            newEntity = newEntity.replaceAll(updateToken, String.valueOf(updateValue));
-        } else if (idType == (String.class)) {
-            newEntity = newEntity.replaceAll(updateToken, "\"" + String.valueOf(updateValue) + "\"");
+
+        if (this.updateType == (Integer.class)) {
+            newEntity = newEntity.replaceAll(updateToken, ((Integer)updateValue).toString());
+        } else if (this.updateType == (String.class)) {
+            newEntity = newEntity.replaceAll(updateToken, "\""+updateValue+"\"");
+        } else if (this.updateType == (BigDecimal.class)) {
+            BigDecimal updateValue1 = (BigDecimal) updateValue;
+            System.out.println("BigDecimal:"+updateValue1.toString());
+            String bd = updateValue1.toString();
+            System.out.println("bd:"+bd);
+            newEntity = newEntity.replaceAll(updateToken, bd);
         }
-        System.out.println(newEntity);
+        System.out.println("generated: "+newEntity);
         return newEntity;
     }
 

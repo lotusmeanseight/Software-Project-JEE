@@ -8,11 +8,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.json.JsonArray;
-import javax.json.JsonObject;
 
 import static org.junit.Assert.assertEquals;
 
-public class OrderIT extends BasicIT<OrderProxy, Integer,String> {
+public class OrderITEmployee extends BasicIT<OrderProxy, Integer,String> {
     @Before
     public void init() {
         this.setProxyType(OrderProxy.class);

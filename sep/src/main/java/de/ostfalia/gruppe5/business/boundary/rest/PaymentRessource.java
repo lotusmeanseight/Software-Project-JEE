@@ -52,17 +52,15 @@ public class PaymentRessource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postPayment(JsonObject jsonObject){
         Payment payment = new Payment();
+        payment.setCheckNumber(jsonObject.getString("checkNumber"));
         populatePayment(jsonObject, payment);
-        paymentService.save(payment);
+        paymentService.update(payment);
 //        List<Payment> parsedList = paymentService.findByCheckNumber(payment.getCheckNumber());
 //        Payment parsed = parsedList.get(0);
 //        UriBuilder builder = uriinfo.getRequestUriBuilder();
 //        URI uri = builder.path(PaymentRessource.class, "getPayment")
 //                .build(parsed.getCheckNumber());
 //        return Response.created(uri).build(
-
-        //TODO customerNumber ist customer-object und wird von EJB als null erkannt
-        //TODO warum passiert die scheiße?
         UriBuilder builder = uriinfo.getRequestUriBuilder();
         URI uri = builder.path(PaymentRessource.class, "getPayment")
                 .build(payment.getCheckNumber());
@@ -70,15 +68,11 @@ public class PaymentRessource {
     }
 
     private void populatePayment(JsonObject jsonObject, Payment payment){
-        System.out.println("ERROR==============="+jsonObject.toString());
         JsonObject customerNumberJson = jsonObject.get("customerNumber").asJsonObject();
         String customerNumberString = customerNumberJson.get("customerNumber").toString();
-        System.out.println("ERROR+++++++++++++++"+customerNumberString);
         if (customerNumberString.contains("\""))
             customerNumberString.replaceAll("\"","");
-        System.out.println("ERROR+++++++++++++++"+customerNumberString);
         int customerNumber = Integer.parseInt(customerNumberString);
-        System.out.println("ERROR###############"+customerNumber);
         Customer customer = this.customerService.find(customerNumber);
         payment.setCustomerNumber(customer);
         payment.setPaymentDate(this.localDateFromJson(jsonObject.get("paymentDate").asJsonObject()));
@@ -120,11 +114,7 @@ public class PaymentRessource {
     @Path("/{id}/assignedCustomer")
     @Produces(MediaType.APPLICATION_JSON)
     public Customer getPaymentAssignedCustomer(@PathParam("id") String id){
-        System.out.println("ERROR with id "+id);
         List<Payment> payments = paymentService.findByCheckNumber(id);
-        System.out.println("ERROR payment "+payments.size());
-        payments.stream().forEach(System.out::println);
-        System.out.println("ERROR payment "+payments.get(0));
         return payments.get(0).getCustomerNumber();
     }
 

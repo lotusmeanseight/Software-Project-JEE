@@ -9,6 +9,7 @@ import de.ostfalia.gruppe5.business.entity.Order;
 import de.ostfalia.gruppe5.business.entity.OrderDetail;
 
 import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.DenyAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -45,20 +46,16 @@ public class OrderRessource {
     @Context
     private UriInfo uriinfo;
 
-    @RolesAllowed("CUSTOMER")
-    @GET
-    @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Order> getOrdersCustomer() {
-        Integer userId = customerUser.getId();
-        return service.getOrdersByCustomerId(userId);
-    }
-
+    @RolesAllowed({"EMPLOYEE", "CUSTOMER"})
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Order> getOrders() {
-        return service.findAll();
+        Integer userId = customerUser.getId();
+        if (userId == null)
+            return service.findAll();
+        else
+            return service.getOrdersByCustomerId(userId);
     }
 
     @GET
@@ -78,7 +75,6 @@ public class OrderRessource {
         Integer orderNumber = service.nextID();
         order.setOrderNumber(orderNumber);
         populateOrder(json, order);
-        System.out.println("ERROR +++++++++++++order:"+order.toString());
         service.update(order);
 //        service.save(order);
 //        Order parsed = service.find(order.getOrderNumber());
@@ -96,8 +92,6 @@ public class OrderRessource {
 
         int customerNumber = json.getInt("customerNumber");
         Customer customer = customerService.find(customerNumber);
-        System.out.println("ERROR +++++++++++++customer:"+customer.toString());
-
         order.setCustomerNumber(customer);
     }
 
@@ -111,7 +105,7 @@ public class OrderRessource {
         sb.append(monthGood);
         sb.append(" ");
         String day = orderDate.get("dayOfMonth").toString();
-        if (day.length()<2)
+        if (day.length() < 2)
             sb.append("0");
         sb.append(day);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMMM dd");
