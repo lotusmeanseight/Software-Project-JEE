@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -80,5 +81,22 @@ public class ProductLine implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(getProductLine(), productList, getTextDescription(), getHtmlDescription(), getImage());
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
+			try {
+				sb.append("[");
+				sb.append(field.getName());
+				sb.append("=");
+				sb.append(field.get(this));
+				sb.append("] ");
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		});
+		return sb.toString();
 	}
 }

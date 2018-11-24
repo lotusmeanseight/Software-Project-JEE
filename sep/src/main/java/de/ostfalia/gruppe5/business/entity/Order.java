@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -125,21 +126,17 @@ public class Order {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        sb.append(this.getOrderNumber());
-        sb.append(",");
-        sb.append(this.getCustomerNumber());
-        sb.append(",");
-        sb.append(this.getComments());
-        sb.append(",");
-        sb.append(this.getStatus());
-        sb.append(",");
-        sb.append(this.getOrderDate());
-        sb.append(",");
-        sb.append(this.getShippedDate());
-        sb.append(",");
-        sb.append(this.getRequiredDate());
-        sb.append("]");
+        Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
+            try {
+                sb.append("[");
+                sb.append(field.getName());
+                sb.append("=");
+                sb.append(field.get(this));
+                sb.append("] ");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        });
         return sb.toString();
     }
 }

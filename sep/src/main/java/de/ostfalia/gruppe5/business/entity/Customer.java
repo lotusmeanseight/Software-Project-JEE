@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -206,33 +207,17 @@ public class Customer {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("[");
-		sb.append(this.getCustomerNumber());
-		sb.append(",");
-		sb.append(this.getCustomerName());
-		sb.append(",");
-		sb.append(this.getContactFirstName());
-		sb.append(",");
-		sb.append(this.getContactLastName());
-		sb.append(",");
-		sb.append(this.getSalesRepEmployeeNumber());
-		sb.append(",");
-		sb.append(this.getCountry());
-		sb.append(",");
-		sb.append(this.getState());
-		sb.append(",");
-		sb.append(this.getCity());
-		sb.append(",");
-		sb.append(this.getAddressLine1());
-		sb.append(",");
-		sb.append(this.getAddressLine2());
-		sb.append(",");
-		sb.append(this.getCreditLimit());
-		sb.append(",");
-		sb.append(this.getPostalCode());
-		sb.append(",");
-		sb.append(this.getPhone());
-		sb.append("]");
+		Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
+			try {
+				sb.append("[");
+				sb.append(field.getName());
+				sb.append("=");
+				sb.append(field.get(this));
+				sb.append("] ");
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		});
 		return sb.toString();
 	}
 }

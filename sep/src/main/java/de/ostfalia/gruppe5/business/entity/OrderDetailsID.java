@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Objects;
 
 @Embeddable
@@ -49,4 +50,20 @@ public class OrderDetailsID implements Serializable {
         return Objects.hash(orderNumber, productCode);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
+            try {
+                sb.append("[");
+                sb.append(field.getName());
+                sb.append("=");
+                sb.append(field.get(this));
+                sb.append("] ");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        });
+        return sb.toString();
+    }
 }

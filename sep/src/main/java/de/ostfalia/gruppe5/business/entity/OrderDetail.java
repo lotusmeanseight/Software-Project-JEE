@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
@@ -95,5 +96,22 @@ public class OrderDetail implements Serializable {
 
     public void setId(OrderDetailsID id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
+            try {
+                sb.append("[");
+                sb.append(field.getName());
+                sb.append("=");
+                sb.append(field.get(this));
+                sb.append("] ");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        });
+        return sb.toString();
     }
 }
