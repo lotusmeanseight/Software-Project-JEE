@@ -14,11 +14,6 @@ import java.util.concurrent.ThreadLocalRandom;
 @Stateless
 public class PaymentService extends AbstractLazyJPAService<Payment> {
 
-    @Override
-    public void save(Payment entity) {
-        super.save(super.update(entity));
-    }
-
     public List<Payment> findByCheckNumber(String checknumber) {
         TypedQuery<Payment> query = this.getEntityManager().createQuery("Select p from Payment p where p.checkNumber=?1", Payment.class);
         query.setParameter(1, checknumber);

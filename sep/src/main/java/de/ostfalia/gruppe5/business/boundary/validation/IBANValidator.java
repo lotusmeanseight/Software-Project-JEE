@@ -12,14 +12,6 @@ import java.util.Arrays;
 @ApplicationScoped
 public class IBANValidator implements ConstraintValidator<IBAN, String> {
 
-    private static int MODULO = 97;
-    private static int COUNTRY_CODE_START_INDEX = 0;
-    private static int COUNTRY_CODE_END_INDEX = COUNTRY_CODE_START_INDEX + 1;
-    private static int CHECK_DIGIT_START_INDEX = COUNTRY_CODE_START_INDEX;
-    private static int CHECK_DIGIT_END_INDEX = CHECK_DIGIT_START_INDEX + 1;
-    private static int BBAN_INDEX = CHECK_DIGIT_END_INDEX + 1;
-    private static int START_ALPHANUMERICAL = 'A' + 1;
-
 
     @Override
     public void initialize(IBAN iban){
@@ -27,21 +19,11 @@ public class IBANValidator implements ConstraintValidator<IBAN, String> {
     }
 
     @Override
-    public boolean isValid(String check, ConstraintValidatorContext constraintValidatorContext) {
-        return (modulo(check)).equals(BigInteger.ONE);
+    public boolean isValid(String iban, ConstraintValidatorContext constraintValidatorContext) {
+        System.out.println("#############");
+        System.out.println(iban);
+        IBANValidatorHelper helper = new IBANValidatorHelper(iban);
+        return helper.validateIBAN();
     }
 
-    private BigInteger modulo(String iban){
-        int[] countryCodeToInt = iban.chars().limit(COUNTRY_CODE_END_INDEX+1).map(this::transformInteger).toArray();
-        StringBuilder builder = new StringBuilder();
-        builder.append(iban.substring(4));
-        builder.append(Arrays.stream(countryCodeToInt));
-        builder.append(iban.substring(CHECK_DIGIT_START_INDEX,CHECK_DIGIT_END_INDEX));
-        BigInteger bigInteger = new BigInteger(builder.toString());
-        return bigInteger.mod(BigInteger.valueOf(MODULO));
-    }
-
-    private int transformInteger(int code){
-        return code - START_ALPHANUMERICAL + 9;
-    }
 }
