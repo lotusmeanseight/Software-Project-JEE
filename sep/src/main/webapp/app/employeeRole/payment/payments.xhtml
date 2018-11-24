@@ -38,21 +38,6 @@
                     <h:outputText id="amount" value="#{payment.amount}"/>
                 </h:column>
 
-
-                <h:column>
-                    <f:facet name="header">Aktualisieren</f:facet>
-                    <h:commandButton action="paymentEdit" value="Aktualisieren">
-                        <f:setPropertyActionListener target="#{paymentView.payment}" value="#{payment}"/>
-                        <f:setPropertyActionListener target="#{paymentView.payment.customerNumber}"
-                                                     value="#{payment.customerNumber}"/>
-                        <f:setPropertyActionListener target="#{paymentView.payment.checkNumber}"
-                                                     value="#{payment.checkNumber}"/>
-                    </h:commandButton>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Loeschen</f:facet>
-                    <h:commandButton action="#{paymentView.delete(payment)}" value="Loeschen"/>
-                </h:column>
                 <f:facet name="footer">
                     <h:commandButton value="Erste Seite" action="#{paymentView.datatable.goToFirstPage()}"
                                      disabled="#{paymentView.datatable.table.first eq 0}"/>

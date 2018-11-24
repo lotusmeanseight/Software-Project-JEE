@@ -1,5 +1,7 @@
 package de.ostfalia.gruppe5.business.entity;
 
+import de.ostfalia.gruppe5.business.boundary.validation.IBAN;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,6 +28,7 @@ public class Payment implements Serializable {
 
     @Id
     @Size(max = 50)
+    @IBAN
     private String checkNumber;
 
     @NotNull

@@ -14,33 +14,9 @@ import java.util.concurrent.ThreadLocalRandom;
 @Stateless
 public class PaymentService extends AbstractLazyJPAService<Payment> {
 
-    private final List<String> letters = new ArrayList<>(
-            Arrays.asList("A", "B", "C", "D", "E", "F", "G",
-                    "H", "I", "J", "K", "L", "M", "N", "O", "P",
-                    "Q", "R", "S", "T", "U", "V", "W", "X", "Y",
-                    "Z"));
-
     @Override
     public void save(Payment entity) {
-        entity.setCheckNumber(generateRandomCheckNumber((ThreadLocalRandom.current().nextInt(0, 5)),
-                (ThreadLocalRandom.current().nextInt(0, 10))));
         super.save(super.update(entity));
-    }
-
-    private String generateRandomCheckNumber(int numberOfLetters, int numbers) {
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 0; i < numberOfLetters; i++) {
-            builder.append(letters.get(ThreadLocalRandom
-                    .current().nextInt(0, 26)));
-        }
-
-        for (int i = 0; i < numbers; i++) {
-            builder.append(ThreadLocalRandom.current()
-                    .nextInt(1, 10));
-        }
-
-        return builder.toString();
     }
 
     public List<Payment> findByCheckNumber(String checknumber) {
