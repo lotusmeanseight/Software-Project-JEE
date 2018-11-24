@@ -12,23 +12,35 @@ public class IBANValidatorHelper {
     private static int BBAN_INDEX = CHECK_DIGIT_START_INDEX + CHECK_DIGIT_LENGTH;
     private static int START_ALPHANUMERICAL = 'A';
     private final String IBAN;
+    private String BBAN;
+    private String countryCode;
+    private String checkDigits;
 
     public IBANValidatorHelper(String IBAN){
         this.IBAN = IBAN;
+        this.BBAN = IBAN.substring(BBAN_INDEX);
+        this.countryCode = IBAN.substring(COUNTRY_CODE_START_INDEX, COUNTRY_CODE_LENGTH-1);
+        this.checkDigits = IBAN.substring(CHECK_DIGIT_START_INDEX, CHECK_DIGIT_START_INDEX+CHECK_DIGIT_LENGTH);
     }
 
     public boolean validateIBAN(){
         int[] countryCodeToInt = IBAN.chars().limit(COUNTRY_CODE_LENGTH).map(this::transformCountryCode).toArray();
         StringBuilder builder = new StringBuilder();
-        String checkDigits = IBAN.substring(CHECK_DIGIT_START_INDEX, CHECK_DIGIT_START_INDEX+CHECK_DIGIT_LENGTH);
-        String BBAN = IBAN.substring(BBAN_INDEX);
-        builder.append(BBAN);
+        builder.append(this.BBAN);
         for (int a : countryCodeToInt) {
             builder.append(a);
         }
-        builder.append(checkDigits);
+        builder.append(this.checkDigits);
         BigInteger bigInteger = new BigInteger(builder.toString());
         return bigInteger.mod(BigInteger.valueOf(MODULO)).equals(BigInteger.ONE);
+    }
+
+    public boolean validateBBAN(){
+        return false; //TODO
+    }
+
+    public boolean validateCountryCode(){
+        return false; //TODO
     }
 
     private int transformCountryCode(int code){
