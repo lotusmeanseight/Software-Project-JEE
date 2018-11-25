@@ -1,7 +1,6 @@
 package de.ostfalia.gruppe5.rest;
 
 import javax.json.JsonArray;
-import javax.json.JsonObject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;

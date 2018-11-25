@@ -1,4 +1,4 @@
-package JAXB.XML;
+package de.ostfalia.gruppe5.xml;
 
 import de.ostfalia.gruppe5.business.entity.Order;
 import de.ostfalia.gruppe5.business.entity.OrderDetail;
