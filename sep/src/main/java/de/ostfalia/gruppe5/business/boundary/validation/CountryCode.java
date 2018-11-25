@@ -11,7 +11,7 @@ public enum CountryCode {
     AL("Albania", 28),
     AT("Austria", 20),
     AZ("Azerbaijan", 28),
-    BA("Bosnia and Herzegovania", 20 ),
+    BA("Bosnia and Herzegovania", 20),
     BE("Belgium", 16),
     BG("Bulgaria", 22),
     BH("Bahrain", 22),
@@ -84,17 +84,19 @@ public enum CountryCode {
     XK("Kosovo", 20);
 
     private final String countryName;
-    private final int IBAN_LENGTH;
+    private final int ibanLength;
 
-    private CountryCode(String countryName, int IBAN_LENGTH){
+    CountryCode(String countryName, int ibanLength){
         this.countryName = countryName;
-        this.IBAN_LENGTH = IBAN_LENGTH;
+        this.ibanLength = ibanLength;
     }
 
     public String getCountryName() {
         return countryName;
     }
 
-    public int getIBAN_LENGTH() {
-        return IBAN_LENGTH;
-    }}
+    public int getIbanLength() {
+        return ibanLength;
+    }
+
+}

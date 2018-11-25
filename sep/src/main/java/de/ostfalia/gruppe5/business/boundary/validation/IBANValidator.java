@@ -11,6 +11,11 @@ import javax.validation.ConstraintValidatorContext;
 public class IBANValidator implements ConstraintValidator<IBAN, String> {
 
 
+    /**
+     * Compliance to at least Java EE 7
+     * Seems to be empty most of the time
+     * @param iban
+     */
     @Override
     public void initialize(IBAN iban){
 

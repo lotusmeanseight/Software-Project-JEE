@@ -4,33 +4,33 @@ import java.math.BigInteger;
 
 public class IBANValidatorHelper {
 
-    private static int MODULO = 97;
-    private static int COUNTRY_CODE_START_INDEX = 0;
-    private static int COUNTRY_CODE_LENGTH = 2;
-    private static int CHECK_DIGIT_START_INDEX = COUNTRY_CODE_START_INDEX + COUNTRY_CODE_LENGTH;
-    private static int CHECK_DIGIT_LENGTH = 2;
-    private static int BBAN_INDEX = CHECK_DIGIT_START_INDEX + CHECK_DIGIT_LENGTH;
-    private static int START_ALPHANUMERICAL = 'A';
-    private final String IBAN;
-    private final String BBAN;
+    private static final int MODULO = 97;
+    private static final int COUNTRY_CODE_START_INDEX = 0;
+    private static final int COUNTRY_CODE_LENGTH = 2;
+    private static final int CHECK_DIGIT_START_INDEX = COUNTRY_CODE_START_INDEX + COUNTRY_CODE_LENGTH;
+    private static final int CHECK_DIGIT_LENGTH = 2;
+    private static final int BBAN_INDEX = CHECK_DIGIT_START_INDEX + CHECK_DIGIT_LENGTH;
+    private static final int START_ALPHANUMERICAL = 'A';
+    private final String iban;
+    private final String bban;
     private final CountryCode countryCode;
     private final String checkDigits;
 
-    public IBANValidatorHelper(String IBAN){
-        this.IBAN = IBAN;
-        this.BBAN = IBAN.substring(BBAN_INDEX);
-        this.countryCode = CountryCode.valueOf(IBAN.substring(COUNTRY_CODE_START_INDEX, COUNTRY_CODE_LENGTH-1));
-        this.checkDigits = IBAN.substring(CHECK_DIGIT_START_INDEX, CHECK_DIGIT_START_INDEX+CHECK_DIGIT_LENGTH);
+    public IBANValidatorHelper(String iban){
+        this.iban = iban;
+        this.bban = iban.substring(BBAN_INDEX);
+        this.countryCode = CountryCode.valueOf(iban.substring(COUNTRY_CODE_START_INDEX, COUNTRY_CODE_LENGTH));
+        this.checkDigits = iban.substring(CHECK_DIGIT_START_INDEX, CHECK_DIGIT_START_INDEX+CHECK_DIGIT_LENGTH);
     }
 
     public boolean validateIBAN(){
-        if(IBAN.length() != countryCode.getIBAN_LENGTH()){
+        if(iban.length() != countryCode.getIbanLength()){
             return false;
         }
 
-        int[] countryCodeToInt = IBAN.chars().limit(COUNTRY_CODE_LENGTH).map(this::transformCountryCode).toArray();
+        int[] countryCodeToInt = iban.chars().limit(COUNTRY_CODE_LENGTH).map(this::transformCountryCode).toArray();
         StringBuilder builder = new StringBuilder();
-        builder.append(this.BBAN);
+        builder.append(this.bban);
 
         for (int a : countryCodeToInt) {
             builder.append(a);
@@ -47,19 +47,11 @@ public class IBANValidatorHelper {
      * @return
      */
     public boolean validateBBAN(){
-        if(BBAN.length() == countryCode.getIBAN_LENGTH()-4){
-            return true;
-        }else{
-            return false;
-        }
+        return bban.length() == countryCode.getIbanLength()-4;
     }
 
     public boolean validateCountryCode(){
-        if(countryCode != null){
-            return true;
-        }else{
-            return false;
-        }
+        return countryCode != null;
     }
 
     private int transformCountryCode(int code){
