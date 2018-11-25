@@ -12,9 +12,9 @@ public class IBANValidatorHelper {
     private static int BBAN_INDEX = CHECK_DIGIT_START_INDEX + CHECK_DIGIT_LENGTH;
     private static int START_ALPHANUMERICAL = 'A';
     private final String IBAN;
-    private String BBAN;
-    private CountryCode countryCode;
-    private String checkDigits;
+    private final String BBAN;
+    private final CountryCode countryCode;
+    private final String checkDigits;
 
     public IBANValidatorHelper(String IBAN){
         this.IBAN = IBAN;
@@ -41,8 +41,17 @@ public class IBANValidatorHelper {
         return bigInteger.mod(BigInteger.valueOf(MODULO)).equals(BigInteger.ONE);
     }
 
+    /**
+     * BBAN is always IBAN LENGTH - 4.
+     * if that changes, country code can hold individual info.
+     * @return
+     */
     public boolean validateBBAN(){
-        return false; //TODO
+        if(BBAN.length() == countryCode.getIBAN_LENGTH()-4){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public boolean validateCountryCode(){
