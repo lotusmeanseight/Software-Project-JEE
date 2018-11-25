@@ -65,8 +65,4 @@ public class IBANValidatorHelper {
     private int transformCountryCode(int code){
         return code + 1 - START_ALPHANUMERICAL + 9;
     }
-
-    public String getIBAN() {
-        return IBAN;
-    }
 }
