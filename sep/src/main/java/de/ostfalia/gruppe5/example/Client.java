@@ -17,12 +17,12 @@ public class Client {
 
     @Inject
     JMSContext context ;
-    @Resource( lookup = " java :/ queue / FirstQueue ")
+    @Resource( lookup = "java:/queue/FirstQueue")
     private Queue queue ;
 
     @PostConstruct
     public void init () {
-        Destination destination = queue ;
+        Destination destination = queue;
         for (int i = 0; i < CONST ; i++) {
             String text = " This is message " + (i + 1);
             context.createProducer().send(destination, text);
