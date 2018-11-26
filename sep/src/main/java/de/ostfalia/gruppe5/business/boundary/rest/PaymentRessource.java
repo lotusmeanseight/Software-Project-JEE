@@ -51,8 +51,9 @@ public class PaymentRessource {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postPayment(JsonObject jsonObject){
+        System.out.println("ERROR >>>>>>"+jsonObject.toString());
         Payment payment = new Payment();
-        payment.setCheckNumber(jsonObject.getString("checkNumber"));
+//        payment.setCheckNumber(jsonObject.getString("checkNumber"));
         populatePayment(jsonObject, payment);
         System.out.println("ERROR ====== "+payment.toString());
         paymentService.save(payment);
@@ -63,12 +64,9 @@ public class PaymentRessource {
     }
 
     private void populatePayment(JsonObject jsonObject, Payment payment){
-        JsonObject customerNumberJson = jsonObject.get("customerNumber").asJsonObject();
-        String customerNumberString = customerNumberJson.get("customerNumber").toString();
-        if (customerNumberString.contains("\""))
-            customerNumberString.replaceAll("\"","");
-        int customerNumber = Integer.parseInt(customerNumberString);
-        Customer customer = this.customerService.find(customerNumber);
+        JsonObject customerNumberJson = jsonObject.getJsonObject("customerNumber");
+        Integer customerNumberString = customerNumberJson.getInt("customerNumber");
+        Customer customer = this.customerService.find(customerNumberString);
         payment.setCustomerNumber(customer);
         payment.setPaymentDate(this.localDateFromJson(jsonObject.get("paymentDate").asJsonObject()));
         payment.setAmount(Double.parseDouble(jsonObject.get("amount").toString()));
