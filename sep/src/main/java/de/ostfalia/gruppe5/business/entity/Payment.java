@@ -87,7 +87,7 @@ public class Payment implements Serializable {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
-            if (!field.getName().equals("customerNumber")) {
+//            if (!field.getName().equals("customerNumber"))
                 try {
                     sb.append(", ");
                     sb.append(field.getName());
@@ -96,7 +96,6 @@ public class Payment implements Serializable {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-            }
         });
         sb.append("]");
         String toString = "[" + sb.toString().subSequence(2, sb.length());

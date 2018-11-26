@@ -17,7 +17,7 @@ public class PaymentIT extends BasicIT<PaymentProxy, String, BigDecimal> {
     @Before
     public void init() {
         this.setProxyType(PaymentProxy.class);
-        this.setTestId("HQ55022");
+        this.setTestId("HQ336336");
         this.setPrimaryKey("checkNumber");
         this.setUpdateKeyword("amount");
         this.setTestEntity("" +

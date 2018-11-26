@@ -43,7 +43,7 @@ public class PaymentRessource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Payment getPayment(@PathParam("id") String id){
-        return paymentService.find(id);
+        return paymentService.findByCheckNumber(id).get(0);
     }
 
     @POST
@@ -54,13 +54,8 @@ public class PaymentRessource {
         Payment payment = new Payment();
         payment.setCheckNumber(jsonObject.getString("checkNumber"));
         populatePayment(jsonObject, payment);
-        paymentService.update(payment);
-//        List<Payment> parsedList = paymentService.findByCheckNumber(payment.getCheckNumber());
-//        Payment parsed = parsedList.get(0);
-//        UriBuilder builder = uriinfo.getRequestUriBuilder();
-//        URI uri = builder.path(PaymentRessource.class, "getPayment")
-//                .build(parsed.getCheckNumber());
-//        return Response.created(uri).build(
+        System.out.println("ERROR ====== "+payment.toString());
+        paymentService.save(payment);
         UriBuilder builder = uriinfo.getRequestUriBuilder();
         URI uri = builder.path(PaymentRessource.class, "getPayment")
                 .build(payment.getCheckNumber());
@@ -82,7 +77,7 @@ public class PaymentRessource {
     @PUT
     @Path("/{id}")
     public Response putPayment(@PathParam(("id")) String id, JsonObject jsonObject){
-        Payment payment = paymentService.find(id);
+        Payment payment = paymentService.findByCheckNumber(id).get(0);
         String jsonID = jsonObject.getString("checkNumber");
         if(!payment.getCheckNumber().equals(jsonID)){
             return Response.status(400).build();
@@ -91,7 +86,7 @@ public class PaymentRessource {
         paymentService.update(payment);
 
         GenericEntity<Payment> entity = new GenericEntity<>
-                (paymentService.find(id), Payment.class);
+                (paymentService.findByCheckNumber(id).get(0), Payment.class);
         return Response.ok().entity(entity).build();
     }
 
@@ -99,13 +94,13 @@ public class PaymentRessource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deletePayment(@PathParam("id") String id){
-        Payment payment = paymentService.find(id);
+        Payment payment = paymentService.findByCheckNumber(id).get(0);
         if(payment == null){
             return Response.status(404).build();
         }else{
             GenericEntity<Payment> entity =
                     new GenericEntity<>(payment, Payment.class);
-            paymentService.deleteById(id);
+            paymentService.delete(payment);
             return Response.ok().entity(entity).build();
         }
     }
@@ -115,6 +110,7 @@ public class PaymentRessource {
     @Produces(MediaType.APPLICATION_JSON)
     public Customer getPaymentAssignedCustomer(@PathParam("id") String id){
         List<Payment> payments = paymentService.findByCheckNumber(id);
+        Payment current = payments.get(0);
         return payments.get(0).getCustomerNumber();
     }
 

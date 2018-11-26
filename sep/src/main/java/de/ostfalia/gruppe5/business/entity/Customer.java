@@ -208,6 +208,7 @@ public class Customer {
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 		Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
+            if (!field.getName().equals("payments"))
 			try {
 				sb.append(", ");
 				sb.append(field.getName());

@@ -44,9 +44,8 @@ public class PaymentService extends AbstractLazyJPAService<Payment> {
     }
 
     public List<Payment> findByCheckNumber(String checknumber) {
-        TypedQuery<Payment> query = this.getEntityManager().createQuery("Select p from Payment p where p.checkNumber=?1", Payment.class);
-        query.setParameter(1, checknumber);
-        return query.getResultList();
+        String psql = "Select p from Payment p where p.checkNumber="+checknumber;
+        return this.getEntityManager().createQuery(psql, Payment.class).getResultList();
     }
 
     public PaymentService() {
