@@ -24,7 +24,7 @@ public class IBANValidator implements ConstraintValidator<IBAN, String> {
     @Override
     public boolean isValid(String iban, ConstraintValidatorContext constraintValidatorContext) {
         IBANValidatorHelper helper = new IBANValidatorHelper(iban);
-        return helper.validateCountryCode() && helper.validateBBAN() && helper.validateIBAN();
+        return helper.validateIBAN();
     }
 
 }
