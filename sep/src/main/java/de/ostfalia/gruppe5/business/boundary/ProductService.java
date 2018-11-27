@@ -7,7 +7,7 @@ import javax.ejb.Stateless;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class ProductService extends AbstractLazyJPAService<Product> {
+public class ProductService extends AbstractTableJPAService<Product> {
 
 	public ProductService() {
 		setEntityClass(Product.class);

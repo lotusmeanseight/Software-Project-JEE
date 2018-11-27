@@ -7,10 +7,10 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @DeclareRoles({"EMPLOYEE, CUSTOMER"})
-public abstract class AbstractLazyJPAService<T> extends AbstractJPAService<T> {
+public abstract class AbstractTableJPAService<T> extends AbstractJPAService<T> {
 
     @RolesAllowed("EMPLOYEE")
-    public List<T> getAllTLazy(int first, int max){
+    public List<T> getAllEntitiesInRange(int first, int max){
         TypedQuery<T> query = getEntityManager().createNamedQuery(getEntityClass().getSimpleName() + ".findAll", getEntityClass());
         query.setFirstResult(first);
         query.setMaxResults(max);
@@ -18,7 +18,7 @@ public abstract class AbstractLazyJPAService<T> extends AbstractJPAService<T> {
     }
 
     @RolesAllowed("EMPLOYEE")
-    public int countT(){
+    public int countEntities(){
         Query query = getEntityManager().createNamedQuery(getEntityClass().getSimpleName() + ".countAll" );
         List<Long> resultList = query.getResultList();
         return resultList.get(0).intValue();

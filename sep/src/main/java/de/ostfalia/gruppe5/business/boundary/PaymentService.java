@@ -9,7 +9,7 @@ import java.util.List;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class PaymentService extends AbstractLazyJPAService<Payment> {
+public class PaymentService extends AbstractTableJPAService<Payment> {
 
     public List<Payment> findByCheckNumber(String checknumber) {
         TypedQuery<Payment> query = this.getEntityManager().createQuery("Select p from Payment p where p.checkNumber=?1", Payment.class);

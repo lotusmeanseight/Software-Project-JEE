@@ -8,7 +8,7 @@ import javax.persistence.TypedQuery;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class CustomerService extends AbstractLazyJPAService<Customer> {
+public class CustomerService extends AbstractTableJPAService<Customer> {
 
 	@Override
 	public void save(Customer entity) {

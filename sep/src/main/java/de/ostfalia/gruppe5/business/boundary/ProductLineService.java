@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class ProductLineService extends AbstractLazyJPAService<ProductLine> {
+public class ProductLineService extends AbstractTableJPAService<ProductLine> {
 
 	private final List<String> letters = new ArrayList<>(
 			Arrays.asList("A", "B", "C", "D", "E", "F", "G",
