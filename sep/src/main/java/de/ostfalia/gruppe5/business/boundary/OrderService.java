@@ -10,7 +10,7 @@ import java.util.List;
 @DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class OrderService extends AbstractLazyJPAService<Order> {
+public class OrderService extends AbstractTableJPAService<Order> {
 	public OrderService() {
 		setEntityClass(Order.class);
 	}

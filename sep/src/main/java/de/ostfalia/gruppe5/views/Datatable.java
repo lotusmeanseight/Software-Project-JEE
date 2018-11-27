@@ -1,6 +1,6 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.business.boundary.AbstractLazyJPAService;
+import de.ostfalia.gruppe5.business.boundary.AbstractTableJPAService;
 import de.ostfalia.gruppe5.business.entity.DataModel;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +10,7 @@ import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class Datatable<T extends AbstractLazyJPAService, E> implements Serializable {
+public abstract class Datatable<T extends AbstractTableJPAService, E> implements Serializable {
 
     private DataModel dataModel;
     @Transient
@@ -27,12 +27,12 @@ public abstract class Datatable<T extends AbstractLazyJPAService, E> implements 
     @PostConstruct
     public void initList() {
         rowsOnPage = 10; // Gibt die Anzahl an Einträgen an, die Pro Seite abgebildet werden
-        allRowsCount = service.countT(); // Zählt die Einträge in der Datenbank
+        allRowsCount = service.countEntities(); // Zählt die Einträge in der Datenbank
         lazyDataLoading(0);
     }
 
     private void lazyDataLoading(int first) {
-        List<E> lazyList = service.getAllTLazy(first, rowsOnPage);
+        List<E> lazyList = service.getAllEntitiesInRange(first, rowsOnPage);
         dataModel = new DataModel(lazyList, allRowsCount, rowsOnPage);
     }
 
