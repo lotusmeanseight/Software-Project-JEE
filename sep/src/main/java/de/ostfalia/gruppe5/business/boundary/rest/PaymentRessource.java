@@ -89,7 +89,10 @@ public class PaymentRessource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deletePayment(@PathParam("id") String id){
-        Payment payment = paymentService.findByCheckNumber(id).get(0);
+        Payment payment = null;
+        List<Payment> paymentCandidates = paymentService.findByCheckNumber(id);
+        if (!paymentCandidates.isEmpty())
+            payment = paymentCandidates.get(0);
         if(payment == null){
             return Response.status(404).build();
         }else{
@@ -105,7 +108,6 @@ public class PaymentRessource {
     @Produces(MediaType.APPLICATION_JSON)
     public Customer getPaymentAssignedCustomer(@PathParam("id") String id){
         List<Payment> payments = paymentService.findByCheckNumber(id);
-        Payment current = payments.get(0);
         return payments.get(0).getCustomerNumber();
     }
 
