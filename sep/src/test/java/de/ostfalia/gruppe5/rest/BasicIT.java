@@ -121,7 +121,6 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
     public void testDeleteSpecificWrongID() {
         this.initEnvironment();
         Response response = proxy.deleteEntity("NotARealIdOfAProduct");
-//        System.out.println(response.readEntity(String.class));
         assertEquals(404, response.getStatus());
         response.close();
         this.cleanup();
