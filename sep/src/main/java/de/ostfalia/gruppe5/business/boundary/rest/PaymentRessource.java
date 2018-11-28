@@ -51,11 +51,8 @@ public class PaymentRessource {
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postPayment(JsonObject jsonObject){
-        System.out.println("ERROR >>>>>>"+jsonObject.toString());
         Payment payment = new Payment();
-//        payment.setCheckNumber(jsonObject.getString("checkNumber"));
         populatePayment(jsonObject, payment);
-        System.out.println("ERROR ====== "+payment.toString());
         paymentService.save(payment);
         UriBuilder builder = uriinfo.getRequestUriBuilder();
         URI uri = builder.path(PaymentRessource.class, "getPayment")

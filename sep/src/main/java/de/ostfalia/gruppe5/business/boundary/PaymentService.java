@@ -24,7 +24,7 @@ public class PaymentService extends AbstractLazyJPAService<Payment> {
     public void save(Payment entity) {
         entity.setCheckNumber(generateRandomCheckNumber((ThreadLocalRandom.current().nextInt(0, 5)),
                 (ThreadLocalRandom.current().nextInt(0, 10))));
-        super.save(super.update(entity));
+        super.save((entity));
     }
 
     private String generateRandomCheckNumber(int numberOfLetters, int numbers) {

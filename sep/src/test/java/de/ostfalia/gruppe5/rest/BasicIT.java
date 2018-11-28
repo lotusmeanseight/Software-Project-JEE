@@ -48,7 +48,6 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         JsonArray array = this.proxy.getAllEntities();
         JsonObject jsonForId = array.get(array.size() - 1).asJsonObject();
         U generatedValue = null;
-        System.out.println("jsonForId:"+jsonForId.toString());
         if (this.idType == (Integer.class)) {
             this.currentEntityID = (I) Integer.valueOf(jsonForId.get(this.primaryKey).toString());
             generatedValue = (U) jsonForId.get(this.updateKeyword).toString().replaceAll("(\\\\)*\"","");
@@ -62,8 +61,6 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         } else {
             assertTrue("Type of primaryKey is not registered, ask for help!!!", false);
         }
-        System.out.println(jsonForId.get(this.updateKeyword).getValueType());
-        System.out.println("generatedValue:"+generatedValue);
 
         if (this.updateType == (Integer.class)) {
             assertEquals(updateBase, generatedValue);
@@ -82,20 +79,10 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         }else{
             assertTrue("Type of updateValue is not registered, ask for help!!!", false);
         }
-
-        System.out.println("############");
-        System.out.println(this.idType);
-        System.out.println(this.currentEntityID);
-        System.out.println("############");
     }
 
     public void cleanup() {
-        System.out.println("++++++++ After BasicIT");
         Response response = null;
-        System.out.println("############");
-        System.out.println(this.idType);
-        System.out.println(this.currentEntityID);
-        System.out.println("############");
         if (idType == (Integer.class)) {
             response = this.proxy.deleteEntity((Integer) this.currentEntityID);
         } else if (idType == (String.class)) {
@@ -126,25 +113,9 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         jsonArray.stream().forEach(json -> {
             JsonObject jsonObject = json.asJsonObject();
             jsonObject.keySet().stream().forEach(key -> assertTrue("object with PK " + jsonObject.get(primaryKey).toString() + " is corrupt", !jsonObject.get(primaryKey).toString().isEmpty()));
-            System.out.println(json.toString());
         });
         this.cleanup();
     }
-
-//    @Test
-//    public void testPost() {
-//        String id = "";
-//        ResteasyClient client = (ResteasyClient) ResteasyClientBuilder.newClient();
-//        ResteasyWebTarget web = client.target(target);
-//        web.register(new BasicAuthentication(username, password));
-//        T proxy = web.proxy(proxyType);
-//        JsonArray arrayBefore = proxy.getAllEntities();
-//        proxy.createEntity(this.generateTestEntity(this.testId));
-//        JsonArray arrayAfter = proxy.getAllEntities();
-//        id = arrayAfter.get(arrayAfter.size() - 1).asJsonObject().get(primaryKey).toString();
-//        assertNotEquals(arrayBefore.get(arrayBefore.size() - 1).asJsonObject().get(primaryKey).toString(), id);
-//        proxy.deleteEntity(id);
-//    }
 
     @Test
     public void testDeleteSpecificWrongID() {
@@ -156,16 +127,9 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         this.cleanup();
     }
 
-//    @Test
-//    public void testDeleteSpecific() {
-//        JsonObject productById = proxy.getEntityById(id);
-//        assertEquals(id, productById.get(primaryKey).toString().replaceAll("\"", ""));
-//    }
-
     @Test
     public void testPut() {
         this.initEnvironment();
-//        Modify Product
 
         String modifiedEntity = this.generateTestEntity(this.currentEntityID, updateGoal);
         JsonObject json = null;
@@ -176,14 +140,11 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
             proxy.putEntity((String) this.currentEntityID, modifiedEntity);
             json = proxy.getEntityById((String) this.currentEntityID);
         }
-        System.out.println(json);
         U updateValue = null;
         if (this.updateType == (Integer.class)) {
-            System.out.println("int:" + json.get(updateKeyword));
             updateValue = (U) String.valueOf(json.get(updateKeyword)).replaceAll("\"","");
             assertEquals(updateGoal, updateValue);
         } else if (this.updateType == (String.class)) {
-            System.out.println("string:" + json.get(updateKeyword));
             updateValue = (U) json.getString(updateKeyword).replaceAll("\"","");
             assertEquals(updateGoal, updateValue);
         } else if (this.updateType == (BigDecimal.class)) {
@@ -191,7 +152,7 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
             df.setParseBigDecimal(true);
             BigDecimal bd = new BigDecimal(0);
             try {
-                bd = (BigDecimal) df.parse(json.getString(updateKeyword).replaceAll("\"",""));
+                bd = (BigDecimal) df.parse(json.get(updateKeyword).toString());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -201,7 +162,6 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
     }
 
     public String generateTestEntity(I id, U updateValue) {
-        System.out.println("++++++++++++ Generate id:"+id+" + update:"+updateValue);
         String newEntity = this.testEntity;
 
         if (idType == (Integer.class)) {
@@ -216,12 +176,9 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
             newEntity = newEntity.replaceAll(updateToken, "\""+updateValue+"\"");
         } else if (this.updateType == (BigDecimal.class)) {
             BigDecimal updateValue1 = (BigDecimal) updateValue;
-            System.out.println("BigDecimal:"+updateValue1.toString());
             String bd = updateValue1.toString();
-            System.out.println("bd:"+bd);
             newEntity = newEntity.replaceAll(updateToken, bd);
         }
-        System.out.println("generated: "+newEntity);
         return newEntity;
     }
 
@@ -262,7 +219,6 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
     }
 
     public void setProxyType(Class<T> proxyType) {
-        System.out.println("+++++++++++ setProxyType to " + proxyType.getSimpleName());
         this.proxyType = proxyType;
     }
 
@@ -323,7 +279,6 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
     }
 
     public void setUpdateType(Class<U> updateType) {
-        System.out.println("+++++++++++ setUpdateType to " + updateType);
         this.updateType = updateType;
     }
 }
