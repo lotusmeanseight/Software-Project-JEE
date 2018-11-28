@@ -149,8 +149,8 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         } else if (this.updateType == (BigDecimal.class)) {
             DecimalFormat df = new DecimalFormat();
             df.setParseBigDecimal(true);
-            df.applyLocalizedPattern("#,##0.###");
             System.out.println("Pattern:"+df.toLocalizedPattern());
+            df.applyLocalizedPattern("#,##0.###");
             BigDecimal bd = new BigDecimal(0);
             try {
                 bd = (BigDecimal) df.parse(json.get(updateKeyword).toString());
