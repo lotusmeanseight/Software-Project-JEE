@@ -17,7 +17,6 @@ public class ProductIT extends BasicIT<ProductProxy, String, String> {
 
     @Before
     public void init() {
-        System.out.println("Before ProductIT");
         this.setProxyType(ProductProxy.class);
         this.setTestId("S10_1678");
         this.setPrimaryKey("productCode");
