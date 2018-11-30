@@ -1,5 +1,6 @@
 package de.ostfalia.gruppe5.business.boundary;
 
+import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.Item;
 import de.ostfalia.gruppe5.business.entity.Product;
 

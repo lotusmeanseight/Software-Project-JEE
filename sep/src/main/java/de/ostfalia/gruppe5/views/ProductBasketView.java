@@ -1,7 +1,7 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.business.boundary.ProductBasket;
-import de.ostfalia.gruppe5.business.entity.Product;
+import de.ostfalia.gruppe5.business.boundary.*;
+import de.ostfalia.gruppe5.business.entity.*;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlDataTable;
@@ -15,9 +15,21 @@ import java.math.BigDecimal;
 public class ProductBasketView {
 
     private HtmlDataTable datatable;
-
     @Inject
     private ProductBasket productBasket;
+    @Inject
+    private CustomerService customerService;
+    @Inject
+    private OrderService orderService;
+    @Inject
+    private OrderDetailService orderDetailService;
+    @Inject
+    private PaymentService paymentService;
+
+    private Customer customer;
+    private Order order;
+    private OrderDetail orderDetail;
+    private Payment payment;
 
     public ProductBasketView(){
     }
@@ -41,7 +53,6 @@ public class ProductBasketView {
     public BigDecimal getTotalPrice(){
         return productBasket.calulateTotal();
     }
-
 
     public ProductBasket getProductBasket() {
         return productBasket;
