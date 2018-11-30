@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import de.ostfalia.gruppe5.business.entity.Bankleitzahl;
-import de.ostfalia.gruppe5.business.entity.Order;
 
 public class IBANValidatorHelper {
 
@@ -16,8 +15,8 @@ public class IBANValidatorHelper {
     private static final int CHECK_DIGIT_START_INDEX = COUNTRY_CODE_START_INDEX + COUNTRY_CODE_LENGTH;
     private static final int CHECK_DIGIT_LENGTH = 2;
     private static final int BBAN_INDEX = CHECK_DIGIT_START_INDEX + CHECK_DIGIT_LENGTH;
-    private static final int BLZSTARTINDESBBAN = 0;
-    private static final int BLZENDINDEXBBAN = 7;
+    private static final int BLZ_START_INDEX_BBAN = 0;
+    private static final int BLZ_END_INDEX_BBAN = 7;
     private final String iban;
     private final String bban;
     private final String blz;
@@ -30,7 +29,7 @@ public class IBANValidatorHelper {
     public IBANValidatorHelper(String iban){
         this.iban = iban;
         this.bban = iban.substring(BBAN_INDEX);
-        this.blz = bban.substring(BLZSTARTINDESBBAN, BLZENDINDEXBBAN);
+        this.blz = bban.substring(BLZ_START_INDEX_BBAN, BLZ_END_INDEX_BBAN);
         this.countryCode = CountryCode.valueOf(iban.substring(COUNTRY_CODE_START_INDEX, COUNTRY_CODE_LENGTH));
         this.checkDigits = iban.substring(CHECK_DIGIT_START_INDEX, CHECK_DIGIT_START_INDEX+CHECK_DIGIT_LENGTH);
     }
@@ -68,6 +67,10 @@ public class IBANValidatorHelper {
         return bigInteger.mod(BigInteger.valueOf(MODULO)).equals(BigInteger.ONE);
     }
     
+    /**
+     * Looks up the blz in the bakleitzahl table.
+     * @return if the bankleitzahl is in the db then true ist returned otherwise false.
+     */
     private boolean validateBLZ() {
     	if(entityManager.createQuery("select o from bankleitzahl o where o.bankleitzahl = " + blz, Bankleitzahl.class)
 		.getResultList().isEmpty()) {
