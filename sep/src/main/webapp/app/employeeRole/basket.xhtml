@@ -21,17 +21,8 @@
         <div>
             <h2>Choose Basket Item</h2>
             <h:form>
-                <h:panelGrid columns="2">
-                    <label>Produktcode</label>
-                    <h:selectOneMenu value="products">
-                        <f:selectItem value="basketView.productList" var="product"
-                        itemValue="product" itemLabel="product.productCode">
-                        </f:selectItem>
-                    </h:selectOneMenu>
-                    <label>Quantity</label>
-                    <h:inputText value="basketView.basketItem.quantity" />
-                </h:panelGrid>
-                <h:commandButton action="basketView.addItem" value="Add Item"></h:commandButton>
+
+                <h:commandButton action="../product/products.jsf" value="Add Item"/>
             </h:form>
         </div>
         <div>
