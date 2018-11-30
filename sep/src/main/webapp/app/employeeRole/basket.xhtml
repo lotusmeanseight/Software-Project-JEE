@@ -14,15 +14,11 @@
 
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
-<ui:define name="header">
-    <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
-</ui:define>
     <ui:define name="content">
         <div>
             <h2>Choose Basket Item</h2>
             <h:form>
-
-                <h:commandButton action="../product/products.jsf" value="Add Item"/>
+                <h:button outcome="product/products" value="Product List"/>
             </h:form>
         </div>
         <div>
@@ -30,7 +26,7 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Kundennummer:"></h:outputLabel>
-                    <h:inputText value="productBasketView.basket.customerNumber"/>
+                    <h:inputText value="productBasketView.basket.customesrNumber"/>
 
                 <h:outputLabel value="IBAN"/>
                 <!--<h:inputText value="basketView.basket.iban" />-->
@@ -46,7 +42,7 @@
             </h:form>
 
             <h:form>
-                <h:dataTable value="productBasketView.productBasket.itemList" var="item" border="1"
+                <h:dataTable value="#{productBasketView.productBasket.itemList}" var="item" border="1"
                              selectionMode="single" styleClass="table" headerClass="table-header"
                              rowClasses="table-odd-row,table-even-row">
                     <h:column>
