@@ -50,8 +50,10 @@ public class IBANValidatorHelper {
             return false;
         }else if(!validateBBAN()){
             return false;
-        }else if(validateBLZ()) {
-        	
+        }else if(countryCode.equals(CountryCode.DE)) {
+        	if(!validateBLZ()) {
+        		return false;
+        	}
         }
 
         int[] countryCodeToInt = iban.chars().limit(COUNTRY_CODE_LENGTH).map(this::transformCountryCode).toArray();
