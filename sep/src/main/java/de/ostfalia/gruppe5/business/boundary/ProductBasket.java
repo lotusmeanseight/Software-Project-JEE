@@ -33,12 +33,12 @@ public class ProductBasket implements Serializable {
         if(newQuantity < 0){
             List<FacesMessage> messages = new ArrayList<>();
             messages.add(new FacesMessage("Die Anzahl ist zu niedrig für: "
-                    + itemList.get(indexOfList).getProduct().getProductName()));
+                    + getItemList().get(indexOfList).getProduct().getProductName()));
             throw new ValidatorException(messages);
         }else if(newQuantity == 0){
             removeItem(indexOfList);
         }else{
-            itemList.get(indexOfList).setQuantity(newQuantity);
+            getItemList().get(indexOfList).setQuantity(newQuantity);
         }
     }
 
@@ -47,7 +47,7 @@ public class ProductBasket implements Serializable {
      * @param indexOfList position of item in basket
      */
     public void removeItem(int indexOfList){
-        itemList.remove(indexOfList);
+        getItemList().remove(indexOfList);
     }
 
     /**
@@ -57,9 +57,9 @@ public class ProductBasket implements Serializable {
     public void buyProduct(Product product){
         int basketPosition = checkBasket(product);
         if(!(basketPosition >= 0)){
-            itemList.add(new Item(product, 1));
+            getItemList().add(new Item(product, 1));
         }else{
-            itemList.get(basketPosition).setQuantity(itemList.get(basketPosition).getQuantity()+1);
+            getItemList().get(basketPosition).setQuantity(getItemList().get(basketPosition).getQuantity()+1);
         }
     }
 
@@ -69,7 +69,7 @@ public class ProductBasket implements Serializable {
      */
     public BigDecimal calulateTotal(){
         double total = 0;
-        for(Item item : itemList){
+        for(Item item : getItemList()){
             total = total + item.getProduct().getBuyPrice() * item.getQuantity();
         }
         return BigDecimal.valueOf(total);
@@ -82,8 +82,8 @@ public class ProductBasket implements Serializable {
      * @return index of the product if it is present in the basket.
      */
     private int checkBasket(Product product){
-        for (int i = 0; i < itemList.size(); i++) {
-            if(itemList.get(i).getProduct().getProductCode().equals(product.getProductCode())){
+        for (int i = 0; i < getItemList().size(); i++) {
+            if(getItemList().get(i).getProduct().getProductCode().equals(product.getProductCode())){
                 return i;
             }
         }
@@ -91,4 +91,7 @@ public class ProductBasket implements Serializable {
         return -1;
     }
 
+    public List<Item> getItemList() {
+        return itemList;
+    }
 }
