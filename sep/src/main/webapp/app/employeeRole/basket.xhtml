@@ -22,7 +22,7 @@
             <h2>Choose Basket Item</h2>
             <h:form>
 
-                <h:commandButton action="../product/products.jsf" value="Add Item"/>
+                <h:button outcome="product/products.jsf" value="Add Item"/>
             </h:form>
         </div>
         <div>
@@ -46,7 +46,7 @@
             </h:form>
 
             <h:form>
-                <h:dataTable value="productBasketView.productBasket.itemList" var="item" border="1"
+                <h:dataTable value="#{productBasketView.productBasket.itemList}" binding="#{productBasketView.datatable}" var="item" border="1"
                              selectionMode="single" styleClass="table" headerClass="table-header"
                              rowClasses="table-odd-row,table-even-row">
                     <h:column>
@@ -75,7 +75,7 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Löschen</f:facet>
-                        <h:commandButton action="productBasketView.remove" value="Loeschen"/>
+                        <h:commandButton action="#{productBasketView.remove()}" value="Loeschen"/>
                     </h:column>
                 </h:dataTable>
             </h:form>

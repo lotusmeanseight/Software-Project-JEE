@@ -7,6 +7,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.sound.midi.SysexMessage;
 import java.math.BigDecimal;
 
 @Named
@@ -48,5 +49,13 @@ public class ProductBasketView {
 
     public void setProductBasket(ProductBasket productBasket) {
         this.productBasket = productBasket;
+    }
+
+    public HtmlDataTable getDatatable() {
+        return datatable;
+    }
+
+    public void setDatatable(HtmlDataTable datatable) {
+        this.datatable = datatable;
     }
 }

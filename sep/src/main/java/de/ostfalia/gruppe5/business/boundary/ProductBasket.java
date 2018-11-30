@@ -47,6 +47,7 @@ public class ProductBasket implements Serializable {
      * @param indexOfList position of item in basket
      */
     public void removeItem(int indexOfList){
+
         getItemList().remove(indexOfList);
     }
 
