@@ -2,6 +2,12 @@ package de.ostfalia.gruppe5.business.boundary.validation;
 
 import java.math.BigInteger;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+
+import de.ostfalia.gruppe5.business.entity.Bankleitzahl;
+import de.ostfalia.gruppe5.business.entity.Order;
+
 public class IBANValidatorHelper {
 
     private static final int MODULO = 97;
@@ -10,14 +16,21 @@ public class IBANValidatorHelper {
     private static final int CHECK_DIGIT_START_INDEX = COUNTRY_CODE_START_INDEX + COUNTRY_CODE_LENGTH;
     private static final int CHECK_DIGIT_LENGTH = 2;
     private static final int BBAN_INDEX = CHECK_DIGIT_START_INDEX + CHECK_DIGIT_LENGTH;
+    private static final int BLZSTARTINDESBBAN = 0;
+    private static final int BLZENDINDEXBBAN = 7;
     private final String iban;
     private final String bban;
+    private final String blz;
     private final CountryCode countryCode;
     private final String checkDigits;
+    
+    @Inject
+    EntityManager entityManager;
 
     public IBANValidatorHelper(String iban){
         this.iban = iban;
         this.bban = iban.substring(BBAN_INDEX);
+        this.blz = bban.substring(BLZSTARTINDESBBAN, BLZENDINDEXBBAN);
         this.countryCode = CountryCode.valueOf(iban.substring(COUNTRY_CODE_START_INDEX, COUNTRY_CODE_LENGTH));
         this.checkDigits = iban.substring(CHECK_DIGIT_START_INDEX, CHECK_DIGIT_START_INDEX+CHECK_DIGIT_LENGTH);
     }
@@ -38,6 +51,8 @@ public class IBANValidatorHelper {
             return false;
         }else if(!validateBBAN()){
             return false;
+        }else if(validateBLZ()) {
+        	
         }
 
         int[] countryCodeToInt = iban.chars().limit(COUNTRY_CODE_LENGTH).map(this::transformCountryCode).toArray();
@@ -51,6 +66,15 @@ public class IBANValidatorHelper {
         builder.append(this.checkDigits);
         BigInteger bigInteger = new BigInteger(builder.toString());
         return bigInteger.mod(BigInteger.valueOf(MODULO)).equals(BigInteger.ONE);
+    }
+    
+    private boolean validateBLZ() {
+    	if(entityManager.createQuery("select o from bankleitzahl o where o.bankleitzahl = " + blz, Bankleitzahl.class)
+		.getResultList().isEmpty()) {
+    		return false;
+    	} else {
+    		return true;
+    	}
     }
 
     /**
