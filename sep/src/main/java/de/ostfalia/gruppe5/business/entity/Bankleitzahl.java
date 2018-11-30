@@ -1,6 +1,7 @@
 package de.ostfalia.gruppe5.business.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -10,19 +11,33 @@ public class Bankleitzahl {
 	public Bankleitzahl() {
 	}
 	
+	@Id
 	private String bankleitzahl;
+	
 	private String merkmal;
+	
 	private String bezeichnung;
+	
 	private String plz;
+	
 	private String ort;
+	
 	private String kurzbezeichnung;
+	
 	private String pan;
+	
 	private String bic;
+	
 	private String pruefzifferberechnungsmethode;
+	
 	private String datensatznummer;
+	
 	private String aenderungskennzeichen;
+	
 	private String bankleitzahlloeschung;
+	
 	private String nachfolgebankleitzahl;
+	
 	
 	public String getBankleitzahl() {
 		return bankleitzahl;
