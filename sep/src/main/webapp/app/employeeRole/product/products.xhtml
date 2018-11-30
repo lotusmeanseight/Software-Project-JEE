@@ -58,7 +58,8 @@
         </h:column>
         <h:column>
             <f:facet name="header">Zum Warenkorb hinzufügen</f:facet>
-            <h:commandButton value="Hinzufügen" actionListener="#{productView.addToBasket(product)}">
+            <h:inputText binding="#{quantity}" />
+            <h:commandButton value="Hinzufügen" action="#{productView.addToBasket(product,quantity.value)}">
 
             </h:commandButton>
         </h:column>

@@ -30,12 +30,13 @@ public class ProductBasketView {
     private Order order;
     private OrderDetail orderDetail;
     private Payment payment;
+    private BigDecimal totalPrice;
 
     public ProductBasketView(){
     }
 
-    public String buy(Product product){
-        productBasket.buyProduct(product);
+    public String buy(Product product , int quantity){
+        productBasket.buyProduct(product, quantity);
         return null;
     }
 

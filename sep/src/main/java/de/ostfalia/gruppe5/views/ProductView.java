@@ -14,6 +14,8 @@ public class ProductView {
 
 	private Product product;
 
+	private  int quantity;
+
 	@Inject
 	private ProductBasket productBasket;
 
@@ -50,8 +52,8 @@ public class ProductView {
 		return null;
 	}
 
-	public String addToBasket(Product product){
-		productBasket.buyProduct(product);
+	public String addToBasket(Product product , int quantity){
+		productBasket.buyProduct(product, quantity);
 		return "basket?faces-redirect=true";
 	}
 
@@ -59,4 +61,11 @@ public class ProductView {
 		return datatable;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 }

@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <title>Basket</title>
     <h:outputStylesheet library="css" name="style.css"/>
@@ -29,7 +29,7 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Kundennummer:"></h:outputLabel>
-                    <h:inputText value="productBasketView.basket.customerNumber"/>
+                    <h:inputText a:placeholder="Bitte eingeben"/>
 
                 <h:outputLabel value="IBAN"/>
                 <!--<h:inputText value="basketView.basket.iban" />-->
@@ -76,6 +76,10 @@
                         <f:facet name="header">Löschen</f:facet>
                         <h:commandButton action="#{productBasketView.remove}" value="Loeschen"/>
                     </h:column>
+                    <f:facet name="footer">
+                        <h:outputLabel value="Gesamtbetrag: "/>
+                        <h:outputText value="#{productBasketView.totalPrice} Euro" />
+                    </f:facet>
                 </h:dataTable>
             </h:form>
         </div>

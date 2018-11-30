@@ -56,10 +56,10 @@ public class ProductBasket implements Serializable {
      * Addding Product to Basket, if it is already inside then add one.
      * @param product
      */
-    public void buyProduct(Product product){
+    public void buyProduct(Product product , int quantity){
         int basketPosition = checkBasket(product);
         if(!(basketPosition >= 0)){
-            getItemList().add(new Item(product, 1));
+            getItemList().add(new Item(product, quantity));
         }else{
             getItemList().get(basketPosition).setQuantity(getItemList().get(basketPosition).getQuantity()+1);
         }
