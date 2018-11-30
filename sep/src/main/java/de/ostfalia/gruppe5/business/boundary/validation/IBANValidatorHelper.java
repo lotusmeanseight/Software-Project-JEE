@@ -3,7 +3,6 @@ package de.ostfalia.gruppe5.business.boundary.validation;
 import java.math.BigInteger;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -76,6 +75,7 @@ public class IBANValidatorHelper {
      * @return if the bankleitzahl is not in the db then false is returned, otherwise true is returned.
      */
     private boolean validateBLZ() {
+    	System.out.println(entityManager.isOpen());
     	List<Bankleitzahl> list = entityManager.createQuery("select b from Bankleitzahl b where b.bankleitzahl = " + blz, Bankleitzahl.class)
 		.getResultList();
     	if(list == null || list.isEmpty()) {
