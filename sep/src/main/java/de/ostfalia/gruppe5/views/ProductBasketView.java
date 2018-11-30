@@ -4,6 +4,7 @@ import de.ostfalia.gruppe5.business.boundary.ProductBasket;
 import de.ostfalia.gruppe5.business.entity.Product;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.math.BigDecimal;
@@ -11,6 +12,8 @@ import java.math.BigDecimal;
 @Named
 @RequestScoped
 public class ProductBasketView {
+
+    private HtmlDataTable datatable;
 
     @Inject
     private ProductBasket productBasket;
@@ -23,7 +26,8 @@ public class ProductBasketView {
         return null;
     }
 
-    public String remove(int indexOfList){
+    public String remove(){
+        int indexOfList = datatable.getRowIndex();
         productBasket.removeItem(indexOfList);
         return null;
     }

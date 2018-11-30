@@ -56,14 +56,12 @@
             <f:facet name="header">MSRP</f:facet>
             <h:outputText id="msrp" value="#{product.MSRP}"/>
         </h:column>
-        <!--<h:column>
+        <h:column>
             <f:facet name="header">Zum Warenkorb hinzufügen</f:facet>
-            <h:commandButton value="Hinzufügen">
-                <f:setPropertyActionListener target="#{productView.productBasket.product}" value="#{product}"/>
-                <f:setPropertyActionListener target="#{productView.productBasket.product.productCode}"
-                                             value="#{product.productCode}"/>
+            <h:commandButton value="Hinzufügen" actionListener="#{productView.addToBasket(product)}">
+
             </h:commandButton>
-        </h:column>-->
+        </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
             <h:commandButton action="productEdit" value="Aktualisieren">

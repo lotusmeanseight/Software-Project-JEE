@@ -150,7 +150,7 @@ public class Product implements Serializable {
         return Objects.hash(getProductCode(), getProductName(), getProductLine(), getProductScale(), getProductVendor(), getProductDescription(), getQuantityInStock(), getBuyPrice(), getMSRP());
     }
 
-    @Override
+    /*@Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
@@ -166,5 +166,5 @@ public class Product implements Serializable {
         sb.append("]");
         String toString = "[" + sb.toString().subSequence(2, sb.length());
         return toString;
-    }
+    }*/
 }

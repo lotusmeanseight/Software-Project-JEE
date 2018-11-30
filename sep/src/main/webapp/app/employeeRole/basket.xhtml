@@ -30,50 +30,52 @@
             <h:form>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Kundennummer:"></h:outputLabel>
-                    <h:inputText value="basketView.basket.customerNumber"/>
+                    <h:inputText value="productBasketView.basket.customerNumber"/>
 
                 <h:outputLabel value="IBAN"/>
-                <h:inputText value="basketView.basket.iban" />
+                <!--<h:inputText value="basketView.basket.iban" />-->
 
                 <h:outputLabel value="Accountnummer"/>
-                <h:inputText value="basketView.basket.accountNumber"/>
+                <!--<h:inputText value="basketView.basket.accountNumber"/>-->
 
                 <h:outputLabel value="Bankleitzahl"/>
-                <h:inputText value="basketView.basket.bankCode"/>
+                <!--<h:inputText value="basketView.basket.bankCode"/>-->
 
                 </h:panelGrid>
-                <h:commandButton action="basketView.save()" value="Bestellung abschliessen"/>
+                <!--<h:commandButton action="basketView.save()" value="Bestellung abschliessen"/>-->
             </h:form>
 
             <h:form>
-                <h:dataTable value="basketView.basketitemList" var="item" binding="basketView.table">
+                <h:dataTable value="productBasketView.productBasket.itemList" var="item" border="1"
+                             selectionMode="single" styleClass="table" headerClass="table-header"
+                             rowClasses="table-odd-row,table-even-row">
                     <h:column>
                         <f:facet name="header">Produktcode</f:facet>
-                        <h:outputText value="item.product.productCode"/>
+                        <h:outputText value="#{item.product.productCode}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Produktname</f:facet>
-                        <h:outputText value="item.product.productName"/>
+                        <h:outputText value="#{item.product.productName}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Beschreibung</f:facet>
-                        <h:outputText value="item.product.productCode"/>
+                        <h:outputText value="#{item.product.productDescription}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Kaufpreis</f:facet>
-                        <h:outputText value="item.product.productCode"/>
+                        <h:outputText value="#{item.product.buyPrice}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">MSRP</f:facet>
-                        <h:outputText value="item.product.productCode"/>
+                        <h:outputText value="#{item.product.MSRP}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Anzahl </f:facet>
-                        <h:outputText value="item.quantity"/>
+                        <h:outputText value="#{item.quantity}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">Löschen</f:facet>
-                        <h:commandButton action="basketView.delete(product)" value="Loeschen"/>
+                        <h:commandButton action="productBasketView.remove" value="Loeschen"/>
                     </h:column>
                 </h:dataTable>
             </h:form>
