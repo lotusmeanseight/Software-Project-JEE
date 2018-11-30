@@ -3,12 +3,14 @@ package de.ostfalia.gruppe5.views;
 import de.ostfalia.gruppe5.business.boundary.*;
 import de.ostfalia.gruppe5.business.entity.*;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.sound.midi.SysexMessage;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Named
 @RequestScoped
@@ -32,7 +34,31 @@ public class ProductBasketView {
     private Payment payment;
     private BigDecimal totalPrice;
 
+    private LocalDate currentDate;
+
     public ProductBasketView(){
+    }
+
+    @PostConstruct
+    private void init(){
+        currentDate = LocalDate.now();
+    }
+
+    private Order createOrder(){
+        Order order = new Order();
+        order.setStatus((OrderStatus.IN_PROCESS.toString()));
+        order.setOrderDate(currentDate);
+        order.setRequiredDate(currentDate);
+        order.setShippedDate(currentDate);
+
+        return order;
+    }
+
+    private Payment createPayment() {
+        Payment payment = new Payment();
+        payment.setPaymentDate(currentDate);
+
+        return  payment;
     }
 
     public String buy(Product product , int quantity){
@@ -49,6 +75,10 @@ public class ProductBasketView {
     public String changeQuantity(int indexOfList, int newQuantity){
         productBasket.changeQuantityInBasket(indexOfList, newQuantity);
         return null;
+    }
+
+    public Customer getCustomer(int customerNumber){
+        return customerService.find(customerNumber);
     }
 
     public BigDecimal getTotalPrice(){
@@ -69,5 +99,13 @@ public class ProductBasketView {
 
     public void setDatatable(HtmlDataTable datatable) {
         this.datatable = datatable;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
