@@ -69,7 +69,7 @@ public class IBANValidatorHelper {
     
     /**
      * Looks up the blz in the bakleitzahl table.
-     * @return if the bankleitzahl is in the db then true ist returned otherwise false.
+     * @return if the bankleitzahl is not in the db then false is returned, otherwise true is returned.
      */
     private boolean validateBLZ() {
     	if(entityManager.createQuery("select o from bankleitzahl o where o.bankleitzahl = " + blz, Bankleitzahl.class)
