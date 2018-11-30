@@ -1,9 +1,11 @@
 package de.ostfalia.gruppe5.business.boundary.validation;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import de.ostfalia.gruppe5.business.entity.Bankleitzahl;
 
@@ -16,14 +18,14 @@ public class IBANValidatorHelper {
     private static final int CHECK_DIGIT_LENGTH = 2;
     private static final int BBAN_INDEX = CHECK_DIGIT_START_INDEX + CHECK_DIGIT_LENGTH;
     private static final int BLZ_START_INDEX_BBAN = 0;
-    private static final int BLZ_END_INDEX_BBAN = 7;
+    private static final int BLZ_END_INDEX_BBAN = 8;
     private final String iban;
     private final String bban;
     private final String blz;
     private final CountryCode countryCode;
     private final String checkDigits;
     
-    @Inject
+    @PersistenceContext(unitName = "BLZ")
     EntityManager entityManager;
 
     public IBANValidatorHelper(String iban){
@@ -74,8 +76,9 @@ public class IBANValidatorHelper {
      * @return if the bankleitzahl is not in the db then false is returned, otherwise true is returned.
      */
     private boolean validateBLZ() {
-    	if(entityManager.createQuery("select o from bankleitzahl o where o.bankleitzahl = " + blz, Bankleitzahl.class)
-		.getResultList().isEmpty()) {
+    	List<Bankleitzahl> list = entityManager.createQuery("select b from Bankleitzahl b where b.bankleitzahl = " + blz, Bankleitzahl.class)
+		.getResultList();
+    	if(list == null || list.isEmpty()) {
     		return false;
     	} else {
     		return true;
