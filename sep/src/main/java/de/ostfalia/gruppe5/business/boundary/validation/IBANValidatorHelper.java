@@ -3,11 +3,14 @@ package de.ostfalia.gruppe5.business.boundary.validation;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
-import de.ostfalia.gruppe5.business.entity.Bankleitzahl;
-
+@Named
+@RequestScoped
 public class IBANValidatorHelper {
 
     private static final int MODULO = 97;
@@ -18,16 +21,19 @@ public class IBANValidatorHelper {
     private static final int BBAN_INDEX = CHECK_DIGIT_START_INDEX + CHECK_DIGIT_LENGTH;
     private static final int BLZ_START_INDEX_BBAN = 0;
     private static final int BLZ_END_INDEX_BBAN = 8;
-    private final String iban;
-    private final String bban;
-    private final String blz;
-    private final CountryCode countryCode;
-    private final String checkDigits;
+    private String iban;
+    private String bban;
+    private String blz;
+    private CountryCode countryCode;
+    private String checkDigits;
     
     @PersistenceContext(unitName = "BLZ")
     EntityManager entityManager;
 
-    public IBANValidatorHelper(String iban){
+    public IBANValidatorHelper() {
+	}
+    
+    public void build(String iban){
         this.iban = iban;
         this.bban = iban.substring(BBAN_INDEX);
         this.blz = bban.substring(BLZ_START_INDEX_BBAN, BLZ_END_INDEX_BBAN);
@@ -75,9 +81,9 @@ public class IBANValidatorHelper {
      * @return if the bankleitzahl is not in the db then false is returned, otherwise true is returned.
      */
     private boolean validateBLZ() {
-    	System.out.println(entityManager.isOpen());
-    	List<Bankleitzahl> list = entityManager.createQuery("select b from Bankleitzahl b where b.bankleitzahl = " + blz, Bankleitzahl.class)
-		.getResultList();
+    	Query q = entityManager.createNativeQuery("SELECT b.bankleitzahl FROM bankleitzahl b WHERE b.bankleitzahl = :id");
+    	q.setParameter("id", blz);
+    	List<Object[]> list = q.getResultList();
     	if(list == null || list.isEmpty()) {
     		return false;
     	} else {
