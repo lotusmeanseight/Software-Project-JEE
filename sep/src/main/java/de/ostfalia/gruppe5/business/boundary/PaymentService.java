@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
-public class PaymentService extends AbstractLazyJPAService<Payment> {
+public class PaymentService extends AbstractTableJPAService<Payment> {
 
     private final List<String> letters = new ArrayList<>(
             Arrays.asList("A", "B", "C", "D", "E", "F", "G",
