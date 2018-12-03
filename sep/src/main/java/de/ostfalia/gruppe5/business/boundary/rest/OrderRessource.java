@@ -3,15 +3,18 @@ package de.ostfalia.gruppe5.business.boundary.rest;
 import de.ostfalia.gruppe5.business.boundary.CustomerService;
 import de.ostfalia.gruppe5.business.boundary.OrderDetailService;
 import de.ostfalia.gruppe5.business.boundary.OrderService;
+import de.ostfalia.gruppe5.business.boundary.ProductService;
 import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.CustomerUser;
 import de.ostfalia.gruppe5.business.entity.Order;
 import de.ostfalia.gruppe5.business.entity.OrderDetail;
+import de.ostfalia.gruppe5.business.entity.OrderDetailsID;
 
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import javax.faces.flow.builder.ReturnBuilder;
 import javax.inject.Inject;
 import javax.json.JsonObject;
 import javax.ws.rs.*;
@@ -36,6 +39,9 @@ public class OrderRessource {
 
     @Inject
     private OrderService service;
+    
+    @Inject 
+    private ProductService productService;
 
     @Inject
     private CustomerService customerService;
@@ -81,6 +87,64 @@ public class OrderRessource {
         UriBuilder builder = uriinfo.getRequestUriBuilder();
         URI uri = builder.path(OrderRessource.class, "getOrder").build(order.getOrderNumber());
         return Response.created(uri).build();
+    }
+    
+    @RolesAllowed({"EMPLOYEE", "CUSTOMER"})
+    @POST
+    @Path("/basket")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response postOrderBasket(JsonObject json) {	
+        Order order = new Order();
+        Integer orderNumber = service.nextID();
+        order.setOrderNumber(orderNumber);
+        newOrder(json, order);
+        service.update(order);
+        
+        
+        
+        fillOrderDetails(json, orderNumber);
+        
+        UriBuilder builder = uriinfo.getRequestUriBuilder();
+        URI uri = builder.path(OrderRessource.class, "getOrder").build(order.getOrderNumber());
+        return Response.created(uri).build();
+    }
+    
+    private String ibanOrBlz(JsonObject json) {
+    	if(json.getString("iban") != null) {
+    		return json.getString("iban");
+    	}
+    	return null;
+    }
+    
+    private void fillOrderDetails(JsonObject json, Integer orderNumber) {
+    	
+    	json.getJsonArray("orders").stream().forEach(s -> {
+    		String productCode = s.asJsonObject().getString("productCode");
+    		OrderDetailsID id = new OrderDetailsID(orderNumber, productCode);
+    		OrderDetail orderDetail = new OrderDetail();
+    		orderDetail.setId(id);
+    		orderDetail.setOrderLineNumber((short) 1);
+    		Integer quantityOrdered = s.asJsonObject().getInt("amount");
+    		orderDetail.setQuantityOrdered(quantityOrdered);
+    		orderDetail.setPriceEach(productService.find(productCode).getBuyPrice());
+    		orderDetail.setProductCode(productService.find(productCode));
+    		orderDetail.setOrderNumber(service.find(orderNumber));
+    		orderDetailService.save(orderDetail);
+    		});
+    	
+    }
+    
+    private void newOrder(JsonObject json, Order order) {
+    	order.setComments("A Comment");
+    	order.setOrderDate(LocalDate.now());
+    	order.setRequiredDate(LocalDate.now());
+    	order.setShippedDate(LocalDate.now());
+    	order.setStatus("In Process");
+    	
+    	int customerNumber = json.getInt("customerNumber");
+        Customer customer = customerService.find(customerNumber);
+        order.setCustomerNumber(customer);
     }
 
     private void populateOrder(JsonObject json, Order order) {
