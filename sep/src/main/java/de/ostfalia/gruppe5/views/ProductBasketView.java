@@ -1,6 +1,7 @@
 package de.ostfalia.gruppe5.views;
 
 import de.ostfalia.gruppe5.business.boundary.*;
+import de.ostfalia.gruppe5.business.boundary.validation.IBAN;
 import de.ostfalia.gruppe5.business.entity.*;
 
 import javax.annotation.PostConstruct;
@@ -35,11 +36,13 @@ public class ProductBasketView {
     private Order order;
     private OrderDetail orderDetail;
     private Payment payment;
-    private BigDecimal totalPrice;
+    private Double totalPrice;
 
     private LocalDate currentDate;
 
+    @IBAN
     private String iban;
+
     private Integer accountNumber;
     private Integer blz;
 
@@ -52,12 +55,24 @@ public class ProductBasketView {
     }
 
     public void processOrder(){
+        createOrder();
+        createPayment();
+        payment.setAmount(totalPrice);
+        payment.setCustomerNumber(customer);
+        payment.setCheckNumber(iban);
+
+
+        order.setStatus((OrderStatus.IN_PROCESS.toString()));
+        order.setCustomerNumber(customer);
+
+        for (Item i: productBasket.getItemList()) {
+            
+        }
 
     }
 
     private Order createOrder(){
         Order order = new Order();
-        order.setStatus((OrderStatus.IN_PROCESS.toString()));
         order.setOrderDate(currentDate);
         order.setRequiredDate(currentDate);
         order.setShippedDate(currentDate);
@@ -68,7 +83,6 @@ public class ProductBasketView {
     private Payment createPayment() {
         Payment payment = new Payment();
         payment.setPaymentDate(currentDate);
-
         return  payment;
     }
 
