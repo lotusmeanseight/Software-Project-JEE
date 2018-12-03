@@ -21,8 +21,8 @@
         <div>
             <h:form>
                 <h:panelGrid columns="2" >
-                    Kundennummer:  <h:outputLabel value="#{productBasketView.productBasket.customer.customerNumber}"/>
-                    Bitte wählen Sie einen Kunden aus: <h:button outcome="customer/customers.jsf" value="Kunden hinzufügen"/>
+                    Kundennummer:  <h:outputLabel value="#{productBasketView.productBasket.customer.customerNumber}" a:placeholder="Bitte wählen Sie einen Kunden aus"/>
+                    <h:button outcome="customer/customers.jsf" value="Kunden hinzufügen"/>
                 </h:panelGrid>
                 <h2>Bitte geben Sie die Bankverbindung ein</h2>
                 <h:panelGrid columns="2">
