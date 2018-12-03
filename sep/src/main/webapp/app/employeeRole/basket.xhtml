@@ -9,7 +9,6 @@
 <h:head>
     <title>Basket</title>
     <h:outputStylesheet library="css" name="style.css"/>
-
 </h:head>
 
 <body>
@@ -18,35 +17,31 @@
     <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
 </ui:define>
     <ui:define name="content">
+
         <div>
-            <h2>Choose Basket Item</h2>
+            <h:form>
+                <h:panelGrid columns="2" >
+                    Kundennummer:  <h:outputLabel value="#{productBasketView.productBasket.customer.customerNumber}"/>
+                    Bitte wählen Sie einen Kunden aus: <h:button outcome="customer/customers.jsf" value="Kunden hinzufügen"/>
+                </h:panelGrid>
+                <h2>Bitte geben Sie die Bankverbindung ein</h2>
+                <h:panelGrid columns="2">
+                IBAN: <h:inputText value="#{productBasketView.iban}"/>
+                Accountnummer: <h:inputText value="#{productBasketView.accountNumber}"/>
+                Bankleitzahl: <h:inputText value="#{productBasketView.blz}"/>
+                </h:panelGrid>
+                <h:commandButton action="#{productBasketView.processOrder}" value="Bestellung abschliessen"/>
+            </h:form>
+        </div>
+        <div>
+            <h2>Produkt zum Warenkorb hinzufügen</h2>
             <h:form>
                 <h:button outcome="product/products.jsf" value="Produkt hinzufügen"/>
             </h:form>
         </div>
         <div>
-            <h2>Basket</h2>
             <h:form>
-                <h:panelGrid columns="2" >
-                    <h:outputLabel value="#{productBasketView.productBasket.customer.customerNumber}"/>
-                    <h:outputLabel value="Bitte wählen Sie einen Kunden aus"/>
-                    <h:button outcome="customer/customers.jsf" value="Kunden hinzufügen"/>
-
-
-                <h:outputLabel value="IBAN"/>
-                <!--<h:inputText value="basketView.basket.iban" />-->
-
-                <h:outputLabel value="Accountnummer"/>
-                <!--<h:inputText value="basketView.basket.accountNumber"/>-->
-
-                <h:outputLabel value="Bankleitzahl"/>
-                <!--<h:inputText value="basketView.basket.bankCode"/>-->
-
-                </h:panelGrid>
-                <!--<h:commandButton action="basketView.save()" value="Bestellung abschliessen"/>-->
-            </h:form>
-
-            <h:form>
+                <h2>Warenkorb</h2>
                 <h:dataTable value="#{productBasketView.productBasket.itemList}" binding="#{productBasketView.datatable}" var="item" border="1"
                              selectionMode="single" styleClass="table" headerClass="table-header"
                              rowClasses="table-odd-row,table-even-row">

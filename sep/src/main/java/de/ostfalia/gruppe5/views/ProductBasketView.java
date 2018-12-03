@@ -39,12 +39,20 @@ public class ProductBasketView {
 
     private LocalDate currentDate;
 
+    private String iban;
+    private Integer accountNumber;
+    private Integer blz;
+
     public ProductBasketView(){
     }
 
     @PostConstruct
     private void init(){
         currentDate = LocalDate.now();
+    }
+
+    public void processOrder(){
+
     }
 
     private Order createOrder(){
@@ -123,5 +131,29 @@ public class ProductBasketView {
 
     public void setCustomerUser(CustomerUser customerUser) {
         this.customerUser = customerUser;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+
+    public Integer getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(Integer accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public Integer getBlz() {
+        return blz;
+    }
+
+    public void setBlz(Integer blz) {
+        this.blz = blz;
     }
 }
