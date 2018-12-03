@@ -83,21 +83,4 @@ public class ProductLine implements Serializable {
 		return Objects.hash(getProductLine(), productList, getTextDescription(), getHtmlDescription(), getImage());
 	}
 
-	@Override
-	public String toString() {
-		final StringBuilder sb = new StringBuilder();
-		Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
-			try {
-				sb.append(", ");
-				sb.append(field.getName());
-				sb.append("=");
-				sb.append(field.get(this));
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		});
-		sb.append("]");
-		String toString = "[" + sb.toString().subSequence(2, sb.length());
-		return toString;
-	}
 }

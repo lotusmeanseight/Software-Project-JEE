@@ -22,10 +22,10 @@ public class OrderService extends AbstractTableJPAService<Order> {
 	}
 
 	public Integer nextID(){
-		Integer lastID = this.getEntityManager().createQuery("select MAX(o.orderNumber) from Order o", Integer.class).getSingleResult();
-		lastID++;
+		Integer lastID = this.getEntityManager().createQuery("select MAX(o.orderNumber) from Order o", Integer.class)
+				.getSingleResult();
 
-		return lastID;
+		return ++lastID;
 	}
 
 }

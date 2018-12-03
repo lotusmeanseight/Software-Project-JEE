@@ -14,16 +14,13 @@ import java.util.Objects;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class OrderDetail implements Serializable {
 
-    @EmbeddedId
-    private OrderDetailsID id;
-
-    @ManyToOne
-    @MapsId("orderNumber")
+    @Id
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "orderNumber")
     private Order orderNumber;
 
-    @ManyToOne
-    @MapsId("productCode")
+    @Id
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "productCode")
     private Product productCode;
 
@@ -56,10 +53,6 @@ public class OrderDetail implements Serializable {
         this.orderLineNumber = orderLineNumber;
     }
 
-    public OrderDetailsID getId() {
-        return id;
-    }
-
     public Order getOrderNumber() {
         return orderNumber;
     }
@@ -73,7 +66,7 @@ public class OrderDetail implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderDetail that = (OrderDetail) o;
-        return Objects.equals(id, that.id) &&
+        return
                 Objects.equals(orderNumber, that.orderNumber) &&
                 Objects.equals(productCode, that.productCode) &&
                 Objects.equals(quantityOrdered, that.quantityOrdered) &&
@@ -83,7 +76,7 @@ public class OrderDetail implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, orderNumber, productCode, quantityOrdered, priceEach, orderLineNumber);
+        return Objects.hash(orderNumber, productCode, quantityOrdered, priceEach, orderLineNumber);
     }
 
     public void setOrderNumber(Order orderNumber) {
@@ -94,25 +87,5 @@ public class OrderDetail implements Serializable {
         this.productCode = productCode;
     }
 
-    public void setId(OrderDetailsID id) {
-        this.id = id;
-    }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
-            try {
-                sb.append(", ");
-                sb.append(field.getName());
-                sb.append("=");
-                sb.append(field.get(this));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        });
-        sb.append("]");
-        String toString = "[" + sb.toString().subSequence(2, sb.length());
-        return toString;
-    }
 }

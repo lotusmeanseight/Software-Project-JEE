@@ -71,12 +71,12 @@ public class ProductBasket implements Serializable {
      * calculate total price of items in basket
      * @return total money to pay in transaction
      */
-    public BigDecimal calulateTotal(){
+    public double calulateTotal(){
         double total = 0;
         for(Item item : getItemList()){
             total = total + item.getProduct().getBuyPrice() * item.getQuantity();
         }
-        return BigDecimal.valueOf(total);
+        return total;
     }
 
     /**
