@@ -6,11 +6,11 @@ import de.ostfalia.gruppe5.business.entity.*;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.sound.midi.SysexMessage;
-import java.math.BigDecimal;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +34,9 @@ public class ProductBasketView {
     @Inject
     private PaymentService paymentService;
 
-    private Customer customer;
     private Order order;
     private OrderDetail orderDetail;
     private Payment payment;
-    private Double totalPrice;
-
     private LocalDate currentDate;
 
     @IBAN
@@ -57,41 +54,44 @@ public class ProductBasketView {
     }
 
     public void processOrder(){
-        createOrder();
-        createPayment();
-        payment.setAmount(totalPrice);
-        payment.setCustomerNumber(customer);
-        payment.setCheckNumber(iban);
+        this.order = createOrder();
+        this.payment = createPayment();
 
+        List<OrderDetail> orderDetails = new ArrayList<>();
 
-        order.setStatus((OrderStatus.IN_PROCESS.toString()));
-        order.setCustomerNumber(customer);
-
-        List<OrderDetail> items = new ArrayList<OrderDetail>();
-
-        for (Item i: productBasket.getItemList()) {
-            OrderDetail o = new OrderDetail();
-            o.setProductCode(i.getProduct());
-            o.setPriceEach(i.getProduct().getBuyPrice());
-            o.setQuantityOrdered(i.getQuantity());
-            items.add(o);
+        for (Item i : productBasket.getItemList()) {
+            OrderDetail singleOrderDetail = new OrderDetail();
+            singleOrderDetail.setOrderNumber(order);
+            singleOrderDetail.setProductCode(i.getProduct());
+            singleOrderDetail.setPriceEach(i.getProduct().getBuyPrice());
+            singleOrderDetail.setQuantityOrdered(i.getQuantity());
+            orderDetails.add(singleOrderDetail);
+            this.orderDetailService.save(singleOrderDetail);
         }
-        
+
+        this.orderService.save(order);
+        this.paymentService.save(payment);
     }
 
     private Order createOrder(){
         Order order = new Order();
+        order.setOrderNumber(orderService.nextID());
         order.setOrderDate(currentDate);
         order.setRequiredDate(currentDate);
-        order.setShippedDate(currentDate);
+        order.setStatus(OrderStatus.IN_PROCESS.toString());
+        order.setCustomerNumber(this.productBasket.getCustomer());
 
         return order;
     }
 
     private Payment createPayment() {
         Payment payment = new Payment();
+        payment.setAmount(getTotalPrice());
+        payment.setCustomerNumber(this.productBasket.getCustomer());
+        payment.setCheckNumber(iban+"_"+order.getOrderNumber());
         payment.setPaymentDate(currentDate);
-        return  payment;
+
+        return payment;
     }
 
     public String buy(Product product , int quantity){
@@ -105,7 +105,8 @@ public class ProductBasketView {
         return null;
     }
 
-    public String changeQuantity(int indexOfList, int newQuantity){
+    public String changeQuantity(int newQuantity){
+        int indexOfList = datatable.getRowIndex();
         productBasket.changeQuantityInBasket(indexOfList, newQuantity);
         return null;
     }
@@ -114,11 +115,7 @@ public class ProductBasketView {
         return customerUser.getId() != null;
     }
 
-    public Customer getCustomer(int customerNumber){
-        return customerService.find(customerNumber);
-    }
-
-    public BigDecimal getTotalPrice(){
+    public double getTotalPrice(){
         return productBasket.calulateTotal();
     }
 
@@ -137,15 +134,6 @@ public class ProductBasketView {
     public void setDatatable(HtmlDataTable datatable) {
         this.datatable = datatable;
     }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
 
     public CustomerUser getCustomerUser() {
         return customerUser;

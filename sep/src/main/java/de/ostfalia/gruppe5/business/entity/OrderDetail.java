@@ -15,7 +15,7 @@ import java.util.Objects;
 public class OrderDetail implements Serializable {
 
     @EmbeddedId
-    private OrderDetailsID id;
+    private OrderDetailsID id = new OrderDetailsID();
 
     @ManyToOne
     @MapsId("orderNumber")
@@ -98,21 +98,4 @@ public class OrderDetail implements Serializable {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
-            try {
-                sb.append(", ");
-                sb.append(field.getName());
-                sb.append("=");
-                sb.append(field.get(this));
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        });
-        sb.append("]");
-        String toString = "[" + sb.toString().subSequence(2, sb.length());
-        return toString;
-    }
 }

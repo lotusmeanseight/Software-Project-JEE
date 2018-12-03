@@ -123,7 +123,7 @@ public class Order {
         this.customerNumber = customerNumber;
     }
 
-    @Override
+/*    @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
@@ -141,5 +141,19 @@ public class Order {
         sb.append("]");
         String toString = "[" + sb.toString().subSequence(2, sb.length());
         return toString;
+    }*/
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderNumber=" + orderNumber +
+                ", orderDetails=" + orderDetails +
+                ", orderDate=" + orderDate +
+                ", requiredDate=" + requiredDate +
+                ", shippedDate=" + shippedDate +
+                ", status='" + status + '\'' +
+                ", comments='" + comments + '\'' +
+                ", customerNumber=" + customerNumber +
+                '}';
     }
 }

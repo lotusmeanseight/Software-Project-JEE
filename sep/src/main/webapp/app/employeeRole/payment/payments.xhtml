@@ -47,8 +47,6 @@
                                      disabled="#{paymentView.datatable.table.first + paymentView.datatable.table.rows ge paymentView.datatable.table.rowCount}"/>
                     <h:commandButton value="Letzte Seite" action="#{paymentView.datatable.goToLastPage()}"
                                      disabled="#{paymentView.datatable.table.rows ge paymentView.datatable.table.rowCount}"/>
-                    <h:commandButton action="paymentInsert" value="Einfuegen"/>
-
                 </f:facet>
             </h:dataTable>
         </h:form>
