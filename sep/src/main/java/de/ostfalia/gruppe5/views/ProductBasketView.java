@@ -12,6 +12,8 @@ import javax.inject.Named;
 import javax.sound.midi.SysexMessage;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Named
 @RequestScoped
@@ -65,10 +67,16 @@ public class ProductBasketView {
         order.setStatus((OrderStatus.IN_PROCESS.toString()));
         order.setCustomerNumber(customer);
 
-        for (Item i: productBasket.getItemList()) {
-            
-        }
+        List<OrderDetail> items = new ArrayList<OrderDetail>();
 
+        for (Item i: productBasket.getItemList()) {
+            OrderDetail o = new OrderDetail();
+            o.setProductCode(i.getProduct());
+            o.setPriceEach(i.getProduct().getBuyPrice());
+            o.setQuantityOrdered(i.getQuantity());
+            items.add(o);
+        }
+        
     }
 
     private Order createOrder(){
