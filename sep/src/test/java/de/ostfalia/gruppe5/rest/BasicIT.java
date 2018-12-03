@@ -11,8 +11,11 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+
+import static org.junit.Assert.*;
 
 public abstract class BasicIT<T extends BasicProxy, I, U> {
 
@@ -47,29 +50,39 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         U generatedValue = null;
         if (this.idType == (Integer.class)) {
             this.currentEntityID = (I) Integer.valueOf(jsonForId.get(this.primaryKey).toString());
-            generatedValue = (U) (jsonForId.get(this.updateKeyword).toString().replaceAll("\"",""));
+            generatedValue = (U) jsonForId.get(this.updateKeyword).toString().replaceAll("(\\\\)*\"","");
         } else if (idType == (String.class)) {
-            String idString = jsonForId.getString(this.primaryKey);
+            String idString = jsonForId.get(this.primaryKey).toString();
             if (idString.contains("\""))
                 idString = idString.replaceAll("\"", "");
             this.currentEntityID = (I) idString;
-            generatedValue = (U) jsonForId.getString(this.updateKeyword).replaceAll("\"","");
+
+            generatedValue = (U) jsonForId.get(this.updateKeyword).toString().replaceAll("(\\\\)*\"","");
         } else {
             assertTrue("Type of primaryKey is not registered, ask for help!!!", false);
         }
-        assertEquals(this.updateBase, generatedValue);
 
-        if (idType == (Integer.class)) {
-
-        } else if (idType == (String.class)) {
-
+        if (this.updateType == (Integer.class)) {
+            assertEquals(updateBase, generatedValue);
+        } else if (this.updateType == (String.class)) {
+            assertEquals(updateBase, generatedValue);
+        } else if (this.updateType == (BigDecimal.class)) {
+            DecimalFormat df = new DecimalFormat();
+            df.setParseBigDecimal(true);
+            BigDecimal bd = new BigDecimal(0);
+            try {
+                bd = (BigDecimal) df.parse(generatedValue.toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            assertEquals(updateBase, bd);
+        }else{
+            assertTrue("Type of updateValue is not registered, ask for help!!!", false);
         }
     }
 
     public void cleanup() {
-        System.out.println("++++++++ After BasicIT");
         Response response = null;
-
         if (idType == (Integer.class)) {
             response = this.proxy.deleteEntity((Integer) this.currentEntityID);
         } else if (idType == (String.class)) {
@@ -104,41 +117,18 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         this.cleanup();
     }
 
-//    @Test
-//    public void testPost() {
-//        String id = "";
-//        ResteasyClient client = (ResteasyClient) ResteasyClientBuilder.newClient();
-//        ResteasyWebTarget web = client.target(target);
-//        web.register(new BasicAuthentication(username, password));
-//        T proxy = web.proxy(proxyType);
-//        JsonArray arrayBefore = proxy.getAllEntities();
-//        proxy.createEntity(this.generateTestEntity(this.testId));
-//        JsonArray arrayAfter = proxy.getAllEntities();
-//        id = arrayAfter.get(arrayAfter.size() - 1).asJsonObject().get(primaryKey).toString();
-//        assertNotEquals(arrayBefore.get(arrayBefore.size() - 1).asJsonObject().get(primaryKey).toString(), id);
-//        proxy.deleteEntity(id);
-//    }
-
     @Test
     public void testDeleteSpecificWrongID() {
         this.initEnvironment();
         Response response = proxy.deleteEntity("NotARealIdOfAProduct");
-//        System.out.println(response.readEntity(String.class));
         assertEquals(404, response.getStatus());
         response.close();
         this.cleanup();
     }
 
-//    @Test
-//    public void testDeleteSpecific() {
-//        JsonObject productById = proxy.getEntityById(id);
-//        assertEquals(id, productById.get(primaryKey).toString().replaceAll("\"", ""));
-//    }
-
     @Test
     public void testPut() {
         this.initEnvironment();
-//        Modify Product
 
         String modifiedEntity = this.generateTestEntity(this.currentEntityID, updateGoal);
         JsonObject json = null;
@@ -149,34 +139,47 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
             proxy.putEntity((String) this.currentEntityID, modifiedEntity);
             json = proxy.getEntityById((String) this.currentEntityID);
         }
-        System.out.println(json);
         U updateValue = null;
-        if (idType == (Integer.class)) {
-            System.out.println("int:" + json.get(updateKeyword));
+        if (this.updateType == (Integer.class)) {
             updateValue = (U) String.valueOf(json.get(updateKeyword)).replaceAll("\"","");
-        } else if (idType == (String.class)) {
-            System.out.println("string:" + json.get(updateKeyword));
+            assertEquals(updateGoal, updateValue);
+        } else if (this.updateType == (String.class)) {
             updateValue = (U) json.getString(updateKeyword).replaceAll("\"","");
+            assertEquals(updateGoal, updateValue);
+        } else if (this.updateType == (BigDecimal.class)) {
+            DecimalFormat df = new DecimalFormat();
+            df.setParseBigDecimal(true);
+            System.out.println("Pattern:"+df.toLocalizedPattern());
+            df.applyLocalizedPattern("#,##0.###");
+            BigDecimal bd = new BigDecimal(0);
+            try {
+                bd = (BigDecimal) df.parse(json.get(updateKeyword).toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            assertEquals(updateGoal, bd);
         }
-
-        assertEquals(updateGoal, updateValue);
         this.cleanup();
     }
 
     public String generateTestEntity(I id, U updateValue) {
-        System.out.println("++++++++++++ Generate id+update");
         String newEntity = this.testEntity;
+
         if (idType == (Integer.class)) {
             newEntity = newEntity.replaceAll(primaryKeyToken, String.valueOf(id));
         } else if (idType == (String.class)) {
-            newEntity = newEntity.replaceAll(primaryKeyToken, "\"" + String.valueOf(id) + "\"");
+            newEntity = newEntity.replaceAll(primaryKeyToken, "\""+(String)id+"\"");
         }
-        if (idType == (Integer.class)) {
-            newEntity = newEntity.replaceAll(updateToken, String.valueOf(updateValue));
-        } else if (idType == (String.class)) {
-            newEntity = newEntity.replaceAll(updateToken, "\"" + String.valueOf(updateValue) + "\"");
+
+        if (this.updateType == (Integer.class)) {
+            newEntity = newEntity.replaceAll(updateToken, ((Integer)updateValue).toString());
+        } else if (this.updateType == (String.class)) {
+            newEntity = newEntity.replaceAll(updateToken, "\""+updateValue+"\"");
+        } else if (this.updateType == (BigDecimal.class)) {
+            BigDecimal updateValue1 = (BigDecimal) updateValue;
+            String bd = updateValue1.toString();
+            newEntity = newEntity.replaceAll(updateToken, bd);
         }
-        System.out.println(newEntity);
         return newEntity;
     }
 
@@ -217,7 +220,6 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
     }
 
     public void setProxyType(Class<T> proxyType) {
-        System.out.println("+++++++++++ setProxyType to " + proxyType.getSimpleName());
         this.proxyType = proxyType;
     }
 
@@ -278,7 +280,6 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
     }
 
     public void setUpdateType(Class<U> updateType) {
-        System.out.println("+++++++++++ setUpdateType to " + updateType);
         this.updateType = updateType;
     }
 }

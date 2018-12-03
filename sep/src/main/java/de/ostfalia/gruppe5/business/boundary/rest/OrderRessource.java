@@ -1,12 +1,15 @@
 package de.ostfalia.gruppe5.business.boundary.rest;
 
+import de.ostfalia.gruppe5.business.boundary.CustomerService;
 import de.ostfalia.gruppe5.business.boundary.OrderDetailService;
 import de.ostfalia.gruppe5.business.boundary.OrderService;
+import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.CustomerUser;
 import de.ostfalia.gruppe5.business.entity.Order;
 import de.ostfalia.gruppe5.business.entity.OrderDetail;
 
 import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.DenyAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -35,25 +38,24 @@ public class OrderRessource {
     private OrderService service;
 
     @Inject
+    private CustomerService customerService;
+
+    @Inject
     private OrderDetailService orderDetailService;
 
     @Context
     private UriInfo uriinfo;
 
-    @RolesAllowed("CUSTOMER")
-    @GET
-    @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<Order> getOrdersCustomer() {
-        Integer userId = customerUser.getId();
-        return service.getOrdersByCustomerId(userId);
-    }
-
+    @RolesAllowed({"EMPLOYEE", "CUSTOMER"})
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Order> getOrders() {
-        return service.findAll();
+        Integer userId = customerUser.getId();
+        if (userId == null)
+            return service.findAll();
+        else
+            return service.getOrdersByCustomerId(userId);
     }
 
     @GET
@@ -70,13 +72,14 @@ public class OrderRessource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postOrder(JsonObject json) {
         Order order = new Order();
-        order.setOrderNumber(service.nextID());
+        Integer orderNumber = service.nextID();
+        order.setOrderNumber(orderNumber);
         populateOrder(json, order);
         service.update(order);
-        service.save(order);
-        Order parsed = service.find(order.getOrderNumber());
+//        service.save(order);
+//        Order parsed = service.find(order.getOrderNumber());
         UriBuilder builder = uriinfo.getRequestUriBuilder();
-        URI uri = builder.path(OrderRessource.class, "getOrder").build(parsed.getOrderNumber());
+        URI uri = builder.path(OrderRessource.class, "getOrder").build(order.getOrderNumber());
         return Response.created(uri).build();
     }
 
@@ -84,9 +87,12 @@ public class OrderRessource {
         order.setOrderDate(localDateFromJson(json.get("orderDate").asJsonObject()));
         order.setShippedDate(localDateFromJson(json.get("shippedDate").asJsonObject()));
         order.setRequiredDate(localDateFromJson(json.get("requiredDate").asJsonObject()));
-
         order.setStatus(json.getString("status"));
         order.setComments(json.get("comments").toString());
+
+        int customerNumber = json.getInt("customerNumber");
+        Customer customer = customerService.find(customerNumber);
+        order.setCustomerNumber(customer);
     }
 
     private LocalDate localDateFromJson(JsonObject orderDate) {
@@ -99,7 +105,7 @@ public class OrderRessource {
         sb.append(monthGood);
         sb.append(" ");
         String day = orderDate.get("dayOfMonth").toString();
-        if (day.length()<2)
+        if (day.length() < 2)
             sb.append("0");
         sb.append(day);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MMMM dd");

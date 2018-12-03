@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Objects;
 
 @NamedQueries({@NamedQuery(name = "Payment.countAll", query = "SELECT COUNT(p) FROM Payment p"),
@@ -85,4 +86,22 @@ public class Payment implements Serializable {
         return Objects.hash(getCustomerNumber(), getCheckNumber(), getPaymentDate(), getAmount());
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
+//            if (!field.getName().equals("customerNumber"))
+                try {
+                    sb.append(", ");
+                    sb.append(field.getName());
+                    sb.append("=");
+                    sb.append(field.get(this));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+        });
+        sb.append("]");
+        String toString = "[" + sb.toString().subSequence(2, sb.length());
+        return toString;
+    }
 }

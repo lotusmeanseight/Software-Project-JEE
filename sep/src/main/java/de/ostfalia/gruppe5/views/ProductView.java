@@ -1,5 +1,6 @@
 package de.ostfalia.gruppe5.views;
 
+import de.ostfalia.gruppe5.business.boundary.ProductBasket;
 import de.ostfalia.gruppe5.business.boundary.ProductService;
 import de.ostfalia.gruppe5.business.entity.Product;
 
@@ -12,6 +13,11 @@ import javax.inject.Named;
 public class ProductView {
 
 	private Product product;
+
+	private  int quantity;
+
+	@Inject
+	private ProductBasket productBasket;
 
 	@Inject
 	private ProductService service;
@@ -46,8 +52,20 @@ public class ProductView {
 		return null;
 	}
 
+	public String addToBasket(Product product , int quantity){
+		productBasket.buyProduct(product, quantity);
+		return "basket?faces-redirect=true";
+	}
+
 	public ProductDataTable getDatatable() {
 		return datatable;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 }

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -203,4 +204,22 @@ public class Customer {
 				getPostalCode(), getCountry(), getSalesRepEmployeeNumber(), getCreditLimit());
 	}
 
+	/*@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder();
+		Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
+            if (!field.getName().equals("payments"))
+			try {
+				sb.append(", ");
+				sb.append(field.getName());
+				sb.append("=");
+				sb.append(field.get(this));
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		});
+		sb.append("]");
+		String toString = "[" + sb.toString().subSequence(2, sb.length());
+		return toString;
+	}*/
 }
