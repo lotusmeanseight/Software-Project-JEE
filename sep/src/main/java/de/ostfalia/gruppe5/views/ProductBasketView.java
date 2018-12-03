@@ -59,17 +59,18 @@ public class ProductBasketView {
 
         List<OrderDetail> orderDetails = new ArrayList<>();
 
+        this.orderService.save(order);
         for (Item i : productBasket.getItemList()) {
             OrderDetail singleOrderDetail = new OrderDetail();
             singleOrderDetail.setOrderNumber(order);
             singleOrderDetail.setProductCode(i.getProduct());
             singleOrderDetail.setPriceEach(i.getProduct().getBuyPrice());
             singleOrderDetail.setQuantityOrdered(i.getQuantity());
+            singleOrderDetail.setOrderLineNumber((short) 0);
             orderDetails.add(singleOrderDetail);
             this.orderDetailService.save(singleOrderDetail);
         }
 
-        this.orderService.save(order);
         this.paymentService.save(payment);
     }
 
@@ -88,7 +89,7 @@ public class ProductBasketView {
         Payment payment = new Payment();
         payment.setAmount(getTotalPrice());
         payment.setCustomerNumber(this.productBasket.getCustomer());
-        payment.setCheckNumber(iban+"_"+order.getOrderNumber());
+        payment.setCheckNumber(iban);
         payment.setPaymentDate(currentDate);
 
         return payment;
