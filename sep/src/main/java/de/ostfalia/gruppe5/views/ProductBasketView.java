@@ -16,6 +16,9 @@ import java.time.LocalDate;
 @RequestScoped
 public class ProductBasketView {
 
+    @Inject
+    private CustomerUser customerUser;
+
     private HtmlDataTable datatable;
     @Inject
     private ProductBasket productBasket;
@@ -77,6 +80,10 @@ public class ProductBasketView {
         return null;
     }
 
+    public boolean isCustomerUser(){
+        return customerUser.getId() != null;
+    }
+
     public Customer getCustomer(int customerNumber){
         return customerService.find(customerNumber);
     }
@@ -107,5 +114,14 @@ public class ProductBasketView {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+
+    public CustomerUser getCustomerUser() {
+        return customerUser;
+    }
+
+    public void setCustomerUser(CustomerUser customerUser) {
+        this.customerUser = customerUser;
     }
 }

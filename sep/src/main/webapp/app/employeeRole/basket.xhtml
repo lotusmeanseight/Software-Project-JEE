@@ -21,15 +21,16 @@
         <div>
             <h2>Choose Basket Item</h2>
             <h:form>
-                <h:button outcome="product/products.jsf" value="Add Item"/>
+                <h:button outcome="product/products.jsf" value="Produkt hinzufügen"/>
             </h:form>
         </div>
         <div>
             <h2>Basket</h2>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Kundennummer:"></h:outputLabel>
-                    <h:inputText a:placeholder="Bitte eingeben"/>
+                <h:panelGrid columns="2" >
+                    <h:outputLabel value="#{productBasketView.productBasket.customer.customerNumber}"/>
+                    <h:outputLabel value="Bitte wählen Sie einen Kunden aus"/>
+                    <h:button outcome="customer/customers.jsf" value="Kunden hinzufügen"/>
 
 
                 <h:outputLabel value="IBAN"/>

@@ -204,7 +204,7 @@ public class Customer {
 				getPostalCode(), getCountry(), getSalesRepEmployeeNumber(), getCreditLimit());
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
 		Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
@@ -221,5 +221,5 @@ public class Customer {
 		sb.append("]");
 		String toString = "[" + sb.toString().subSequence(2, sb.length());
 		return toString;
-	}
+	}*/
 }

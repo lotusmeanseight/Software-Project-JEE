@@ -36,6 +36,7 @@ public class CustomerRessource {
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Customer> getCustomers() {
+
         return customerService.findAll();
     }
 

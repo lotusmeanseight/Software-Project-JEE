@@ -19,6 +19,8 @@ public class ProductBasket implements Serializable {
 
     private final List<Item> itemList = new ArrayList<>();
 
+    private Customer customer;
+
     public ProductBasket(){
     }
 
@@ -95,5 +97,13 @@ public class ProductBasket implements Serializable {
 
     public List<Item> getItemList() {
         return itemList;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
