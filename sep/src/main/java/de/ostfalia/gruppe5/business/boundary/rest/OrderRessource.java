@@ -133,7 +133,7 @@ public class OrderRessource {
     	String iban = calculateIBAN(json);
     	Payment payment = new Payment();
     	payment.setAmount((double) 1);
-    	payment.setAmount(calculateAmount());
+    	payment.setAmount(calculateAmount(json));
     	payment.setCheckNumber(iban + "_" + orderNumber);
     	payment.setPaymentDate(LocalDate.now());
     	payment.setCustomerNumber(customerService.find(customerNumber));

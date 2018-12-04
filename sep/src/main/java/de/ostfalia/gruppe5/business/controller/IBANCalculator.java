@@ -2,8 +2,6 @@ package de.ostfalia.gruppe5.business.controller;
 
 import java.math.BigInteger;
 
-import javax.faces.convert.BigIntegerConverter;
-
 import de.ostfalia.gruppe5.business.boundary.validation.CountryCode;
 
 public class IBANCalculator {
