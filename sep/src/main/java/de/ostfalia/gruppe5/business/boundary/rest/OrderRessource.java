@@ -102,7 +102,7 @@ public class OrderRessource {
     public Response postOrderBasket(@PathParam("id") Integer id, JsonObject json) {	
         Order order = new Order();
         Integer orderNumber = service.nextID();
-        fillOrder(json, order, id, orderNumber);
+        fillOrder(order, id, orderNumber);
         fillOrderDetails(json, orderNumber);
         fillPayment(json, orderNumber, id);
         
@@ -119,7 +119,7 @@ public class OrderRessource {
     public Response postOrderBasket(JsonObject json) {	
         Order order = new Order();
         Integer orderNumber = service.nextID();
-        fillOrder(json, order, customerUser.getId(), orderNumber);
+        fillOrder(order, customerUser.getId(), orderNumber);
         fillOrderDetails(json, orderNumber);
         fillPayment(json, orderNumber, customerUser.getId());
         
@@ -131,7 +131,8 @@ public class OrderRessource {
     private void fillPayment(JsonObject json, Integer orderNumber, Integer customerNumber) {
     	String iban = calculateIBAN(json);
     	Payment payment = new Payment();
-    	payment.setAmount(Double.parseDouble(json.getString("amount")));
+    	payment.setAmount((double) 1);
+    	//amount berechnen
     	payment.setCheckNumber(iban + "_" + orderNumber);
     	payment.setPaymentDate(LocalDate.now());
     	payment.setCustomerNumber(customerService.find(customerNumber));
@@ -139,7 +140,7 @@ public class OrderRessource {
     }
     
     private String calculateIBAN(JsonObject json) {
-    	if(json.getString("iban") != null || json.getString("iban") != "") {
+    	if(json.getString("iban") == null || json.getString("iban") == "") {
     		return IBANCalculator.calculateDEIBANFromKntnrAndBlz(json.getString("kntnr"), json.getString("blz"));
     	} else {
     		return json.getString("iban");
@@ -164,7 +165,7 @@ public class OrderRessource {
     	
     }
     
-    private void fillOrder(JsonObject json, Order order, int customerNumber, Integer orderNumber) {
+    private void fillOrder(Order order, int customerNumber, Integer orderNumber) {
     	order.setOrderNumber(orderNumber);
     	order.setComments("A Comment");
     	order.setOrderDate(LocalDate.now());
