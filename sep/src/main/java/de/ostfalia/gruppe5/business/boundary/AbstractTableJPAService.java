@@ -6,10 +6,11 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@DeclareRoles({"EMPLOYEE, CUSTOMER"})
+@DeclareRoles({"EMPLOYEE", "CUSTOMER"})
+@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
 public abstract class AbstractTableJPAService<T> extends AbstractJPAService<T> {
 
-    @RolesAllowed("EMPLOYEE")
+
     public List<T> getAllEntitiesInRange(int first, int max){
         TypedQuery<T> query = getEntityManager().createNamedQuery(getEntityClass().getSimpleName() + ".findAll", getEntityClass());
         query.setFirstResult(first);
@@ -17,7 +18,6 @@ public abstract class AbstractTableJPAService<T> extends AbstractJPAService<T> {
         return query.getResultList();
     }
 
-    @RolesAllowed("EMPLOYEE")
     public int countEntities(){
         Query query = getEntityManager().createNamedQuery(getEntityClass().getSimpleName() + ".countAll" );
         List<Long> resultList = query.getResultList();

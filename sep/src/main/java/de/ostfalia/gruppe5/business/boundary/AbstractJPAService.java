@@ -11,8 +11,8 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 
-@DeclareRoles({ "EMPLOYEE, CUSTOMER" })
-@RolesAllowed("EMPLOYEE")
+@DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
+@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
 public abstract class AbstractJPAService<T> {
 
 	private Class<T> entityClass;

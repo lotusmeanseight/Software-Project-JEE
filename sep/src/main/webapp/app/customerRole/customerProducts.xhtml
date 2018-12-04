@@ -12,10 +12,10 @@
 </h:head>
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
-    <ui:define name="header">
-        <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
-    </ui:define>
-    <ui:define name="content">
+<ui:define name="header">
+    <ui:include src="/app/customerRole/HeaderCustomer.xhtml"/>
+</ui:define>
+<ui:define name="content">
 <h:form id="product_datatable_form">
     <h:dataTable id="product_datatable_data" value="#{productView.datatable.dataModel}" binding="#{productView.datatable.table}" var="product" border="1"
                  selectionMode="single" styleClass="table" headerClass="table-header"
@@ -58,21 +58,10 @@
         </h:column>
         <h:column>
             <f:facet name="header">Zum Warenkorb hinzufügen</f:facet>
-            <h:inputText id="quantity" binding="#{quantity}">
-                <f:validateLongRange for = "quantity" minimum = "1" />
+            <h:inputText id="quantity" binding="#{quantity}" >
                 <f:convertNumber integerOnly="true"/>
             </h:inputText>
-            <h:commandButton value="Hinzufügen" action="#{productView.addToBasket(product,quantity.value)}">
-
-            </h:commandButton>
-        </h:column>
-        <h:column>
-            <f:facet name="header">Aktualisieren</f:facet>
-            <h:commandButton action="productEdit" value="Aktualisieren">
-                <f:setPropertyActionListener target="#{productView.product}" value="#{product}"/>
-                <f:setPropertyActionListener target="#{productView.product.productCode}"
-                                             value="#{product.productCode}"/>
-            </h:commandButton>
+            <h:commandButton value="Hinzufügen" action="#{productView.addToBasket(product,quantity.value)}"/>
         </h:column>
         <f:facet name="footer">
             <h:commandButton value="Erste Seite" action="#{productView.datatable.goToFirstPage()}"
@@ -83,13 +72,11 @@
                              disabled="#{productView.datatable.table.first + productView.datatable.table.rows ge productView.datatable.table.rowCount}"/>
             <h:commandButton value="Letzte Seite" action="#{productView.datatable.goToLastPage()}"
                              disabled="#{productView.datatable.table.rows ge productView.datatable.table.rowCount}" />
-
-            <h:commandButton action="productInsert" value="Einfuegen"/>
         </f:facet>
     </h:dataTable>
-    <h:messages style = "color:red;margin:8px;" />
+    <h:messages style ="color:red;margin:8px;" />
 </h:form>
-    </ui:define>
+</ui:define>
 </ui:composition>
 </body>
 </html>

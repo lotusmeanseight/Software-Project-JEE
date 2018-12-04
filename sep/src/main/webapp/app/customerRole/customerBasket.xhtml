@@ -14,21 +14,16 @@
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
 <ui:define name="header">
-    <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    <ui:include src="/app/customerRole/HeaderCustomer.xhtml"/>
 </ui:define>
-    <ui:define name="content">
-
+<ui:define name="content">
         <div>
             <h:form>
-                <h:panelGrid columns="2" >
-                    Kundennummer:  <h:outputLabel value="#{productBasketView.productBasket.customer.customerNumber}" a:placeholder="Bitte wählen Sie einen Kunden aus"/>
-                    <h:button outcome="customer/customers.jsf" value="Kunden hinzufügen"/>
-                </h:panelGrid>
-                <h2>Bitte geben Sie die Bankverbindung ein</h2>
+                <h2>Bitte geben Sie Ihre Bankverbindung ein</h2>
                 <h:panelGrid columns="2">
-                IBAN: <h:inputText value="#{productBasketView.iban}"/>
-                Accountnummer: <h:inputText value="#{productBasketView.accountNumber}" />
-                Bankleitzahl: <h:inputText value="#{productBasketView.blz}"/>
+                    IBAN: <h:inputText value="#{productBasketView.iban}"/>
+                    Accountnummer: <h:inputText value="#{productBasketView.accountNumber}" />
+                    Bankleitzahl: <h:inputText value="#{productBasketView.blz}"/>
                 </h:panelGrid>
                 <h:commandButton action="#{productBasketView.processOrder}" value="Bestellung abschliessen"/>
             </h:form>
@@ -36,7 +31,7 @@
         <div>
             <h2>Produkt zum Warenkorb hinzufügen</h2>
             <h:form>
-                <h:button outcome="product/products.jsf" value="Produkt hinzufügen"/>
+                <h:button outcome="customerProducts.jsf" value="Produkt hinzufügen"/>
             </h:form>
         </div>
         <div>
@@ -80,7 +75,7 @@
                 </h:dataTable>
             </h:form>
         </div>
-    </ui:define>
+</ui:define>
 </ui:composition>
 </body>
 </html>

@@ -50,10 +50,18 @@ public class ProductBasketView {
 
     @PostConstruct
     private void init(){
+        Integer userId = customerUser.getId();
+        if(userId != null){
+
+            Customer customer = customerService.find(userId);
+
+            productBasket.setCustomer(customer);
+        }
         currentDate = LocalDate.now();
+
     }
 
-    public void processOrder(){
+    public String processOrder(){
         this.order = createOrder();
         this.payment = createPayment();
 
@@ -72,6 +80,7 @@ public class ProductBasketView {
         }
 
         this.paymentService.save(payment);
+        return "basket?faces-redirect=true";
     }
 
     private Order createOrder(){
@@ -89,7 +98,8 @@ public class ProductBasketView {
         Payment payment = new Payment();
         payment.setAmount(getTotalPrice());
         payment.setCustomerNumber(this.productBasket.getCustomer());
-        payment.setCheckNumber(iban);
+
+        payment.setCheckNumber(iban + "_" + order.getOrderNumber().toString());
         payment.setPaymentDate(currentDate);
 
         return payment;
@@ -112,9 +122,6 @@ public class ProductBasketView {
         return null;
     }
 
-    public boolean isCustomerUser(){
-        return customerUser.getId() != null;
-    }
 
     public double getTotalPrice(){
         return productBasket.calulateTotal();

@@ -2,10 +2,11 @@ package de.ostfalia.gruppe5.business.boundary;
 
 import de.ostfalia.gruppe5.business.entity.Product;
 
+import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 
-@RolesAllowed("EMPLOYEE")
+@RolesAllowed({"EMPLOYEE","CUSTOMER"})
 @Stateless
 public class ProductService extends AbstractTableJPAService<Product> {
 
