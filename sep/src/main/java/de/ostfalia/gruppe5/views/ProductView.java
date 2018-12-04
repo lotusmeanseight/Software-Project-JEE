@@ -5,6 +5,8 @@ import de.ostfalia.gruppe5.business.boundary.ProductService;
 import de.ostfalia.gruppe5.business.entity.Product;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.Min;
@@ -56,7 +58,12 @@ public class ProductView {
 	}
 
 	public String addToBasket(Product product , int quantity){
-		productBasket.buyProduct(product, quantity);
+		if(quantity <= 0){
+			FacesContext.getCurrentInstance().addMessage("Error:", new FacesMessage("quantity can not " +
+					"be zero or lower"));
+		}else{
+			productBasket.buyProduct(product, quantity);
+		}
 		return "basket?faces-redirect=true";
 	}
 

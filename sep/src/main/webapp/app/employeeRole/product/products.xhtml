@@ -59,8 +59,6 @@
         <h:column>
             <f:facet name="header">Zum Warenkorb hinzufügen</f:facet>
             <h:inputText id="quantity" binding="#{quantity}">
-                <f:validateLongRange for = "quantity" minimum = "1" />
-                <f:convertNumber integerOnly="true"/>
             </h:inputText>
             <h:commandButton value="Hinzufügen" action="#{productView.addToBasket(product,quantity.value)}">
 
