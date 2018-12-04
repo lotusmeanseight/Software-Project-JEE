@@ -20,6 +20,7 @@ import javax.ejb.Stateless;
 import javax.faces.flow.builder.ReturnBuilder;
 import javax.inject.Inject;
 import javax.json.JsonObject;
+import javax.json.JsonValue;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 import java.net.URI;
@@ -132,11 +133,20 @@ public class OrderRessource {
     	String iban = calculateIBAN(json);
     	Payment payment = new Payment();
     	payment.setAmount((double) 1);
-    	//amount berechnen
+    	payment.setAmount(calculateAmount());
     	payment.setCheckNumber(iban + "_" + orderNumber);
     	payment.setPaymentDate(LocalDate.now());
     	payment.setCustomerNumber(customerService.find(customerNumber));
     	paymentService.save(payment);
+    }
+    
+    private Double calculateAmount(JsonObject json) {
+    	Double amount = 0.0;
+    	for (JsonValue s : json.getJsonArray("orders")) {
+    		String productCode = s.asJsonObject().getString("productCode");
+    		amount =+ productService.find(productCode).getBuyPrice();
+		}
+    	return amount;
     }
     
     private String calculateIBAN(JsonObject json) {
