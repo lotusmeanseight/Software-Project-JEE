@@ -61,7 +61,7 @@ public class ProductView {
 		if(quantity <= 0){
 			FacesContext.getCurrentInstance().addMessage("Error:", new FacesMessage("quantity can not " +
 					"be zero or lower"));
-		}else{
+		}else {
 			productBasket.buyProduct(product, quantity);
 		}
 		return "basket?faces-redirect=true";
