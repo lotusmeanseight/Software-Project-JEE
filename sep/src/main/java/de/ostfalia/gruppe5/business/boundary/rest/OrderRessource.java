@@ -3,12 +3,15 @@ package de.ostfalia.gruppe5.business.boundary.rest;
 import de.ostfalia.gruppe5.business.boundary.CustomerService;
 import de.ostfalia.gruppe5.business.boundary.OrderDetailService;
 import de.ostfalia.gruppe5.business.boundary.OrderService;
+import de.ostfalia.gruppe5.business.boundary.PaymentService;
 import de.ostfalia.gruppe5.business.boundary.ProductService;
+import de.ostfalia.gruppe5.business.controller.IBANCalculator;
 import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.CustomerUser;
 import de.ostfalia.gruppe5.business.entity.Order;
 import de.ostfalia.gruppe5.business.entity.OrderDetail;
 import de.ostfalia.gruppe5.business.entity.OrderDetailsID;
+import de.ostfalia.gruppe5.business.entity.Payment;
 
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.DenyAll;
@@ -48,6 +51,9 @@ public class OrderRessource {
 
     @Inject
     private OrderDetailService orderDetailService;
+    
+    @Inject 
+    private PaymentService paymentService;
 
     @Context
     private UriInfo uriinfo;
@@ -89,7 +95,23 @@ public class OrderRessource {
         return Response.created(uri).build();
     }
     
-    @RolesAllowed({"EMPLOYEE", "CUSTOMER"})
+    @POST
+    @Path("/basket/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response postOrderBasket(@PathParam("id") Integer id, JsonObject json) {	
+        Order order = new Order();
+        Integer orderNumber = service.nextID();
+        fillOrder(json, order, id, orderNumber);
+        fillOrderDetails(json, orderNumber);
+        fillPayment(json, orderNumber, id);
+        
+        UriBuilder builder = uriinfo.getRequestUriBuilder();
+        URI uri = builder.path(OrderRessource.class, "getOrder").build(order.getOrderNumber());
+        return Response.created(uri).build();
+    }
+    
+    @RolesAllowed({"CUSTOMER"})
     @POST
     @Path("/basket")
     @Produces(MediaType.TEXT_PLAIN)
@@ -97,24 +119,31 @@ public class OrderRessource {
     public Response postOrderBasket(JsonObject json) {	
         Order order = new Order();
         Integer orderNumber = service.nextID();
-        order.setOrderNumber(orderNumber);
-        newOrder(json, order);
-        service.update(order);
-        
-        
-        
+        fillOrder(json, order, customerUser.getId(), orderNumber);
         fillOrderDetails(json, orderNumber);
+        fillPayment(json, orderNumber, customerUser.getId());
         
         UriBuilder builder = uriinfo.getRequestUriBuilder();
         URI uri = builder.path(OrderRessource.class, "getOrder").build(order.getOrderNumber());
         return Response.created(uri).build();
     }
     
-    private String ibanOrBlz(JsonObject json) {
-    	if(json.getString("iban") != null) {
+    private void fillPayment(JsonObject json, Integer orderNumber, Integer customerNumber) {
+    	String iban = calculateIBAN(json);
+    	Payment payment = new Payment();
+    	payment.setAmount(Double.parseDouble(json.getString("amount")));
+    	payment.setCheckNumber(iban + "_" + orderNumber);
+    	payment.setPaymentDate(LocalDate.now());
+    	payment.setCustomerNumber(customerService.find(customerNumber));
+    	paymentService.save(payment);
+    }
+    
+    private String calculateIBAN(JsonObject json) {
+    	if(json.getString("iban") != null || json.getString("iban") != "") {
+    		return IBANCalculator.calculateDEIBANFromKntnrAndBlz(json.getString("kntnr"), json.getString("blz"));
+    	} else {
     		return json.getString("iban");
     	}
-    	return null;
     }
     
     private void fillOrderDetails(JsonObject json, Integer orderNumber) {
@@ -135,16 +164,17 @@ public class OrderRessource {
     	
     }
     
-    private void newOrder(JsonObject json, Order order) {
+    private void fillOrder(JsonObject json, Order order, int customerNumber, Integer orderNumber) {
+    	order.setOrderNumber(orderNumber);
     	order.setComments("A Comment");
     	order.setOrderDate(LocalDate.now());
     	order.setRequiredDate(LocalDate.now());
     	order.setShippedDate(LocalDate.now());
     	order.setStatus("In Process");
     	
-    	int customerNumber = json.getInt("customerNumber");
         Customer customer = customerService.find(customerNumber);
         order.setCustomerNumber(customer);
+        service.update(order);
     }
 
     private void populateOrder(JsonObject json, Order order) {
