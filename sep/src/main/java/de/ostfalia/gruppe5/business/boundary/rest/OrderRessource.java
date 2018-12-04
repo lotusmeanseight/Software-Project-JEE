@@ -111,7 +111,7 @@ public class OrderRessource {
         return Response.created(uri).build();
     }
     
-    @RolesAllowed({"CUSTOMER"})
+    @RolesAllowed("CUSTOMER")
     @POST
     @Path("/basket")
     @Produces(MediaType.TEXT_PLAIN)
