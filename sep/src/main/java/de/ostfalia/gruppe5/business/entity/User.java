@@ -2,12 +2,12 @@ package de.ostfalia.gruppe5.business.entity;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable{
+public abstract class User implements Serializable {
 
 	private Integer id;
-	
+
 	private String name;
-	
+
 	public User() {
 	}
 

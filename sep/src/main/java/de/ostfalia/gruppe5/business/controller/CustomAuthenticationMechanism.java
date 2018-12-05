@@ -1,5 +1,8 @@
 package de.ostfalia.gruppe5.business.controller;
 
+import static java.lang.String.format;
+import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.security.enterprise.AuthenticationException;
@@ -11,9 +14,6 @@ import javax.security.enterprise.identitystore.CredentialValidationResult;
 import javax.security.enterprise.identitystore.IdentityStoreHandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import static java.lang.String.format;
-import static javax.xml.bind.DatatypeConverter.parseBase64Binary;
 
 @RequestScoped
 public class CustomAuthenticationMechanism implements HttpAuthenticationMechanism {
@@ -63,7 +63,7 @@ public class CustomAuthenticationMechanism implements HttpAuthenticationMechanis
 
 		return null;
 	}
-	
+
 	private String[] getSepCredentials(HttpServletRequest request) {
 
 		String authorizationHeader = request.getHeader("SEP-Authorization");
@@ -73,14 +73,14 @@ public class CustomAuthenticationMechanism implements HttpAuthenticationMechanis
 
 		return null;
 	}
-	
+
 	private CredentialValidationResult createResult(HttpServletRequest request, String[] credentials) {
 		String name = credentials[0];
 		String password = credentials[1];
 
 		UsernamePasswordCredential credential = new UsernamePasswordCredential(name, password);
 		return identityStoreHandler.validate(credential);
-		
+
 	}
 
 }

@@ -1,31 +1,29 @@
 package de.ostfalia.gruppe5.business.entity;
 
-import javax.validation.constraints.NotNull;
-
 public class Item {
 
-    private Product product;
+	private Product product;
 
-    private int quantity;
+	private int quantity;
 
-    public Item(Product product, int quantity){
-        this.product = product;
-        this.quantity = quantity;
-    }
+	public Item(Product product, int quantity) {
+		this.product = product;
+		this.quantity = quantity;
+	}
 
-    public int getQuantity() {
-        return quantity;
-    }
+	public int getQuantity() {
+		return quantity;
+	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
-    public Product getProduct() {
-        return product;
-    }
+	public Product getProduct() {
+		return product;
+	}
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 }

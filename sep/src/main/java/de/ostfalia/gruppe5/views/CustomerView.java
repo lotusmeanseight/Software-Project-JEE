@@ -1,12 +1,12 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.business.boundary.CustomerService;
-import de.ostfalia.gruppe5.business.boundary.ProductBasket;
-import de.ostfalia.gruppe5.business.entity.Customer;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import de.ostfalia.gruppe5.business.boundary.CustomerService;
+import de.ostfalia.gruppe5.business.boundary.ProductBasket;
+import de.ostfalia.gruppe5.business.entity.Customer;
 
 @RequestScoped
 @Named
@@ -48,7 +48,7 @@ public class CustomerView {
 		return null;
 	}
 
-	public void addCustomerToBasket(Customer customer){
+	public void addCustomerToBasket(Customer customer) {
 		productBasket.setCustomer(customer);
 	}
 

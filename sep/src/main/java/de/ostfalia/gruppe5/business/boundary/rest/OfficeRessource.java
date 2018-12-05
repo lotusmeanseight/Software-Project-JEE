@@ -1,17 +1,30 @@
 package de.ostfalia.gruppe5.business.boundary.rest;
 
-import de.ostfalia.gruppe5.business.boundary.OfficeService;
-import de.ostfalia.gruppe5.business.entity.Office;
+import java.net.URI;
+import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.JsonObject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import java.net.URI;
-import java.util.List;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
+
+import de.ostfalia.gruppe5.business.boundary.OfficeService;
+import de.ostfalia.gruppe5.business.entity.Office;
 
 @RolesAllowed("EMPLOYEE")
 @Stateless
@@ -53,11 +66,11 @@ public class OfficeRessource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response postOffice(JsonObject json) {
 		Office office = new Office();
-		populateOffice(json,office);
+		populateOffice(json, office);
 		service.save(office);
 		Office parsed = service.find(office.getOfficeCode());
 		UriBuilder builder = uriinfo.getRequestUriBuilder();
-		URI uri = builder.path(OfficeRessource.class,"getOffice").build(parsed.getOfficeCode());
+		URI uri = builder.path(OfficeRessource.class, "getOffice").build(parsed.getOfficeCode());
 		return Response.created(uri).build();
 	}
 
@@ -93,7 +106,7 @@ public class OfficeRessource {
 		if (!office.getOfficeCode().equals(jsonId)) {
 			return Response.status(400).build();
 		}
-		populateOffice(json,office);
+		populateOffice(json, office);
 		service.update(office);
 
 		GenericEntity<Office> entity = new GenericEntity<>(service.find(id), Office.class);

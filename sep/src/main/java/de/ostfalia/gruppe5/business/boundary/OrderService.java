@@ -1,14 +1,15 @@
 package de.ostfalia.gruppe5.business.boundary;
 
-import de.ostfalia.gruppe5.business.entity.Order;
+import java.util.List;
 
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-import java.util.List;
+
+import de.ostfalia.gruppe5.business.entity.Order;
 
 @DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
-@RolesAllowed({"EMPLOYEE","CUSTOMER"})
+@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
 @Stateless
 public class OrderService extends AbstractTableJPAService<Order> {
 	public OrderService() {
@@ -21,7 +22,7 @@ public class OrderService extends AbstractTableJPAService<Order> {
 	}
 
 	@RolesAllowed("CUSTOMER")
-	public Integer nextID(){
+	public Integer nextID() {
 		Integer lastID = this.getEntityManager().createQuery("select MAX(o.orderNumber) from Order o", Integer.class)
 				.getSingleResult();
 

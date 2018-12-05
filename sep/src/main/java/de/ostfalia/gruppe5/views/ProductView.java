@@ -1,17 +1,14 @@
 package de.ostfalia.gruppe5.views;
 
-import de.ostfalia.gruppe5.business.boundary.ProductBasket;
-import de.ostfalia.gruppe5.business.boundary.ProductService;
-import de.ostfalia.gruppe5.business.entity.Product;
-
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
+import de.ostfalia.gruppe5.business.boundary.ProductBasket;
+import de.ostfalia.gruppe5.business.boundary.ProductService;
+import de.ostfalia.gruppe5.business.entity.Product;
 
 @Named
 @RequestScoped
@@ -19,7 +16,7 @@ public class ProductView {
 
 	private Product product;
 
-	private  int quantity;
+	private int quantity;
 
 	@Inject
 	private ProductBasket productBasket;
@@ -57,11 +54,11 @@ public class ProductView {
 		return null;
 	}
 
-	public String addToBasket(Product product , int quantity){
-		if(quantity <= 0){
-			FacesContext.getCurrentInstance().addMessage("Error:", new FacesMessage("quantity can not " +
-					"be zero or lower"));
-		}else {
+	public String addToBasket(Product product, int quantity) {
+		if (quantity <= 0) {
+			FacesContext.getCurrentInstance().addMessage("Error:",
+					new FacesMessage("quantity can not " + "be zero or lower"));
+		} else {
 			productBasket.buyProduct(product, quantity);
 		}
 		return "basket?faces-redirect=true";

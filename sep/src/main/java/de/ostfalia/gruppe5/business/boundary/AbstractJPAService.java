@@ -1,5 +1,7 @@
 package de.ostfalia.gruppe5.business.boundary;
 
+import java.util.List;
+
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
@@ -8,8 +10,6 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.List;
-
 
 @DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
 @RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
