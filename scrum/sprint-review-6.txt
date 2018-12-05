@@ -1,0 +1,28 @@
+﻿sprint—review-6
+Gruppe 6
+
+Software Engineering Projekt: Realisierung eines Warenwirtschaftssystems
+
+Projektstart: 27.09.2018
+Projektende : 20.12.2018
+
+=================================================
+
+Sprint 6 - Bestellungs- und Zahlungssystem
+
+Sprintanfang: 22.11.2018
+Sprintende: 5.12.2018 (24.00 Uhr)
+
+Einteilung der Teilleitungen:
+
+Georg Göring: 125%
+René Blumenau: 125%
+Bastian Huppertz: 125%
+Lukas Brötje: 125%
+Kasra Kakar: 0%
+
+• Die Integrationstest für die Restendpunkte wurden refactored und funktionieren jetzt. 
+• Die Restendpunkte für alle Entitäten wurden realiesiert oder behoben.
+• Ein Restendpunkt für die Bestellung und die Bezahlung wurde eingerichtet.
+• Die Bestellung auf JSF Ebene wurde entwickelt. 
+• IBAN Validation und Umrechnung in eine IBAN wurde relisiert. 
