@@ -13,7 +13,9 @@ import javax.ws.rs.core.Response;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
+import java.util.Locale;
 
 import static org.junit.Assert.*;
 
@@ -149,8 +151,7 @@ public abstract class BasicIT<T extends BasicProxy, I, U> {
         } else if (this.updateType == (BigDecimal.class)) {
             DecimalFormat df = new DecimalFormat();
             df.setParseBigDecimal(true);
-            System.out.println("Pattern:"+df.toLocalizedPattern());
-            df.applyLocalizedPattern("#,##0.###");
+            df.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.getDefault()));
             BigDecimal bd = new BigDecimal(0);
             try {
                 bd = (BigDecimal) df.parse(json.get(updateKeyword).toString());
