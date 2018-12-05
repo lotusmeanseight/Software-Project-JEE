@@ -17,7 +17,7 @@ public class IBANCalculator {
 		BigInteger siebenUndNeunzig = new BigInteger("97");
 		BigInteger pruefzifferBigInt = testBan.mod(siebenUndNeunzig);
 		int pruefziffer = pruefzifferBigInt.intValue();
-		pruefziffer = 98 - 90;
+		pruefziffer = 98 - pruefziffer;
 		String pruefzifferString;
 		if (pruefziffer < 10) {
 			pruefzifferString = "0" + pruefziffer;

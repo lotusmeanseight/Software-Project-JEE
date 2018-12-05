@@ -24,6 +24,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
@@ -110,6 +111,10 @@ public class OrderRessource {
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response postOrderBasket(@PathParam("id") Integer id, JsonObject json) {
+		Response res = checkBasketJson(json);
+		if (res != null) {
+			return res;
+		}
 		Order order = new Order();
 		Integer orderNumber = service.nextID();
 		fillOrder(order, id, orderNumber);
@@ -127,6 +132,10 @@ public class OrderRessource {
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response postOrderBasket(JsonObject json) {
+		Response res = checkBasketJson(json);
+		if (res != null) {
+			return res;
+		}
 		Order order = new Order();
 		Integer orderNumber = service.nextID();
 		fillOrder(order, customerUser.getId(), orderNumber);
@@ -136,6 +145,27 @@ public class OrderRessource {
 		UriBuilder builder = uriinfo.getRequestUriBuilder();
 		URI uri = builder.path(OrderRessource.class, "getOrder").build(order.getOrderNumber());
 		return Response.created(uri).build();
+	}
+
+	private Response checkBasketJson(JsonObject json) {
+		if (!json.containsKey("iban") || json.getString("iban") == null || json.getString("iban") == "") {
+			if (!json.containsKey("kntnr") || !json.containsKey("blz") || json.getString("kntnr") == null
+					|| json.getString("blz") == null || json.getString("kntnr") == "" || json.getString("blz") == "") {
+				return Response.status(Status.BAD_REQUEST).build();
+			}
+		}
+
+		if (!json.containsKey("orders")) {
+			return Response.status(Status.BAD_REQUEST).build();
+		} else {
+			for (JsonValue s : json.getJsonArray("orders")) {
+				if (!s.asJsonObject().containsKey("productCode") || !s.asJsonObject().containsKey("amount")) {
+					return Response.status(Status.BAD_REQUEST).build();
+				}
+			}
+		}
+
+		return null;
 	}
 
 	private void fillPayment(JsonObject json, Integer orderNumber, Integer customerNumber) {
@@ -159,7 +189,8 @@ public class OrderRessource {
 	}
 
 	private String calculateIBAN(JsonObject json) {
-		if (json.getString("iban") == null || json.getString("iban") == "") {
+
+		if (!json.containsKey("iban") || json.getString("iban") == null || json.getString("iban") == "") {
 			return IBANCalculator.calculateDEIBANFromKntnrAndBlz(json.getString("kntnr"), json.getString("blz"));
 		} else {
 			return json.getString("iban");
