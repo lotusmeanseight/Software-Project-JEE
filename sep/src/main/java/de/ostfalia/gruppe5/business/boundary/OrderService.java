@@ -19,6 +19,8 @@ public class OrderService extends AbstractTableJPAService<Order> {
 		return getEntityManager().createQuery("select o from Order o where o.customerNumber = " + id, Order.class)
 				.getResultList();
 	}
+
+	@RolesAllowed("CUSTOMER")
 	public Integer nextID(){
 		Integer lastID = this.getEntityManager().createQuery("select MAX(o.orderNumber) from Order o", Integer.class)
 				.getSingleResult();

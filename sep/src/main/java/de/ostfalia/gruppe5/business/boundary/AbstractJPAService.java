@@ -20,10 +20,12 @@ public abstract class AbstractJPAService<T> {
 	@PersistenceContext(unitName = "simple")
 	private EntityManager entityManager;
 
+	@RolesAllowed("CUSTOMER")
 	public T find(final String id) {
 		return getEntityManager().find(entityClass, id);
 	}
 
+	@RolesAllowed("CUSTOMER")
 	public T find(final Integer id) {
 		return getEntityManager().find(entityClass, id);
 	}
@@ -38,6 +40,7 @@ public abstract class AbstractJPAService<T> {
 		return allQuery.getResultList();
 	}
 
+	@RolesAllowed("CUSTOMER")
 	public void save(final T entity) {
 		getEntityManager().persist(entity);
 	}
@@ -54,6 +57,7 @@ public abstract class AbstractJPAService<T> {
 		getEntityManager().remove(find(id));
 	}
 
+	@RolesAllowed("CUSTOMER")
 	public T update(final T entity) {
 		return getEntityManager().merge(entity);
 	}
