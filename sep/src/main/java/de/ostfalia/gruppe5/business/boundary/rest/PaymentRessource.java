@@ -79,6 +79,8 @@ public class PaymentRessource {
 		payment.setCustomerNumber(customer);
 		payment.setPaymentDate(this.localDateFromJson(jsonObject.get("paymentDate").asJsonObject()));
 		payment.setAmount(Double.parseDouble(jsonObject.get("amount").toString()));
+
+		payment.setCheckNumber(customer.getCustomerNumber()+"_"+System.nanoTime());
 	}
 
 	@PUT
