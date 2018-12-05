@@ -124,10 +124,17 @@ public class ProductBasketView {
         return null;
     }
 
-
     public boolean isValidOrder(){
         return !(getIban() != null) || !(getAccountNumber() != null && getBlz() != null)
                 && productBasket.getItemList().isEmpty();
+    }
+
+    public boolean isIbanCustomer(){
+        return getIban() != null;
+    }
+
+    public boolean isAccountBLZ(){
+        return getBlz() != null && getAccountNumber() != null;
     }
 
     public void ibanChanged(ValueChangeEvent e){
