@@ -23,8 +23,6 @@ public class ProductBasket implements Serializable {
 
 	private String iban;
 
-	private String calculatedIban;
-
 	private Integer accountNumber;
 	private Integer blz;
 
@@ -142,11 +140,4 @@ public class ProductBasket implements Serializable {
 		this.blz = blz;
 	}
 
-	public String getCalculatedIban() {
-		return calculatedIban;
-	}
-
-	public void setCalculatedIban(String calculatedIban) {
-		this.calculatedIban = calculatedIban;
-	}
 }

@@ -55,6 +55,7 @@ public class ProductBasketView {
 	private Payment payment;
 	private LocalDate currentDate;
 
+	@Inject
 	private IBANValidatorHelper helper;
 
 	private String iban;
@@ -82,11 +83,16 @@ public class ProductBasketView {
 		if(productBasket.getIban() != null && productBasket.getIban().length() > 1){
 			helper.build(productBasket.getIban());
 			if(!helper.validateIBAN()){
-				throw new ValidatorException(new FacesMessage("Hi"));
+				throw new ValidatorException(new FacesMessage("Invalid IBAN"));
 			}
 		}else if(productBasket.getAccountNumber() != null && productBasket.getBlz() != null){
 			String calculatedIBAN = IBANCalculator.calculateDEIBANFromKntnrAndBlz(productBasket.getAccountNumber().toString(),productBasket.getBlz().toString());
-			productBasket.setCalculatedIban(calculatedIBAN);
+			helper.build(calculatedIBAN);
+			if(!helper.validateIBAN()){
+				throw new ValidatorException(new FacesMessage("Invalid Combination"));
+			}else{
+				productBasket.setIban(calculatedIBAN);
+			}
 		}
 
 
@@ -129,8 +135,6 @@ public class ProductBasketView {
 
 		if(productBasket.getIban() != null){
 			payment.setCheckNumber(productBasket.getIban() + "_" + order.getOrderNumber().toString());
-		} else if(productBasket.getCalculatedIban() != null){
-			payment.setCheckNumber(productBasket.getCalculatedIban() + "_" + order.getOrderNumber().toString());
 		}
 
 		payment.setPaymentDate(currentDate);
