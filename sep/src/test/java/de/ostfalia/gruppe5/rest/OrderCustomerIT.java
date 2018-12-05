@@ -10,7 +10,7 @@ import javax.json.JsonArray;
 
 import static org.junit.Assert.assertTrue;
 
-public class OrderITCustomer {
+public class OrderCustomerIT {
     private String username = "King";
     private String password = "112";
     private String target = "http://localhost:8080/sep-gruppe-5/api";
