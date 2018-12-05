@@ -27,22 +27,27 @@ public class CustomerIdentityStore implements IdentityStore {
 	@Override
 	public CredentialValidationResult validate(Credential credential) {
 		UsernamePasswordCredential login = (UsernamePasswordCredential) credential;
+		try {
+			Customer customer = entityManager.find(Customer.class, Integer.parseInt(login.getPasswordAsString()));
+			
+			if (customer == null) {
+				return CredentialValidationResult.NOT_VALIDATED_RESULT;
+			}
 
-		Customer customer = entityManager.find(Customer.class, Integer.parseInt(login.getPasswordAsString()));
+			String lastName = customer.getContactLastName();
 
-		if (customer == null) {
+			if (login.getCaller().equals(lastName)) {
+				user.setId(Integer.parseInt(login.getPasswordAsString()));
+				user.setName(login.getCaller());
+				return new CredentialValidationResult(lastName, new HashSet<>(Arrays.asList("CUSTOMER")));
+			} else {
+				return CredentialValidationResult.NOT_VALIDATED_RESULT;
+			}
+		} catch(NumberFormatException ex) {
 			return CredentialValidationResult.NOT_VALIDATED_RESULT;
 		}
-
-		String lastName = customer.getContactLastName();
-
-		if (login.getCaller().equals(lastName)) {
-			user.setId(Integer.parseInt(login.getPasswordAsString()));
-			user.setName(login.getCaller());
-			return new CredentialValidationResult(lastName, new HashSet<>(Arrays.asList("CUSTOMER")));
-		} else {
-			return CredentialValidationResult.NOT_VALIDATED_RESULT;
-		}
+		
+		
 
 	}
 

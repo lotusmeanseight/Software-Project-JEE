@@ -28,21 +28,26 @@ public class EmployeeIdentityStore implements IdentityStore {
 	public CredentialValidationResult validate(Credential credential) {
 		UsernamePasswordCredential login = (UsernamePasswordCredential) credential;
 
-		Employee employee = entityManager.find(Employee.class, Integer.parseInt(login.getPasswordAsString()));
+		try {
+			Employee employee = entityManager.find(Employee.class, Integer.parseInt(login.getPasswordAsString()));
 
-		if (employee == null) {
+			if (employee == null) {
+				return CredentialValidationResult.NOT_VALIDATED_RESULT;
+			}
+
+			String lastName = employee.getLastName();
+
+			if (login.getCaller().equals(lastName)) {
+				user.setId(Integer.parseInt(login.getPasswordAsString()));
+				user.setName(login.getCaller());
+				return new CredentialValidationResult(lastName, new HashSet<>(Arrays.asList("EMPLOYEE")));
+			} else {
+				return CredentialValidationResult.NOT_VALIDATED_RESULT;
+			}
+		} catch(NumberFormatException ex) {
 			return CredentialValidationResult.NOT_VALIDATED_RESULT;
 		}
-
-		String lastName = employee.getLastName();
-
-		if (login.getCaller().equals(lastName)) {
-			user.setId(Integer.parseInt(login.getPasswordAsString()));
-			user.setName(login.getCaller());
-			return new CredentialValidationResult(lastName, new HashSet<>(Arrays.asList("EMPLOYEE")));
-		} else {
-			return CredentialValidationResult.NOT_VALIDATED_RESULT;
-		}
+		
 
 	}
 
