@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
+import javax.faces.convert.IntegerConverter;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -122,6 +124,23 @@ public class ProductBasketView {
         return null;
     }
 
+
+    public boolean isValidOrder(){
+        return !(getIban() != null) || !(getAccountNumber() != null && getBlz() != null)
+                && productBasket.getItemList().isEmpty();
+    }
+
+    public void ibanChanged(ValueChangeEvent e){
+        setIban(e.getNewValue().toString());
+    }
+
+    public void blzChanged(ValueChangeEvent e){
+        setBlz(Integer.parseInt(e.getNewValue().toString()));
+    }
+
+    public void accountNumberChanged(ValueChangeEvent e){
+        setAccountNumber(Integer.parseInt(e.getNewValue().toString()));
+    }
 
     public double getTotalPrice(){
         return productBasket.calulateTotal();
