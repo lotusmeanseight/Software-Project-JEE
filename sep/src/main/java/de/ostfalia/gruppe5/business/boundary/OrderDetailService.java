@@ -9,8 +9,8 @@ import javax.persistence.TypedQuery;
 
 import de.ostfalia.gruppe5.business.entity.OrderDetail;
 
-@DeclareRoles({ "CUSTOMER", "EMPLOYEE" })
-@RolesAllowed("EMPLOYEE")
+//@DeclareRoles({ "CUSTOMER", "EMPLOYEE" })
+//@RolesAllowed({ "CUSTOMER", "EMPLOYEE" })
 @Stateless
 public class OrderDetailService extends AbstractJPAService<OrderDetail> {
 
@@ -18,7 +18,7 @@ public class OrderDetailService extends AbstractJPAService<OrderDetail> {
 		setEntityClass(OrderDetail.class);
 	}
 
-	@RolesAllowed({ "CUSTOMER", "EMPLOYEE" })
+	//@RolesAllowed({ "CUSTOMER", "EMPLOYEE" })
 	public List<OrderDetail> getAllOrderDetails(Integer orderNumber) {
 		TypedQuery<OrderDetail> query = getEntityManager().createQuery(
 				"Select o from OrderDetail o " + "where o.orderNumber.orderNumber = :orderNumber", OrderDetail.class);

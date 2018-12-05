@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 
 import de.ostfalia.gruppe5.business.entity.ProductLine;
 
-@RolesAllowed("EMPLOYEE")
+//@RolesAllowed("EMPLOYEE")
 @Stateless
 public class ProductLineService extends AbstractTableJPAService<ProductLine> {
 

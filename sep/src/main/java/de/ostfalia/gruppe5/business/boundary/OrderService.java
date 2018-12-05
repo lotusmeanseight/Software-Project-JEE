@@ -8,8 +8,8 @@ import javax.ejb.Stateless;
 
 import de.ostfalia.gruppe5.business.entity.Order;
 
-@DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
-@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
+//@DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
+//@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
 @Stateless
 public class OrderService extends AbstractTableJPAService<Order> {
 	public OrderService() {
@@ -21,7 +21,7 @@ public class OrderService extends AbstractTableJPAService<Order> {
 				.getResultList();
 	}
 
-	@RolesAllowed("CUSTOMER")
+	//@RolesAllowed("CUSTOMER")
 	public Integer nextID() {
 		Integer lastID = this.getEntityManager().createQuery("select MAX(o.orderNumber) from Order o", Integer.class)
 				.getSingleResult();

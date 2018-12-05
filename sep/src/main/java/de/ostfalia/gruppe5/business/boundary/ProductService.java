@@ -5,7 +5,7 @@ import javax.ejb.Stateless;
 
 import de.ostfalia.gruppe5.business.entity.Product;
 
-@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
+//@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
 @Stateless
 public class ProductService extends AbstractTableJPAService<Product> {
 

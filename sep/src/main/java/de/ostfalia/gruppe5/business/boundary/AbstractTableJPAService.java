@@ -7,8 +7,8 @@ import javax.annotation.security.RolesAllowed;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-@DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
-@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
+//@DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
+//@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
 public abstract class AbstractTableJPAService<T> extends AbstractJPAService<T> {
 
 	public List<T> getAllEntitiesInRange(int first, int max) {

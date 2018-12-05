@@ -6,7 +6,7 @@ import javax.persistence.TypedQuery;
 
 import de.ostfalia.gruppe5.business.entity.Customer;
 
-@RolesAllowed("EMPLOYEE")
+//@RolesAllowed("EMPLOYEE")
 @Stateless
 public class CustomerService extends AbstractTableJPAService<Customer> {
 

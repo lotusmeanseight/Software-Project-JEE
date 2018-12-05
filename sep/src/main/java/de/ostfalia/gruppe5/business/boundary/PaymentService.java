@@ -9,8 +9,8 @@ import javax.persistence.TypedQuery;
 
 import de.ostfalia.gruppe5.business.entity.Payment;
 
-@DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
-@RolesAllowed("EMPLOYEE")
+//@DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
+//@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
 @Stateless
 public class PaymentService extends AbstractTableJPAService<Payment> {
 
