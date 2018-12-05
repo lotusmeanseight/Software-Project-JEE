@@ -57,7 +57,10 @@ public class ProductView {
 	public String addToBasket(Product product, int quantity) {
 		if (quantity <= 0) {
 			FacesContext.getCurrentInstance().addMessage("Error:",
-					new FacesMessage("quantity can not " + "be zero or lower"));
+					new FacesMessage("The Quantity must " + "be positive"));
+		} else if(quantity > product.getQuantityInStock()){
+			FacesContext.getCurrentInstance().addMessage("Error:",
+					new FacesMessage("There are not enough products " + "in stock"));
 		} else {
 			productBasket.buyProduct(product, quantity);
 		}
