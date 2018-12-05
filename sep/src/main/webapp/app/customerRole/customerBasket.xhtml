@@ -21,11 +21,11 @@
             <h:form>
                 <h2>Bitte geben Sie Ihre Bankverbindung ein</h2>
                 <h:panelGrid columns="2">
-                    IBAN: <h:inputText value="#{productBasketView.iban}"/>
-                    Accountnummer: <h:inputText value="#{productBasketView.accountNumber}" />
-                    Bankleitzahl: <h:inputText value="#{productBasketView.blz}"/>
-                </h:panelGrid>
-                <h:commandButton action="#{productBasketView.processOrder}" value="Bestellung abschliessen"/>
+                    IBAN: <h:inputText value="#{productBasketView.productBasket.iban}" onchange="submit()" valueChangeListener="#{productBasketView.ibanChanged}" />
+                    Accountnummer: <h:inputText value="#{productBasketView.productBasket.accountNumber}" onchange="submit()" valueChangeListener="#{productBasketView.accountNumberChanged}"  />
+                    Bankleitzahl: <h:inputText value="#{productBasketView.productBasket.blz}" onchange="submit()" valueChangeListener="#{productBasketView.blzChanged}"/></h:panelGrid>
+                <h:commandButton action="#{productBasketView.processOrder}" disabled="#{productBasketView.validOrder}"
+                                 value="Bestellung abschliessen"/>
             </h:form>
         </div>
         <div>

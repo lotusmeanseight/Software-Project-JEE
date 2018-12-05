@@ -6,8 +6,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.event.ValueChangeEvent;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,6 +19,9 @@ import de.ostfalia.gruppe5.business.boundary.OrderService;
 import de.ostfalia.gruppe5.business.boundary.PaymentService;
 import de.ostfalia.gruppe5.business.boundary.ProductBasket;
 import de.ostfalia.gruppe5.business.boundary.validation.IBAN;
+import de.ostfalia.gruppe5.business.boundary.validation.IBANValidator;
+import de.ostfalia.gruppe5.business.boundary.validation.IBANValidatorHelper;
+import de.ostfalia.gruppe5.business.controller.IBANCalculator;
 import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.CustomerUser;
 import de.ostfalia.gruppe5.business.entity.Item;
@@ -50,7 +55,9 @@ public class ProductBasketView {
 	private Payment payment;
 	private LocalDate currentDate;
 
-	@IBAN
+	@Inject
+	private IBANValidatorHelper helper;
+
 	private String iban;
 
 	private Integer accountNumber;
@@ -73,6 +80,22 @@ public class ProductBasketView {
 	}
 
 	public String processOrder() {
+		if(productBasket.getIban() != null && productBasket.getIban().length() > 1){
+			helper.build(productBasket.getIban());
+			if(!helper.validateIBAN()){
+				throw new ValidatorException(new FacesMessage("Invalid IBAN"));
+			}
+		}else if(productBasket.getAccountNumber() != null && productBasket.getBlz() != null){
+			String calculatedIBAN = IBANCalculator.calculateDEIBANFromKntnrAndBlz(productBasket.getAccountNumber().toString(),productBasket.getBlz().toString());
+			helper.build(calculatedIBAN);
+			if(!helper.validateIBAN()){
+				throw new ValidatorException(new FacesMessage("Invalid Combination"));
+			}else{
+				productBasket.setIban(calculatedIBAN);
+			}
+		}
+
+
 		this.order = createOrder();
 		this.payment = createPayment();
 
@@ -110,7 +133,10 @@ public class ProductBasketView {
 		payment.setAmount(getTotalPrice());
 		payment.setCustomerNumber(this.productBasket.getCustomer());
 
-		payment.setCheckNumber(iban + "_" + order.getOrderNumber().toString());
+		if(productBasket.getIban() != null){
+			payment.setCheckNumber(productBasket.getIban() + "_" + order.getOrderNumber().toString());
+		}
+
 		payment.setPaymentDate(currentDate);
 
 		return payment;
@@ -134,28 +160,22 @@ public class ProductBasketView {
 	}
 
 	public boolean isValidOrder() {
-		return !(getIban() != null)
-				|| !(getAccountNumber() != null && getBlz() != null) && productBasket.getItemList().isEmpty();
+		return /*!(getIban() != null && getIban().length() > 15) && !(getAccountNumber() != null && getBlz() != null)
+				||*/ productBasket.getItemList().isEmpty() || !(productBasket.getCustomer() != null);
 	}
 
-	public boolean isIbanCustomer() {
-		return getIban() != null;
+	public void ibanChanged(ValueChangeEvent e){
+		if(e.getNewValue() != null){
+			setIban(e.getNewValue().toString());
+		}
 	}
 
-	public boolean isAccountBLZ() {
-		return getBlz() != null && getAccountNumber() != null;
-	}
-
-	public void ibanChanged(ValueChangeEvent e) {
-		setIban(e.getNewValue().toString());
-	}
-
-	public void blzChanged(ValueChangeEvent e) {
-		setBlz(Integer.parseInt(e.getNewValue().toString()));
-	}
-
-	public void accountNumberChanged(ValueChangeEvent e) {
+	public void accountNumberChanged(ValueChangeEvent e){
 		setAccountNumber(Integer.parseInt(e.getNewValue().toString()));
+	}
+
+	public void blzChanged(ValueChangeEvent e){
+		setBlz(Integer.parseInt(e.getNewValue().toString()));
 	}
 
 	public double getTotalPrice() {
