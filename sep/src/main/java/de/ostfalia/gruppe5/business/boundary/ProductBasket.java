@@ -21,6 +21,13 @@ public class ProductBasket implements Serializable {
 
 	private Customer customer;
 
+	private String iban;
+
+	private String calculatedIban;
+
+	private Integer accountNumber;
+	private Integer blz;
+
 	public ProductBasket() {
 	}
 
@@ -109,5 +116,37 @@ public class ProductBasket implements Serializable {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public String getIban() {
+		return iban;
+	}
+
+	public void setIban(String iban) {
+		this.iban = iban;
+	}
+
+	public Integer getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(Integer accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public Integer getBlz() {
+		return blz;
+	}
+
+	public void setBlz(Integer blz) {
+		this.blz = blz;
+	}
+
+	public String getCalculatedIban() {
+		return calculatedIban;
+	}
+
+	public void setCalculatedIban(String calculatedIban) {
+		this.calculatedIban = calculatedIban;
 	}
 }

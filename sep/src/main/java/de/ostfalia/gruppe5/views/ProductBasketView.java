@@ -21,6 +21,7 @@ import de.ostfalia.gruppe5.business.boundary.ProductBasket;
 import de.ostfalia.gruppe5.business.boundary.validation.IBAN;
 import de.ostfalia.gruppe5.business.boundary.validation.IBANValidator;
 import de.ostfalia.gruppe5.business.boundary.validation.IBANValidatorHelper;
+import de.ostfalia.gruppe5.business.controller.IBANCalculator;
 import de.ostfalia.gruppe5.business.entity.Customer;
 import de.ostfalia.gruppe5.business.entity.CustomerUser;
 import de.ostfalia.gruppe5.business.entity.Item;
@@ -78,13 +79,14 @@ public class ProductBasketView {
 	}
 
 	public String processOrder() {
-		if(getIban() != null){
-			helper.build(getIban());
+		if(productBasket.getIban() != null && productBasket.getIban().length() > 1){
+			helper.build(productBasket.getIban());
 			if(!helper.validateIBAN()){
 				throw new ValidatorException(new FacesMessage("Hi"));
 			}
-		}else if(getAccountNumber() != null && getBlz() != null){
-			//other method
+		}else if(productBasket.getAccountNumber() != null && productBasket.getBlz() != null){
+			String calculatedIBAN = IBANCalculator.calculateDEIBANFromKntnrAndBlz(productBasket.getAccountNumber().toString(),productBasket.getBlz().toString());
+			productBasket.setCalculatedIban(calculatedIBAN);
 		}
 
 
@@ -125,7 +127,12 @@ public class ProductBasketView {
 		payment.setAmount(getTotalPrice());
 		payment.setCustomerNumber(this.productBasket.getCustomer());
 
-		payment.setCheckNumber(iban + "_" + order.getOrderNumber().toString());
+		if(productBasket.getIban() != null){
+			payment.setCheckNumber(productBasket.getIban() + "_" + order.getOrderNumber().toString());
+		} else if(productBasket.getCalculatedIban() != null){
+			payment.setCheckNumber(productBasket.getCalculatedIban() + "_" + order.getOrderNumber().toString());
+		}
+
 		payment.setPaymentDate(currentDate);
 
 		return payment;
@@ -149,8 +156,8 @@ public class ProductBasketView {
 	}
 
 	public boolean isValidOrder() {
-		return !(getIban() != null && getIban().length() > 15) && !(getAccountNumber() != null && getBlz() != null)
-				|| productBasket.getItemList().isEmpty() || !(productBasket.getCustomer() != null);
+		return /*!(getIban() != null && getIban().length() > 15) && !(getAccountNumber() != null && getBlz() != null)
+				||*/ productBasket.getItemList().isEmpty() || !(productBasket.getCustomer() != null);
 	}
 
 	public void ibanChanged(ValueChangeEvent e){

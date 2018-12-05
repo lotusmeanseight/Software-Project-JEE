@@ -21,7 +21,6 @@ public class OrderService extends AbstractTableJPAService<Order> {
 				.getResultList();
 	}
 
-	@RolesAllowed("CUSTOMER")
 	public Integer nextID() {
 		Integer lastID = this.getEntityManager().createQuery("select MAX(o.orderNumber) from Order o", Integer.class)
 				.getSingleResult();
