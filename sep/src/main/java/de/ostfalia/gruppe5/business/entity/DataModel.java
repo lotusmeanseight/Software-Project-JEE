@@ -1,8 +1,9 @@
 package de.ostfalia.gruppe5.business.entity;
 
-import javax.faces.model.CollectionDataModel;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.model.CollectionDataModel;
 
 public class DataModel<E> extends CollectionDataModel<E> {
 
@@ -32,9 +33,9 @@ public class DataModel<E> extends CollectionDataModel<E> {
 
 	@Override
 	public E getRowData() {
-		if(!isRowAvailable()){
+		if (!isRowAvailable()) {
 			throw new IllegalArgumentException();
-		}else{
+		} else {
 			return list.get(getRowIndex());
 		}
 	}

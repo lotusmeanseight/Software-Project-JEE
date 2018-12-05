@@ -11,20 +11,21 @@ import javax.security.enterprise.SecurityContext;
 @Named
 @RequestScoped
 public class LoginBacking {
-	
+
 	@Inject
 	SecurityContext securityContext;
-	
+
 	@Inject
 	ExternalContext externalContext;
-	
+
 	public String redirect() throws IOException {
-    	if(securityContext.isCallerInRole("EMPLOYEE")) {
-    		externalContext.redirect(externalContext.getRequestContextPath() + "/app/employeeRole/customer/customers.jsf");
-        } else {
-        	externalContext.redirect(externalContext.getRequestContextPath() + "/app/customerRole/customersView.jsf");
-        }
-    	return null;
+		if (securityContext.isCallerInRole("EMPLOYEE")) {
+			externalContext
+					.redirect(externalContext.getRequestContextPath() + "/app/employeeRole/customer/customers.jsf");
+		} else {
+			externalContext.redirect(externalContext.getRequestContextPath() + "/app/customerRole/customersView.jsf");
+		}
+		return null;
 	}
 
 }

@@ -56,7 +56,14 @@
             <f:facet name="header">MSRP</f:facet>
             <h:outputText id="msrp" value="#{product.MSRP}"/>
         </h:column>
+        <h:column>
+            <f:facet name="header">Zum Warenkorb hinzufügen</f:facet>
+            <h:inputText id="quantity" binding="#{quantity}">
+            </h:inputText>
+            <h:commandButton value="Hinzufügen" action="#{productView.addToBasket(product,quantity.value)}">
 
+            </h:commandButton>
+        </h:column>
         <h:column>
             <f:facet name="header">Aktualisieren</f:facet>
             <h:commandButton action="productEdit" value="Aktualisieren">
@@ -65,11 +72,6 @@
                                              value="#{product.productCode}"/>
             </h:commandButton>
         </h:column>
-        <!--  <h:column>
-              <f:facet name="header">Loeschen</f:facet>
-              <h:commandButton action="#{productView.delete(product)}" value="Loeschen"/>
-          </h:column> commented out, look at commit message of product branch or
-          pull request associated with the branch -->
         <f:facet name="footer">
             <h:commandButton value="Erste Seite" action="#{productView.datatable.goToFirstPage()}"
                              disabled="#{productView.datatable.table.first eq 0}" />
@@ -83,6 +85,7 @@
             <h:commandButton action="productInsert" value="Einfuegen"/>
         </f:facet>
     </h:dataTable>
+    <h:messages style = "color:red;margin:8px;" />
 </h:form>
     </ui:define>
 </ui:composition>

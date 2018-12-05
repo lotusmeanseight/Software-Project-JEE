@@ -1,21 +1,32 @@
 package de.ostfalia.gruppe5.rest;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/orders")
 public interface OrderProxy extends BasicProxy {
     @GET
     @Path("/{id}/assignedCustomer")
     @Produces(MediaType.APPLICATION_JSON)
-    JsonObject getAssignedCustomer(@PathParam("id") String id);
+    Integer getAssignedCustomer(@PathParam("id") Integer id);
 
     @GET
     @Path("/{id}/orderDetails")
     @Produces(MediaType.APPLICATION_JSON)
-    JsonObject getOrderDetails(@PathParam("id") String id);
+    JsonArray getOrderDetails(@PathParam("id") Integer id);
+
+    @POST
+    @Path("/basket")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    Response postOrderBasket(JsonObject json);
+
+    @POST
+    @Path("/basket/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    Response postOrderBasket(@PathParam("id") Integer id, JsonObject json);
 }

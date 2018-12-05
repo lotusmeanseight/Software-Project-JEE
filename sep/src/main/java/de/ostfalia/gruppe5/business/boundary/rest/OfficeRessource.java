@@ -15,8 +15,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 
 import de.ostfalia.gruppe5.business.boundary.OfficeService;
 import de.ostfalia.gruppe5.business.entity.Office;
@@ -61,11 +66,11 @@ public class OfficeRessource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response postOffice(JsonObject json) {
 		Office office = new Office();
-		populateOffice(json,office);
+		populateOffice(json, office);
 		service.save(office);
 		Office parsed = service.find(office.getOfficeCode());
 		UriBuilder builder = uriinfo.getRequestUriBuilder();
-		URI uri = builder.path(OfficeRessource.class,"getOffice").build(parsed.getOfficeCode());
+		URI uri = builder.path(OfficeRessource.class, "getOffice").build(parsed.getOfficeCode());
 		return Response.created(uri).build();
 	}
 
@@ -76,14 +81,14 @@ public class OfficeRessource {
 		office.setAddressLine2(json.getString("addressLine2"));
 		office.setState(json.getString("state"));
 		office.setCountry(json.getString("country"));
-		office.setPostalCode(json.getString("postalCode"));
+		office.setPostalCode(json.get("postalCode").toString());
 		office.setTerritory(json.getString("territory"));
 	}
 
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteOffice(@PathParam("id") String id) {
+	public Response deleteOffice(@PathParam("id") Integer id) {
 		Office office = service.find(id);
 		if (office == null) {
 			return Response.status(404).build();
@@ -95,13 +100,13 @@ public class OfficeRessource {
 
 	@PUT
 	@Path("/{id}")
-	public Response putOffice(@PathParam("id") String id, JsonObject json) {
+	public Response putOffice(@PathParam("id") Integer id, JsonObject json) {
 		Office office = service.find(id);
-		String jsonId = json.getString("officeCode");
+		int jsonId = json.getInt("officeCode");
 		if (!office.getOfficeCode().equals(jsonId)) {
 			return Response.status(400).build();
 		}
-		populateOffice(json,office);
+		populateOffice(json, office);
 		service.update(office);
 
 		GenericEntity<Office> entity = new GenericEntity<>(service.find(id), Office.class);

@@ -12,5 +12,5 @@ public interface CustomerProxy extends BasicProxy {
     @GET
     @Path("/{id}/assignedEmployee")
     @Produces(MediaType.APPLICATION_JSON)
-    JsonObject getAssignedEmployee(@PathParam("id") String id);
+    JsonObject getAssignedEmployee(@PathParam("id") Integer id);
 }

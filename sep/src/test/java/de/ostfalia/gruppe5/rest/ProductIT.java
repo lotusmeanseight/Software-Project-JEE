@@ -1,6 +1,5 @@
 package de.ostfalia.gruppe5.rest;
 
-import de.ostfalia.gruppe5.business.entity.ProductLine;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -8,22 +7,21 @@ import org.jboss.resteasy.client.jaxrs.internal.BasicAuthentication;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
 
-public class ProductIT extends BasicIT<ProductProxy> {
+public class ProductIT extends BasicIT<ProductProxy, String, String> {
 
     @Before
     public void init() {
         this.setProxyType(ProductProxy.class);
         this.setTestId("S10_1678");
         this.setPrimaryKey("productCode");
-        this.setTestEntity("{\"productCode\":\"" + this.getPrimaryKeyToken() + "\"," +
-                "\"productName\":\"" + this.getUpdateToken() + "\"," +
+        this.setTestEntity("{\"productCode\":" + this.getPrimaryKeyToken() + "," +
+                "\"productName\":" + this.getUpdateToken() + "," +
                 "\"productLine\":" +
                 "{\"productLine\":\"Ships\"," +
                 "\"textDescription\":\"The perfect holiday or anniversary gift for executives, clients, friends, and family. These handcrafted model ships are unique, stunning works of art that will be treasured for generations! They come fully assembled and ready for display in the home or office. We guarantee the highest quality, and best value.\"," +
@@ -36,6 +34,10 @@ public class ProductIT extends BasicIT<ProductProxy> {
                 "\"buyPrice\":33.3," +
                 "\"msrp\":54.6}");
         this.setUpdateKeyword("productName");
+        this.setIdType(String.class);
+        this.setUpdateType(String.class);
+        this.setUpdateBase("100");
+        this.setUpdateGoal("0");
     }
 
     @Test

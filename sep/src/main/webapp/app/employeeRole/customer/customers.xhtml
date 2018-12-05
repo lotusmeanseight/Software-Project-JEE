@@ -73,6 +73,12 @@
                     <h:outputText id="limit" value="#{customer.creditLimit}"/>
                 </h:column>
                 <h:column>
+                    <f:facet name="header">Für Warenkorb auswählen</f:facet>
+                    <h:commandButton value="Hinzufügen" action="#{customerView.addCustomerToBasket(customer)}">
+                        <f:actionListener binding="#{productBasket.setCustomer(customer)}"/>
+                    </h:commandButton>
+                </h:column>
+                <h:column>
                     <f:facet name="header">Aktualisieren</f:facet>
                     <h:commandButton action="customerEdit" value="Aktualisieren">
                         <f:setPropertyActionListener target="#{customerView.customer}" value="#{customer}"/>

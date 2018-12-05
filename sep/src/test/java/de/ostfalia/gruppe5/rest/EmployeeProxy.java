@@ -12,5 +12,5 @@ public interface EmployeeProxy extends BasicProxy {
     @GET
     @Path("/{id}/assignedOffice")
     @Produces(MediaType.APPLICATION_JSON)
-    JsonObject getAssignedOffice(@PathParam("id") String id);
+    JsonObject getAssignedOffice(@PathParam("id") Integer id);
 }

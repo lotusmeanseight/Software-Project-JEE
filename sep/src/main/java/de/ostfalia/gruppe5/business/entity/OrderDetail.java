@@ -1,11 +1,18 @@
 package de.ostfalia.gruppe5.business.entity;
 
-import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name = "orderdetails")
@@ -13,87 +20,75 @@ import java.util.Objects;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class OrderDetail implements Serializable {
 
-    @EmbeddedId
-    private OrderDetailsID id;
+	@Id
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "orderNumber")
+	private Order orderNumber;
 
-    @ManyToOne
-    @MapsId("orderNumber")
-    @JoinColumn(name = "orderNumber")
-    private Order orderNumber;
+	@Id
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "productCode")
+	private Product productCode;
 
-    @ManyToOne
-    @MapsId("productCode")
-    @JoinColumn(name = "productCode")
-    private Product productCode;
+	private Integer quantityOrdered;
+	private Double priceEach;
+	private Short orderLineNumber;
 
-    private Integer quantityOrdered;
-    private Double priceEach;
-    private Short orderLineNumber;
+	public Integer getQuantityOrdered() {
+		return quantityOrdered;
+	}
 
+	public void setQuantityOrdered(Integer quantityOrdered) {
+		this.quantityOrdered = quantityOrdered;
+	}
 
-    public Integer getQuantityOrdered() {
-        return quantityOrdered;
-    }
+	public Double getPriceEach() {
+		return priceEach;
+	}
 
-    public void setQuantityOrdered(Integer quantityOrdered) {
-        this.quantityOrdered = quantityOrdered;
-    }
+	public void setPriceEach(Double priceEach) {
+		this.priceEach = priceEach;
+	}
 
-    public Double getPriceEach() {
-        return priceEach;
-    }
+	public Short getOrderLineNumber() {
+		return orderLineNumber;
+	}
 
-    public void setPriceEach(Double priceEach) {
-        this.priceEach = priceEach;
-    }
+	public void setOrderLineNumber(Short orderLineNumber) {
+		this.orderLineNumber = orderLineNumber;
+	}
 
-    public Short getOrderLineNumber() {
-        return orderLineNumber;
-    }
+	public Order getOrderNumber() {
+		return orderNumber;
+	}
 
-    public void setOrderLineNumber(Short orderLineNumber) {
-        this.orderLineNumber = orderLineNumber;
-    }
+	public Product getProductCode() {
+		return productCode;
+	}
 
-    public OrderDetailsID getId() {
-        return id;
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		OrderDetail that = (OrderDetail) o;
+		return Objects.equals(orderNumber, that.orderNumber) && Objects.equals(productCode, that.productCode)
+				&& Objects.equals(quantityOrdered, that.quantityOrdered) && Objects.equals(priceEach, that.priceEach)
+				&& Objects.equals(orderLineNumber, that.orderLineNumber);
+	}
 
-    public Order getOrderNumber() {
-        return orderNumber;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(orderNumber, productCode, quantityOrdered, priceEach, orderLineNumber);
+	}
 
-    public Product getProductCode() {
-        return productCode;
-    }
+	public void setOrderNumber(Order orderNumber) {
+		this.orderNumber = orderNumber;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderDetail that = (OrderDetail) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(orderNumber, that.orderNumber) &&
-                Objects.equals(productCode, that.productCode) &&
-                Objects.equals(quantityOrdered, that.quantityOrdered) &&
-                Objects.equals(priceEach, that.priceEach) &&
-                Objects.equals(orderLineNumber, that.orderLineNumber);
-    }
+	public void setProductCode(Product productCode) {
+		this.productCode = productCode;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, orderNumber, productCode, quantityOrdered, priceEach, orderLineNumber);
-    }
-
-    public void setOrderNumber(Order orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public void setProductCode(Product productCode) {
-        this.productCode = productCode;
-    }
-
-    public void setId(OrderDetailsID id) {
-        this.id = id;
-    }
 }

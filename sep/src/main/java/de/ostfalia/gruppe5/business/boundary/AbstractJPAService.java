@@ -11,20 +11,21 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-
-@DeclareRoles({ "EMPLOYEE, CUSTOMER" })
-@RolesAllowed("EMPLOYEE")
+//@DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
+//@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
 public abstract class AbstractJPAService<T> {
 
 	private Class<T> entityClass;
 
-	@PersistenceContext
+	@PersistenceContext(unitName = "simple")
 	private EntityManager entityManager;
 
+	//@RolesAllowed("CUSTOMER")
 	public T find(final String id) {
 		return getEntityManager().find(entityClass, id);
 	}
 
+	//@RolesAllowed("CUSTOMER")
 	public T find(final Integer id) {
 		return getEntityManager().find(entityClass, id);
 	}
@@ -39,6 +40,7 @@ public abstract class AbstractJPAService<T> {
 		return allQuery.getResultList();
 	}
 
+	//@RolesAllowed("CUSTOMER")
 	public void save(final T entity) {
 		getEntityManager().persist(entity);
 	}
@@ -55,6 +57,7 @@ public abstract class AbstractJPAService<T> {
 		getEntityManager().remove(find(id));
 	}
 
+	//@RolesAllowed("CUSTOMER")
 	public T update(final T entity) {
 		return getEntityManager().merge(entity);
 	}
@@ -67,7 +70,7 @@ public abstract class AbstractJPAService<T> {
 		this.entityClass = entityClass;
 	}
 
-	@RolesAllowed({ "EMPLOYEE,CUSTOMER" })
+	//@RolesAllowed({ "EMPLOYEE,CUSTOMER" })
 	public EntityManager getEntityManager() {
 		return entityManager;
 	}

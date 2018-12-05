@@ -63,7 +63,7 @@ public class CustomAuthenticationMechanism implements HttpAuthenticationMechanis
 
 		return null;
 	}
-	
+
 	private String[] getSepCredentials(HttpServletRequest request) {
 
 		String authorizationHeader = request.getHeader("SEP-Authorization");
@@ -73,14 +73,14 @@ public class CustomAuthenticationMechanism implements HttpAuthenticationMechanis
 
 		return null;
 	}
-	
+
 	private CredentialValidationResult createResult(HttpServletRequest request, String[] credentials) {
 		String name = credentials[0];
 		String password = credentials[1];
 
 		UsernamePasswordCredential credential = new UsernamePasswordCredential(name, password);
 		return identityStoreHandler.validate(credential);
-		
+
 	}
 
 }

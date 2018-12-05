@@ -15,8 +15,11 @@
                     <h:selectOneMenu
                             onchange="window.location = this.options[this.selectedIndex].value">
                         <f:selectItem itemLabel="Bitte waehlen.."/>
-                        <f:selectItem itemLabel="Customers"
+                        <f:selectItem itemLabel="Orders"
                                       itemValue="customersView.jsf"/>
+                        <f:selectItem itemLabel="Basket"
+                                      itemValue="customerBasket.jsf"/>
+
                     </h:selectOneMenu>
                 </h:form>
             </td>

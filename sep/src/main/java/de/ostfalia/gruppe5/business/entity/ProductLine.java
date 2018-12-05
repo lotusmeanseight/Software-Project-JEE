@@ -1,14 +1,21 @@
 package de.ostfalia.gruppe5.business.entity;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @NamedQueries({ @NamedQuery(name = "ProductLine.countAll", query = "SELECT COUNT(p) FROM ProductLine p"),
 		@NamedQuery(name = "ProductLine.findAll", query = "SELECT p FROM ProductLine p") })
@@ -81,4 +88,5 @@ public class ProductLine implements Serializable {
 	public int hashCode() {
 		return Objects.hash(getProductLine(), productList, getTextDescription(), getHtmlDescription(), getImage());
 	}
+
 }

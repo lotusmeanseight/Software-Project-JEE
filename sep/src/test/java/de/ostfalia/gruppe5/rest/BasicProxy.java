@@ -6,11 +6,16 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public interface BasicProxy {
+public abstract interface BasicProxy {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     JsonObject getEntityById(@PathParam("id") String id);
+
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    JsonObject getEntityById(@PathParam("id") Integer id);
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -22,8 +27,16 @@ public interface BasicProxy {
 
     @DELETE
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     Response deleteEntity(@PathParam("id") String id);
+
+    @DELETE
+    @Path("/{id}")
+    Response deleteEntity(@PathParam("id") Integer id);
+
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    Response putEntity(@PathParam("id") Integer id, String productJson);
 
     @PUT
     @Path("/{id}")
