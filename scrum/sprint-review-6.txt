@@ -26,3 +26,10 @@ Kasra Kakar: 0%
 • Ein Restendpunkt für die Bestellung und die Bezahlung wurde eingerichtet.
 • Die Bestellung auf JSF Ebene wurde entwickelt. 
 • IBAN Validation und Umrechnung in eine IBAN wurde relisiert. 
+
+Für den Endpunkt /api/orders/basket (Customer)
+Muss folgende eine JSON nach folgendem Format angehängt werden: 
+{ "iban" : "DE08700901001234567890", "blz" : "", "kontonr" : "", "orders": [{"productCode": "S10_1678", "amount": 2}]}#
+
+/api/orders/basket/{customerId}
+Als Employee muss noch eine Customer ID als Parameter gesetzt werden.
