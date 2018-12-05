@@ -14,7 +14,7 @@
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
 <ui:define name="header">
-    <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    <ui:include src="/app/employeeRole/HeaderEmployeeBasket.xhtml"/>
 </ui:define>
     <ui:define name="content">
 
@@ -26,7 +26,7 @@
                 </h:panelGrid>
                 <h2>Bitte geben Sie die Bankverbindung ein</h2>
                 <h:panelGrid columns="2">
-                IBAN: <h:inputText value="#{productBasketView.iban}" onchange="submit()" valueChangeListener="#{productBasketView.ibanChanged}" disabled="#{productBasketView.accountBLZ}" />
+                IBAN: <h:inputText value="#{productBasketView.iban}" onchange="submit()" valueChangeListener="#{productBasketView.ibanChanged}" disabled="#{productBasketView.accountBLZ}" a:placeholder="DE00 0000 0000 0000 0000 00 "/>
                 Accountnummer: <h:inputText value="#{productBasketView.accountNumber}" onchange="submit()" valueChangeListener="#{productBasketView.blzChanged}" disabled="#{productBasketView.ibanCustomer}"/>
                 Bankleitzahl: <h:inputText value="#{productBasketView.blz}" onchange="submit()" valueChangeListener="#{productBasketView.accountNumberChanged}" disabled="#{productBasketView.ibanCustomer}"/>
                 </h:panelGrid>
