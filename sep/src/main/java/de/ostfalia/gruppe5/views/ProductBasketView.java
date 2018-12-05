@@ -121,7 +121,7 @@ public class ProductBasketView {
 		} else {
 			FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(),null,"customer/customers.xhtml");
 		}
-
+		productBasket.resetBasket();
 		return "basket?faces-redirect=true";
 	}
 
