@@ -149,8 +149,8 @@ public class ProductBasketView {
 	}
 
 	public boolean isValidOrder() {
-		return !(getIban() != null && getIban().length() > 15) || !(getAccountNumber() != null && getBlz() != null)
-				&& productBasket.getItemList().isEmpty() && productBasket.getCustomer() != null;
+		return !(getIban() != null && getIban().length() > 15) && !(getAccountNumber() != null && getBlz() != null)
+				|| productBasket.getItemList().isEmpty() || !(productBasket.getCustomer() != null);
 	}
 
 	public void ibanChanged(ValueChangeEvent e){
