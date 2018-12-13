@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.html.HtmlDataTable;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
@@ -114,6 +116,12 @@ public class ProductBasketView {
 		}
 
 		this.paymentService.save(payment);
+		if(customerUser.getId() != null){
+			FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(),null,"customersView.xhtml");
+		} else {
+			FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(),null,"customer/customers.xhtml");
+		}
+		productBasket.resetBasket();
 		return "basket?faces-redirect=true";
 	}
 

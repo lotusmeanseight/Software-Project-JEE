@@ -29,6 +29,14 @@ public class ProductBasket implements Serializable {
 	public ProductBasket() {
 	}
 
+	public void resetBasket(){
+		itemList.clear();
+		this.customer = null;
+		this.iban = null;
+		this.accountNumber = null;
+		this.blz = null;
+	}
+
 	/**
 	 * Changes quantity of basket to the new quantity if newquantity is 0 then
 	 * product is deleted if newquantity is below 0 then a validatorexception with a

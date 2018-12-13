@@ -1,0 +1,32 @@
+Product Backlog
+Gruppe 5
+
+Software Engineering Projekt: Realisierung eines Warenwirtschaftssystems
+
+Projektstart: 27.09.2018
+Projektende: 20.12.2018
+
+=================================================
+
+Sprint 7 - Docker und UI
+
+Sprintanfang: 6.12.2018
+Sprintende: 19.12.2018 (24.00 Uhr)
+
+• Docker Files (Container) für die folgenden Komponenten erstellen:
+  - Datenbank (PostgreSQL) container
+  - Application (sep) container mit Wildfly
+  - UI (sep-ui) container für eine View der REST Schnittstellen mit Wildfly
+  
+• Erstellung der UI (oder Überarbeitung)
+  - Responsive Design damit die UI auf vielen verschiedenen Endgeräten funktioniert.
+  - Seperation der UI (sep-ui) und der Applikation (sep)
+
+• Erstellung der Skripte
+  - Startskript um die Container Architektur hochzufahren
+  - Skripte welche die UNIX Shell verwenden
+    - Aufsetzen der Ordner, Wildfly runterladen etc.
+  - Skripte welche die Datenbank aufsetzen
+    - Erstellung der Datenbank
+    - Erstellung des Nutzers
+    - Befüllung der Datenbank mit Testdaten
