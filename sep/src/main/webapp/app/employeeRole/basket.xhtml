@@ -8,13 +8,13 @@
       xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <title>Basket</title>
-    <h:outputStylesheet library="css" name="style.css"/>
+
 </h:head>
 
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
 <ui:define name="header">
-    <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    <ui:include src="/app/employeeRole/HeaderEmployeeBasket.xhtml"/>
 </ui:define>
     <ui:define name="content">
 
@@ -46,30 +46,44 @@
                              selectionMode="single" styleClass="table" headerClass="table-header"
                              rowClasses="table-odd-row,table-even-row">
                     <h:column>
+                        <f:passThroughAttribute name="data-label" value="Produktcode"/>
+                        <f:passThroughAttribute name="class" value="label"/>
                         <f:facet name="header">Produktcode</f:facet>
                         <h:outputText value="#{item.product.productCode}"/>
                     </h:column>
                     <h:column>
+                        <f:passThroughAttribute name="data-label" value="Produktname"/>
+                        <f:passThroughAttribute name="class" value="label"/>
                         <f:facet name="header">Produktname</f:facet>
                         <h:outputText value="#{item.product.productName}"/>
                     </h:column>
                     <h:column>
+                        <f:passThroughAttribute name="data-label" value="Beschreibung"/>
+                        <f:passThroughAttribute name="class" value="label"/>
                         <f:facet name="header">Beschreibung</f:facet>
                         <h:outputText value="#{item.product.productDescription}"/>
                     </h:column>
                     <h:column>
+                        <f:passThroughAttribute name="data-label" value="Kaufpreis"/>
+                        <f:passThroughAttribute name="class" value="label"/>
                         <f:facet name="header">Kaufpreis</f:facet>
                         <h:outputText value="#{item.product.buyPrice}"/>
                     </h:column>
                     <h:column>
+                        <f:passThroughAttribute name="data-label" value="MSRP"/>
+                        <f:passThroughAttribute name="class" value="label"/>
                         <f:facet name="header">MSRP</f:facet>
                         <h:outputText value="#{item.product.MSRP}"/>
                     </h:column>
                     <h:column>
+                        <f:passThroughAttribute name="data-label" value="Anzahl"/>
+                        <f:passThroughAttribute name="class" value="label"/>
                         <f:facet name="header">Anzahl </f:facet>
                         <h:outputText value="#{item.quantity}"/>
                     </h:column>
                     <h:column>
+                        <f:passThroughAttribute name="data-label" value="Produkt Löschen"/>
+                        <f:passThroughAttribute name="class" value="label"/>
                         <f:facet name="header">Löschen</f:facet>
                         <h:commandButton action="#{productBasketView.remove}" value="Loeschen"/>
                     </h:column>
