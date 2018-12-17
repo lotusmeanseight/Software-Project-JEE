@@ -21,42 +21,62 @@
                  selectionMode="single" styleClass="table" headerClass="table-header"
                  rowClasses="table-odd-row,table-even-row" first="0" rows="#{productView.datatable.rowsOnPage}">
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Produkt Code"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Produkt Code</f:facet>
             <h:outputText id="productCode" value="#{product.productCode}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Produkt Name"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Produkt Name</f:facet>
             <h:outputText id="productName" value="#{product.productName}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Produkt Linie"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Produkt Linie</f:facet>
             <h:outputText id="productLine" value="#{product.productLine.productLine}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Produkt Größe"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Produkt Größe</f:facet>
             <h:outputText id="productScale" value="#{product.productScale}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Produkt Händler"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Produkt Händler</f:facet>
             <h:outputText id="productVendor" value="#{product.productScale}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Produkt Beschreibung"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Produkt Beschreibung</f:facet>
             <h:outputText id="productDescription" value="#{product.productDescription}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Anzahl auf Lager"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Anzahl auf Lager</f:facet>
             <h:outputText id="quantityInStock" value="#{product.quantityInStock}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Kaufpreis"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Kaufpreis</f:facet>
             <h:outputText id="buyPrice" value="#{product.buyPrice}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="MSRP"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">MSRP</f:facet>
             <h:outputText id="msrp" value="#{product.MSRP}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Produkt hinzufügen"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Zum Warenkorb hinzufügen</f:facet>
             <h:inputText id="quantity" binding="#{quantity}" >
                 <f:convertNumber integerOnly="true"/>

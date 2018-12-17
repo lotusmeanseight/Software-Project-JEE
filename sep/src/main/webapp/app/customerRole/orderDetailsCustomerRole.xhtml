@@ -24,22 +24,32 @@
                          selectionMode="single" styleClass="table" headerClass="table-header"
                          rowClasses="table-odd-row,table-even-row">
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Bestellnummer"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Bestellnummer</f:facet>
                     <h:outputText id="order" value="#{orderDetail.orderNumber.orderNumber}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Produkt Code"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Produkt Code</f:facet>
                     <h:outputText id="productCode" value="#{orderDetail.productCode.productCode}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Anzahl"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Anzahl</f:facet>
                     <h:outputText id="qtyOrdered" value="#{orderDetail.quantityOrdered}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Preis pro Produkt"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Preis pro Produkt</f:facet>
                     <h:outputText id="priceEach" value="#{orderDetail.priceEach}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Auftragsnummer"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Auftragsnummer</f:facet>
                     <h:outputText id="orderline" value="#{orderDetail.orderLineNumber}"/>
                 </h:column>

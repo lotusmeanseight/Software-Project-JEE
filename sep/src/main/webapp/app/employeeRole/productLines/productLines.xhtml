@@ -21,20 +21,28 @@
                          selectionMode="single" styleClass="table" headerClass="table-header"
                          rowClasses="table-odd-row,table-even-row" first="0" rows="#{productLineView.datatable.rowsOnPage}">
                 <h:column>
-                    <f:facet name="header">Product Line</f:facet>
+                    <f:passThroughAttribute name="data-label" value="Produkt Linie"/>
+                    <f:passThroughAttribute name="class" value="label"/>
+                    <f:facet name="header">Produkt Linie</f:facet>
                     <h:outputText id="productLine" value="#{productline.productLine}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Beschreibung (Text)"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Beschreibung (Text)</f:facet>
                     <h:outputText id="textDescription"
                                   value="#{productline.textDescription}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Beschreibung (Html)"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Beschreibung (Html)</f:facet>
                     <h:outputText id="checkNumber"
                                   value="#{productline.htmlDescription}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Bild"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Bild</f:facet>
                     <h:commandButton action="productLineImageView"
                                      value="Anschauen">
@@ -54,6 +62,8 @@
                 </h:column>
 
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Produktlinie aktualisieren"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Aktualisieren</f:facet>
                     <h:commandButton action="productlineEdit" value="Aktualisieren">
                         <f:setPropertyActionListener
@@ -64,6 +74,8 @@
                     </h:commandButton>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Produktlinie löschen"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Loeschen</f:facet>
                     <h:commandButton action="#{productLineView.delete(productline)}"
                                      value="Loeschen"/>

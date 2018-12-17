@@ -22,71 +22,85 @@
                          rowClasses="table-odd-row,table-even-row" first="0" rows="#{customerView.datatable.rowsOnPage}">
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Kundennummer"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Kundennummer</f:facet>
                     <h:outputText id="id" value="#{customer.customerNumber}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Firma"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Firma</f:facet>
                     <h:outputText id="name" value="#{customer.customerName}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Name"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Name</f:facet>
                     <h:outputText id="lastName" value="#{customer.contactLastName}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Vorname"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Vorname</f:facet>
                     <h:outputText id="firstName" value="#{customer.contactFirstName}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Telefonnummer"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Telefonnummer</f:facet>
                     <h:outputText id="phone" value="#{customer.phone}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="1. Adresse"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">1. Adresse</f:facet>
                     <h:outputText id="firstAdressline" value="#{customer.addressLine1}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="2. Adresse"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">2. Adresse</f:facet>
                     <h:outputText id="secondAdressLine" value="#{customer.addressLine2}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Stadt"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Stadt</f:facet>
                     <h:outputText id="city" value="#{customer.city}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Staat"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Staat</f:facet>
                     <h:outputText id="state" value="#{customer.state}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Postleitzahl"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Postleitzahl</f:facet>
                     <h:outputText id="postalcode" value="#{customer.postalCode}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Land"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Land</f:facet>
                     <h:outputText id="country" value="#{customer.country}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Repräsentant"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Repräsentant</f:facet>
                     <h:outputText id="employeenumber" value="#{customer.salesRepEmployeeNumber.employeeNumber}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Kreditlimit"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Kreditlimit</f:facet>
                     <h:outputText id="limit" value="#{customer.creditLimit}"/>
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Zum Warenkorb hinzufügen"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Für Warenkorb auswählen</f:facet>
                     <h:commandButton value="Hinzufügen" action="#{customerView.addCustomerToBasket(customer)}">
                         <f:actionListener binding="#{productBasket.setCustomer(customer)}"/>
@@ -94,6 +108,7 @@
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Kunden aktualisieren"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Aktualisieren</f:facet>
                     <h:commandButton action="customerEdit" value="Aktualisieren">
                         <f:setPropertyActionListener target="#{customerView.customer}" value="#{customer}"/>
@@ -103,6 +118,7 @@
                 </h:column>
                 <h:column>
                     <f:passThroughAttribute name="data-label" value="Kunden löschen"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Loeschen</f:facet>
                     <h:commandButton action="#{customerView.delete(customer)}" value="Loeschen"/>
                 </h:column>
