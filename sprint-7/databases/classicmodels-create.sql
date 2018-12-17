@@ -16,7 +16,7 @@ SET client_min_messages = warning;
 CREATE DATABASE classicmodels WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'de_DE.UTF-8' LC_CTYPE = 'de_DE.UTF-8';
 
 
-ALTER DATABASE classicmodels OWNER TO postgres;
+ALTER DATABASE classicmodels OWNER TO sep;
 
 \connect classicmodels
 
@@ -311,8 +311,8 @@ ALTER TABLE ONLY products
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
+REVOKE ALL ON SCHEMA public FROM sep;
+GRANT ALL ON SCHEMA public TO sep;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 --

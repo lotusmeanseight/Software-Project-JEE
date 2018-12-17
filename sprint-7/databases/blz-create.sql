@@ -14,11 +14,9 @@ SET client_min_messages = warning;
 --
 
 CREATE DATABASE blz WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'de_DE.UTF-8' LC_CTYPE = 'de_DE.UTF-8';
-ALTER DATABASE blz OWNER TO postgres;
+ALTER DATABASE blz OWNER TO sep;
 
 \connect blz
-
-CREATE USER sep;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -75,8 +73,8 @@ ALTER TABLE bankleitzahl OWNER TO sep;
 --
 
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
+REVOKE ALL ON SCHEMA public FROM sep;
+GRANT ALL ON SCHEMA public TO sep;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
