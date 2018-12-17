@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xml:lang="en" lang="en"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+<head>
+    <title>Bild:</title>
+</head>
+<body>
+<ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="header">
+        <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    </ui:define>
+    <ui:define name="content">
+        <h:graphicImage value="/image?id=#{productLineView.productLine.productLine}"/>
+        <!-- 	<h:graphicImage value="/image"> -->
+        <!-- 		<f:param id="productLine" name="productLine" value="#{productLineView.productLine.productLine}"/> -->
+        <!-- 	</h:graphicImage> -->
+
+    </ui:define>
+</ui:composition>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Customer Edit</title>
+    <h:head>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+</h:head>
+<body>
+<ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="header">
+        <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    </ui:define>
+    <ui:define name="content">
+        <h1>Aktualisieren</h1>
+        <h:form>
+            <h:panelGrid columns="2">
+                Firma: <h:inputText value="#{customerView.customer.customerName}"/>
+                Name: <h:inputText value="#{customerView.customer.contactLastName}"/>
+                Vorname: <h:inputText value="#{customerView.customer.contactFirstName}"/>
+                Telefonnummer: <h:inputText value="#{customerView.customer.phone}"/>
+                1. Adresse: <h:inputText value="#{customerView.customer.addressLine1}"/>
+                2. Adresse: <h:inputText value="#{customerView.customer.addressLine2}"/>
+                Stadt: <h:inputText value="#{customerView.customer.city}"/>
+                Staat: <h:inputText value="#{customerView.customer.state}"/>
+                Postleitzahl: <h:inputText value="#{customerView.customer.postalCode}"/>
+                Land: <h:inputText value="#{customerView.customer.country}"/>
+                Repräsentant: <h:inputText value="#{customerView.customer.salesRepEmployeeNumber}"/>
+                Kreditlimit: <h:inputText value="#{customerView.customer.creditLimit}"/>
+            </h:panelGrid>
+            <h:inputHidden value="#{customerView.customer.customerNumber}"/>
+            <h:commandButton action="#{customerView.update(customerView.customer)}" value="Aktualisieren">
+                <f:setPropertyActionListener target="#{customerView.customer}" value="#{customerView.customer}"/>
+            </h:commandButton>
+            <h:button styleClass="button" value="Liste" outcome="customers"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</body>
+</html>

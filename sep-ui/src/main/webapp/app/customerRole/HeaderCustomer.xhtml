@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<body>
+<ui:composition>
+    <table style="width:100%">
+        <tr>
+            <td>
+                <h:form>
+                    <h:selectOneMenu
+                            onchange="window.location = this.options[this.selectedIndex].value">
+                        <f:selectItem itemLabel="Bitte waehlen.."/>
+                        <f:selectItem itemLabel="Orders"
+                                      itemValue="customersView.jsf"/>
+                        <f:selectItem itemLabel="Basket"
+                                      itemValue="customerBasket.jsf"/>
+
+                    </h:selectOneMenu>
+                </h:form>
+            </td>
+            <td>
+                <p>Eingeloggt als: #{request.userPrincipal.name}</p>
+            </td>
+        </tr>
+    </table>
+</ui:composition>
+</body>
+</html>
