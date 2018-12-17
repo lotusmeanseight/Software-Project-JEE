@@ -7,6 +7,7 @@
     <persistence-unit name="simple">
         <jta-data-source>java:jboss/datasources/sepDS</jta-data-source>
         <properties>
+        	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/> <!-- DB Dialect -->
             <property name="hibernate.show_sql" value="true"/>
             <!-- <property name="hibernate.hbm2ddl.auto" value="validate"/> -->
             <property name="javax.persistence.validation.mode" value="NONE" />
@@ -16,6 +17,7 @@
     <persistence-unit name="BLZ">
         <jta-data-source>java:jboss/datasources/blzDS</jta-data-source>
         <properties>
+        	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/> <!-- DB Dialect -->
             <property name="hibernate.show_sql" value="true"/>
             <!-- <property name="hibernate.hbm2ddl.auto" value="validate"/> -->
         </properties>
