@@ -14,11 +14,11 @@ SET client_min_messages = warning;
 --
 
 CREATE DATABASE blz WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'de_DE.UTF-8' LC_CTYPE = 'de_DE.UTF-8';
-
-
 ALTER DATABASE blz OWNER TO postgres;
 
 \connect blz
+
+CREATE USER sep;
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
