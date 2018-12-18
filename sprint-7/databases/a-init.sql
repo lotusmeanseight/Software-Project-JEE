@@ -1,0 +1,1 @@
+CREATE USER SEP WITH password 'sep';
