@@ -16,7 +16,7 @@ mv sep/target/sep-gruppe-5.war sprint-7/sep
 # building and running the docker containers
 cd sprint-7/databases
 docker build -t gruppe5-postgres .
-docker run --name postgres-container -p 9090:9090 -d gruppe5-postgres
+docker run --name postgres-container -p 5432:5432 -d gruppe5-postgres
 cd ..
 cd sep
 docker build -t gruppe5-sep .

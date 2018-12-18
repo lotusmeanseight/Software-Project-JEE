@@ -1,1 +1,1 @@
-CREATE USER SEP WITH password 'sep';
+CREATE ROLE sep WITH password 'sep';

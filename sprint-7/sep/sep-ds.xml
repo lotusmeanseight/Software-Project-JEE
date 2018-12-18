@@ -6,7 +6,7 @@
 
     <datasource jndi-name="java:jboss/datasources/sepDS" pool-name="sep-classicmodels" enabled="true"
                 use-java-context="true">
-        <connection-url>jdbc:postgresql://localhost/classicmodels</connection-url>
+        <connection-url>jdbc:postgresql://container:5432/classicmodels</connection-url>
         <driver>postgresql-42.2.5.jar</driver>
         <security>
             <user-name>sep</user-name>
