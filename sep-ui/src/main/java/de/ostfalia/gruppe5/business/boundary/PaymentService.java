@@ -21,7 +21,7 @@ public class PaymentService extends AbstractTableJPAService<Payment> {
     public List<Payment> findByCheckNumber(String checknumber) {
         URL serverUrl = null; //the value is hardcoded for testing purposes
         try {
-            serverUrl = new URL("http://localhost:8081/payments/"+checknumber);
+            serverUrl = new URL("http://localhost:8081/payments/" + checknumber);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -37,7 +37,7 @@ public class PaymentService extends AbstractTableJPAService<Payment> {
         } finally {
             connection.disconnect();
         }
-        System.out.println("output: "+output);
+        System.out.println("output: " + output);
         return null;
     }
 

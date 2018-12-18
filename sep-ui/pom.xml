@@ -71,7 +71,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>sep-gruppe-5</finalName>
+		<finalName>sep-gruppe-5-ui</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
