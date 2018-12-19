@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <h:outputStylesheet library="css" name="style.css"/>
+</h:head>
+<body>
+<ui:composition template="/TemplateLayout.xhtml">
+    <ui:define name="header">
+        <ui:include src="/app/employeeRole/HeaderEmployee.xhtml"/>
+    </ui:define>
+    <ui:define name="content">
+        <h:form id="customer_datatable_form">
+            <h:dataTable id="customer_datatable_data" binding="#{customerView.datatable.table}"
+                         value="#{customerView.datatable.dataModel}" var="customer" border="1"
+                         selectionMode="single" styleClass="table" headerClass="table-header"
+                         rowClasses="table-odd-row,table-even-row" first="0" rows="#{customerView.datatable.rowsOnPage}">
+                <h:column>
+                    <f:facet name="header">Kundennummer</f:facet>
+                    <h:outputText id="id" value="#{customer.customerNumber}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Firma</f:facet>
+                    <h:outputText id="name" value="#{customer.customerName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText id="lastName" value="#{customer.contactLastName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Vorname</f:facet>
+                    <h:outputText id="firstName" value="#{customer.contactFirstName}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Telefonnummer</f:facet>
+                    <h:outputText id="phone" value="#{customer.phone}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">1. Adresse</f:facet>
+                    <h:outputText id="firstAdressline" value="#{customer.addressLine1}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">2. Adresse</f:facet>
+                    <h:outputText id="secondAdressLine" value="#{customer.addressLine2}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Stadt</f:facet>
+                    <h:outputText id="city" value="#{customer.city}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Staat</f:facet>
+                    <h:outputText id="state" value="#{customer.state}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Postleitzahl</f:facet>
+                    <h:outputText id="postalcode" value="#{customer.postalCode}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Land</f:facet>
+                    <h:outputText id="country" value="#{customer.country}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Repräsentant</f:facet>
+                    <h:outputText id="employeenumber" value="#{customer.salesRepEmployeeNumber.employeeNumber}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Kreditlimit</f:facet>
+                    <h:outputText id="limit" value="#{customer.creditLimit}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Für Warenkorb auswählen</f:facet>
+                    <h:commandButton value="Hinzufügen" action="#{customerView.addCustomerToBasket(customer)}">
+                        <f:actionListener binding="#{productBasket.setCustomer(customer)}"/>
+                    </h:commandButton>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Aktualisieren</f:facet>
+                    <h:commandButton action="customerEdit" value="Aktualisieren">
+                        <f:setPropertyActionListener target="#{customerView.customer}" value="#{customer}"/>
+                        <f:setPropertyActionListener target="#{customerView.customer.customerNumber}"
+                                                     value="#{customer.customerNumber}"/>
+                    </h:commandButton>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Loeschen</f:facet>
+                    <h:commandButton action="#{customerView.delete(customer)}" value="Loeschen"/>
+                </h:column>
+                <f:facet name="footer">
+                    <h:commandButton value="Erste Seite" action="#{customerView.datatable.goToFirstPage()}"
+                                     disabled="#{customerView.datatable.table.first eq 0}"/>
+                    <h:commandButton value="Vorherige Seite" action="#{customerView.datatable.goToPreviousPage()}"
+                                     disabled="#{customerView.datatable.table.first eq 0}"/>
+                    <h:commandButton value="Nächste Seite" action="#{customerView.datatable.goToNextPage()}"
+                                     disabled="#{customerView.datatable.table.first + customerView.datatable.table.rows ge customerView.datatable.table.rowCount}"/>
+                    <h:commandButton value="Letzte Seite" action="#{customerView.datatable.goToLastPage()}"
+                                     disabled="#{customerView.datatable.table.rows ge customerView.datatable.table.rowCount}"/>
+                    <h:commandButton action="customerInsert" value="Einfuegen"/>
+                </f:facet>
+            </h:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</body>
+</html>
