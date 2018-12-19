@@ -59,14 +59,14 @@ public class RestCaller {
                     con.setDoInput(true);
                     con.setRequestProperty("Content-Type", "application/json");
                     con.setRequestProperty("Accept", "application/json");
-                    this.sendData(con, body.toString());
+                    this.sendData(con, body.toString()!=null?body.toString():"");
                     break;
                 case UPDATE:
                     con.setDoOutput(true);
                     con.setDoInput(true);
                     con.setRequestProperty("Content-Type", "application/json");
                     con.setRequestProperty("Accept", "application/json");
-                    this.sendData(con, body.toString());
+                    this.sendData(con, body.toString()!=null?body.toString():"");
                     break;
                 default:
                     throw new Exception();
