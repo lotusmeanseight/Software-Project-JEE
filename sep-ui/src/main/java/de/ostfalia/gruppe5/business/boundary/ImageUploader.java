@@ -1,10 +1,6 @@
 package de.ostfalia.gruppe5.business.boundary;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import de.ostfalia.gruppe5.business.entity.ProductLine;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -15,8 +11,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Transient;
 import javax.servlet.http.Part;
-
-import de.ostfalia.gruppe5.business.entity.ProductLine;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @ViewScoped
 @Named

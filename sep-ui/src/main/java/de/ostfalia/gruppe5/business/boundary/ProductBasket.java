@@ -1,17 +1,16 @@
 package de.ostfalia.gruppe5.business.boundary;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import de.ostfalia.gruppe5.business.entity.Customer;
+import de.ostfalia.gruppe5.business.entity.Item;
+import de.ostfalia.gruppe5.business.entity.Product;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Named;
-
-import de.ostfalia.gruppe5.business.entity.Customer;
-import de.ostfalia.gruppe5.business.entity.Item;
-import de.ostfalia.gruppe5.business.entity.Product;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Named
 @SessionScoped

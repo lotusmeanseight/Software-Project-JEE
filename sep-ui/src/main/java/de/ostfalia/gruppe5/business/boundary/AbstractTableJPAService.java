@@ -1,11 +1,8 @@
 package de.ostfalia.gruppe5.business.boundary;
 
-import java.util.List;
-
-import javax.annotation.security.DeclareRoles;
-import javax.annotation.security.RolesAllowed;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.List;
 
 //@DeclareRoles({ "EMPLOYEE", "CUSTOMER" })
 //@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })

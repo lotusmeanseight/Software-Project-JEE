@@ -1,47 +1,100 @@
 package de.ostfalia.gruppe5.business.boundary;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.Stateless;
-
+import de.ostfalia.gruppe5.business.controller.RestCaller;
 import de.ostfalia.gruppe5.business.entity.ProductLine;
+
+import javax.ejb.Stateless;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import java.util.ArrayList;
+import java.util.List;
 
 //@RolesAllowed("EMPLOYEE")
 @Stateless
 public class ProductLineService extends AbstractTableJPAService<ProductLine> {
+	String targetUrl = null;
 
-	private final List<String> letters = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
-			"K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"));
+	public String call(String id, String httpMethod, JsonObject body){
+		RestCaller rest = new RestCaller();
+		return rest.callRest(this.targetUrl,id,httpMethod,body);
+	}
+
+	//@RolesAllowed("CUSTOMER")
+	public ProductLine find(final String id) {
+		String response = this.call(id,RestCaller.GET, null);
+		ProductLine productLine = new ProductLine();
+		this.populateProductLine(response, productLine);
+		return productLine;
+	}
+
+	//@RolesAllowed("CUSTOMER")
+	public ProductLine find(final Integer id) {
+		String response = this.call(String.valueOf(id),RestCaller.GET, null);
+		ProductLine productLine = new ProductLine();
+		this.populateProductLine(response, productLine);
+		return productLine;
+	}
+
+	public List<ProductLine> findAll() {
+		String response = this.call(null,RestCaller.GET, null);
+		ProductLine productLine = new ProductLine();
+		return this.populateProductLineList(response);
+	}
+
+	private List<ProductLine> populateProductLineList(String response) {
+		JsonObject jsonObject1 = Json.createObjectBuilder().build().getJsonObject(response);
+		JsonArray array = jsonObject1.asJsonArray();
+		List<ProductLine> list = new ArrayList<>();
+		for (int i = 0; i < array.size(); i++) {
+			ProductLine productLine= new ProductLine();
+			this.populateProductLine(array.get(i).asJsonObject(), productLine);
+			list.add(productLine);
+		}
+		return list;
+	}
+
+	//@RolesAllowed("CUSTOMER")
+	public void save(final ProductLine entity) {
+		String response = this.call(String.valueOf(entity.getProductLine()),RestCaller.POST, Json.createObjectBuilder().build().getJsonObject(entity.toJson()));
+	}
+
+	public void delete(final ProductLine entity) {
+		String response = this.call(String.valueOf(entity.getProductLine()),RestCaller.DELETE, null);
+	}
+
+	public void deleteById(final String id) {
+		String response = this.call(id,RestCaller.DELETE, null);
+	}
+
+	public void deleteById(final Integer id) {
+		String response = this.call(String.valueOf(id),RestCaller.DELETE, null);
+	}
+
+
+	private void populateProductLine(String json, ProductLine productLine) {
+		JsonObject jsonObject1 = Json.createObjectBuilder().build().getJsonObject(json);
+		this.populateProductLine(jsonObject1,productLine);
+	}
+
+	private void populateProductLine(JsonObject json, ProductLine productLine) {
+		productLine.setHtmlDescription(json.get("htmlDescription").toString());
+		productLine.setTextDescription(json.get("textDescription").toString());
+
+		productLine.setImage(json.get("image").toString().getBytes());
+	}
+
+
+	//@RolesAllowed("CUSTOMER")
+	public ProductLine update(final ProductLine entity) {
+		String response = this.call(String.valueOf(entity.getProductLine()),RestCaller.UPDATE, Json.createObjectBuilder().build().getJsonObject(entity.toJson()));
+		ProductLine productLine = new ProductLine();
+		this.populateProductLine(response, productLine);
+		return productLine;
+	}
+
 
 	public ProductLineService() {
 		setEntityClass(ProductLine.class);
-	}
-
-	public String nextID() {
-		String lastID = this.getEntityManager()
-				.createQuery("select MAX(p.productLine) from ProductLine p", String.class).getSingleResult();
-		String[] array = lastID.split("_");
-		String id = array[array.length - 1];
-
-		int numberOfLetters = ThreadLocalRandom.current().nextInt(0, 5);
-
-		int numbers = ThreadLocalRandom.current().nextInt(0, 10);
-
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < numberOfLetters; i++) {
-			builder.append(letters.get(ThreadLocalRandom.current().nextInt(0, 26)));
-		}
-
-		for (int i = 0; i < numbers; i++) {
-			builder.append(ThreadLocalRandom.current().nextInt(1, 10));
-		}
-
-		builder.append(id);
-
-		return builder.toString();
 	}
 }

@@ -1,13 +1,12 @@
 package de.ostfalia.gruppe5.business.boundary.validation;
 
-import java.math.BigInteger;
-import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.math.BigInteger;
+import java.util.List;
 
 @Named
 @RequestScoped

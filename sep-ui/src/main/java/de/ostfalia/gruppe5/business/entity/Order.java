@@ -2,6 +2,7 @@ package de.ostfalia.gruppe5.business.entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -147,5 +148,26 @@ public class Order {
 		return "Order{" + "orderNumber=" + orderNumber + ", orderDetails=" + orderDetails + ", orderDate=" + orderDate
 				+ ", requiredDate=" + requiredDate + ", shippedDate=" + shippedDate + ", status='" + status + '\''
 				+ ", comments='" + comments + '\'' + ", customerNumber=" + customerNumber + '}';
+	}
+
+
+	public String toJson() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
+			try {
+				sb.append("\"");
+				sb.append(field.getName());
+				sb.append("\"");
+				sb.append(":");
+				sb.append("\"");
+				sb.append(field.get(this));
+				sb.append("\"");
+				sb.append(", ");
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		});
+		return sb.substring(0, sb.length() - 1) + "}";
 	}
 }

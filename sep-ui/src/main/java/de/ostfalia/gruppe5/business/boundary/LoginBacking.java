@@ -1,12 +1,11 @@
 package de.ostfalia.gruppe5.business.boundary;
 
-import java.io.IOException;
-
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.security.enterprise.SecurityContext;
+import java.io.IOException;
 
 @Named
 @RequestScoped

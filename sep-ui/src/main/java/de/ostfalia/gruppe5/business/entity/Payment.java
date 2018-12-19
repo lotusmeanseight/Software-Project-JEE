@@ -2,6 +2,7 @@ package de.ostfalia.gruppe5.business.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -94,4 +95,24 @@ public class Payment implements Serializable {
 		return Objects.hash(getCustomerNumber(), getCheckNumber(), getPaymentDate(), getAmount());
 	}
 
+
+	public String toJson() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		Arrays.stream(this.getClass().getDeclaredFields()).forEach(field -> {
+			try {
+				sb.append("\"");
+				sb.append(field.getName());
+				sb.append("\"");
+				sb.append(":");
+				sb.append("\"");
+				sb.append(field.get(this));
+				sb.append("\"");
+				sb.append(", ");
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		});
+		return sb.substring(0, sb.length() - 1) + "}";
+	}
 }
