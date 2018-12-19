@@ -1,1 +1,0 @@
-CREATE ROLE sep WITH password 'sep';
