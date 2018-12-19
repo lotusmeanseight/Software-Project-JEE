@@ -19,7 +19,7 @@ import java.util.Locale;
 //@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
 @Stateless
 public class PaymentService extends AbstractTableJPAService<Payment> {
-    String targetUrl = null;
+    String targetUrl = "http://localhost:8080/sep-gruppe-5/payments";
 
     public String call(String id, String httpMethod, JsonObject body){
         RestCaller rest = new RestCaller();

@@ -15,7 +15,7 @@ import java.util.List;
 //@RolesAllowed("EMPLOYEE")
 @Stateless
 public class CustomerService extends AbstractTableJPAService<Customer> {
-    String targetUrl = null;
+    String targetUrl = "http://localhost:8080/sep-gruppe-5/customers";
 
     public String call(String id, String httpMethod, JsonObject body) {
         RestCaller rest = new RestCaller();

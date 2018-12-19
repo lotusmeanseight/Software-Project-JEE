@@ -14,7 +14,7 @@ import java.util.List;
 @Stateless
 public class OfficeService extends AbstractTableJPAService<Office> {
 
-	String targetUrl = null;
+	String targetUrl = "http://localhost:8080/sep-gruppe-5/offices";
 
 	public String call(String id, String httpMethod, JsonObject body){
 		RestCaller rest = new RestCaller();

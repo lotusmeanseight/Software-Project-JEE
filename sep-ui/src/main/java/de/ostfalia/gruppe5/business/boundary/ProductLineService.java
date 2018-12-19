@@ -13,7 +13,7 @@ import java.util.List;
 //@RolesAllowed("EMPLOYEE")
 @Stateless
 public class ProductLineService extends AbstractTableJPAService<ProductLine> {
-	String targetUrl = null;
+	String targetUrl = "http://localhost:8080/sep-gruppe-5/productlines";
 
 	public String call(String id, String httpMethod, JsonObject body){
 		RestCaller rest = new RestCaller();

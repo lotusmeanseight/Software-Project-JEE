@@ -15,7 +15,7 @@ import java.util.List;
 //@RolesAllowed({ "EMPLOYEE", "CUSTOMER" })
 @Stateless
 public class ProductService extends AbstractTableJPAService<Product> {
-	String targetUrl = null;
+	String targetUrl = "http://localhost:8080/sep-gruppe-5/products";
 
 
 
