@@ -8,7 +8,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
 >
 <h:head>
-    <h:outputStylesheet library="css" name="style.css"/>
+
 </h:head>
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
@@ -22,18 +22,26 @@
                          selectionMode="single" styleClass="table" headerClass="table-header"
                          rowClasses="table-odd-row,table-even-row" first="0" rows="#{paymentView.datatable.rowsOnPage}">
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Kundennummer"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Kundennummer</f:facet>
                     <h:outputText id="customerNumber" value="#{payment.customerNumber}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Check Nummer"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Check Nummer</f:facet>
                     <h:outputText id="checkNumber" value="#{payment.checkNumber}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Zahlungsdatum"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Zahlungsdatum</f:facet>
                     <h:outputText id="paymentDate" value="#{payment.paymentDate}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Betrag"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Betrag</f:facet>
                     <h:outputText id="amount" value="#{payment.amount}"/>
                 </h:column>

@@ -7,7 +7,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-    <h:outputStylesheet library="css" name="style.css"/>
+
 </h:head>
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
@@ -22,35 +22,51 @@
                          selectionMode="single" styleClass="table" headerClass="table-header"
                          rowClasses="table-odd-row,table-even-row" first="0" rows="#{orderViewCustomerRole.rowsOnPage}">
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Bestellnummer"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Bestellnummer</f:facet>
                     <h:outputText id="order" value="#{order.orderNumber}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Bestelldatum"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Bestelldatum</f:facet>
                     <h:outputText id="orderDate" value="#{order.orderDate}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Bedarfstermin"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Bedarfstermin</f:facet>
                     <h:outputText id="requiredDate" value="#{order.requiredDate}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Versanddatum"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Versanddatum</f:facet>
                     <h:outputText id="shippedDate" value="#{order.shippedDate}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Status"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Status</f:facet>
                     <h:outputText id="status" value="#{order.status}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Kommentar"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Kommentar</f:facet>
                     <h:outputText id="comments" value="#{order.comments}"/>
                 </h:column>
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Kundennummer"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Kundennummer</f:facet>
                     <h:outputText id="customerNumber" value="#{order.customerNumber}"/>
                 </h:column>
 
                 <h:column>
+                    <f:passThroughAttribute name="data-label" value="Details"/>
+                    <f:passThroughAttribute name="class" value="label"/>
                     <f:facet name="header">Order Details</f:facet>
                     <h:commandButton action="orderDetailsCustomerRole" value="View">
                         <f:setPropertyActionListener target="#{orderViewCustomerRole.order}" value="#{order}"/>

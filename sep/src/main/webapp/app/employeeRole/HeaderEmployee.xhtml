@@ -10,7 +10,7 @@
 <ui:composition>
     <table style="width:100%">
         <tr>
-            <td>
+            <td class="menu">
                 <h:form>
                     <h:selectOneMenu
                             onchange="window.location = this.options[this.selectedIndex].value">
@@ -36,7 +36,7 @@
                     </h:selectOneMenu>
                 </h:form>
             </td>
-            <td>
+            <td class="login">
                 <p>Eingeloggt als: #{request.userPrincipal.name}</p>
             </td>
         </tr>

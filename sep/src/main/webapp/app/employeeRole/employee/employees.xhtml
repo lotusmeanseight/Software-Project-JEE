@@ -8,7 +8,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
 >
 <h:head>
-    <h:outputStylesheet library="css" name="style.css"/>
+
 </h:head>
 <body>
 <ui:composition template="/TemplateLayout.xhtml">
@@ -21,38 +21,56 @@
                  selectionMode="single" styleClass="table" headerClass="table-header"
                  rowClasses="table-odd-row,table-even-row" first="0" rows="#{employeeView.datatable.rowsOnPage}">
         <h:column>
+            <f:passThroughAttribute name="data-label" value="ID"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">ID</f:facet>
             <h:outputText id="id" value="#{employee.employeeNumber}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Name"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Name</f:facet>
             <h:outputText id="lastName" value="#{employee.lastName}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Vorname"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Vorname</f:facet>
             <h:outputText id="firstName" value="#{employee.firstName}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Erweiterung"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Erweiterung</f:facet>
             <h:outputText id="extension" value="#{employee.extension}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Email"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Email</f:facet>
             <h:outputText id="email" value="#{employee.email}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Office Code"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Office Code</f:facet>
             <h:outputText id="officeCode" value="#{employee.officeCode.officeCode}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Vorgesetzter"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Vorgesetzter</f:facet>
             <h:outputText id="reportsTo" value="#{employee.reportsTo}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Position"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Position</f:facet>
             <h:outputText id="jobTitle" value="#{employee.jobTitle}"/>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Angestellten aktualisieren"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Aktualisieren</f:facet>
             <h:commandButton action="employeeEdit" value="Aktualisieren">
                 <f:setPropertyActionListener target="#{employeeView.employee}" value="#{employee}"/>
@@ -61,6 +79,8 @@
             </h:commandButton>
         </h:column>
         <h:column>
+            <f:passThroughAttribute name="data-label" value="Angestellten löschen"/>
+            <f:passThroughAttribute name="class" value="label"/>
             <f:facet name="header">Loeschen</f:facet>
             <h:commandButton action="#{employeeView.delete(employee)}" value="Loeschen"/>
         </h:column>
