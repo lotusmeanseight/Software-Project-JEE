@@ -1,8 +1,0 @@
-Gruppe 5:
-- CDI 1.1, JSF 2.2, JPA 2.1
-- FacesContext nach 2.2-Manier bzw. ExternalContext
-- Seitenparameter mit Servlet- statt mit JSF-API
-- java.util.Date
-Zielerreichung: 85%
--10 wg alten APIs
--5 wg Date
